@@ -1,0 +1,12 @@
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\bin\Debug\net6.0\DataAccess.deps.json
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\bin\Debug\net6.0\DataAccess.dll
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfoInputs.cache
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfo.cs
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.sourcelink.json
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.dll
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\refint\DataAccess.dll
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\DataAccess.pdb
+C:\Users\Maxi\Desktop\ConsorcioGest\ConsorcioGestBack\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll
