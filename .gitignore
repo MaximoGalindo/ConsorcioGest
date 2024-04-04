@@ -1,3 +1,18 @@
+# Carpeta bin generada por compilaciones
+bin/
 
-ConsorcioGestBack/.vs/ConsorcioGestBack/v17/.suo
-/ConsorcioGestBack/.vs
+# Carpeta obj generada por compilaciones
+obj/
+
+# Archivos de usuario y configuración específica de Visual Studio
+.vs/
+
+# Carpeta generada por ReSharpe, un complemento de Visual Studio
+_ReSharper*/
+
+# Archivos de análisis de código
+*.suo
+*.user
+*.sln.docstates
+*.csproj.user
+*.resharper
