@@ -2,7 +2,7 @@
 bin/
 
 # Carpeta obj generada por compilaciones
-obj/
+.obj/
 
 # Archivos de usuario y configuración específica de Visual Studio
 .vs/
@@ -16,3 +16,5 @@ _ReSharper*/
 *.sln.docstates
 *.csproj.user
 *.resharper
+
+
