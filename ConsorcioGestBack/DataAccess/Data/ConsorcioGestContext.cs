@@ -479,6 +479,7 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("CONTRASENIA");
+            entity.Property(e => e.Documento).HasColumnName("DOCUMENTO");
             entity.Property(e => e.Email)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -500,22 +501,18 @@ public partial class ConsorcioGestContext : DbContext
 
             entity.HasOne(d => d.IdCondominioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdCondominio)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_USUARIO_CONODMINIO");
 
             entity.HasOne(d => d.IdEstadoUsuarioNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdEstadoUsuario)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_USUARIO_ESTADO_USUARIO");
 
             entity.HasOne(d => d.IdPerfilNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdPerfil)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_USUARIO_PERFIL");
 
             entity.HasOne(d => d.IdTipoDocumentoNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.IdTipoDocumento)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_USUARIO_TIPO_DOCUMENTO");
         });
 
