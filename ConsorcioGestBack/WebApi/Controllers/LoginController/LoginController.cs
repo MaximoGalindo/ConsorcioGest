@@ -3,8 +3,9 @@ using BusinessService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers.LoginController
 {
     [Route("api/login")]
     [ApiController]
@@ -17,18 +18,32 @@ namespace WebApi.Controllers
             this.loginService = loginService;
         }
 
-        [HttpPost]
+        [HttpPost()]
         public IActionResult Login(LoginUser loginUser)
         {
             return Ok(loginService.Login(loginUser));
         }
 
-        [HttpGet]
-        [Authorize(Roles =("Admin"))]
+        [HttpGet("/getUser")]
+        [Authorize]
+        public IActionResult GetUser()
+        {
+            return Ok(loginService.GetCurrentUser((ClaimsIdentity)HttpContext.User.Identity));
+        }
+
+        [HttpGet("/logOut")]
+        [Authorize]
         public IActionResult Logout()
         {
-            return Ok("Hola entre");
+            return Ok(loginService.LogOut());
         }
-      
+
+        [HttpGet("/name")]
+        [Authorize]
+        public IActionResult GetNameUser()
+        {
+            return Ok(LoginService.CurrentUser.Name);
+        }
+
     }
 }

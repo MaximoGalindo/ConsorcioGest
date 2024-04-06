@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,17 @@ namespace BusinessService.Models
 {
     public class UserModel
     {
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public bool IsOcupant { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string? Phone { get; set; }
+        public string Email { get; set; } = null!;
         public bool IsOwner { get; set; }
-        public string Profile { get; set; }
+        public bool IsOcupant { get; set; }
+        public int? IdCondominium { get; set; }
+        public ProfileModel Profile { get; set; } = null;
+        public StateModel UserState { get; set; } = null;
+        public int? IdDocumentType { get; set; }
+        public int Document { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http;
 
 namespace BusinessService.Services
 {
@@ -18,6 +19,8 @@ namespace BusinessService.Services
     {
         private readonly ConsorcioGestContext context;
         private readonly IConfiguration _config;
+
+        public static UserModel CurrentUser {  get; private set; }
 
         public LoginService(ConsorcioGestContext context, IConfiguration configuration)
         {
@@ -31,10 +34,10 @@ namespace BusinessService.Services
 
             if (user != null)
             {
-                var token = Generate(user);
+                var token = GenerateToken(user);
                 return token;
             }
-            return "Error";
+            return "Usuario no Encontrado";
         }
 
         private UserModel Authenticate(LoginUser loginUser)
@@ -44,16 +47,11 @@ namespace BusinessService.Services
                 .Where(u => u.Email == loginUser.Email && u.Contrasenia == loginUser.Password)
                 .Select(u => new UserModel
                 {
+                    Document = u.Documento,
                     Email = u.Email,
-                    Name = u.Nombre,
-                    LastName = u.Apellido,
-                    Phone = u.Telefono,
-                    Password = u.Contrasenia,
-                    IsOcupant = u.Espropietario,
-                    IsOwner = u.Esinquilino,
-                    Profile = u.IdPerfilNavigation.Nombre
-
-                }).FirstOrDefault();
+                    Profile = new ProfileModel { Id = u.Id, Name = u.IdPerfilNavigation.Nombre}
+                })
+                .FirstOrDefault();
 
             if (currentUser != null)
             {
@@ -62,7 +60,7 @@ namespace BusinessService.Services
             return null;
         }
 
-        private string Generate(UserModel userModel)
+        private string GenerateToken(UserModel userModel)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -70,9 +68,8 @@ namespace BusinessService.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.Email, userModel.Email),
-                new Claim(ClaimTypes.GivenName, userModel.Name),
-                new Claim(ClaimTypes.Surname, userModel.LastName),
-                new Claim(ClaimTypes.Role, userModel.Profile)
+                new Claim(ClaimTypes.Role, userModel.Profile.Name.ToString()),
+                new Claim("Document", userModel.Document.ToString()),
             };
 
             var token = new JwtSecurityToken(
@@ -85,5 +82,41 @@ namespace BusinessService.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
         
+        public UserModel GetCurrentUser(ClaimsIdentity identity)
+        {
+            var userClaims = identity.Claims;
+            int documentUser = Convert.ToInt32(userClaims.FirstOrDefault(n => n.Type == "Document")?.Value);
+            var email = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Email)?.Value;
+
+            var user = context.Usuarios
+                .Include(u => u.IdPerfilNavigation)
+                .Include(u => u.IdEstadoUsuarioNavigation)
+                .Where(u => u.Documento == documentUser
+                    && u.Email == email)
+                .FirstOrDefault();
+
+            CurrentUser = new UserModel
+            {
+                Id = user.Id,
+                Name = user.Nombre,
+                LastName = user.Apellido,                    
+                Document = user.Documento,
+                Phone = user.Telefono,
+                Email = user.Email,
+                IsOwner = user.Espropietario,
+                IsOcupant = user.Esinquilino,
+                IdCondominium = user.IdCondominio,                
+                IdDocumentType = user.IdTipoDocumento,
+                Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },
+                UserState = new StateModel { Id = user.IdEstadoUsuario.Value, Name = user.IdEstadoUsuarioNavigation.Nombre},
+            };
+            return CurrentUser;
+        }
+
+        public bool LogOut()
+        {
+            CurrentUser = null;
+            return true;
+        }
     }
 }
