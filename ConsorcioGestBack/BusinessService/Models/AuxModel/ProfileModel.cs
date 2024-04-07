@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessService.Models
+namespace BusinessService.Models.AuxModel
 {
     public class ProfileModel
     {

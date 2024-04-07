@@ -12,6 +12,8 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using BusinessService.Models.AuxModel;
 
 namespace BusinessService.Services
 {
@@ -19,8 +21,10 @@ namespace BusinessService.Services
     {
         private readonly ConsorcioGestContext context;
         private readonly IConfiguration _config;
+        private readonly IDictionary<string, DateTime> activeTokens = new Dictionary<string, DateTime>();
 
         public static UserModel CurrentUser {  get; private set; }
+        private string Token {  get; set; }
 
         public LoginService(ConsorcioGestContext context, IConfiguration configuration)
         {
@@ -30,12 +34,15 @@ namespace BusinessService.Services
 
         public string Login(LoginUser loginUser)
         {
-            var user = Authenticate(loginUser);
-
-            if (user != null)
+            if(loginUser != null)
             {
-                var token = GenerateToken(user);
-                return token;
+                var user = Authenticate(loginUser);
+
+                if (user != null)
+                {
+                    Token = GenerateToken(user);
+                    return Token.ToString();
+                }
             }
             return "Usuario no Encontrado";
         }
@@ -84,39 +91,37 @@ namespace BusinessService.Services
         
         public UserModel GetCurrentUser(ClaimsIdentity identity)
         {
-            var userClaims = identity.Claims;
-            int documentUser = Convert.ToInt32(userClaims.FirstOrDefault(n => n.Type == "Document")?.Value);
-            var email = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Email)?.Value;
-
-            var user = context.Usuarios
-                .Include(u => u.IdPerfilNavigation)
-                .Include(u => u.IdEstadoUsuarioNavigation)
-                .Where(u => u.Documento == documentUser
-                    && u.Email == email)
-                .FirstOrDefault();
-
-            CurrentUser = new UserModel
+            if(identity != null)
             {
-                Id = user.Id,
-                Name = user.Nombre,
-                LastName = user.Apellido,                    
-                Document = user.Documento,
-                Phone = user.Telefono,
-                Email = user.Email,
-                IsOwner = user.Espropietario,
-                IsOcupant = user.Esinquilino,
-                IdCondominium = user.IdCondominio,                
-                IdDocumentType = user.IdTipoDocumento,
-                Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },
-                UserState = new StateModel { Id = user.IdEstadoUsuario.Value, Name = user.IdEstadoUsuarioNavigation.Nombre},
-            };
-            return CurrentUser;
-        }
+                var userClaims = identity.Claims;
+                int documentUser = Convert.ToInt32(userClaims.FirstOrDefault(n => n.Type == "Document")?.Value);
+                var email = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Email)?.Value;
 
-        public bool LogOut()
-        {
-            CurrentUser = null;
-            return true;
+                var user = context.Usuarios
+                    .Include(u => u.IdPerfilNavigation)
+                    .Include(u => u.IdEstadoUsuarioNavigation)
+                    .Where(u => u.Documento == documentUser
+                        && u.Email == email)
+                    .FirstOrDefault();
+
+                CurrentUser = new UserModel
+                {
+                    Id = user.Id,
+                    Name = user.Nombre,
+                    LastName = user.Apellido,
+                    Document = user.Documento,
+                    Phone = user.Telefono,
+                    Email = user.Email,
+                    IsOwner = user.Espropietario,
+                    IsOcupant = user.Esinquilino,
+                    IdCondominium = user.IdCondominio,
+                    IdDocumentType = user.IdTipoDocumento,
+                    Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },
+                    UserState = new StateModel { Id = user.IdEstadoUsuario.Value, Name = user.IdEstadoUsuarioNavigation.Nombre },
+                };
+                return CurrentUser;
+            }
+            return null;
         }
     }
 }

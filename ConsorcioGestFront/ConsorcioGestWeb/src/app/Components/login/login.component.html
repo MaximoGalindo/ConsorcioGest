@@ -1,0 +1,46 @@
+<div class="total-container">
+    <div class="title-container">
+        <div class="row">
+            <div class="col mb-0">
+                <h1>Consorcio Gest</h1>
+                <div class="line"></div>
+                <h4>Sistema de gestion de Consorcios</h4>
+            </div>
+        </div>
+    </div>
+    <div class="login-container">
+        <div>
+            <div>
+                <h3>Ingresar al Sistema</h3>
+            </div>
+            <div>
+                <input type="text" 
+                name="Email" 
+                #Email="ngModel" 
+                [(ngModel)]="form.Email"
+                class="custom-input" 
+                placeholder="Correo Electrónico">
+            </div>
+            <div >
+                <input type="password" 
+                class="custom-input" 
+                placeholder="Contraseña"
+                [(ngModel)]="form.Password"
+                #Password="ngModel"
+                name="Password">    
+            </div>
+            <div >
+                <a href="">Olvide mi contraseña</a>
+            </div>
+        </div>
+        <div>
+            <div>
+                <button (click)="onSubmit()">Iniciar Sesion</button>
+            </div>
+            <div>
+                <button>Registrarse</button>
+            </div>
+        </div>
+    </div>
+    
+</div>

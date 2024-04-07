@@ -1,0 +1,7 @@
+# Carpeta bin generada por compilaciones
+bin/
+
+# Carpeta obj generada por compilaciones
+obj/
+
+
