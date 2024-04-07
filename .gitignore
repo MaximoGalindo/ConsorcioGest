@@ -5,7 +5,7 @@ bin/
 obj/
 
 # Archivos de usuario y configuración específica de Visual Studio
-ConsorcioGestBack/.vs/
+ConsorcioGestBack\.vs\
 
 # Carpeta generada por ReSharpe, un complemento de Visual Studio
 _ReSharper*/
