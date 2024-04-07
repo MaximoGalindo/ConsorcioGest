@@ -1,4 +1,5 @@
-﻿using DataAccess.Data.Models;
+﻿using BusinessService.Models.AuxModel;
+using DataAccess.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

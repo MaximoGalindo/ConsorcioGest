@@ -26,24 +26,9 @@ namespace WebApi.Controllers.LoginController
 
         [HttpGet("/getUser")]
         [Authorize]
-        public IActionResult GetUser()
+        public IActionResult GetCurrentUser()
         {
             return Ok(loginService.GetCurrentUser((ClaimsIdentity)HttpContext.User.Identity));
         }
-
-        [HttpGet("/logOut")]
-        [Authorize]
-        public IActionResult Logout()
-        {
-            return Ok(loginService.LogOut());
-        }
-
-        [HttpGet("/name")]
-        [Authorize]
-        public IActionResult GetNameUser()
-        {
-            return Ok(LoginService.CurrentUser.Name);
-        }
-
     }
 }
