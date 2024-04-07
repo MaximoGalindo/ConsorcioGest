@@ -15,6 +15,6 @@ namespace BusinessService.DTO
         public string Phone { get; set; }
         public string Document { get; set; }
         public int DocumentType { get; set; }
-        public string UserType { get; set; }
+        public string? UserType { get; set; }
     }
 }

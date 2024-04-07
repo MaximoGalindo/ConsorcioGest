@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  register() {
-    this.router.navigate(['/register']);
+  register(parametro:string) {
+    this.router.navigate(['/register',{ userType: parametro }]);
   }
 }

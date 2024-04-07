@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterUserDTO } from 'src/app/Models/DTO/RegisterUserDTO';
 import { DocumentTypeModel } from 'src/app/Models/HelperModel/DocumentTypeModel';
 import { UserService } from 'src/app/Services/user.service';
@@ -14,25 +14,55 @@ export class RegisterComponent {
   registerForm:FormGroup = new FormGroup({});
   confirmPassword: string= '';
   documentTypes: DocumentTypeModel[] = [];
+  adminRegister: boolean = false;
+  residentRegister: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private userService:UserService,
-    private router:Router
+    private router:Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      Name: ['', Validators.required],
-      LastName: ['', Validators.required],
-      Email: ['', [Validators.required, Validators.email]],
-      Password: ['', Validators.required],
-      ConfirmPassword: ['', Validators.required],
-      Phone: ['',Validators.required],
-      Document: ['',Validators.required],
-      UserType: ['', Validators.required],
-      DocumentType: ['', Validators.required],
+    this.route.params.subscribe(params => {
+        const userType = params['userType']; 
+        if(userType == 'Residente'){
+          this.residentRegister = true;
+          this.adminRegister = false;
+        }  
+        else if(userType == 'Admin')
+        {
+          this.adminRegister = true;
+          this.residentRegister = false;
+        }
     });
+    
+    if(this.residentRegister){
+      this.registerForm = this.fb.group({
+        Name: ['', Validators.required],
+        LastName: ['', Validators.required],
+        Email: ['', [Validators.required, Validators.email]],
+        Password: ['', Validators.required],
+        ConfirmPassword: ['', Validators.required],
+        Phone: ['',Validators.required],
+        Document: ['',Validators.required],
+        UserType: ['', Validators.required],
+        DocumentType: ['', Validators.required],
+      });
+    }
+    else if(this.adminRegister){
+      this.registerForm = this.fb.group({
+        Name: ['', Validators.required],
+        LastName: ['', Validators.required],
+        Email: ['', [Validators.required, Validators.email]],
+        Password: ['', Validators.required],
+        ConfirmPassword: ['', Validators.required],
+        Phone: ['',Validators.required],
+        Document: ['',Validators.required],
+        DocumentType: ['', Validators.required],
+      });
+    }
 
     this.loadDocumentTypes();
   }

@@ -1,17 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Doppio+One&display=swap');
 
-body{
-    background: linear-gradient(135deg, #ECFFF7, #A9FFE6);
+body{   
     font-family: 'Doppio One', sans-serif; 
 }
 
-.line {
-    width: 80%; 
-    max-width: 500px;
-    height: 2px;
-    background-color: black; 
-    margin-top: 2px; 
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+.backgroud-login{
+    background: linear-gradient(135deg, #ECFFF7, #A9FFE6);
+}
+
+.background-admin{
+    background: black
 }

@@ -17,9 +17,9 @@ public partial class Usuario
 
     public string Contrasenia { get; set; } = null!;
 
-    public bool Espropietario { get; set; }
+    public bool? Espropietario { get; set; }
 
-    public bool Esinquilino { get; set; }
+    public bool? Esinquilino { get; set; }
 
     public int? IdCondominio { get; set; }
 

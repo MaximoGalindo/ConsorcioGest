@@ -38,27 +38,30 @@ button {
 }
 
 
-.password-container {
+.input-container {
     display: flex;
     align-items: center; 
 }
 
-.password-container input {
+.input-container input,
+.input-container select {
     flex: 1;
     margin-right: 10px;
 }
-
-.password-container input:last-child {
+.input-container input:last-child {
     margin-right: 0; 
 }
 
 @media screen and (max-width: 500px) {
-    .password-container {
+    .input-container {
         flex-direction: column; 
     }
-    .password-container input {
+    .input-container input {
         margin-right: 0;
         margin-bottom: 10px; 
     }
-
+    .input-container select {
+        margin-right: 0;
+        margin-bottom: 10px; 
+    }
 }

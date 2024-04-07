@@ -1,38 +1,38 @@
-.title-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 30px;
-}
-
-.login-container {
+.total-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 30px;
+    height: 100vh;
 }
 
-.total-container {
-    height: 90vh;
+.line {
+    width: 80%; 
+    max-width: 500px;
+    height: 2px;
+    background-color: black; 
+    margin-top: 2px; 
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 h1 {
-    margin-bottom: 10px;
-    font-size: 3.5vw;
+    margin-bottom: 5px;
+    font-size: 60px;
 }
 
 h4 {
     margin-top: 10px;
-    font-size: 1vw;
+    font-size: 13px;
     font-weight: 100;
 }
 
 h3 {
     font-weight: 300;
-    font-size: 1.5vw;
+    font-size: 20px;
 }
 
 .custom-input {
@@ -53,10 +53,23 @@ h3 {
 a {
     text-decoration: none;
     color: grey;
-    display: block;
+    display: flex;
     text-align: left;
     font-size: 15px;
-    margin-left: 15px;
+}
+
+.forgot-password {
+    margin-right: 240px;
+}
+
+.admin-register {
+    text-decoration: none;
+    color: grey;
+    display: inline-block; 
+    text-align: left;
+    font-size: 14px; 
+    margin-left: 10px;
+    margin-top: 80px;
 }
 
 button {
@@ -73,25 +86,13 @@ button {
 
 
 @media screen and (max-width: 500px) {
-    .title-container {
+    .total-container{
         display: flex;
         justify-content: center;
-        flex-direction: column; 
-        text-align: center;
-        margin-top: 10vh;
-      }
-    
-    .login-container {
-        display: flex;
-        justify-content: center;
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
         text-align: center;
-        margin-top: 50px;
-    }
-    
-    .total-container{
-        height: 90vh;
+        height: 100vh;
     }
     
     h1{
@@ -129,9 +130,12 @@ button {
         display: block; 
         text-align: left; 
         font-size: 15px;
-        margin-left: 15px;
     }
     
+    .forgot-password {
+        margin-right: 110px;
+    }
+
     button{
         background-color: #F9BC60; 
         border: none; 

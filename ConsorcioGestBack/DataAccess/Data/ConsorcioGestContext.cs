@@ -484,8 +484,12 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("EMAIL");
-            entity.Property(e => e.Esinquilino).HasColumnName("ESINQUILINO");
-            entity.Property(e => e.Espropietario).HasColumnName("ESPROPIETARIO");
+            entity.Property(e => e.Esinquilino)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("ESINQUILINO");
+            entity.Property(e => e.Espropietario)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("ESPROPIETARIO");
             entity.Property(e => e.IdCondominio).HasColumnName("ID_CONDOMINIO");
             entity.Property(e => e.IdEstadoUsuario).HasColumnName("ID_ESTADO_USUARIO");
             entity.Property(e => e.IdPerfil).HasColumnName("ID_PERFIL");
