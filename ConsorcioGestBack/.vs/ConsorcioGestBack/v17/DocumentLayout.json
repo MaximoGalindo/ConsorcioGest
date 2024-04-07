@@ -46,8 +46,7 @@
               "RelativeToolTip": "WebApi\\Controllers\\LoginController\\LoginController.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T16:11:32.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T16:11:32.276Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "BusinessService\\Services\\LoginService.cs",
               "ViewState": "AQIAADUAAAAAAAAAAAAEwEwAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T15:54:15.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T15:54:15.619Z"
             },
             {
               "$type": "Document",
@@ -70,7 +68,7 @@
               "RelativeDocumentMoniker": "BusinessService\\Services\\UserService.cs",
               "ToolTip": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\Services\\UserService.cs",
               "RelativeToolTip": "BusinessService\\Services\\UserService.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAAAMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-07T15:36:27.745Z",
               "EditorCaption": ""
@@ -85,8 +83,7 @@
               "RelativeToolTip": "WebApi\\Controllers\\UserController\\UserController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T15:21:25.801Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T15:21:25.801Z"
             }
           ]
         }

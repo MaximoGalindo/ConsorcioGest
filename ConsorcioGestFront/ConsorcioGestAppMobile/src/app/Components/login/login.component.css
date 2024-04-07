@@ -3,6 +3,7 @@
     justify-content: center;
     flex-direction: column; 
     text-align: center;
+    margin-top: 10vh;
   }
 
 .login-container {
@@ -15,7 +16,7 @@
 }
 
 .total-container{
-    height: 97vh;
+    height: 90vh;
 }
 
 h1{
@@ -34,7 +35,7 @@ h3{
 
 .custom-input {
     width: 32vh;
-    height: 2.3vh;
+    height: 5vh;
     padding: 1vh;
     margin: 1vh;
     border: none;
