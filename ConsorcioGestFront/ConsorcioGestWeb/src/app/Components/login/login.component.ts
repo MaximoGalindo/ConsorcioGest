@@ -27,24 +27,38 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      //this.router.navigate(['/main-page']);
     }
   }
 
   onSubmit() {   
     this.authService.login(this.form).subscribe({  
         next: (data:any) => {   
-        this.storageService.saveToken(data);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.router.navigate(['/main-page']);
+          //Hace el inciio de sesion
+        this.authService.getUser().subscribe(user => {
+          //Pregunta si es un admin
+          if(user.profile.name == 'Admin'){
+            this.storageService.saveToken(data);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;   
+          }
+          else
+          {
+            this.isLoginFailed = true;
+            this.isLoggedIn = false;
+          }
+        })            
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
+        this.isLoggedIn = false;
       }
     });
-    this.authService.getUser().subscribe(data => {
-      console.log(data);
-    })
+
+  }
+
+  register() {
+    this.router.navigate(['/register']);
   }
 }

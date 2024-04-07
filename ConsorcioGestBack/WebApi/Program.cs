@@ -40,13 +40,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 //SERVICES
-builder.Services.AddScoped<LoginService>();
-builder.Services.AddScoped<UserService>();
-
 builder.Services.AddDbContext<ConsorcioGestContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings:ConexionString"));
 });
+
+builder.Services.AddScoped<LoginService>();
+builder.Services.AddScoped<UserService>();
+
 
 builder.Services.AddSwaggerGen(c =>
 {

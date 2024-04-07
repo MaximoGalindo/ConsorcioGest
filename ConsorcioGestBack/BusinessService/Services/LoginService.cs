@@ -21,7 +21,6 @@ namespace BusinessService.Services
     {
         private readonly ConsorcioGestContext context;
         private readonly IConfiguration _config;
-        private readonly IDictionary<string, DateTime> activeTokens = new Dictionary<string, DateTime>();
 
         public static UserModel CurrentUser {  get; private set; }
         private string Token {  get; set; }

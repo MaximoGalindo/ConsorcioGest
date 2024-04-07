@@ -9,6 +9,7 @@
       "WebApi/1.0.0": {
         "dependencies": {
           "BusinessService": "1.0.0",
+          "DataAccess": "1.0.0",
           "JWT": "10.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.9",
           "Swashbuckle.AspNetCore": "6.5.0"

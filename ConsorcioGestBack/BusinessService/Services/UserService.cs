@@ -1,6 +1,7 @@
 ﻿using BusinessService.DTO;
 using BusinessService.Enums;
 using BusinessService.Models.AuxModel;
+using BusinessService.ResponseDTO;
 using DataAccess.Data;
 using DataAccess.Data.Models;
 using System;
@@ -15,38 +16,52 @@ namespace BusinessService.Services
     {
         private readonly ConsorcioGestContext context;
 
-        public UserService(ConsorcioGestContext consorcio)
+        public UserService(ConsorcioGestContext context)
         {
-            this.context = consorcio;
+            this.context = context;
         }
 
-        public async Task<bool> CreateUser(RegisterUserDTO userDTO)
+        public SuccessResponseDTO CreateUser(RegisterUserDTO userDTO)
         {
-            if (userDTO != null)
+            try
             {
-                Usuario usuario = new Usuario
+                if (userDTO != null)
                 {
-                    Nombre = userDTO.Name,
-                    Apellido = userDTO.LastName,
-                    Telefono = userDTO.Phone,
-                    Email = userDTO.Email,
-                    Contrasenia = userDTO.Password,
-                    Espropietario = userDTO.UserType == "IsOwner" ? true : false,
-                    Esinquilino = userDTO.UserType == "IsOcupant" ? true : false,
-                    IdEstadoUsuario = (int)UserStates.PendienteDeAprobacion,
-                    Documento = Convert.ToInt32(userDTO.Document),
-                    IdTipoDocumento = userDTO.DocumentType
-                };
+                    var userExist = context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == Convert.ToInt32(userDTO.Document));
 
-                await context.AddAsync(usuario);
-                var result = await context.SaveChangesAsync();
-                if (result > 0)
-                    return true;
+                    if (userExist != null)
+                        return new SuccessResponseDTO { Success = false, Message = "Este usuario ya existe" }; 
+
+                    Usuario usuario = new Usuario
+                    {
+                        Nombre = userDTO.Name,
+                        Apellido = userDTO.LastName,
+                        Telefono = userDTO.Phone,
+                        Email = userDTO.Email,
+                        Contrasenia = userDTO.Password,
+                        Espropietario = userDTO.UserType == "IsOwner" ? true : false,
+                        Esinquilino = userDTO.UserType == "IsOcupant" ? true : false,
+                        IdEstadoUsuario = (int)UserStates.PendienteDeAprobacion,
+                        Documento = Convert.ToInt32(userDTO.Document),
+                        IdTipoDocumento = userDTO.DocumentType,
+                        IdCondominio = null,
+                        IdPerfil = null
+                    };
+
+                    context.Add(usuario);
+                    var result = context.SaveChanges();
+                    if (result > 0)
+                        return new SuccessResponseDTO { Success = true, Message = "Usuario creado correctamente" }; 
+                    else
+                        return new SuccessResponseDTO { Success = false, Message = "Error al crear el usuario" }; ;
+                }
                 else
-                    return false;
+                    return new SuccessResponseDTO { Success = false, Message = "Los datos no se enviaron correctamente" }; ; ;
+            }catch(Exception e)
+            {
+                return new SuccessResponseDTO { Success = false, Message = e.Message };
             }
-            else
-              return false;
+            
         }
 
         public List<DocumentTypeModel> GetDocumentTypes()
