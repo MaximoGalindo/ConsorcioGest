@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RegisterUserDTO } from 'src/app/Models/DTO/RegisterUserDTO';
 import { DocumentTypeModel } from 'src/app/Models/HelperModel/DocumentTypeModel';
 import { UserService } from 'src/app/Services/user.service';
@@ -14,7 +15,11 @@ export class RegisterComponent {
   confirmPassword: string= '';
   documentTypes: DocumentTypeModel[] = [];
 
-  constructor(private fb: FormBuilder, private userService:UserService) { }
+  constructor(
+    private fb: FormBuilder,
+    private userService:UserService,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -51,7 +56,9 @@ export class RegisterComponent {
 
       this.userService.createUser(user).subscribe({
         next: data => {
-          console.log(data);          
+          if(data != null)
+            //ACA CON LO QUE SE RESPONDE LA API PODEMOS CREAR LOS MENSAJES DE CONFIRMACIONES
+            this.router.navigate(['/login'])         
         }
       })
 
@@ -62,7 +69,7 @@ export class RegisterComponent {
 
   loadDocumentTypes(){
     this.userService.getDocumentTypes().subscribe({
-      next: data => {
+      next: data => {       
         for(var item of data){
           this.documentTypes.push({Id: item.id, Name: item.name});
         }
