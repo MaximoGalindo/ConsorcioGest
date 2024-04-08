@@ -10,6 +10,7 @@ import { httpInterceptorProviders } from './Helpers/HttpRequestInterceptor';
 import { RegisterComponent } from './Components/register/register.component';
 import { MainPageAdminComponent } from './Components/main-page-admin/main-page-admin.component';
 import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest.component';
+import { UsersGestComponent } from './Components/Users/users-gest/users-gest.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest
     LoginComponent,
     RegisterComponent,    
     MainPageAdminComponent,
-    ClaimsGestComponent  
+    ClaimsGestComponent,
+    UsersGestComponent  
   ],
   imports: [
     BrowserModule,
