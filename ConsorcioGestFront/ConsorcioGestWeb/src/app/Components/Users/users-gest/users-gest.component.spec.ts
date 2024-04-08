@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainPageComponent } from './main-page.component';
+import { UsersGestComponent } from './users-gest.component';
 
-describe('MainPageComponent', () => {
-  let component: MainPageComponent;
-  let fixture: ComponentFixture<MainPageComponent>;
+describe('UsersGestComponent', () => {
+  let component: UsersGestComponent;
+  let fixture: ComponentFixture<UsersGestComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MainPageComponent]
+      declarations: [UsersGestComponent]
     });
-    fixture = TestBed.createComponent(MainPageComponent);
+    fixture = TestBed.createComponent(UsersGestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

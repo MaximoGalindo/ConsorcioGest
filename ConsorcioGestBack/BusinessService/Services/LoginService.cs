@@ -102,7 +102,7 @@ namespace BusinessService.Services
                     .Where(u => u.Documento == documentUser
                         && u.Email == email)
                     .FirstOrDefault();
-
+                //HAY QUE HACER LA VALIDACION DE QUE SI NO TIENE PERFIL RETORNE ALGO COMO, NECESITAS AUTORIZACION
                 CurrentUser = new UserModel
                 {
                     Id = user.Id,
@@ -111,8 +111,8 @@ namespace BusinessService.Services
                     Document = user.Documento,
                     Phone = user.Telefono,
                     Email = user.Email,
-                    IsOwner = user.Espropietario,
-                    IsOcupant = user.Esinquilino,
+                    IsOwner = user.Espropietario != null ? true : false,
+                    IsOcupant = user.Esinquilino != null ? true: false,
                     IdCondominium = user.IdCondominio,
                     IdDocumentType = user.IdTipoDocumento,
                     Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },

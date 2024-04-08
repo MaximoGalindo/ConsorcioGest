@@ -6,16 +6,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
-import { MainPageComponent } from './Components/main-page/main-page.component';
 import { httpInterceptorProviders } from './Helpers/HttpRequestInterceptor';
 import { RegisterComponent } from './Components/register/register.component';
+import { MainPageAdminComponent } from './Components/main-page-admin/main-page-admin.component';
+import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest.component';
+import { UsersGestComponent } from './Components/Users/users-gest/users-gest.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainPageComponent,
-    RegisterComponent
+    RegisterComponent,    
+    MainPageAdminComponent,
+    ClaimsGestComponent,
+    UsersGestComponent  
   ],
   imports: [
     BrowserModule,

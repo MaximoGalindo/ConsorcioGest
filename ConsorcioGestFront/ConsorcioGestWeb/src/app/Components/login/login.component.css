@@ -7,21 +7,10 @@
     height: 100vh;
 }
 
-.line {
-    width: 80%; 
-    max-width: 500px;
-    height: 2px;
-    background-color: black; 
-    margin-top: 2px; 
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
 h1 {
     margin-bottom: 5px;
-    font-size: 60px;
+    font-size: 40px;
+    margin-top: 0;
 }
 
 h4 {
@@ -31,13 +20,15 @@ h4 {
 }
 
 h3 {
-    font-weight: 300;
-    font-size: 20px;
+    font-weight: 200;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
 }
 
 .custom-input {
     width: 400px;
-    height: 40px;
+    height: 30px;
     padding: 10px;
     margin: 10px;
     border: none;
@@ -55,32 +46,31 @@ a {
     color: grey;
     display: flex;
     text-align: left;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .forgot-password {
-    margin-right: 240px;
+    margin-right: 280px;
 }
 
 .admin-register {
     text-decoration: none;
     color: grey;
-    display: inline-block; 
     text-align: left;
     font-size: 14px; 
     margin-left: 10px;
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 button {
     background-color: #F9BC60;
     border: none;
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: 9px 18px;
     color: black;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
-    font-weight: 400;
+    font-weight: 300;
     margin-top: 10px;
 }
 
