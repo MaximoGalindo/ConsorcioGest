@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\businessservice\\dto\\registeruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|solutionrelative:businessservice\\dto\\registeruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{19929AE0-304D-45EF-81A1-B77F39D6455C}|WebApi\\WebApi.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\webapi\\controllers\\logincontroller\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{19929AE0-304D-45EF-81A1-B77F39D6455C}|WebApi\\WebApi.csproj|solutionrelative:webapi\\controllers\\logincontroller\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\businessservice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|solutionrelative:businessservice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\businessservice\\services\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|solutionrelative:businessservice\\services\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\businessservice\\dto\\registeruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|solutionrelative:businessservice\\dto\\registeruserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\businessservice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07C0BAC7-041B-46C9-A585-A0E445A62A6B}|BusinessService\\BusinessService.csproj|solutionrelative:businessservice\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19929AE0-304D-45EF-81A1-B77F39D6455C}|WebApi\\WebApi.csproj|c:\\users\\maxi\\desktop\\consorciogest\\consorciogestback\\webapi\\controllers\\usercontroller\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,21 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 302,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RegisterUserDTO.cs",
-              "DocumentMoniker": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\DTO\\RegisterUserDTO.cs",
-              "RelativeDocumentMoniker": "BusinessService\\DTO\\RegisterUserDTO.cs",
-              "ToolTip": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\DTO\\RegisterUserDTO.cs",
-              "RelativeToolTip": "BusinessService\\DTO\\RegisterUserDTO.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T19:50:33.247Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -55,32 +42,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "RegisterUserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\DTO\\RegisterUserDTO.cs",
+              "RelativeDocumentMoniker": "BusinessService\\DTO\\RegisterUserDTO.cs",
+              "ToolTip": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\DTO\\RegisterUserDTO.cs",
+              "RelativeToolTip": "BusinessService\\DTO\\RegisterUserDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-07T19:50:33.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\WebApi\\Controllers\\LoginController\\LoginController.cs",
               "RelativeDocumentMoniker": "WebApi\\Controllers\\LoginController\\LoginController.cs",
               "ToolTip": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\WebApi\\Controllers\\LoginController\\LoginController.cs",
               "RelativeToolTip": "WebApi\\Controllers\\LoginController\\LoginController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAAAJAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAB4AAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-07T16:11:32.276Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "LoginService.cs",
               "DocumentMoniker": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\Services\\LoginService.cs",
               "RelativeDocumentMoniker": "BusinessService\\Services\\LoginService.cs",
               "ToolTip": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\Services\\LoginService.cs",
               "RelativeToolTip": "BusinessService\\Services\\LoginService.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAEwEwAAABAAAAA",
+              "ViewState": "AQIAAEkAAAAAAAAAAAAmwFoAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T15:54:15.619Z"
+              "WhenOpened": "2024-04-07T15:54:15.619Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\Maxi\\Desktop\\ConsorcioGest\\ConsorcioGestBack\\BusinessService\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "BusinessService\\Services\\UserService.cs",
@@ -88,8 +89,7 @@
               "RelativeToolTip": "BusinessService\\Services\\UserService.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAAABcAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T15:36:27.745Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T15:36:27.745Z"
             },
             {
               "$type": "Document",

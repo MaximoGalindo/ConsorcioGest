@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  height: 100vh; 
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #004643;
+}
+
+.content {
+  flex-grow: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  color: white;
+}
