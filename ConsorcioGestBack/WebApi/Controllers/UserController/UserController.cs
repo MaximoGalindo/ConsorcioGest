@@ -29,6 +29,12 @@ namespace WebApi.Controllers.UserController
             return Ok(userService.GetDocumentTypes());
         }
 
+        [HttpGet("/getConsortiums")]
+        public IActionResult GetConsortiums()
+        {
+            return Ok(userService.GetConsortiums());
+        }
+
     }
 
 }

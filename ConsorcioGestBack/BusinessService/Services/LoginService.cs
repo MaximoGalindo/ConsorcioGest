@@ -122,5 +122,10 @@ namespace BusinessService.Services
             }
             return null;
         }
+
+       /* public bool GetCurrentConsortium()
+        {
+
+        }*/
     }
 }

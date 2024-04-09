@@ -1,5 +1,6 @@
 ﻿using BusinessService.DTO;
 using BusinessService.Enums;
+using BusinessService.Models;
 using BusinessService.Models.AuxModel;
 using BusinessService.ResponseDTO;
 using DataAccess.Data;
@@ -74,6 +75,19 @@ namespace BusinessService.Services
                     }).ToList();
 
             return documentTypeList;
+        }
+
+        public List<ConsortiumModel> GetConsortiums()
+        {
+            List<ConsortiumModel> consortiumList = context.Consorcios
+                    .Select(t => new ConsortiumModel
+                    {
+                        Id = t.Id,
+                        Name = t.Nombre,
+                        Location = t.Ubicacion
+                    }).ToList();
+
+            return consortiumList;
         }
     }
 }

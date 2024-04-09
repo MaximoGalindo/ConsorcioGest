@@ -1,5 +1,5 @@
 <div class="container">
-    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <form [formGroup]="registerForm" (ngSubmit)="SubmitForm()">
         <div class="register-container">
             <h1>Registrarse</h1> 
         <h3>Información de cuenta</h3>   
@@ -16,10 +16,14 @@
             <input type="text" class="custom-input" placeholder="Nombre" name="Name" formControlName="Name">
             <input type="text" class="custom-input" placeholder="Apellido" name="LastName"
             formControlName="LastName">
-        </div>
-        <div class="input-container">
             <input type="text" class="custom-input" placeholder="Teléfono" name="Phone"
             formControlName="Phone">
+        </div>
+        <div class="input-container">
+            <select class="custom-select" formControlName="Consortium">
+                <option value="" disabled>Seleccione su Consorcio</option>
+                <option *ngFor="let consortium of consortiums" [value]="consortium.Id">{{ consortium.Name + ' - ' + consortium.Location }}</option>
+            </select>
             <select class="custom-select" formControlName="DocumentType">
                 <option value="" disabled>Seleccione el tipo de documento</option>
                 <option *ngFor="let documentType of documentTypes" [value]="documentType.Id">{{ documentType.Name }}</option>
