@@ -23,7 +23,7 @@ namespace BusinessService.Services
         private readonly IConfiguration _config;
 
         public static UserModel CurrentUser {  get; private set; }
-        private string Token {  get; set; }
+        public static ConsortiumModel CurrentConsortium { get; private set; }
 
         public LoginService(ConsorcioGestContext context, IConfiguration configuration)
         {
@@ -31,7 +31,7 @@ namespace BusinessService.Services
             this._config = configuration;
         }
 
-        public string Login(LoginUser loginUser)
+        public UserModel Login(LoginUser loginUser)
         {
             if(loginUser != null)
             {
@@ -39,11 +39,12 @@ namespace BusinessService.Services
 
                 if (user != null)
                 {
-                    Token = GenerateToken(user);
-                    return Token.ToString();
+                    var token = GenerateToken(user);
+                    GetCurrentUser(token);
+                    return CurrentUser;
                 }
             }
-            return "Usuario no Encontrado";
+            return null;
         }
 
         private UserModel Authenticate(LoginUser loginUser)
@@ -87,45 +88,61 @@ namespace BusinessService.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        
-        public UserModel GetCurrentUser(ClaimsIdentity identity)
-        {
-            if(identity != null)
-            {
-                var userClaims = identity.Claims;
-                int documentUser = Convert.ToInt32(userClaims.FirstOrDefault(n => n.Type == "Document")?.Value);
-                var email = userClaims.FirstOrDefault(n => n.Type == ClaimTypes.Email)?.Value;
 
-                var user = context.Usuarios
-                    .Include(u => u.IdPerfilNavigation)
-                    .Include(u => u.IdEstadoUsuarioNavigation)
-                    .Where(u => u.Documento == documentUser
-                        && u.Email == email)
-                    .FirstOrDefault();
-                //HAY QUE HACER LA VALIDACION DE QUE SI NO TIENE PERFIL RETORNE ALGO COMO, NECESITAS AUTORIZACION
-                CurrentUser = new UserModel
+        public void GetCurrentUser(string token)
+        {
+            if (!string.IsNullOrEmpty(token))
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+
+                if (tokenS != null)
                 {
-                    Id = user.Id,
-                    Name = user.Nombre,
-                    LastName = user.Apellido,
-                    Document = user.Documento,
-                    Phone = user.Telefono,
-                    Email = user.Email,
-                    IsOwner = user.Espropietario != null ? true : false,
-                    IsOcupant = user.Esinquilino != null ? true: false,
-                    IdCondominium = user.IdCondominio,
-                    IdDocumentType = user.IdTipoDocumento,
-                    Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },
-                    UserState = new StateModel { Id = user.IdEstadoUsuario.Value, Name = user.IdEstadoUsuarioNavigation.Nombre },
-                };
-                return CurrentUser;
+                    var claims = tokenS.Claims;
+                    var documentUser = Convert.ToInt32(claims.FirstOrDefault(n => n.Type == "Document")?.Value);
+                    var email = claims.FirstOrDefault(n => n.Type == ClaimTypes.Email)?.Value;
+
+                    var user = context.Usuarios
+                        .Include(u => u.IdPerfilNavigation)
+                        .Include(u => u.IdEstadoUsuarioNavigation)
+                        .Where(u => u.Documento == documentUser && u.Email == email)
+                        .FirstOrDefault();
+
+                    if (user != null)
+                    {
+                        CurrentUser = new UserModel
+                        {
+                            Id = user.Id,
+                            Name = user.Nombre,
+                            LastName = user.Apellido,
+                            Document = user.Documento,
+                            Phone = user.Telefono,
+                            Email = user.Email,
+                            IsOwner = user.Espropietario != null ? true : false,
+                            IsOcupant = user.Esinquilino != null ? true : false,
+                            IdCondominium = user.IdCondominio,
+                            IdDocumentType = user.IdTipoDocumento,
+                            Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },
+                            UserState = new StateModel { Id = user.IdEstadoUsuario.Value, Name = user.IdEstadoUsuarioNavigation.Nombre },
+                            Token = token
+                        };
+                    }
+                }
             }
-            return null;
         }
 
-       /* public bool GetCurrentConsortium()
+        public ConsortiumModel GetCurrentConsortium(int consortiumID)
         {
+            CurrentConsortium = context.Consorcios
+                .Where(c => c.Id == consortiumID)
+                .Select(c => new ConsortiumModel
+                {
+                    Id = c.Id,
+                    Name = c.Nombre,
+                    Location = c.Ubicacion
+                }).First();
 
-        }*/
+            return CurrentConsortium != null ? CurrentConsortium : null;
+        }
     }
 }

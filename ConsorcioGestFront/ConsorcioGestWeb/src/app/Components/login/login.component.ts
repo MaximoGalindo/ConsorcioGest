@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserModel } from 'src/app/Models/Models/UserModel';
 import { AuthService } from 'src/app/Services/auth.service';
 import { StorageService } from 'src/app/Services/storage.service';
 
@@ -34,31 +35,28 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {   
-    console.log(this.form);
-    
+    console.log(this.form);    
     this.authService.login(this.form).subscribe({  
-      next: (data:any) => {   
-        this.storageService.saveToken(data);  
+      next: (data) => {        
+        this.storageService.saveToken(data.token); 
+        if(data.profile.name == 'Admin'){
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;  
+          this.router.navigate(['/main-page-admin']);
+        }
+        else if(data.profile.name == 'Residente')
+        {
+          this.router.navigate(['/main-page-residente']);
+          this.isLoginFailed = true;
+          this.isLoggedIn = false;
+        } 
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.isLoggedIn = false;
       }
-    });
-    this.authService.getUser().subscribe(user => {
-      if(user.profile.name == 'Admin'){
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;  
-        this.router.navigate(['/main-page-admin']);
-      }
-      else if(user.profile.name == 'Residente')
-      {
-        this.router.navigate(['/main-page-residente']);
-        this.isLoginFailed = true;
-        this.isLoggedIn = false;
-      }
-    })   
+    });   
   }
 
   register(parametro:string) {

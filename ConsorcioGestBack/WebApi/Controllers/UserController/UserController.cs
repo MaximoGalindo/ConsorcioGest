@@ -35,6 +35,29 @@ namespace WebApi.Controllers.UserController
             return Ok(userService.GetConsortiums());
         }
 
+        [HttpGet("/getUsers")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(userService.GetAllUsers());
+        }
+
+        [HttpGet("/getUsersById/{userID}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetUserById(int userID)
+        {
+            return Ok(userService.GetUserByID(userID));
+        }
+
+        [HttpPut("/adminUser/{userID}")]
+        [Authorize]
+        public IActionResult UpdateUser(int userID, [FromBody] UpdateUserDTO userDTO)
+        {
+            return Ok(userService.UpdateUser(userID,userDTO));
+        }
+        
+
+
     }
 
 }

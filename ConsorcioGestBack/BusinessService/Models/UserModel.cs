@@ -22,5 +22,6 @@ namespace BusinessService.Models
         public StateModel UserState { get; set; } = null;
         public int? IdDocumentType { get; set; }
         public int Document { get; set; }
+        public string Token { get; set; }
     }
 }

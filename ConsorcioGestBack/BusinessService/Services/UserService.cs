@@ -5,6 +5,7 @@ using BusinessService.Models.AuxModel;
 using BusinessService.ResponseDTO;
 using DataAccess.Data;
 using DataAccess.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace BusinessService.Services
                         Contrasenia = userDTO.Password,
                         Espropietario = userDTO.UserType == "IsOwner" ? true : false,
                         Esinquilino = userDTO.UserType == "IsOcupant" ? true : false,
-                        IdEstadoUsuario = (int)UserStates.PendienteDeAprobacion,
+                        IdEstadoUsuario = (int)UserStatesEnum.PendienteDeAprobacion,
                         Documento = Convert.ToInt32(userDTO.Document),
                         IdTipoDocumento = userDTO.DocumentType,
                         IdCondominio = null,
@@ -88,6 +89,83 @@ namespace BusinessService.Services
                     }).ToList();
 
             return consortiumList;
+        }
+
+        public List<UserModelDTO> GetAllUsers()
+        {
+            List<UserModelDTO> userModelDTOs = context.Usuarios
+                .Where(u => 
+                u.ConsorcioUsuarios.Any(cu => cu.IdConsorcio == LoginService.CurrentConsortium.Id)
+                && u.IdPerfil != 1)
+               .Select(u => new UserModelDTO 
+               {
+                   Name = u.Nombre + ' ' + u.Apellido,
+                   Phone = u.Telefono,
+                   Email = u.Email,
+                   Document = u.Documento,
+                   Profile = u.IdPerfilNavigation != null ? u.IdPerfilNavigation.Nombre : "",
+                   Property = u.Esinquilino == true ? "Inquilino" : "Dueño",
+                   State = u.IdEstadoUsuarioNavigation.Nombre,
+                   //A CHEKAR LA PARTE ESTA DEL ARMADO DEL CONDOMINIO
+                   Condominium =
+                    u.IdCondominioNavigation != null ?
+                            u.IdCondominioNavigation.Torre
+                    + ' ' + u.IdCondominioNavigation.Piso
+                    + ' ' + u.IdCondominioNavigation.Departamento
+                    : "",
+
+               }).ToList();
+            return userModelDTOs;
+        }
+
+        public UserModelDTO GetUserByID(int userID)
+        {
+            UserModelDTO userModelDTO = context.Usuarios
+                .Where(u => u.Id == userID)
+                .Select(u => new UserModelDTO
+                {
+                    Name = u.Nombre + ' ' + u.Apellido,
+                    Phone = u.Telefono,
+                    Email = u.Email,
+                    Document = u.Documento,
+                    Profile = u.IdPerfilNavigation != null ? u.IdPerfilNavigation.Nombre : "",
+                    Property = u.Esinquilino == true ? "Inquilino" : "Dueño",
+                    State = u.IdEstadoUsuarioNavigation != null ? u.IdEstadoUsuarioNavigation.Nombre : "",
+                    //A CHEKAR LA PARTE ESTA DEL ARMADO DEL CONDOMINIO
+                    Condominium =
+                    u.IdCondominioNavigation != null ?
+                            u.IdCondominioNavigation.Torre
+                    + ' ' + u.IdCondominioNavigation.Piso
+                    + ' ' + u.IdCondominioNavigation.Departamento
+                    : "",
+
+                }).First();
+            return userModelDTO != null ? userModelDTO : null;
+        }
+
+        public int UpdateUser(int userID,UpdateUserDTO userDTO)
+        {
+            Usuario user = context.Usuarios
+                .Where(u => u.Id == userID).First();
+
+            if(LoginService.CurrentUser.Profile.Id == 2)
+            {
+                user.Telefono = userDTO.Phone != null ? userDTO.Phone : user.Telefono;
+                user.Email = userDTO.Email != null ? userDTO.Email : user.Email;
+            }
+            else
+            {
+                user.Telefono = userDTO.Phone != null ? userDTO.Phone : user.Telefono;
+                user.Email = userDTO.Email != null ? userDTO.Email : user.Email;
+                user.IdPerfil = userDTO.IdProfile != null ? userDTO.IdProfile : user.IdPerfil;
+                user.IdCondominio = userDTO.IdCondominium != null ? userDTO.IdCondominium : user.IdCondominio;
+                user.IdEstadoUsuario = userDTO.IdUserState != null ? userDTO.IdUserState : userDTO.IdUserState;
+            }
+
+            context.Update(user);
+            int result = context.SaveChanges();
+
+            return result;
         }
     }
 }

@@ -42,7 +42,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 //SERVICES
 builder.Services.AddDbContext<ConsorcioGestContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings:ConexionString"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings:ConexionString"))
+           .EnableSensitiveDataLogging(); 
 });
 
 builder.Services.AddScoped<LoginService>();

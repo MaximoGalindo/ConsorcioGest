@@ -21,14 +21,27 @@ namespace WebApi.Controllers.LoginController
         [HttpPost()]
         public IActionResult Login(LoginUser loginUser)
         {
-            return Ok(loginService.Login(loginUser));
+            var user = loginService.Login(loginUser);
+
+            if (user != null)
+                return Ok(user);
+            else
+                return BadRequest("Credenciales inválidas");
         }
 
-        [HttpGet("/getUser")]
+        /*[HttpGet("/getUser")]
         [Authorize]
         public IActionResult GetCurrentUser()
         {
             return Ok(loginService.GetCurrentUser((ClaimsIdentity)HttpContext.User.Identity));
+        }*/
+
+        [HttpGet("/getConsortium")]
+        [Authorize]
+        public IActionResult GetCurrentConsortium(int consortiumID)
+        {
+            return Ok(loginService.GetCurrentConsortium(consortiumID));
         }
+
     }
 }

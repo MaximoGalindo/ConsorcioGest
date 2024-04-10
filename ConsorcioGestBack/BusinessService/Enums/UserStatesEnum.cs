@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessService.Enums
 {
-    public enum UserStates
+    public enum UserStatesEnum
     {
         PendienteDeAprobacion = 1,
         Habilitado = 2,
