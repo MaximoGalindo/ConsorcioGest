@@ -1,0 +1,27 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #4C5F5F;
+}
+
+.filter-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.custom-input {
+    width: 200px;
+    height: 30px;
+}
+
+.table-container {
+    display: flex;
+    margin: 30px;
+}

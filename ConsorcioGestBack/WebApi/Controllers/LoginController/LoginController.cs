@@ -36,7 +36,7 @@ namespace WebApi.Controllers.LoginController
             return Ok(loginService.GetCurrentUser((ClaimsIdentity)HttpContext.User.Identity));
         }*/
 
-        [HttpGet("/getConsortium")]
+        [HttpPost("/getConsortium")]
         [Authorize]
         public IActionResult GetCurrentConsortium(int consortiumID)
         {

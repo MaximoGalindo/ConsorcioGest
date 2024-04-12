@@ -16,8 +16,6 @@ export class AuthService {
     return this.http.post<UserModel>(this.baseUrl + 'api/login', credentials);
   }
   
-  getUser(): Observable<any> {
-    return this.http.get(this.baseUrl + 'getUser')
-  }
+  
   //ACA SE HACE TAMBIEN EL REGISTER
 }

@@ -25,3 +25,18 @@ body{
     margin-right: auto;
     text-align: center;
 }
+
+.custom-input {
+    width: 400px;
+    height: 30px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 13px;
+    background-color: #36CFA2;
+    font-size: 16px;
+    text-align: left;
+    outline: none;
+    font-size: 200;
+    color: black;
+}

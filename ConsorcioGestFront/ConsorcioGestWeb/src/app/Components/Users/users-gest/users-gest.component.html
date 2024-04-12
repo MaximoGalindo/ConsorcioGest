@@ -1,1 +1,48 @@
-<p>users-gest works!</p>
+<div class="filter-container">
+
+    <input type="text" 
+    name="Email" 
+    class="custom-input" 
+    placeholder="Correo Electrónico">
+    <input type="text" 
+    name="Email" 
+    class="custom-input" 
+    placeholder="Correo Electrónico">
+    <input type="text" 
+    name="Email" 
+    class="custom-input" 
+    placeholder="Correo Electrónico">
+    <input type="text" 
+    name="Email" 
+    class="custom-input" 
+    placeholder="Correo Electrónico">
+
+</div>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Documento</th>
+                <th>Nombre Completo</th>
+                <th>Condominio</th>
+                <th>Ocupacion</th>
+                <th>Contacto</th>
+                <th>Perfil</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.document}}</td>
+                <td>{{user.name}}</td>                
+                <td>{{user.condominium}}</td>
+                <td>{{user.property}}</td>
+                <td>{{user.phone}} <br> {{user.email}}</td>
+                <td>{{user.profile}}</td>
+                <td>{{user.state}}</td>
+                <td><button>Editar</button></td>
+            </tr>            
+        </tbody>
+    </table>
+</div>

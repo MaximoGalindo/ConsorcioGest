@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegisterUserDTO } from '../Models/DTO/RegisterUserDTO';
+import { UserModelDTO } from '../Models/DTO/UserModelDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class UserService {
     return this.http.get(this.baseUrl + 'getConsortiums')
   }
 
-  //ACA VAS A PREGUNTAR TODO LO DEL USUARIO
+  GetUsers():Observable<UserModelDTO[]>{
+    return this.http.get<UserModelDTO[]>(this.baseUrl + 'getUsers')
+  }
+
+  
+  
 }
