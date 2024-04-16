@@ -8,8 +8,10 @@ namespace BusinessService.Enums
 {
     public enum UserStatesEnum
     {
-        PendienteDeAprobacion = 1,
-        Habilitado = 2,
-        Deshabilitado = 3
+        Habilitado = 1,
+        Deshabilitado = 2,
+        PendienteDeAprobacion = 3,
+        Rechazado = 4
+        
     }
 }

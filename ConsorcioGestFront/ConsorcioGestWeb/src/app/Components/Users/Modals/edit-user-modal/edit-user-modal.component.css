@@ -1,0 +1,36 @@
+.modal-content {
+    background-color: #ABD1C6;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 80%;
+    position: relative;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.line{
+    max-width: 800px;
+    height: 1.5px;
+    margin-top: 10px;
+}
+
+.custom-select {
+    width: 200px;
+    height: 30px;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 13px;
+    background-color: #36CFA2;
+    font-size: 16px;
+    text-align: left;
+    outline: none;
+    color: black;
+}

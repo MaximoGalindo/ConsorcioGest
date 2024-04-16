@@ -41,7 +41,42 @@
                 <td>{{user.phone}} <br> {{user.email}}</td>
                 <td>{{user.profile}}</td>
                 <td>{{user.state}}</td>
-                <td><button>Editar</button></td>
+                <td>      
+                    <button 
+                    *ngIf="user.state != 'Pendiente de Aprobacion'"
+                    [disabled]="user.state === 'Habilitado'"
+                    (click)="ActivateUser(user.document)" 
+                    class="icono" 
+                    style="color: green; margin-right: 8px; background-color: transparent; border: none;"
+                    >
+                    <i class="fa-solid fa-check fa-2x" style="color: green;"></i>
+                    </button>
+                    <button 
+                    *ngIf="user.state != 'Pendiente de Aprobacion'"
+                    [disabled]="user.state === 'Deshabilitado'"
+                    (click)="DeactivateUser(user.document)" 
+                    class="icono" 
+                    style="color: red; margin-right: 8px; background-color: transparent; border: none;"
+                    >
+                    <i class="fa-solid fa-ban fa-2x" style="color: red;"></i>
+                    </button>
+                    <button 
+                    *ngIf="user.state != 'Pendiente de Aprobacion'"
+                    (click)="EditUser(user.document)" 
+                    class="icono" 
+                    style="color: lightblue; margin-right: 8px; background-color: transparent; border: none;"
+                    >
+                    <i class="fa-solid fa-pen fa-2x" style="color: lightblue;"></i>
+                    </button>
+                    <button 
+                    *ngIf="user.state == 'Pendiente de Aprobacion'"
+                    (click)="EditUser(user.document)" 
+                    class="icono" 
+                    style="color: lightblue; margin-right: 8px; background-color: transparent; border: none;"
+                    >
+                    <i class="fa-solid fa-pen fa-2x" style="color: lightblue;"></i>
+                    </button>
+                </td>
             </tr>            
         </tbody>
     </table>

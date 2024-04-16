@@ -1,0 +1,14 @@
+
+<div *ngIf="_UserIsPresent" class="modal-container">
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
+
+        <div style="text-align: center; font-size: 25px;">{{User.name}}</div>
+        <hr class="line">
+
+        <label for="">Condominio</label>
+        <select class="custom-select">
+            <option value="" disabled>Seleccione el tipo de documento</option>           
+        </select>
+    </div>
+</div>

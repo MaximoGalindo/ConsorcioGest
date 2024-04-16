@@ -118,10 +118,10 @@ namespace BusinessService.Services
             return userModelDTOs;
         }
 
-        public UserModelDTO GetUserByID(int userID)
+        public UserModelDTO GetUserByDocument(int documentUser)
         {
             UserModelDTO userModelDTO = context.Usuarios
-                .Where(u => u.Id == userID)
+                .Where(u => u.Documento == documentUser)
                 .Select(u => new UserModelDTO
                 {
                     Name = u.Nombre + ' ' + u.Apellido,
@@ -143,10 +143,10 @@ namespace BusinessService.Services
             return userModelDTO != null ? userModelDTO : null;
         }
 
-        public int UpdateUser(int userID,UpdateUserDTO userDTO)
+        public int UpdateUser(int userDocument,UpdateUserDTO userDTO)
         {
             Usuario user = context.Usuarios
-                .Where(u => u.Id == userID).First();
+                .Where(u => u.Documento == userDocument).First();
 
             if(LoginService.CurrentUser.Profile.Id == 2)
             {

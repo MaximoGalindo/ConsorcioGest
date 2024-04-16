@@ -11,6 +11,10 @@ import { RegisterComponent } from './Components/register/register.component';
 import { MainPageAdminComponent } from './Components/main-page-admin/main-page-admin.component';
 import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest.component';
 import { UsersGestComponent } from './Components/Users/users-gest/users-gest.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditUserModalComponent } from './Components/Users/Modals/edit-user-modal/edit-user-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,8 @@ import { UsersGestComponent } from './Components/Users/users-gest/users-gest.com
     RegisterComponent,    
     MainPageAdminComponent,
     ClaimsGestComponent,
-    UsersGestComponent  
+    UsersGestComponent,
+    EditUserModalComponent  
   ],
   imports: [
     BrowserModule,
@@ -27,6 +32,8 @@ import { UsersGestComponent } from './Components/Users/users-gest/users-gest.com
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgbModule, 
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

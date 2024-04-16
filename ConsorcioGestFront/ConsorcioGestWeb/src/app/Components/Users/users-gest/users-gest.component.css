@@ -1,14 +1,18 @@
 table {
     width: 100%;
     border-collapse: collapse;
+    color: white;
 }
 th, td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
+    background-color: #8A9292;
 }
+
 th {
-    background-color: #4C5F5F;
+    background-color: #36CFA2;
+    color: black;
 }
 
 .filter-container{
@@ -24,4 +28,17 @@ th {
 .table-container {
     display: flex;
     margin: 30px;
+}
+button{
+    background-color: transparent;
+}
+
+.icono:hover:not([disabled]) {
+    filter: brightness(120%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.icono[disabled]:hover {
+    filter: brightness(100%);
+    box-shadow: none;
 }

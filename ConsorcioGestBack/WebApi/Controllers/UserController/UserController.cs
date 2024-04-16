@@ -42,18 +42,18 @@ namespace WebApi.Controllers.UserController
             return Ok(userService.GetAllUsers());
         }
 
-        [HttpGet("/getUsersById/{userID}")]
+        [HttpGet("/getUserByDocument/{documentUser}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetUserById(int userID)
+        public IActionResult GetUserByDocument(int documentUser)
         {
-            return Ok(userService.GetUserByID(userID));
+            return Ok(userService.GetUserByDocument(documentUser));
         }
 
-        [HttpPut("/adminUser/{userID}")]
+        [HttpPut("/updateUser/{documentUser}")]
         [Authorize]
-        public IActionResult UpdateUser(int userID, [FromBody] UpdateUserDTO userDTO)
+        public IActionResult UpdateUser(int documentUser, [FromBody] UpdateUserDTO userDTO)
         {
-            return Ok(userService.UpdateUser(userID,userDTO));
+            return Ok(userService.UpdateUser(documentUser, userDTO));
         }
         
 

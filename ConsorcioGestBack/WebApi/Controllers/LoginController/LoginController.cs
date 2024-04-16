@@ -40,7 +40,7 @@ namespace WebApi.Controllers.LoginController
         [Authorize]
         public IActionResult GetCurrentConsortium(int consortiumID)
         {
-            return Ok(loginService.GetCurrentConsortium(consortiumID));
+                return Ok(loginService.GetCurrentConsortium(consortiumID));
         }
 
     }
