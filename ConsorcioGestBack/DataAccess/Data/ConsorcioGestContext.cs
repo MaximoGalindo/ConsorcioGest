@@ -24,6 +24,8 @@ public partial class ConsorcioGestContext : DbContext
 
     public virtual DbSet<ConsorcioUsuario> ConsorcioUsuarios { get; set; }
 
+    public virtual DbSet<ConsortiumConfiguration> ConsortiumConfigurations { get; set; }
+
     public virtual DbSet<Contacto> Contactos { get; set; }
 
     public virtual DbSet<Encuesta> Encuestas { get; set; }
@@ -41,6 +43,8 @@ public partial class ConsorcioGestContext : DbContext
     public virtual DbSet<EstadoReserva> EstadoReservas { get; set; }
 
     public virtual DbSet<EstadoUsuario> EstadoUsuarios { get; set; }
+
+    public virtual DbSet<FloorConfiguration> FloorConfigurations { get; set; }
 
     public virtual DbSet<Opcion> Opcions { get; set; }
 
@@ -140,6 +144,34 @@ public partial class ConsorcioGestContext : DbContext
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CONSORCIOUSUARIO_USUARIO");
+        });
+
+        modelBuilder.Entity<ConsortiumConfiguration>(entity =>
+        {
+            entity.ToTable("ConsortiumConfiguration");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.DeparmentConfiguration)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.FloorConfiguration)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.IdConsortium).HasColumnName("ID_CONSORTIUM");
+            entity.Property(e => e.IdFloor).HasColumnName("ID_FLOOR");
+            entity.Property(e => e.TowerName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.IdConsortiumNavigation).WithMany(p => p.ConsortiumConfigurations)
+                .HasForeignKey(d => d.IdConsortium)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ConsortiumConfiguration_Consortium");
+
+            entity.HasOne(d => d.IdFloorNavigation).WithMany(p => p.ConsortiumConfigurations)
+                .HasForeignKey(d => d.IdFloor)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ConsortiumConfiguration_FloorConfiguration");
         });
 
         modelBuilder.Entity<Contacto>(entity =>
@@ -312,6 +344,13 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("OBSERVACION");
+        });
+
+        modelBuilder.Entity<FloorConfiguration>(entity =>
+        {
+            entity.ToTable("FloorConfiguration");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
         });
 
         modelBuilder.Entity<Opcion>(entity =>

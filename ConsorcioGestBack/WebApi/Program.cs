@@ -48,6 +48,7 @@ builder.Services.AddDbContext<ConsorcioGestContext>(options =>
 
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ConsortiumService>();
 
 
 builder.Services.AddSwaggerGen(c =>

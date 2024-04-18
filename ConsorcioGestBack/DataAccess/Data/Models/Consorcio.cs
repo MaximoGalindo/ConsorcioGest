@@ -17,6 +17,8 @@ public partial class Consorcio
 
     public virtual ICollection<ConsorcioUsuario> ConsorcioUsuarios { get; set; } = new List<ConsorcioUsuario>();
 
+    public virtual ICollection<ConsortiumConfiguration> ConsortiumConfigurations { get; set; } = new List<ConsortiumConfiguration>();
+
     public virtual ICollection<Contacto> Contactos { get; set; } = new List<Contacto>();
 
     public virtual ICollection<EspacioComun> EspacioComuns { get; set; } = new List<EspacioComun>();
