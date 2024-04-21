@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace BusinessService.Models
 {
+
     public class ConsortiumConfiguration 
-    { 
+    {  
         public List<Tower> Towers {  get; set; }
         public List<CommonSpaces> CommonSpaces { get; set; }
     }
@@ -16,13 +17,13 @@ namespace BusinessService.Models
     public class Tower
     {
         public string Name { get; set; }
-        public int Floor { get; set; }
         public TowerConfig TowerConfig { get; set; }
     }
 
     public class TowerConfig
     {
         public FloorConfig FloorConfig { get; set; }
+        public int Floors { get; set; }
         public DepartmentConfig DepartmentConfig { get; set; }
         public bool IsUniform { get; set; }
         public bool IsUniqual { get; set; }

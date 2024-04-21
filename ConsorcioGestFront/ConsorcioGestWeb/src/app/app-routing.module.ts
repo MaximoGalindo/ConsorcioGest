@@ -4,6 +4,8 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { MainPageAdminComponent } from './Components/main-page-admin/main-page-admin.component';
 import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest.component';
+import { SelectConsortiumComponent } from './Components/Consortium/select-consortium/select-consortium.component';
+import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,7 +16,9 @@ const routes: Routes = [
       {path: '',component: MainPageAdminComponent},
       {path: 'claims-gest', component: ClaimsGestComponent}
     ]
-  }
+  },
+  { path: 'consortium', component: SelectConsortiumComponent},
+  { path: 'register-consortium', component: RegisterConsortiumComponent},
 ];
 
 

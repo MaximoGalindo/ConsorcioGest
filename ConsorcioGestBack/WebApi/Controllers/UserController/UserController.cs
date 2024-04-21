@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.UserController
 {
-    [Route("api/users")]
+    [Route("users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -17,39 +17,33 @@ namespace WebApi.Controllers.UserController
             this.userService = userService;
         }
 
-        [HttpPost("/register")]
+        [HttpPost("register")]
         public IActionResult createUser(RegisterUserDTO user)
         {
             return Ok(userService.CreateUser(user));
         }
 
-        [HttpGet("/getDocumentTypes")]
+        [HttpGet("getDocumentTypes")]
         public IActionResult getDocumentTypes()
         {
             return Ok(userService.GetDocumentTypes());
         }
 
-        [HttpGet("/getConsortiums")]
-        public IActionResult GetConsortiums()
-        {
-            return Ok(userService.GetConsortiums());
-        }
-
-        [HttpGet("/getUsers")]
+        [HttpGet("getUsers")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetAllUsers()
         {
             return Ok(userService.GetAllUsers());
         }
 
-        [HttpGet("/getUserByDocument/{documentUser}")]
+        [HttpGet("getUserByDocument/{documentUser}")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetUserByDocument(int documentUser)
         {
             return Ok(userService.GetUserByDocument(documentUser));
         }
 
-        [HttpPut("/updateUser/{documentUser}")]
+        [HttpPut("updateUser/{documentUser}")]
         [Authorize]
         public IActionResult UpdateUser(int documentUser, [FromBody] UpdateUserDTO userDTO)
         {

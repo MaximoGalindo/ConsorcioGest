@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace WebApi.Controllers.LoginController
 {
-    [Route("api/login")]
+    [Route("login")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -18,7 +18,7 @@ namespace WebApi.Controllers.LoginController
             this.loginService = loginService;
         }
 
-        [HttpPost()]
+        [HttpPost]
         public IActionResult Login(LoginUser loginUser)
         {
             var user = loginService.Login(loginUser);
@@ -36,11 +36,11 @@ namespace WebApi.Controllers.LoginController
             return Ok(loginService.GetCurrentUser((ClaimsIdentity)HttpContext.User.Identity));
         }*/
 
-        [HttpPost("/getConsortium")]
-        [Authorize]
-        public IActionResult GetCurrentConsortium(int consortiumID)
+        [HttpPost("setCurrentConsortium")]
+        [Authorize(Roles ="Admin")]
+        public IActionResult SetCurrentConsortium(int consortiumID)
         {
-                return Ok(loginService.GetCurrentConsortium(consortiumID));
+           return Ok(loginService.SetCurrentConsortium(consortiumID));
         }
 
     }

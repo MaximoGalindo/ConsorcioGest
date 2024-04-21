@@ -15,6 +15,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditUserModalComponent } from './Components/Users/Modals/edit-user-modal/edit-user-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SelectConsortiumComponent } from './Components/Consortium/select-consortium/select-consortium.component';
+import { CommonModule } from '@angular/common';
+import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
+import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config-tower-modal/config-tower-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MainPageAdminComponent,
     ClaimsGestComponent,
     UsersGestComponent,
-    EditUserModalComponent  
+    EditUserModalComponent,
+    SelectConsortiumComponent,
+    RegisterConsortiumComponent,
+    ConfigTowerModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgbModule, 
+    NgbModule,
+    CommonModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

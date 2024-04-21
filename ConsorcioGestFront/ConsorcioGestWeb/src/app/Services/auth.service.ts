@@ -9,13 +9,15 @@ import { UserModel } from '../Models/Models/UserModel';
 })
 export class AuthService {
 
-  baseUrl = 'https://localhost:7083/';
+  baseUrl = 'https://localhost:7083/login/';
   constructor(private http:HttpClient) { }
 
   login(credentials:any) :Observable<UserModel>{
-    return this.http.post<UserModel>(this.baseUrl + 'api/login', credentials);
+    return this.http.post<UserModel>(this.baseUrl, credentials);
+  }
+
+  SetCurrentConsortium(consortiumID:number) :Observable<any>{
+    return this.http.post<any>(this.baseUrl + "setCurrentConsortium?consortiumID=" + consortiumID, null);
   }
   
-  
-  //ACA SE HACE TAMBIEN EL REGISTER
 }

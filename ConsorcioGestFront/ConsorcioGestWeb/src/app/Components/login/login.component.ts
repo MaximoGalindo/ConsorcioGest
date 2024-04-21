@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         if(data.profile.name == 'Admin'){
           this.isLoginFailed = false;
           this.isLoggedIn = true;  
-          this.router.navigate(['/main-page-admin']);
+          this.router.navigate(['/consortium'])
         }
         else if(data.profile.name == 'Residente')
         {

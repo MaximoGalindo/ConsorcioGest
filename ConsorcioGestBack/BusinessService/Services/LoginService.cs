@@ -131,7 +131,7 @@ namespace BusinessService.Services
             }
         }
 
-        public ConsortiumModel GetCurrentConsortium(int consortiumID)
+        public ConsortiumModel SetCurrentConsortium(int consortiumID)
         {
             CurrentConsortium = context.Consorcios
                 .Where(c => c.Id == consortiumID)

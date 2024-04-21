@@ -10,7 +10,7 @@ import { UpdateUserDTO } from '../Models/DTO/UpdateUserDTO';
 })
 export class UserService {
 
-  baseUrl = 'https://localhost:7083/';
+  baseUrl = 'https://localhost:7083/users/';
   constructor(private http:HttpClient) { }
 
   CreateUser(registerUserDTO: RegisterUserDTO): Observable<any> {
@@ -19,10 +19,6 @@ export class UserService {
 
   GetDocumentTypes(): Observable<any> {
     return this.http.get(this.baseUrl + 'getDocumentTypes')
-  }
-
-  GetConsortiums():Observable<any>{
-    return this.http.get(this.baseUrl + 'getConsortiums')
   }
 
   GetUsers():Observable<UserModelDTO[]>{

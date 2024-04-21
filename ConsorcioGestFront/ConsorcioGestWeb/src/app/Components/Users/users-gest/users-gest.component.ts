@@ -32,21 +32,13 @@ export class UsersGestComponent implements OnInit{
 
   LoadUsers(){
 
-    //ESTO ES TEMPORAL HASTA QUE HAGA LA GESTION DE CONSORCIOS
-    this.consortiumService.getCurrentConsortium(1).subscribe({
+    this.userService.GetUsers().subscribe({
       next: data => {
-        console.log(data);  
-        this.userService.GetUsers().subscribe({
-          next: data => {
-            if (data != null)
-              this.users = data;
-              console.log(this.users);
-            
-          }
-        })      
+        if (data != null)
+          this.users = data;
+          console.log(this.users);        
       }
-    })  
-
+    }) 
     
   }
 

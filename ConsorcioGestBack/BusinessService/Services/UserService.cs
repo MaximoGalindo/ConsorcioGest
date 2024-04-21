@@ -78,19 +78,6 @@ namespace BusinessService.Services
             return documentTypeList;
         }
 
-        public List<ConsortiumModel> GetConsortiums()
-        {
-            List<ConsortiumModel> consortiumList = context.Consorcios
-                    .Select(t => new ConsortiumModel
-                    {
-                        Id = t.Id,
-                        Name = t.Nombre,
-                        Location = t.Ubicacion
-                    }).ToList();
-
-            return consortiumList;
-        }
-
         public List<UserModelDTO> GetAllUsers()
         {
             List<UserModelDTO> userModelDTOs = context.Usuarios

@@ -1,5 +1,5 @@
 ﻿using BusinessService.Models;
-using BusinessService.Services;
+using BusinessService.Services.Consortium;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace WebApi.Controllers.LoginController
 {
-    [Route("api/consortium")]
+    [Route("consortium")]
     [ApiController]
     public class ConsortiumController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace WebApi.Controllers.LoginController
 
         public ConsortiumController(ConsortiumService consortiumService)
         {
-            this.consortiumService = consortiumService; 
+            this.consortiumService = consortiumService;
         }
 
         /*[HttpPost]
@@ -30,6 +30,14 @@ namespace WebApi.Controllers.LoginController
         {
             return Ok(consortiumService.GenerateLogicDepartments(config));
         }
+
+        [HttpGet("getConsortiums")]
+        public IActionResult GetAllConsortiums() {
+
+            return Ok(consortiumService.GetAllConsortiums());
+
+        }     
+
 
     }
 }

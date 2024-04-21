@@ -1,4 +1,5 @@
 using BusinessService.Services;
+using BusinessService.Services.Consortium;
 using DataAccess.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +50,7 @@ builder.Services.AddDbContext<ConsorcioGestContext>(options =>
 builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ConsortiumService>();
+builder.Services.AddScoped<ConsortiumGenerateLogicService>();
 
 
 builder.Services.AddSwaggerGen(c =>

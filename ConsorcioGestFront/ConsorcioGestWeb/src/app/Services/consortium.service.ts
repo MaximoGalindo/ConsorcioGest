@@ -7,10 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class ConsortiumService {
 
-  baseUrl = 'https://localhost:7083/';
+  baseUrl = 'https://localhost:7083/consortium/';
   constructor(private http:HttpClient) { }
 
   getCurrentConsortium(consortiumID:number) :Observable<any>{
     return this.http.post(this.baseUrl + 'getConsortium?consortiumID='+ consortiumID,{});
+  }  
+  GetConsortiums():Observable<any>{
+    return this.http.get(this.baseUrl + 'getConsortiums')
   }
+
 }

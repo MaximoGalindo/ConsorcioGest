@@ -1,0 +1,28 @@
+<div class="total-container">
+    <div class="rectangule">
+        <h1>Seleccione un Consorcio</h1>
+        <div class="line"></div>
+        <div style="margin-top: 30px;">
+            <input type="text" 
+                    class="custom-input" 
+                    placeholder="Buscar">
+            <button class="button-search">Buscar</button>
+        </div>
+        <div class="consortiums-container" *ngFor="let c of consortiums">
+            <button (click)="selectConsortium(c.Id)" class="consortiums-button">
+                {{c.Name}}
+                <br>
+                {{c.Location}}
+            </button>
+        </div>
+        <div style="margin-top: 30px; 
+                    margin-right: 25px;
+                        display: flex;
+                        justify-content: right;
+                        ">
+           <button class="add-consortium" (click)="addConsortium()"><i class="fa-solid fa-plus fa-2x"></i> </button>
+        </div>
+    </div>
+
+
+</div>

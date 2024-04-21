@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterUserDTO } from 'src/app/Models/DTO/RegisterUserDTO';
 import { ConsortiumModel } from 'src/app/Models/HelperModel/ConsortiumModel';
 import { DocumentTypeModel } from 'src/app/Models/HelperModel/DocumentTypeModel';
+import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
+    private consortiumService:ConsortiumService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -112,12 +114,11 @@ export class RegisterComponent {
   }
 
   LoadConsortiums() {
-    this.userService.GetConsortiums().subscribe({
+    this.consortiumService.GetConsortiums().subscribe({
       next: data => {
         for (var item of data) {
           this.consortiums.push({ Id: item.id, Name: item.name, Location: item.location });
-          console.log(this.consortiums);
-          
+          console.log(this.consortiums);            
         }
       }
     })
