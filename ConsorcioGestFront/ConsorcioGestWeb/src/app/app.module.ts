@@ -19,6 +19,7 @@ import { SelectConsortiumComponent } from './Components/Consortium/select-consor
 import { CommonModule } from '@angular/common';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config-tower-modal/config-tower-modal.component';
+import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config
     SelectConsortiumComponent,
     RegisterConsortiumComponent,
     ConfigTowerModalComponent,
+    ConfigGridComponent,
   ],
   imports: [
     BrowserModule,

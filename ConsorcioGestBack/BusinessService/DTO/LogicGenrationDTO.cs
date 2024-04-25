@@ -14,5 +14,6 @@ namespace BusinessService.DTO
         public List<char>? Alphabet { get; set; }
         public int? Iteration { get; set; }
         public bool Sequential { get; set; }
+        public bool HasLowLevel { get; set; }
     }
 }

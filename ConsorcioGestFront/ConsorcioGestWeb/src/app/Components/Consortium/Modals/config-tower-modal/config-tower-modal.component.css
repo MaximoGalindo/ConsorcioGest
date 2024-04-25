@@ -3,6 +3,8 @@
     padding: 20px;
     border: 1px solid #888;
     max-width: 80%;
+    height: 420px;
+    width: 600px;
     position: relative;
     border-radius: 10px;
 }
@@ -14,3 +16,62 @@
     padding: 10px;
     cursor: pointer;
 }
+
+h1{
+    text-align: center;
+}
+
+.custom-input{
+    width: 50px !important;
+    height: 22px !important;
+}
+label{
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.custom-select{
+    width: 125px;
+    height: 38px;
+    margin-right: 10px;
+}
+
+.units-container{
+    display: flex;
+    align-items: center;
+}
+
+button {
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+
+.button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-grid{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+    padding: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+

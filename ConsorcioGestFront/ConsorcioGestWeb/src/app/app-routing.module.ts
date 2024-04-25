@@ -6,6 +6,7 @@ import { MainPageAdminComponent } from './Components/main-page-admin/main-page-a
 import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest.component';
 import { SelectConsortiumComponent } from './Components/Consortium/select-consortium/select-consortium.component';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
+import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

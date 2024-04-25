@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 namespace BusinessService.Models
 {
 
-    public class ConsortiumConfiguration 
-    {  
+    public class ConsortiumConfiguration
+    {
+        public string CUIT {  get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
         public List<Tower> Towers {  get; set; }
         public List<CommonSpaces> CommonSpaces { get; set; }
     }
@@ -22,19 +25,12 @@ namespace BusinessService.Models
 
     public class TowerConfig
     {
-        public FloorConfig FloorConfig { get; set; }
         public int Floors { get; set; }
         public DepartmentConfig DepartmentConfig { get; set; }
         public bool IsUniform { get; set; }
         public bool IsUniqual { get; set; }
-        
+        public bool HasLowLevel { get; set; }
         public List<CountDeparmentsByFloor> CountDeparmentsByFloors { get; set; } = null;
-    }
-
-    public class FloorConfig
-    {
-        public int? Iteration { get; set; }
-        public NomencaltureEnum Nomencalture { get; set; }
     }
     public class DepartmentConfig
     {
@@ -51,6 +47,8 @@ namespace BusinessService.Models
     public class CommonSpaces
     {
         public string Name { get; set; }
+        public TimeOnly HourFrom { get; set; }
+        public TimeOnly HourTo { get; set; }
     }
 
 
