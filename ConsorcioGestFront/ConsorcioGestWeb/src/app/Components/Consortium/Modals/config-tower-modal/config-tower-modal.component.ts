@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigGridComponent } from '../config-grid/config-grid.component';
-import { TowerConfigSharedService } from 'src/app/Services/Shared/tower-config-shared.service';
+import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortium-config-shared.service';
 import { TowerConfig } from 'src/app/Models/Models/TowerConfigModel';
 import { Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
 
@@ -19,7 +19,7 @@ export class ConfigTowerModalComponent {
   listTowerConfig:Tower[] = []; 
   constructor(
     private modalService: NgbModal,
-    private towerConfigShared: TowerConfigSharedService
+    private towerConfigShared: ConsortiumConfigSharedService
   ){
     towerConfigShared.Tower$.subscribe({ next: tower => {
       this.tower = tower
@@ -36,11 +36,11 @@ export class ConfigTowerModalComponent {
   }
   
   save(){
-    if(!this.listTowerConfig.find(tower => tower.Name === this.tower.Name)){
+    if(!this.listTowerConfig.find(tower => tower.name === this.tower.name)){
       this.listTowerConfig.push(this.tower);
     }
     else{
-      var index = this.listTowerConfig.findIndex(tower => tower.Name === this.tower.Name);
+      var index = this.listTowerConfig.findIndex(tower => tower.name === this.tower.name);
       this.listTowerConfig[index] = this.tower
     }
     console.log(this.listTowerConfig);    
@@ -49,19 +49,19 @@ export class ConfigTowerModalComponent {
   }
 
   showGridConfig(){
-    this.towerConfigShared.setFloor(this.tower.TowerConfig.floors);
+    this.towerConfigShared.setFloor(this.tower.towerConfig.floors);
     this.modalService.open(ConfigGridComponent);
   }
 
   //VALIDACIONES 
   onCheckboxChange(checkboxNumber: number) {
     if (checkboxNumber === 1) {
-      if (this.tower.TowerConfig.isUniform) {
-        this.tower.TowerConfig.isUniqual = false;
+      if (this.tower.towerConfig.isUniform) {
+        this.tower.towerConfig.isUniqual = false;
       }
     } else if (checkboxNumber === 2) {   
-      if (this.tower.TowerConfig.isUniqual) {
-        this.tower.TowerConfig.isUniform = false;
+      if (this.tower.towerConfig.isUniqual) {
+        this.tower.towerConfig.isUniform = false;
       }
     }
   }

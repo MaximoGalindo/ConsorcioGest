@@ -4,7 +4,7 @@ export class TowerConfig {
     isUniform: boolean;
     isUniqual: boolean;
     hasLowLevel: boolean;
-    countDepartmentsByFloors: CountDepartmentsByFloor[];
+    countDeparmentsByFloors: CountDepartmentsByFloor[];
   
     constructor() {
       this.floors = 15;
@@ -12,7 +12,7 @@ export class TowerConfig {
       this.isUniform = false;
       this.isUniqual = false;
       this.hasLowLevel = false;
-      this.countDepartmentsByFloors = [];
+      this.countDeparmentsByFloors = [];
     }
   }
   
@@ -25,15 +25,13 @@ export class TowerConfig {
       this.iteration = null;
       this.nomencalture = NomencaltureEnum.Numeric; 
       this.sequential = false;
-    }
+    }   
   }
   
   export class CountDepartmentsByFloor {
-    floor: number | null;
     departmentsCount: number;
   
     constructor() {
-      this.floor = null;
       this.departmentsCount = 0;
     }
   }

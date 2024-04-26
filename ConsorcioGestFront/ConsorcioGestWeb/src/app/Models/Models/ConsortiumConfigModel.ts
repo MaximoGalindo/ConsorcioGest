@@ -17,25 +17,25 @@ export class ConsortiumConfiguration {
 }
 
 export class Tower {
-  Name: string;
-  TowerConfig: TowerConfig;
+  name: string;
+  towerConfig: TowerConfig;
 
   constructor() {
-    this.Name = '';
-    this.TowerConfig = new TowerConfig();
+    this.name = '';
+    this.towerConfig = new TowerConfig();
   }
 }
 
 
 export class CommonSpaces {
-  Name: string;
-  HourFrom: string;
-  HourTo: string;
+  name: string;
+  hourFrom: string;
+  hourTo: string;
 
   constructor() {
-    this.Name = '';
-    this.HourFrom = '';
-    this.HourTo = '';
+    this.name = '';
+    this.hourFrom = '';
+    this.hourTo = '';
   }
 }
 

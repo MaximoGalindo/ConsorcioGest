@@ -80,7 +80,7 @@ namespace BusinessService.Services.Consortium
                     {
                         FloorDepartmentDTO departmentDTO = new FloorDepartmentDTO();
                         departmentDTO.Floor = "PB"; 
-                        departmentDTO.Deparment = alphabet[j - 1].ToString();
+                        departmentDTO.Department = alphabet[j - 1].ToString();
                         departmentDTOs.Add(departmentDTO);
                     }
                     logicGenrationDTO.Floors -= 1;
@@ -94,7 +94,7 @@ namespace BusinessService.Services.Consortium
                     {
                         FloorDepartmentDTO departmentDTO = new FloorDepartmentDTO();
                         departmentDTO.Floor = i.ToString();
-                        departmentDTO.Deparment = alphabet[j - 1].ToString();
+                        departmentDTO.Department = alphabet[j - 1].ToString();
                         departmentDTOs.Add(departmentDTO);
                     }
                 }
@@ -111,7 +111,7 @@ namespace BusinessService.Services.Consortium
                         {                     
                             FloorDepartmentDTO departmentDTO = new FloorDepartmentDTO();
                             departmentDTO.Floor = "PB";
-                            departmentDTO.Deparment = alphabet[j - 1].ToString();
+                            departmentDTO.Department = alphabet[j - 1].ToString();
                             departmentDTOs.Add(departmentDTO);
                         }
                     }
@@ -124,13 +124,13 @@ namespace BusinessService.Services.Consortium
                             if (logicGenrationDTO.HasLowLevel)
                             {
                                 departmentDTO.Floor = (floorIndex - 1).ToString();
-                                departmentDTO.Deparment = alphabet[j - 1].ToString();
+                                departmentDTO.Department = alphabet[j - 1].ToString();
                                 departmentDTOs.Add(departmentDTO);
                             }
                             else
                             {
                                 departmentDTO.Floor = (floorIndex).ToString();
-                                departmentDTO.Deparment = alphabet[j - 1].ToString();
+                                departmentDTO.Department = alphabet[j - 1].ToString();
                                 departmentDTOs.Add(departmentDTO);
                             }
      
@@ -177,7 +177,7 @@ namespace BusinessService.Services.Consortium
                         {
                             FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
                             floorDTO.Floor = "PB"; 
-                            floorDTO.Deparment = j.ToString();
+                            floorDTO.Department = j.ToString();
                             floorDTOs.Add(floorDTO);
                         }
                     }
@@ -188,7 +188,7 @@ namespace BusinessService.Services.Consortium
                         FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
                         int floorNumber = (int)Math.Ceiling((double)i / countDeparmentsUniform);
                         floorDTO.Floor = floorNumber.ToString();
-                        floorDTO.Deparment = i.ToString();
+                        floorDTO.Department = i.ToString();
                         floorDTOs.Add(floorDTO);                  
                     }
                 }
@@ -203,7 +203,7 @@ namespace BusinessService.Services.Consortium
                             {
                                 FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
                                 floorDTO.Floor = "PB";
-                                floorDTO.Deparment = (i * logicGenrationDTO.Iteration.Value + j).ToString();
+                                floorDTO.Department = (i * logicGenrationDTO.Iteration.Value + j).ToString();
                                 floorDTOs.Add(floorDTO);
                             }                           
                         }                       
@@ -215,7 +215,7 @@ namespace BusinessService.Services.Consortium
                             {         
                                 floorDTO.Floor = i.ToString();
                                 int departmentNumber = (i + 1) * logicGenrationDTO.Iteration.Value + j;
-                                floorDTO.Deparment = departmentNumber.ToString();
+                                floorDTO.Department = departmentNumber.ToString();
                                 floorDTOs.Add(floorDTO);
                             }
                             else
@@ -223,7 +223,7 @@ namespace BusinessService.Services.Consortium
                                 i = i == 0 ? 1 : i;
                                 floorDTO.Floor = i.ToString();
                                 int departmentNumber = i * logicGenrationDTO.Iteration.Value + j;
-                                floorDTO.Deparment = departmentNumber.ToString();
+                                floorDTO.Department = departmentNumber.ToString();
                                 floorDTOs.Add(floorDTO);
                             }
 
@@ -249,14 +249,14 @@ namespace BusinessService.Services.Consortium
                             if(floorIndex == 0 && logicGenrationDTO.HasLowLevel)
                             {
                                 floorDTO.Floor = "PB";
-                                floorDTO.Deparment = departmentIndex.ToString();
+                                floorDTO.Department = departmentIndex.ToString();
                                 floorDTOs.Add(floorDTO);
                                 departmentIndex++;
                             }
                             else
                             {
                                 floorDTO.Floor = (floorIndex + 1).ToString();
-                                floorDTO.Deparment = departmentIndex.ToString();
+                                floorDTO.Department = departmentIndex.ToString();
                                 floorDTOs.Add(floorDTO);
                                 departmentIndex++;
                             }
@@ -279,7 +279,7 @@ namespace BusinessService.Services.Consortium
                                 FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
                                 floorDTO.Floor = "PB";
                                 int departmentNumber = floorIndex * logicGenrationDTO.Iteration.Value + j;
-                                floorDTO.Deparment = departmentNumber.ToString();
+                                floorDTO.Department = departmentNumber.ToString();
                                 floorDTOs.Add(floorDTO);
                             }
                         }
@@ -292,7 +292,7 @@ namespace BusinessService.Services.Consortium
                             {
                                 floorDTO.Floor = floorIndex.ToString();
                                 int departmentNumber = (floorIndex + 1) * logicGenrationDTO.Iteration.Value + j;
-                                floorDTO.Deparment = departmentNumber.ToString();
+                                floorDTO.Department = departmentNumber.ToString();
                                 floorDTOs.Add(floorDTO);
                             }
                             else
@@ -300,7 +300,7 @@ namespace BusinessService.Services.Consortium
                                 floorIndex = floorIndex == 0 ? 1 : floorIndex;
                                 floorDTO.Floor = floorIndex.ToString();
                                 int departmentNumber = floorIndex * logicGenrationDTO.Iteration.Value + j;
-                                floorDTO.Deparment = departmentNumber.ToString();
+                                floorDTO.Department = departmentNumber.ToString();
                                 floorDTOs.Add(floorDTO);
                             }
 
@@ -343,7 +343,7 @@ namespace BusinessService.Services.Consortium
                 FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
                 int floorNumber = (int)Math.Ceiling((double)i / departmentsPerFloor);
                 floorDTO.Floor = logicGenrationDTO.Alphabet[floorNumber - 1].ToString();
-                floorDTO.Deparment = i.ToString();
+                floorDTO.Department = i.ToString();
                 floorDTOs.Add(floorDTO);
             }
             else
@@ -356,7 +356,7 @@ namespace BusinessService.Services.Consortium
                         floorDTO.Floor = logicGenrationDTO.Alphabet[i - 1].ToString();
 
                         int departmentNumber = (i * logicGenrationDTO.Iteration.Value) + j;
-                        floorDTO.Deparment = departmentNumber.ToString();
+                        floorDTO.Department = departmentNumber.ToString();
 
                         floorDTOs.Add(floorDTO);
                     }
@@ -376,7 +376,7 @@ namespace BusinessService.Services.Consortium
                 {
                     FloorDepartmentDTO departmentDTO = new FloorDepartmentDTO();
                     departmentDTO.Floor = i.ToString();
-                    departmentDTO.Deparment = c.ToString();
+                    departmentDTO.Department = c.ToString();
                     departmentDTOs.Add(departmentDTO);
                 }
             }

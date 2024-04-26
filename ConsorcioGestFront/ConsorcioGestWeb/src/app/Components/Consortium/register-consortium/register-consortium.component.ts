@@ -4,9 +4,10 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigTowerModalComponent } from '../Modals/config-tower-modal/config-tower-modal.component';
-import { TowerConfigSharedService } from 'src/app/Services/Shared/tower-config-shared.service';
+import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortium-config-shared.service';
 import { TowerConfig } from 'src/app/Models/Models/TowerConfigModel';
 import { CommonSpaces, ConsortiumConfiguration, Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-consortium',
@@ -23,7 +24,8 @@ export class RegisterConsortiumComponent {
 
   constructor(
     private modalService: NgbModal,
-    private towerConfigShared:TowerConfigSharedService
+    private towerConfigShared:ConsortiumConfigSharedService,
+    private router:Router
   ){
 
   }
@@ -52,7 +54,13 @@ export class RegisterConsortiumComponent {
 
 
   //BOTONES 
-  Save(){
+  Back(){
+    this.selectedTab = this.selectedTab > 1   ? this.selectedTab - 1 : this.selectedTab
+  }
+  Next(){
+    this.selectedTab = this.selectedTab < 5 ? this.selectedTab + 1 : this.selectedTab
+  }
+  Confirm(){
     this.towerConfigShared.TowerList$.subscribe({
       next: towerList => {
         this.towerList = towerList
@@ -60,13 +68,9 @@ export class RegisterConsortiumComponent {
     })
 
     this.consortiumConfig.Towers = this.towerList;
-    console.log(this.consortiumConfig);
-    
-  }
-  Back(){
-    this.selectedTab = this.selectedTab > 1   ? this.selectedTab - 1 : this.selectedTab
-  }
-  Next(){
-    this.selectedTab = this.selectedTab < 5 ? this.selectedTab + 1 : this.selectedTab
+    this.consortiumConfig.CommonSpaces = this.commonSpacesList    
+    this.towerConfigShared.setConsortiumConfig(this.consortiumConfig)
+    this.router.navigate(['/register-consortium/confirm']);
+    console.log(this.consortiumConfig);  
   }
 }

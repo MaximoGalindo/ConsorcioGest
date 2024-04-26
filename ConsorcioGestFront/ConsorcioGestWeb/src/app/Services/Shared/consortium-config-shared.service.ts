@@ -6,7 +6,7 @@ import { TowerConfig } from 'src/app/Models/Models/TowerConfigModel';
 @Injectable({
   providedIn: 'root'
 })
-export class TowerConfigSharedService {
+export class ConsortiumConfigSharedService {
 
   private floorTower = new BehaviorSubject<any>(null);
   FloorTower$ = this.floorTower.asObservable();
@@ -22,6 +22,9 @@ export class TowerConfigSharedService {
 
   private towerList = new BehaviorSubject<any>(null);
   TowerList$ = this.towerList.asObservable();
+
+  private consortiumConfig = new BehaviorSubject<any>(null);
+  ConsortiumConfig$ = this.consortiumConfig.asObservable();
 
   setFloor(data:number){
     this.floorTower.next(data);
@@ -43,5 +46,8 @@ export class TowerConfigSharedService {
     this.towerList.next(data);
   }
 
+  setConsortiumConfig(data:ConsortiumConfiguration){
+    this.consortiumConfig.next(data);
+  }
   constructor() { }
 }

@@ -7,6 +7,7 @@ import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest
 import { SelectConsortiumComponent } from './Components/Consortium/select-consortium/select-consortium.component';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
+import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,7 +20,12 @@ const routes: Routes = [
     ]
   },
   { path: 'consortium', component: SelectConsortiumComponent},
-  { path: 'register-consortium', component: RegisterConsortiumComponent},
+  { path: 'register-consortium', 
+    children: [
+      {path:'' , component: RegisterConsortiumComponent},
+      {path: 'confirm', component: SaveConsortiumComponent}
+    ]  
+  },
 ];
 
 

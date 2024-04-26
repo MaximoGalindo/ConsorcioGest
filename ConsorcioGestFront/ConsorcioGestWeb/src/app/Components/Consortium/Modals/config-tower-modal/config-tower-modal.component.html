@@ -9,61 +9,61 @@
                 class="custom-input" 
                 placeholder="Pisos"             
                 min="1"
-                [(ngModel)]="tower.TowerConfig.floors">
+                [(ngModel)]="tower.towerConfig.floors">
             </div>
             <div>
                 <h3 style="margin: 0px 3px">Configuracion de Unidades</h3>
                 <div style="margin: 0px; width: 230px;" class="line"></div>
                 <div class="units-container">
                     <label style="font-size: 15px ;" for="">Departamentos:</label>
-                    <select class="custom-select" [(ngModel)]="tower.TowerConfig.departmentConfig.nomencalture">
+                    <select class="custom-select" [(ngModel)]="tower.towerConfig.departmentConfig.nomencalture">
                         <option value="0" disabled>Seleccione una Division</option>  
                         <option value="1" >Numerica</option>  
                         <option value="2" >Alfanumerica</option>                
                     </select>
-                    <label *ngIf="tower.TowerConfig.departmentConfig.nomencalture == 1">
+                    <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1">
                         <input type="checkbox" 
-                        [(ngModel)]="tower.TowerConfig.departmentConfig.sequential">
+                        [(ngModel)]="tower.towerConfig.departmentConfig.sequential">
                         Secuencial
                     </label>                   
                 </div>  
                 <div>
-                    <label *ngIf="tower.TowerConfig.departmentConfig.nomencalture == 1 && !tower.TowerConfig.departmentConfig.sequential">Intercalacion</label>
-                    <input *ngIf="tower.TowerConfig.departmentConfig.nomencalture == 1 && !tower.TowerConfig.departmentConfig.sequential" type="text" 
+                    <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential">Intercalacion</label>
+                    <input *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential" type="text" 
                     class="custom-input"                  
                     oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-                    [(ngModel)]="tower.TowerConfig.departmentConfig.iteration">
+                    [(ngModel)]="tower.towerConfig.departmentConfig.iteration">
                     
                 </div>
                 <div>
                     <label>
                         <input 
                         type="checkbox" 
-                        [(ngModel)]="tower.TowerConfig.isUniform"
+                        [(ngModel)]="tower.towerConfig.isUniform"
                         (change)="onCheckboxChange(1)">
                         Uniforme
                     </label>   
                     <label class="custom-radio">
                         <input                          
                         type="checkbox"                         
-                        [(ngModel)]="tower.TowerConfig.isUniqual"
+                        [(ngModel)]="tower.towerConfig.isUniqual"
                         (change)="onCheckboxChange(2)">
                         Desigual
                     </label>   
-                    <button *ngIf="tower.TowerConfig.isUniqual" class="edit-grid" type="button" (click)="showGridConfig()"><i class="fa-solid fa-pen" style="color: rgb(16, 76, 96);"></i></button> 
+                    <button *ngIf="tower.towerConfig.isUniqual" class="edit-grid" type="button" (click)="showGridConfig()"><i class="fa-solid fa-pen" style="color: rgb(16, 76, 96);"></i></button> 
                 </div>
                 <div>
                     <label>
                         <input type="checkbox" 
-                        [(ngModel)]="tower.TowerConfig.hasLowLevel">
+                        [(ngModel)]="tower.towerConfig.hasLowLevel">
                         Tiene Planta Baja
                     </label> 
                 </div>
-                <div *ngIf="tower.TowerConfig.isUniform">
+                <div *ngIf="tower.towerConfig.isUniform">
                     <label for="">Cantidad de Departamentos por Piso:</label>
                     <input type="number" 
                     class="custom-input"                  
-                    [(ngModel)]="tower.TowerConfig.countDepartmentsByFloors">
+                    [(ngModel)]="tower.towerConfig.countDeparmentsByFloors">
                 
                 </div>                 
             </div>     

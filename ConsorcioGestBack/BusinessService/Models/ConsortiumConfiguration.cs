@@ -54,7 +54,7 @@ namespace BusinessService.Models
 
     public class FloorDepartmentDTO {
         public string Floor {  get; set; }
-        public string Deparment { get; set; }
+        public string Department { get; set; }
     }
 
 

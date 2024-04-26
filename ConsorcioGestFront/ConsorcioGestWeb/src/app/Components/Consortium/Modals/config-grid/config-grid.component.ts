@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TowerConfigSharedService } from 'src/app/Services/Shared/tower-config-shared.service';
+import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortium-config-shared.service';
 
 @Component({
   selector: 'app-config-grid',
@@ -16,7 +16,7 @@ export class ConfigGridComponent {
   checksSelected: any[][] = [];
 
   constructor(
-    private towerConfigShared: TowerConfigSharedService
+    private towerConfigShared: ConsortiumConfigSharedService
   ) {
 
     this.getFloor();
@@ -44,13 +44,9 @@ export class ConfigGridComponent {
   }
 
   updateSelectedPerRow() {
-    this.selectedPerFloor = Array.from({ length: this.floor }, () => 0); // Reiniciamos el arreglo
-  
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = Math.min(startIndex + this.itemsPerPage, this.floor);
-  
-    for (let i = startIndex; i < endIndex; i++) {
-      this.selectedPerFloor[i] = this.grid[i]?.filter(cell => cell.checked).length || 0;
+    this.selectedPerFloor = [];
+    for (let i = 0; i < this.floor; i++) {
+      this.selectedPerFloor[i] = this.countSelected(i);
     }
   }
   
@@ -71,7 +67,6 @@ export class ConfigGridComponent {
 
   save(){
     console.log(this.selectedPerFloor);
-    
     //this.towerConfigShared.setDeparmentPerFloor(this.selectedPerFloor);
   }
 

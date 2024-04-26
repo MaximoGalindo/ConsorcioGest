@@ -25,7 +25,7 @@ namespace WebApi.Controllers.LoginController
             return null;
         }*/
 
-        [HttpPost]
+        [HttpPost("generateLogicConfiguration")]
         public IActionResult GenerateLogicConfiguration(Tower config)
         {
             return Ok(consortiumService.GenerateLogicDepartments(config));

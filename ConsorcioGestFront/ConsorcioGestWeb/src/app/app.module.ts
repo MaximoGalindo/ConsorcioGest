@@ -20,6 +20,8 @@ import { CommonModule } from '@angular/common';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config-tower-modal/config-tower-modal.component';
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
+import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
+import { ShowConfigTowerComponent } from './Components/Consortium/Modals/show-config-tower/show-config-tower.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/
     RegisterConsortiumComponent,
     ConfigTowerModalComponent,
     ConfigGridComponent,
+    SaveConsortiumComponent,
+    ShowConfigTowerComponent,
   ],
   imports: [
     BrowserModule,

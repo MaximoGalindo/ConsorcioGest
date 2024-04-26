@@ -1,0 +1,24 @@
+<div class="modal-container">
+    <div class="modal-content">
+      <table #tableRef>
+        <thead>
+          <tr>
+            <th>Piso</th>
+            <th *ngFor="let department of departmentList">{{ department.deparment }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let floor of obtenerPisosUnicos(departmentList)">
+            <td>
+                <input class="floor-input" type="text" [value]="floor">
+            </td>
+            <td *ngFor="let department of obtenerDepartamentosPorPiso(floor)">
+              <input class="deparments-input" type="text" [value]="department.department">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+        <button (click)="see()">Ver</button>
+    </div>
+  </div>
+  
