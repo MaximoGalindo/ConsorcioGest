@@ -19,10 +19,12 @@ export class ConsortiumConfiguration {
 export class Tower {
   name: string;
   towerConfig: TowerConfig;
+  floorDepartments: FloorDeparmentDTO[] = [];
 
   constructor() {
     this.name = '';
     this.towerConfig = new TowerConfig();
+    this.floorDepartments = [];
   }
 }
 
@@ -37,5 +39,11 @@ export class CommonSpaces {
     this.hourFrom = '';
     this.hourTo = '';
   }
+  
 }
 
+
+export class FloorDeparmentDTO{
+  floor:string = '';
+  department:string = '';    
+}

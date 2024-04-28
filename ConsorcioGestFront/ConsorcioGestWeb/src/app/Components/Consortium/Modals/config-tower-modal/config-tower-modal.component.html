@@ -29,9 +29,10 @@
                 </div>  
                 <div>
                     <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential">Intercalacion</label>
-                    <input *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential" type="text" 
+                    <input *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential" 
+                    type="number" 
                     class="custom-input"                  
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                    min="1"
                     [(ngModel)]="tower.towerConfig.departmentConfig.iteration">
                     
                 </div>
@@ -63,7 +64,7 @@
                     <label for="">Cantidad de Departamentos por Piso:</label>
                     <input type="number" 
                     class="custom-input"                  
-                    [(ngModel)]="tower.towerConfig.countDeparmentsByFloors">
+                    [(ngModel)]="depsByFloor">
                 
                 </div>                 
             </div>     

@@ -21,6 +21,7 @@ namespace BusinessService.Models
     {
         public string Name { get; set; }
         public TowerConfig TowerConfig { get; set; }
+        public List<FloorDepartmentDTO>? FloorDepartment { get; set; }
     }
 
     public class TowerConfig

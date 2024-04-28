@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 
 button {
@@ -31,4 +32,13 @@ button {
 .floor-input{
     width: 30px;
     background-color: green;
+    color: white;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
 }

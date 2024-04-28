@@ -15,6 +15,7 @@ export class ConfigTowerModalComponent {
   _TowerIsPresent: boolean = true;
   pisos:number = 0;
   tower:Tower = new Tower();
+  depsByFloor:number = 0;
 
   listTowerConfig:Tower[] = []; 
   constructor(
@@ -36,11 +37,14 @@ export class ConfigTowerModalComponent {
   }
   
   save(){
-    if(!this.listTowerConfig.find(tower => tower.name === this.tower.name)){
+   
+    if(!this.listTowerConfig.find(tower => tower.name === this.tower.name)){     
+      this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:this.depsByFloor});
       this.listTowerConfig.push(this.tower);
     }
     else{
       var index = this.listTowerConfig.findIndex(tower => tower.name === this.tower.name);
+      this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:this.depsByFloor});
       this.listTowerConfig[index] = this.tower
     }
     console.log(this.listTowerConfig);    

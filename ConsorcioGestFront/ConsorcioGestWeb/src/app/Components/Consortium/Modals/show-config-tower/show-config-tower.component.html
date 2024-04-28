@@ -1,24 +1,26 @@
-<div class="modal-container">
+<div class="modal-container" *ngIf="_ShowModal">
     <div class="modal-content">
+      <span class="close" (click)="CloseModal()">&times;</span>
       <table #tableRef>
         <thead>
-          <tr>
+          <tr>            
             <th>Piso</th>
-            <th *ngFor="let department of departmentList">{{ department.deparment }}</th>
+            <th>Dep</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let floor of obtenerPisosUnicos(departmentList)">
-            <td>
+          <tr *ngFor="let floor of ObtenerPisosUnicos(tower.floorDepartments);">
+            <td>                
                 <input class="floor-input" type="text" [value]="floor">
-            </td>
-            <td *ngFor="let department of obtenerDepartamentosPorPiso(floor)">
+            </td>            
+            <td *ngFor="let department of ObtenerDepartamentosPorPiso(floor)">
               <input class="deparments-input" type="text" [value]="department.department">
             </td>
           </tr>
         </tbody>
       </table>
-        <button (click)="see()">Ver</button>
+        <button (click)="Save()">Guardar</button>
+        <button (click)="CloseModal()">Cerrar</button>
     </div>
-  </div>
+</div>
   
