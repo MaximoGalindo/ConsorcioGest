@@ -36,11 +36,18 @@ namespace WebApi.Controllers.LoginController
             return Ok(loginService.GetCurrentUser((ClaimsIdentity)HttpContext.User.Identity));
         }*/
 
-        [HttpPost("setCurrentConsortium")]
+        [HttpPost("set-current-consortium")]
         [Authorize(Roles ="Admin")]
         public IActionResult SetCurrentConsortium(int consortiumID)
         {
            return Ok(loginService.SetCurrentConsortium(consortiumID));
+        }
+
+        [HttpPost("remove-current-consortium")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult RemoveCurrentConsortium()
+        {
+            return Ok(loginService.RemoveCurrentConsortium());
         }
 
     }

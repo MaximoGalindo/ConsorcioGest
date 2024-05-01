@@ -96,9 +96,8 @@ namespace BusinessService.Services
                    //A CHEKAR LA PARTE ESTA DEL ARMADO DEL CONDOMINIO
                    Condominium =
                     u.IdCondominioNavigation != null ?
-                            u.IdCondominioNavigation.Torre
-                    + ' ' + u.IdCondominioNavigation.Piso
-                    + ' ' + u.IdCondominioNavigation.Departamento
+                            u.IdCondominioNavigation.Torre                    
+                    + ' ' + u.IdCondominioNavigation.NumeroDepartamento
                     : "",
 
                }).ToList();
@@ -122,8 +121,7 @@ namespace BusinessService.Services
                     Condominium =
                     u.IdCondominioNavigation != null ?
                             u.IdCondominioNavigation.Torre
-                    + ' ' + u.IdCondominioNavigation.Piso
-                    + ' ' + u.IdCondominioNavigation.Departamento
+                    + ' ' + u.IdCondominioNavigation.NumeroDepartamento
                     : "",
 
                 }).First();

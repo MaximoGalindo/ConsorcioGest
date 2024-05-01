@@ -12,6 +12,6 @@ namespace BusinessService.DTO
         public string Name { get; set; }
         public string Location { get; set; }
         public string CUIT { get; set; }
-        public ConsortiumConfiguration Configuration { get; set; }
+        public ConsortiumConfig Configuration { get; set; }
     }
 }

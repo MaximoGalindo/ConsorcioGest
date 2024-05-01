@@ -18,19 +18,19 @@ export class UserService {
   }
 
   GetDocumentTypes(): Observable<any> {
-    return this.http.get(this.baseUrl + 'getDocumentTypes')
+    return this.http.get(this.baseUrl + 'get-document-types')
   }
 
   GetUsers():Observable<UserModelDTO[]>{
-    return this.http.get<UserModelDTO[]>(this.baseUrl + 'getUsers')
+    return this.http.get<UserModelDTO[]>(this.baseUrl + 'get-users')
   }
 
   GetUserByDocument(userDocument:number): Observable<UserModelDTO>{
-    return this.http.get<UserModelDTO>(this.baseUrl + 'getUserByDocument/'+ userDocument)
+    return this.http.get<UserModelDTO>(this.baseUrl + 'get-user-by-document/'+ userDocument)
   }
 
   UpdateUser(userDocument:number, user:UpdateUserDTO):Observable<any>{
-    return this.http.put(this.baseUrl + 'updateUser/'+ userDocument, user)
+    return this.http.put(this.baseUrl + 'update-user/'+ userDocument, user)
   }
 
   

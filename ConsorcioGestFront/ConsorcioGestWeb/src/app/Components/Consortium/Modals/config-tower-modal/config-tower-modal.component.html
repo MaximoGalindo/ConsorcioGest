@@ -1,6 +1,6 @@
 <div *ngIf="_TowerIsPresent" class="modal-container">
     <div class="modal-content">
-        <span class="close" (click)="closeModal()">&times;</span>
+        <span class="close" (click)="CloseModal()">&times;</span>
         <h1>Configuracion de Bloque</h1>
         <div class="line"></div>
             <div>
@@ -18,8 +18,8 @@
                     <label style="font-size: 15px ;" for="">Departamentos:</label>
                     <select class="custom-select" [(ngModel)]="tower.towerConfig.departmentConfig.nomencalture">
                         <option value="0" disabled>Seleccione una Division</option>  
-                        <option value="1" >Numerica</option>  
-                        <option value="2" >Alfanumerica</option>                
+                        <option [ngValue]="1" >Numerica</option>  
+                        <option [ngValue]="2" >Alfanumerica</option>                
                     </select>
                     <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1">
                         <input type="checkbox" 
@@ -64,13 +64,20 @@
                     <label for="">Cantidad de Departamentos por Piso:</label>
                     <input type="number" 
                     class="custom-input"                  
-                    [(ngModel)]="depsByFloor">
+                    [(ngModel)]="uniformDeps">
                 
                 </div>                 
             </div>     
             <div class="button-container">
                 <button (click)="save()">Guardar</button>
-                <button (click)="closeModal()">Cerrar</button>
+                <button (click)="CloseModal()">Cerrar</button>
             </div>  
     </div>
 </div>
+
+<app-config-grid 
+    *ngIf="_GridIsPresent"    
+    [Floor]="tower.towerConfig.floors"
+    (_ShowModal)="CloseGridModal()"
+    (_CountDeparmentsByFloors)="GetDepartmentsByFloor($event)"
+></app-config-grid>

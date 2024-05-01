@@ -26,7 +26,7 @@ export class SaveConsortiumComponent {
     private consortiumSevice: ConsortiumService
   ) {
 
-    /*this.consortiumConfig.CUIT = '1234567890';
+   /* this.consortiumConfig.CUIT = '1234567890';
     this.consortiumConfig.Name = 'Gamma';
     this.consortiumConfig.Location = 'Circunvalacion';
   
@@ -116,8 +116,7 @@ export class SaveConsortiumComponent {
   }
 
 
-  Save(){
-  
+  Save() {
     this.consortiumConfig.Towers.forEach(tower => {
       if(tower.floorDepartments.length == 0){
         this.consortiumSevice.GenerateLogicConfiguration(tower).subscribe({
@@ -127,9 +126,15 @@ export class SaveConsortiumComponent {
         })
       }      
     }) 
-
-    console.log(this.consortiumConfig);   
+    console.log(this.consortiumConfig);
+    
+    this.consortiumSevice.SaveConsortium(this.consortiumConfig).subscribe({
+      next: consortium => {
+        console.log(consortium);
+      }
+    });
   }
+  
 
   IsEdit(evento: boolean){
     this._IsEdit = evento

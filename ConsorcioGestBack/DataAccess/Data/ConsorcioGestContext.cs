@@ -44,8 +44,6 @@ public partial class ConsorcioGestContext : DbContext
 
     public virtual DbSet<EstadoUsuario> EstadoUsuarios { get; set; }
 
-    public virtual DbSet<FloorConfiguration> FloorConfigurations { get; set; }
-
     public virtual DbSet<Opcion> Opcions { get; set; }
 
     public virtual DbSet<Perfil> Perfils { get; set; }
@@ -88,15 +86,11 @@ public partial class ConsorcioGestContext : DbContext
             entity.ToTable("CONDOMINIO");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Departamento)
+            entity.Property(e => e.IdConsorcio).HasColumnName("ID_CONSORCIO");
+            entity.Property(e => e.NumeroDepartamento)
                 .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("DEPARTAMENTO");
-            entity.Property(e => e.IdConsorcio).HasColumnName("ID_CONSORCIO");
-            entity.Property(e => e.Piso)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("PISO");
+                .HasColumnName("NUMERO_DEPARTAMENTO");
             entity.Property(e => e.Torre)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -151,14 +145,13 @@ public partial class ConsorcioGestContext : DbContext
             entity.ToTable("ConsortiumConfiguration");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CountDepartmentsByFloor)
+                .HasMaxLength(500)
+                .IsUnicode(false);
             entity.Property(e => e.DeparmentConfiguration)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.FloorConfiguration)
-                .HasMaxLength(50)
-                .IsUnicode(false);
             entity.Property(e => e.IdConsortium).HasColumnName("ID_CONSORTIUM");
-            entity.Property(e => e.IdFloor).HasColumnName("ID_FLOOR");
             entity.Property(e => e.TowerName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -167,11 +160,6 @@ public partial class ConsorcioGestContext : DbContext
                 .HasForeignKey(d => d.IdConsortium)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ConsortiumConfiguration_Consortium");
-
-            entity.HasOne(d => d.IdFloorNavigation).WithMany(p => p.ConsortiumConfigurations)
-                .HasForeignKey(d => d.IdFloor)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ConsortiumConfiguration_FloorConfiguration");
         });
 
         modelBuilder.Entity<Contacto>(entity =>
@@ -344,13 +332,6 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("OBSERVACION");
-        });
-
-        modelBuilder.Entity<FloorConfiguration>(entity =>
-        {
-            entity.ToTable("FloorConfiguration");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
         });
 
         modelBuilder.Entity<Opcion>(entity =>

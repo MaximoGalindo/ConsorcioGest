@@ -1,4 +1,5 @@
 using BusinessService.Services;
+using BusinessService.Services.BaseService;
 using BusinessService.Services.Consortium;
 using DataAccess.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

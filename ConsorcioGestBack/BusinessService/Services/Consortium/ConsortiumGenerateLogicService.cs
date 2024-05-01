@@ -170,26 +170,23 @@ namespace BusinessService.Services.Consortium
 
                 if (logicGenrationDTO.Sequential)
                 {
-
-                    if (logicGenrationDTO.HasLowLevel)
-                    {
-                        for (int j = 1; j <= countDeparmentsUniform; j++)
-                        {
-                            FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
-                            floorDTO.Floor = "PB"; 
-                            floorDTO.Department = j.ToString();
-                            floorDTOs.Add(floorDTO);
-                        }
-                    }
-
-
                     for (int i = 1; i <= sequentialDepartments; i++)
                     {
                         FloorDepartmentDTO floorDTO = new FloorDepartmentDTO();
-                        int floorNumber = (int)Math.Ceiling((double)i / countDeparmentsUniform);
-                        floorDTO.Floor = floorNumber.ToString();
-                        floorDTO.Department = i.ToString();
-                        floorDTOs.Add(floorDTO);                  
+                        if (i <= countDeparmentsUniform && logicGenrationDTO.HasLowLevel)
+                        {                           
+                            floorDTO.Floor = "PB";
+                            floorDTO.Department = i.ToString();
+                            floorDTOs.Add(floorDTO);
+                        }
+                        else
+                        {   
+
+                            int floorNumber = logicGenrationDTO.HasLowLevel ? ( (int)Math.Ceiling((double)i / countDeparmentsUniform)) - 1 : (int)Math.Ceiling((double)i / countDeparmentsUniform);
+                            floorDTO.Floor = floorNumber.ToString();
+                            floorDTO.Department = i.ToString();
+                            floorDTOs.Add(floorDTO);
+                        }               
                     }
                 }
                 else
@@ -255,7 +252,10 @@ namespace BusinessService.Services.Consortium
                             }
                             else
                             {
-                                floorDTO.Floor = (floorIndex + 1).ToString();
+                                if(logicGenrationDTO.HasLowLevel)
+                                    floorDTO.Floor = floorIndex.ToString();
+                                else
+                                    floorDTO.Floor = (floorIndex + 1).ToString();
                                 floorDTO.Department = departmentIndex.ToString();
                                 floorDTOs.Add(floorDTO);
                                 departmentIndex++;

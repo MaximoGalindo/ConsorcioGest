@@ -25,18 +25,25 @@ namespace WebApi.Controllers.LoginController
             return null;
         }*/
 
-        [HttpPost("generateLogicConfiguration")]
+        [HttpPost("generate-logic-configuration")]
         public IActionResult GenerateLogicConfiguration(Tower config)
         {
             return Ok(consortiumService.GenerateLogicDepartments(config));
         }
 
-        [HttpGet("getConsortiums")]
+        [HttpGet("get-consortiums")]
         public IActionResult GetAllConsortiums() {
 
             return Ok(consortiumService.GetAllConsortiums());
 
-        }     
+        }
+
+        [HttpPost("save-consortium")]
+        public IActionResult SaveConsortium(ConsortiumConfig consortiumConfiguration)
+        {
+            return Ok(consortiumService.SaveConsortium(consortiumConfiguration));
+        }
+
 
 
     }

@@ -144,5 +144,11 @@ namespace BusinessService.Services
 
             return CurrentConsortium != null ? CurrentConsortium : null;
         }
+
+        public bool RemoveCurrentConsortium()
+        {
+            CurrentConsortium = null;
+            return true;
+        }
     }
 }

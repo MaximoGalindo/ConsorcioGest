@@ -14,9 +14,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column;    
 }
 
+.table-container {
+    max-height: 350px; 
+    overflow-y: auto; 
+}
+
+.modal-content table {
+    width: 100%; 
+}
+  
 button {
     background-color: #F9BC60;
     border: none;
@@ -28,4 +37,22 @@ button {
     font-weight: 700;
     margin-top: 10px;
     margin-right: 10px;
+}
+
+
+.table-container::-webkit-scrollbar {
+    width: 12px; 
+}
+
+.table-container::-webkit-scrollbar-track {
+    background-color: transparent; /* Color del riel de la barra de desplazamiento */
+    margin-left: 50px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 2px; 
+}
+.table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Cambia el color del pulgar al pasar el mouse sobre él */
 }

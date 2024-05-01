@@ -17,7 +17,10 @@ export class AuthService {
   }
 
   SetCurrentConsortium(consortiumID:number) :Observable<any>{
-    return this.http.post<any>(this.baseUrl + "setCurrentConsortium?consortiumID=" + consortiumID, null);
+    return this.http.post<any>(this.baseUrl + "set-current-consortium?consortiumID=" + consortiumID, null);
   }
   
+  RemoveCurrentConsortium() :Observable<any>{
+    return this.http.post<any>(this.baseUrl + "remove-current-consortium", null);
+  }
 }

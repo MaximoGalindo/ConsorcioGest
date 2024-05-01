@@ -9,11 +9,9 @@ public partial class Condominio
 
     public string Torre { get; set; } = null!;
 
-    public string Piso { get; set; } = null!;
-
-    public string Departamento { get; set; } = null!;
-
     public int IdConsorcio { get; set; }
+
+    public string NumeroDepartamento { get; set; } = null!;
 
     public virtual Consorcio IdConsorcioNavigation { get; set; } = null!;
 

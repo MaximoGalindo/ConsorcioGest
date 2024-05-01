@@ -23,27 +23,27 @@ namespace WebApi.Controllers.UserController
             return Ok(userService.CreateUser(user));
         }
 
-        [HttpGet("getDocumentTypes")]
+        [HttpGet("get-document-types")]
         public IActionResult getDocumentTypes()
         {
             return Ok(userService.GetDocumentTypes());
         }
 
-        [HttpGet("getUsers")]
+        [HttpGet("get-users")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetAllUsers()
         {
             return Ok(userService.GetAllUsers());
         }
 
-        [HttpGet("getUserByDocument/{documentUser}")]
+        [HttpGet("get-user-by-document/{documentUser}")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetUserByDocument(int documentUser)
         {
             return Ok(userService.GetUserByDocument(documentUser));
         }
 
-        [HttpPut("updateUser/{documentUser}")]
+        [HttpPut("update-user/{documentUser}")]
         [Authorize]
         public IActionResult UpdateUser(int documentUser, [FromBody] UpdateUserDTO userDTO)
         {

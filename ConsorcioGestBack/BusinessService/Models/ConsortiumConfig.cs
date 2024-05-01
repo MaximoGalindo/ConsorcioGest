@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BusinessService.Models
 {
 
-    public class ConsortiumConfiguration
+    public class ConsortiumConfig
     {
         public string CUIT {  get; set; }
         public string Name { get; set; }
@@ -48,8 +48,8 @@ namespace BusinessService.Models
     public class CommonSpaces
     {
         public string Name { get; set; }
-        public TimeOnly HourFrom { get; set; }
-        public TimeOnly HourTo { get; set; }
+        public string HourFrom { get; set; }
+        public string HourTo { get; set; }
     }
 
 
