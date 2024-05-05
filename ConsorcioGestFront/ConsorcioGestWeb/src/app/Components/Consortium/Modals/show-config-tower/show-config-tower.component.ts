@@ -16,7 +16,6 @@ export class ShowConfigTowerComponent {
 
   @Input() tower:Tower = new Tower();
 
-
   consortiumConfig:ConsortiumConfiguration = new ConsortiumConfiguration();
 
 

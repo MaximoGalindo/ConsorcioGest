@@ -1,4 +1,5 @@
 ﻿using BusinessService.Enums;
+using BusinessService.Models.AuxModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,8 @@ namespace BusinessService.DTO
         public string Condominium { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public string Profile { get; set; }
+        public ProfileModel Profile { get; set; }
         public string Property { get; set; }
-        public string State { get; set; }
+        public StateModel State { get; set; }
      }
 }

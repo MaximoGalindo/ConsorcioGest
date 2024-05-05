@@ -63,3 +63,10 @@ body {
 }
 
 
+.custom-input[disabled] {
+    background-color: #2b9175; 
+}
+
+select:hover {
+    cursor: pointer;
+}

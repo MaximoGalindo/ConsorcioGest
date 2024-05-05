@@ -22,10 +22,8 @@
 }
 
 .custom-select {
-    width: 200px;
-    height: 30px;
-    padding: 10px;
-    margin: 10px 0;
+    width: 230px;
+    height: 40px;
     border: none;
     border-radius: 13px;
     background-color: #36CFA2;
@@ -33,4 +31,47 @@
     text-align: left;
     outline: none;
     color: black;
+}
+
+.custom-input{
+    width: 200px;
+    margin-right: 20px;
+    height: 20px;
+}
+
+label{
+    margin-right: 10px;
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+}
+
+.aling-items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+button {
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 15px;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    margin-top: 10px;
 }

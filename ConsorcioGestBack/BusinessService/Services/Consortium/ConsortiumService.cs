@@ -113,6 +113,30 @@ namespace BusinessService.Services.Consortium
             }
         }
 
+        public List<ListItemDTO> GetTowers()
+        {
+            return _context.Condominios
+                        .Where(c => c.IdConsorcio == LoginService.CurrentConsortium.Id)
+                        .GroupBy(c => c.Torre)
+                        .Select(group => new ListItemDTO
+                        {
+                            ID = group.First().Id,
+                            Name = group.Key,
+                        })
+                        .ToList();
+        }
 
+        public List<ListItemDTO> GetCondominiums(string Tower)
+        {
+            return _context.Condominios
+                        .Where(c => c.IdConsorcio == LoginService.CurrentConsortium.Id
+                                && c.Torre == Tower)
+                        .Select(c => new ListItemDTO
+                        {
+                            ID = c.Id,
+                            Name = c.NumeroDepartamento,
+                        })
+                        .ToList();
+        }
     }
 }

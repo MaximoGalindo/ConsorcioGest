@@ -16,14 +16,15 @@ import { Router } from '@angular/router';
 })
 export class RegisterConsortiumComponent {
 
+  _ShowConfigTowerModal: boolean = false;
+  SelectedTower:Tower = new Tower();
+
   selectedTab: number = 1;
-  form:FormGroup = new FormGroup({})
   consortiumConfig: ConsortiumConfiguration = new ConsortiumConfiguration();
   towerList:Tower[] = [];
   commonSpacesList:CommonSpaces[] = [];
 
   constructor(
-    private modalService: NgbModal,
     private towerConfigShared:ConsortiumConfigSharedService,
     private router:Router
   ){
@@ -31,8 +32,12 @@ export class RegisterConsortiumComponent {
   }
   //MODAL
   ConfigureTower(item:Tower){
-    this.modalService.open(ConfigTowerModalComponent);
-    this.towerConfigShared.setTower(item);
+    this._ShowConfigTowerModal = true;
+    this.SelectedTower = item;
+  }
+
+  CloseModal(){
+    this._ShowConfigTowerModal = false;
   }
 
  //FORMULARIO
@@ -66,7 +71,6 @@ export class RegisterConsortiumComponent {
         this.towerList = towerList
       }
     })
-
     this.consortiumConfig.Towers = this.towerList;
     this.consortiumConfig.CommonSpaces = this.commonSpacesList    
     this.towerConfigShared.setConsortiumConfig(this.consortiumConfig)

@@ -44,7 +44,17 @@ namespace WebApi.Controllers.LoginController
             return Ok(consortiumService.SaveConsortium(consortiumConfiguration));
         }
 
+        [HttpGet("get-towers")]
+        public IActionResult GetTowers()
+        {
+            return Ok(consortiumService.GetTowers());
+        }
 
+        [HttpGet("get-condominiums")]
+        public IActionResult GetCondominiums(string Tower)
+        {
+            return Ok(consortiumService.GetCondominiums(Tower));
+        }
 
     }
 }

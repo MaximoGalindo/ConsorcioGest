@@ -16,11 +16,11 @@ namespace BusinessService.Services
 {
     public class UserService
     {
-        private readonly ConsorcioGestContext context;
+        private readonly ConsorcioGestContext _context;
 
         public UserService(ConsorcioGestContext context)
         {
-            this.context = context;
+            this._context = context;
         }
 
         public SuccessResponseDTO CreateUser(RegisterUserDTO userDTO)
@@ -29,7 +29,7 @@ namespace BusinessService.Services
             {
                 if (userDTO != null)
                 {
-                    var userExist = context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == Convert.ToInt32(userDTO.Document));
+                    var userExist = _context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == Convert.ToInt32(userDTO.Document));
 
                     if (userExist != null)
                         return new SuccessResponseDTO { Success = false, Message = "Este usuario ya existe" }; 
@@ -50,8 +50,8 @@ namespace BusinessService.Services
                         IdPerfil = null
                     };
 
-                    context.Add(usuario);
-                    var result = context.SaveChanges();
+                    _context.Add(usuario);
+                    var result = _context.SaveChanges();
                     if (result > 0)
                         return new SuccessResponseDTO { Success = true, Message = "Usuario creado correctamente" }; 
                     else
@@ -68,7 +68,7 @@ namespace BusinessService.Services
 
         public List<DocumentTypeModel> GetDocumentTypes()
         {
-            List<DocumentTypeModel> documentTypeList = context.TipoDocumentos
+            List<DocumentTypeModel> documentTypeList = _context.TipoDocumentos
                     .Select(t => new DocumentTypeModel
                     {
                         Id = t.Id,
@@ -80,7 +80,7 @@ namespace BusinessService.Services
 
         public List<UserModelDTO> GetAllUsers()
         {
-            List<UserModelDTO> userModelDTOs = context.Usuarios
+            List<UserModelDTO> userModelDTOs = _context.Usuarios
                 .Where(u => 
                 u.ConsorcioUsuarios.Any(cu => cu.IdConsorcio == LoginService.CurrentConsortium.Id)
                 && u.IdPerfil != 1)
@@ -90,10 +90,19 @@ namespace BusinessService.Services
                    Phone = u.Telefono,
                    Email = u.Email,
                    Document = u.Documento,
-                   Profile = u.IdPerfilNavigation != null ? u.IdPerfilNavigation.Nombre : "",
-                   Property = u.Esinquilino == true ? "Inquilino" : "Dueño",
-                   State = u.IdEstadoUsuarioNavigation.Nombre,
-                   //A CHEKAR LA PARTE ESTA DEL ARMADO DEL CONDOMINIO
+                   Profile = u.IdPerfilNavigation != null ? 
+                            new ProfileModel 
+                            { 
+                                Id = u.IdPerfilNavigation.Id, 
+                                Name = u.IdPerfilNavigation.Nombre 
+                            }: new ProfileModel(),
+                   Property = u.Esinquilino == true ? "Inquilino" : "Propietario",
+                   State = u.IdEstadoUsuarioNavigation != null ?
+                             new StateModel
+                             {
+                                 Id = u.IdEstadoUsuarioNavigation.Id,
+                                 Name = u.IdEstadoUsuarioNavigation.Nombre
+                             }: new StateModel(),
                    Condominium =
                     u.IdCondominioNavigation != null ?
                             u.IdCondominioNavigation.Torre                    
@@ -106,7 +115,7 @@ namespace BusinessService.Services
 
         public UserModelDTO GetUserByDocument(int documentUser)
         {
-            UserModelDTO userModelDTO = context.Usuarios
+            UserModelDTO userModelDTO = _context.Usuarios
                 .Where(u => u.Documento == documentUser)
                 .Select(u => new UserModelDTO
                 {
@@ -114,10 +123,19 @@ namespace BusinessService.Services
                     Phone = u.Telefono,
                     Email = u.Email,
                     Document = u.Documento,
-                    Profile = u.IdPerfilNavigation != null ? u.IdPerfilNavigation.Nombre : "",
-                    Property = u.Esinquilino == true ? "Inquilino" : "Dueño",
-                    State = u.IdEstadoUsuarioNavigation != null ? u.IdEstadoUsuarioNavigation.Nombre : "",
-                    //A CHEKAR LA PARTE ESTA DEL ARMADO DEL CONDOMINIO
+                    Profile = u.IdPerfilNavigation != null ?
+                            new ProfileModel
+                            {
+                                Id = u.IdPerfilNavigation.Id,
+                                Name = u.IdPerfilNavigation.Nombre
+                            } : new ProfileModel(),
+                    Property = u.Esinquilino == true ? "Inquilino" : "Propietario",
+                    State = u.IdEstadoUsuarioNavigation != null ?
+                             new StateModel
+                             {
+                                 Id = u.IdEstadoUsuarioNavigation.Id,
+                                 Name = u.IdEstadoUsuarioNavigation.Nombre
+                             } : new StateModel(),
                     Condominium =
                     u.IdCondominioNavigation != null ?
                             u.IdCondominioNavigation.Torre
@@ -130,7 +148,7 @@ namespace BusinessService.Services
 
         public int UpdateUser(int userDocument,UpdateUserDTO userDTO)
         {
-            Usuario user = context.Usuarios
+            Usuario user = _context.Usuarios
                 .Where(u => u.Documento == userDocument).First();
 
             if(LoginService.CurrentUser.Profile.Id == 2)
@@ -147,10 +165,32 @@ namespace BusinessService.Services
                 user.IdEstadoUsuario = userDTO.IdUserState != null ? userDTO.IdUserState : userDTO.IdUserState;
             }
 
-            context.Update(user);
-            int result = context.SaveChanges();
+            _context.Update(user);
+            int result = _context.SaveChanges();
 
             return result;
+        }
+
+        public List<ListItemDTO> GetProfiles()
+        {
+            return _context.Perfils
+                    .Select(p => new ListItemDTO
+                    {
+                        ID = p.Id,
+                        Name = p.Nombre,
+                    })
+                    .ToList();
+        }
+
+        public List<ListItemDTO> GetStatus()
+        {
+            return _context.EstadoUsuarios
+                        .Select(e => new ListItemDTO
+                        {
+                            ID = e.Id,
+                            Name = e.Nombre
+                        })
+                        .ToList();
         }
     }
 }

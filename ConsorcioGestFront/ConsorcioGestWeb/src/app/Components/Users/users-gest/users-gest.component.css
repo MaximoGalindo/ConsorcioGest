@@ -19,10 +19,29 @@ th {
     display: flex;
     align-items: center;
     width: 100%;
+    margin-top: 30px;
 }
+
+.filter-container 
+button {
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;   
+}
+
 .custom-input {
-    width: 200px;
-    height: 30px;
+    width: 100px;
+    height: 10px;
+}
+label{
+    color: white;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .table-container {
@@ -31,6 +50,11 @@ th {
 }
 button{
     background-color: transparent;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
 }
 
 .icono:hover:not([disabled]) {

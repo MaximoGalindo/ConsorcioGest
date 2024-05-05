@@ -7,7 +7,7 @@ export class TowerConfig {
     countDeparmentsByFloors: CountDepartmentsByFloor[];
   
     constructor() {
-      this.floors = 15;
+      this.floors = 0;
       this.departmentConfig = new DepartmentConfig();
       this.isUniform = false;
       this.isUniqual = false;

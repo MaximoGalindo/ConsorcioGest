@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateUserDTO } from 'src/app/Models/DTO/UpdateUserDTO';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
-import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { UserService } from 'src/app/Services/user.service';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { EditUserModalComponent } from '../Modals/edit-user-modal/edit-user-modal.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.service';
-
-
 
 @Component({
   selector: 'app-users-gest',
@@ -17,13 +11,13 @@ import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.
 })
 export class UsersGestComponent implements OnInit{
 
+  _ShowModalEditUser:boolean = false;
   users:UserModelDTO[] = [];
+  selectedUser:UserModelDTO = new UserModelDTO();
 
   constructor(
     private userService:UserService,
-    private consortiumService:ConsortiumService,
-    private modalService: NgbModal,
-    private UserDataShared:UserDataSharedService
+    private modalService: NgbModal
   ){}
 
   ngOnInit(){
@@ -67,7 +61,15 @@ export class UsersGestComponent implements OnInit{
   }
 
   EditUser(userDocument:number){
-    this.modalService.open(EditUserModalComponent)
-    this.UserDataShared.setUserDocument(userDocument);
+    this._ShowModalEditUser = true;
+    this.userService.GetUserByDocument(userDocument).subscribe({
+      next: data => {
+        this.selectedUser = data;
+      }
+    })    
+  }
+
+  CloseModal(){
+    this._ShowModalEditUser = false;
   }
 }

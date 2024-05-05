@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UpdateUserDTO } from 'src/app/Models/DTO/UpdateUserDTO';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
-import { UserModel } from 'src/app/Models/Models/UserModel';
-import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.service';
+import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
+import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -11,35 +12,68 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class EditUserModalComponent implements OnInit {
 
-   userDocument:number = 0; 
-   _UserIsPresent:boolean = false;
+  @Output() _CloseModal =  new EventEmitter<Boolean>();
 
-   User = new UserModelDTO();
+  @Input() User = new UserModelDTO();
 
+  condominiums:ListItemDTO[] = [];
+  towers:ListItemDTO[] = [];
+  profiles:ListItemDTO[] = [];
+  statuses:ListItemDTO[] = [];
+
+  selectedTower:string = "";
+  selectedCondominium:number = 0;
+  property:number = 0;
+  userUpdated:UpdateUserDTO = new UpdateUserDTO()
   constructor(
-    private UserDataShared:UserDataSharedService,
-    private UserSevice:UserService
+    private UserSevice:UserService,
+    private ConsortiumService:ConsortiumService
   ){
 
   }
-  ngOnInit(): void {
-    this.UserDataShared.UserDocument$.subscribe((data)=>{
-      this.userDocument = data
-      this._UserIsPresent = true
-      this.GetUser(this.userDocument)
+  ngOnInit() {
+    this.ConsortiumService.GetTowers().subscribe((towers)=>{
+      this.towers = towers;
+    })
+    this.UserSevice.GetProfiles().subscribe((profiles)=>{
+      this.profiles = profiles;
+    })
+    this.UserSevice.GetStatus().subscribe((statuses)=>{     
+      this.statuses = statuses;
+    })   
+    console.log(this.User);
+    
+  }
+  CloseModal(){
+    this._CloseModal.emit(false);
+    this.selectedTower = "";
+    this.selectedCondominium = 0;
+    console.log(this.User);
+    
+  }
+  LoadConsortiums(tower:any){  
+    this.selectedTower = tower.value;
+    this.ConsortiumService.GetCondominiums(tower.value).subscribe((condominiums)=>{
+      console.log(condominiums);
+      this.condominiums = condominiums
     })
   }
-  closeModal(){
-    this._UserIsPresent = false
-    this.userDocument = 0;
+
+  SelectConsortium($event:any) {
+    this.selectedCondominium = $event.target.value;
+    console.log(this.selectedCondominium);  
   }
 
-  GetUser(userDocument:number){
-    this.UserSevice.GetUserByDocument(userDocument).subscribe((data)=>{
-      this.User = data
-      console.log(this.User);
+  EditUser(){
+    this.userUpdated.Email = this.User.email;
+    this.userUpdated.Phone = this.User.phone;
+    this.userUpdated.IdCondominium = this.selectedCondominium   
+    this.userUpdated.IdProfile = this.User.profile?.id
+    this.userUpdated.IdUserState = this.User.state?.id
+    this.UserSevice.UpdateUser(this.User.document,this.userUpdated).subscribe((data)=>{
+      console.log(data);
+      this.CloseModal();
+    })
+  }
       
-    })
-  }
-
 }

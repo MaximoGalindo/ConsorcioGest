@@ -1,14 +1,60 @@
-
-<div *ngIf="_UserIsPresent" class="modal-container">
+<div class="modal-container">
     <div class="modal-content">
-        <span class="close" (click)="closeModal()">&times;</span>
-
+        <span class="close" (click)="CloseModal()">&times;</span>
         <div style="text-align: center; font-size: 25px;">{{User.name}}</div>
         <hr class="line">
+        <div class="info-container">
+            <div class="column">
+                <div class="aling-items">   
+                    <label for="">Documento</label>
+                    <input type="text" name="Document" class="custom-input" [(ngModel)]="User.document" disabled>
+                </div>
+                <div class="aling-items">
+                    <label for="">Email</label>
+                    <input type="text" name="Email" class="custom-input" [(ngModel)]="User.email">
+                </div>
+                <div class="aling-items">
+                    <label for="">Phone</label>
+                    <input type="text" name="Phone" class="custom-input" [(ngModel)]="User.phone">
+                </div>
+                <div class="aling-items">
+                    <label for="">Propiedad</label>
+                    <input type="text" name="Property" class="custom-input" [(ngModel)]="User.property" disabled="">
+                </div>
+            </div>
+            <div class="column">
+                <div class="aling-items">
+                    <label for="">Condominio</label>
+                    <select (change)="LoadConsortiums($event.target)" style="width: 110px;" class="custom-select" [(ngModel)]="selectedTower">
+                        <option value="" disabled>Torre</option>     
+                        <option *ngFor="let tower of towers" [value]="tower.name" 
+                        >{{tower.name}}</option>      
+                    </select>
+                    <select style="width: 100px;" class="custom-select" [(ngModel)]="selectedCondominium" (change)="SelectConsortium($event)">
+                        <option value="" disabled>Condominio</option>     
+                        <option *ngFor="let condominium of condominiums" [value]="condominium.id">{{condominium.name}}</option>      
+                    </select>
+                </div>
+                <div class="aling-items">
+                    <label for="">Perfil</label>
+                    <select class="custom-select" [(ngModel)]="User.profile">
+                        <option value="" disabled>Seleccione un Perfil</option>   
+                        <option *ngFor="let profile of profiles" [ngValue]="profile">{{profile.name}}</option>        
+                    </select>
+                </div>
+                <div class="aling-items">
+                    <label for="">Estado</label>
+                    <select class="custom-select" [(ngModel)]="User.state">
+                        <option value="" disabled>Seleccione un Estado</option>    
+                        <option *ngFor="let state of statuses" [ngValue]="state">{{state.name}}</option>       
+                    </select>
+                </div>
+            </div>                
+        </div>      
+        <div class="button-container">
+            <button style="margin-right: 5px;" (click)="EditUser()">Guardar</button>
+            <button (click)="CloseModal()">Cancelar</button>
+        </div>
 
-        <label for="">Condominio</label>
-        <select class="custom-select">
-            <option value="" disabled>Seleccione el tipo de documento</option>           
-        </select>
     </div>
 </div>

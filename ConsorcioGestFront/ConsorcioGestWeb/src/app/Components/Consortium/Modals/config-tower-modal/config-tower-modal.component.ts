@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfigGridComponent } from '../config-grid/config-grid.component';
 import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortium-config-shared.service';
@@ -12,31 +12,28 @@ import { Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
 })
 export class ConfigTowerModalComponent {
 
-  _TowerIsPresent: boolean = true;
+  @Output() _TowerIsPresent = new EventEmitter<boolean>()
+
   _GridIsPresent: boolean = false;
  
-  tower:Tower = new Tower();
+  @Input() tower:Tower = new Tower();
+
   depsByFloor:number[] = [];
   uniformDeps:number = 0;
-  listTowerConfig:Tower[] = []; 
+  listTowers:Tower[] = []; 
   constructor(
     private modalService: NgbModal,
     private towerConfigShared: ConsortiumConfigSharedService
   ){
-    towerConfigShared.Tower$.subscribe({ next: tower => {
-      this.tower = tower
-      }
-    })    
     towerConfigShared.TowerList$.subscribe({ next: towerList => {    
-      if(towerList != null) this.listTowerConfig = towerList
+      if(towerList != null) this.listTowers = towerList
     }})
-
   }
   ngOnInit(){    
   }
 
   CloseModal(){
-    this._TowerIsPresent = false
+    this._TowerIsPresent.emit(false)
   }
   
   CloseGridModal(){
@@ -46,7 +43,7 @@ export class ConfigTowerModalComponent {
   save(){      
     console.log(this.uniformDeps);
     
-    if(!this.listTowerConfig.find(tower => tower.name === this.tower.name)){
+    if(!this.listTowers.find(tower => tower.name === this.tower.name)){
       if(this.uniformDeps > 0){
         this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:this.uniformDeps});
       }
@@ -54,10 +51,10 @@ export class ConfigTowerModalComponent {
         this.depsByFloor.forEach(deps =>
           this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:deps}));  
       }
-      this.listTowerConfig.push(this.tower);
+      this.listTowers.push(this.tower);
     }
     else{
-      var index = this.listTowerConfig.findIndex(tower => tower.name === this.tower.name);
+      var index = this.listTowers.findIndex(tower => tower.name === this.tower.name);
       if(this.uniformDeps > 0){
         this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:this.uniformDeps});
       }
@@ -65,10 +62,10 @@ export class ConfigTowerModalComponent {
         this.depsByFloor.forEach(deps =>
           this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:deps}));  
       }
-      this.listTowerConfig[index] = this.tower
+      this.listTowers[index] = this.tower
     }
-    console.log(this.listTowerConfig);    
-    this.towerConfigShared.setListTower(this.listTowerConfig);
+    console.log(this.listTowers);    
+    this.towerConfigShared.setListTower(this.listTowers);
     this.CloseModal();
   }
 

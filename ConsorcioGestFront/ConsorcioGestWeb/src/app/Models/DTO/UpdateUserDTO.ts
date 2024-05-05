@@ -1,5 +1,5 @@
 export class UpdateUserDTO {
-    Phone?: number | null;
+    Phone?: string | null;
     Email?: string | null;
     IdProfile?: number | null;
     IdUserState?: number | null;

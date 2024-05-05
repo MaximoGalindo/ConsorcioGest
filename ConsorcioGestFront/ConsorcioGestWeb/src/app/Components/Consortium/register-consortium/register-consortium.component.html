@@ -59,7 +59,10 @@
             <button *ngIf="selectedTab == 3" class="button-tab" (click)="Confirm()">Confirmar</button>
         </div>
     </div>
-
-
 </div>
 
+<app-config-tower-modal
+    *ngIf="_ShowConfigTowerModal"
+    [tower]="SelectedTower"
+    (_TowerIsPresent)="CloseModal()"
+></app-config-tower-modal>

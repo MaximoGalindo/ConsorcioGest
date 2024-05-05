@@ -12,7 +12,7 @@ namespace WebApi.Controllers.UserController
     {
         private readonly UserService userService;
 
-        public UserController(UserService userService) 
+        public UserController(UserService userService)
         {
             this.userService = userService;
         }
@@ -49,9 +49,18 @@ namespace WebApi.Controllers.UserController
         {
             return Ok(userService.UpdateUser(documentUser, userDTO));
         }
-        
 
+        [HttpGet("get-profiles")]
+        public IActionResult GetProfiles()
+        {
+            return Ok(userService.GetProfiles());
+        }
 
+        [HttpGet("get-states")]
+        public IActionResult GetStatus()
+        {
+            return Ok(userService.GetStatus());
+        }
     }
 
 }
