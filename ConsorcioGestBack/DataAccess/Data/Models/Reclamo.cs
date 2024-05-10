@@ -21,6 +21,8 @@ public partial class Reclamo
 
     public int? IdCausaProblema { get; set; }
 
+    public int? IdImagen { get; set; }
+
     public virtual ICollection<Encuesta> Encuesta { get; set; } = new List<Encuesta>();
 
     public virtual CausaProblema? IdCausaProblemaNavigation { get; set; }
@@ -28,6 +30,8 @@ public partial class Reclamo
     public virtual EspacioAfectado? IdEspacioAfectadoNavigation { get; set; }
 
     public virtual EstadoReclamo? IdEstadoReclamoNavigation { get; set; }
+
+    public virtual Imagene? IdImagenNavigation { get; set; }
 
     public virtual Usuario? IdUsuarioNavigation { get; set; }
 

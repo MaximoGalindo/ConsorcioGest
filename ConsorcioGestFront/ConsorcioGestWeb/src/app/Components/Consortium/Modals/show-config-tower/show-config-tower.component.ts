@@ -18,7 +18,6 @@ export class ShowConfigTowerComponent {
 
   consortiumConfig:ConsortiumConfiguration = new ConsortiumConfiguration();
 
-
   constructor(
     private towerConfigShared: ConsortiumConfigSharedService
   ) {    
@@ -85,5 +84,15 @@ export class ShowConfigTowerComponent {
     this.CloseModal();
   }
 
-  
+  AddFloor(i: number){
+    /*console.log(this.pisosUnicosArray);
+    console.log(i);
+    this.pisosUnicosArray.splice(i + 1, 0, " ");
+
+  // Imprimir el array actualizado en la consola
+  console.log(this.pisosUnicosArray);*/
+  }
+  AddDeparment(i: number){
+    
+  }
 }

@@ -9,14 +9,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let floor of ObtenerPisosUnicos(tower.floorDepartments);">
-            <td>                
+          <ng-container *ngFor="let floor of ObtenerPisosUnicos(tower.floorDepartments); let i = index">
+            <tr>
+              <td><i (click)="AddFloor(i)" class="fa-solid fa-plus"></i></td>
+              <td>                
                 <input class="floor-input" type="text" [value]="floor">
-            </td>            
-            <td *ngFor="let department of ObtenerDepartamentosPorPiso(floor)">
-              <input class="deparments-input" type="text" [value]="department.department">
-            </td>
-          </tr>
+              </td>           
+              <td *ngFor="let department of ObtenerDepartamentosPorPiso(floor)">
+                <input class="deparments-input" type="text" [value]="department.department">
+              </td>
+              <td><i (click)="AddDeparment(i)" class="fa-solid fa-plus"></i></td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
         <button (click)="Save()">Guardar</button>

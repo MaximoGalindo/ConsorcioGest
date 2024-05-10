@@ -8,10 +8,11 @@ import { SelectConsortiumComponent } from './Components/Consortium/select-consor
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
+import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: MainPageUserComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'main-page-admin',
     children : [

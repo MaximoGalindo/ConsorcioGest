@@ -26,7 +26,7 @@ export class SaveConsortiumComponent {
     private consortiumSevice: ConsortiumService
   ) {
 
-   /* this.consortiumConfig.CUIT = '1234567890';
+    this.consortiumConfig.CUIT = '1234567890';
     this.consortiumConfig.Name = 'Gamma';
     this.consortiumConfig.Location = 'Circunvalacion';
   
@@ -76,13 +76,13 @@ export class SaveConsortiumComponent {
     this.consortiumConfig.CommonSpaces.push(commonSpace1);
     
     //BORRAR ESTO DESPUES
-    towerConfigShared.setConsortiumConfig(this.consortiumConfig);*/
+    towerConfigShared.setConsortiumConfig(this.consortiumConfig);
 
-    towerConfigShared.ConsortiumConfig$.subscribe({
+   /* towerConfigShared.ConsortiumConfig$.subscribe({
       next: consortiumConfig => {
         this.consortiumConfig = consortiumConfig
       }
-    })
+    })*/
 
    }
 

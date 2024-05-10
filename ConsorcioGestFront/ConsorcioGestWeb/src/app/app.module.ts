@@ -22,6 +22,10 @@ import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 import { ShowConfigTowerComponent } from './Components/Consortium/Modals/show-config-tower/show-config-tower.component';
+import { UserRegisterClaimComponent } from './Components/Claims/user-register-claim/user-register-claim.component';
+import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
+import { NavbarUserComponent } from './Components/navbar-user/navbar-user.component';
+import { FooterUserComponent } from './Components/footer-user/footer-user.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { ShowConfigTowerComponent } from './Components/Consortium/Modals/show-co
     ConfigGridComponent,
     SaveConsortiumComponent,
     ShowConfigTowerComponent,
+    UserRegisterClaimComponent,
+    MainPageUserComponent,
+    NavbarUserComponent,
+    FooterUserComponent,
   ],
   imports: [
     BrowserModule,
