@@ -18,20 +18,15 @@ namespace WebApi.Controllers.LoginController
             this.consortiumService = consortiumService;
         }
 
-        /*[HttpPost]
-        public IActionResult GenerateLogicConfiguration(ConsortiumConfiguration consortiumConfiguration)
-        {
-            //Aca es la verdadera pegada a la api. DOnde tengo que mandar la lista de torres
-            return null;
-        }*/
-
         [HttpPost("generate-logic-configuration")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GenerateLogicConfiguration(Tower config)
         {
             return Ok(consortiumService.GenerateLogicDepartments(config));
         }
 
         [HttpGet("get-consortiums")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetAllConsortiums() {
 
             return Ok(consortiumService.GetAllConsortiums());
@@ -39,18 +34,21 @@ namespace WebApi.Controllers.LoginController
         }
 
         [HttpPost("save-consortium")]
+        [Authorize(Roles = "Admin")]
         public IActionResult SaveConsortium(ConsortiumConfig consortiumConfiguration)
         {
             return Ok(consortiumService.SaveConsortium(consortiumConfiguration));
         }
 
         [HttpGet("get-towers")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetTowers()
         {
             return Ok(consortiumService.GetTowers());
         }
 
         [HttpGet("get-condominiums")]
+        [Authorize(Roles = "Admin")]
         public IActionResult GetCondominiums(string Tower)
         {
             return Ok(consortiumService.GetCondominiums(Tower));

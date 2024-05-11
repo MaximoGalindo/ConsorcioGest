@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConsortiumConfiguration, Tower } from '../Models/Models/ConsortiumConfigModel';
 import { ListItemDTO } from '../Models/HelperModel/ListItemDTO';
+import { environment } from '../Helpers/Envriorment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsortiumService {
 
-  baseUrl = 'https://localhost:7083/consortium/';
+  baseUrl = `${environment.API_URL}/consortium/`;
   constructor(private http:HttpClient) { }
 
   GetConsortiums():Observable<any>{

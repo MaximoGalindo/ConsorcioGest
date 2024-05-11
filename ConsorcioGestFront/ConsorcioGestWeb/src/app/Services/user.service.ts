@@ -5,13 +5,14 @@ import { RegisterUserDTO } from '../Models/DTO/RegisterUserDTO';
 import { UpdateUserDTO } from '../Models/DTO/UpdateUserDTO';
 import { ListItemDTO } from '../Models/HelperModel/ListItemDTO';
 import { UserModelDTO } from '../Models/DTO/UserModelDTO';
+import { environment } from '../Helpers/Envriorment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  baseUrl = 'https://localhost:7083/users/';
+  baseUrl = `${environment.API_URL}/users`;
   constructor(private http:HttpClient) { }
 
   CreateUser(registerUserDTO: RegisterUserDTO): Observable<any> {

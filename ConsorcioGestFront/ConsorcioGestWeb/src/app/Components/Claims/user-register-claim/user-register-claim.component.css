@@ -21,15 +21,15 @@ h2{
 }
 
 textarea{
-    margin-top: 20px;
-    background-color: grey;
+    margin-top: 15px;
+    background-color: white;
     border-radius: 5px;
 }
 
 button{
     font-size: 20px;    
     background-color: #F9BC60;
-    margin-top: 10px;
+    margin-top: 15px;
     border: none;
     border-radius: 10px;
     padding: 10px 0 10px 0; 

@@ -1,18 +1,17 @@
-<!--<form (submit)="subirImagen()">
-    <input type="file" (change)="seleccionarImagen($event)" accept="image/png">
-    <button type="submit">Subir Imagen</button>
-    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Imagen">
-  </form>-->
+
 <div class="container">
     <div class="content">
         <h2>Realizar un Reclamo</h2>
         <select class="custom-select">
             <option value="" disabled selected>Seleccione la Causa del Reclamo</option>
+            <option *ngFor="let item of causeClaim" [ngValue]="item.id">{{item.name}}</option>
         </select>
         <select class="custom-select">
             <option value="" disabled selected>Seleccione el Espacio Afectado</option>
+            <option *ngFor="let item of affectedSpaces" [ngValue]="item.id">{{item.name}}</option>
         </select>
-        <textarea name="" id="" rows="18"></textarea>
+        <textarea name="" id="" rows="18" placeholder="Detalle su problema"></textarea>
+        <input type="file" (change)="seleccionarImagen($event)" accept="image/png" multiple>       
         <button>Enviar</button>
     </div>    
 </div>

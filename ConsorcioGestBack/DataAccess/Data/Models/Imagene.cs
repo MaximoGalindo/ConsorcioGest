@@ -11,5 +11,7 @@ public partial class Imagene
 
     public byte[]? DatosImagen { get; set; }
 
-    public virtual ICollection<Reclamo> Reclamos { get; set; } = new List<Reclamo>();
+    public int IdReclamo { get; set; }
+
+    public virtual Reclamo IdReclamoNavigation { get; set; } = null!;
 }

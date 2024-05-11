@@ -12,7 +12,7 @@ import { MainPageUserComponent } from './Components/main-page-user/main-page-use
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: MainPageUserComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'main-page-admin',
     children : [
@@ -20,6 +20,7 @@ const routes: Routes = [
       {path: 'claims-gest', component: ClaimsGestComponent}
     ]
   },
+  { path: 'main-page-user', component: MainPageUserComponent},
   { path: 'consortium', component: SelectConsortiumComponent},
   { path: 'register-consortium', 
     children: [

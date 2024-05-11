@@ -2,14 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserModel } from '../Models/Models/UserModel';
-
+import { environment } from '../Helpers/Envriorment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  baseUrl = 'https://localhost:7083/login/';
+  baseUrl = `${environment.API_URL}/login/`;
   constructor(private http:HttpClient) { }
 
   login(credentials:any) :Observable<UserModel>{

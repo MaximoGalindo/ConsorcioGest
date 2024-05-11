@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         }
         else if(data.profile.name == 'Residente')
         {
-          this.router.navigate(['/main-page-residente']);
+          this.router.navigate(['/main-page-user']);
           this.isLoginFailed = true;
           this.isLoggedIn = false;
         } 

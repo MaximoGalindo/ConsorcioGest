@@ -342,6 +342,11 @@ public partial class ConsorcioGestContext : DbContext
 
             entity.Property(e => e.DatosImagen).HasColumnType("image");
             entity.Property(e => e.Nombre).HasMaxLength(100);
+
+            entity.HasOne(d => d.IdReclamoNavigation).WithMany(p => p.Imagenes)
+                .HasForeignKey(d => d.IdReclamo)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Imagenes_Reclamos");
         });
 
         modelBuilder.Entity<Opcion>(entity =>
@@ -397,7 +402,6 @@ public partial class ConsorcioGestContext : DbContext
             entity.Property(e => e.IdCausaProblema).HasColumnName("ID_CAUSA_PROBLEMA");
             entity.Property(e => e.IdEspacioAfectado).HasColumnName("ID_ESPACIO_AFECTADO");
             entity.Property(e => e.IdEstadoReclamo).HasColumnName("ID_ESTADO_RECLAMO");
-            entity.Property(e => e.IdImagen).HasColumnName("ID_IMAGEN");
             entity.Property(e => e.IdUsuario).HasColumnName("ID_USUARIO");
             entity.Property(e => e.NroReclamo)
                 .HasMaxLength(10)
@@ -415,10 +419,6 @@ public partial class ConsorcioGestContext : DbContext
             entity.HasOne(d => d.IdEstadoReclamoNavigation).WithMany(p => p.Reclamos)
                 .HasForeignKey(d => d.IdEstadoReclamo)
                 .HasConstraintName("FK_RECLAMOS_ESTADORECLAMO");
-
-            entity.HasOne(d => d.IdImagenNavigation).WithMany(p => p.Reclamos)
-                .HasForeignKey(d => d.IdImagen)
-                .HasConstraintName("FK_Reclamos_Imagenes");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Reclamos)
                 .HasForeignKey(d => d.IdUsuario)

@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ClaimUserDTO } from 'src/app/Models/DTO/ClaimUserDTO';
+import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { ClaimService } from 'src/app/Services/claim.service';
 
 @Component({
@@ -7,49 +9,52 @@ import { ClaimService } from 'src/app/Services/claim.service';
   templateUrl: './user-register-claim.component.html',
   styleUrls: ['./user-register-claim.component.css']
 })
-export class UserRegisterClaimComponent {
+export class UserRegisterClaimComponent implements OnInit {
+  imagenesSeleccionadas: File[] = [];
+  claim:ClaimUserDTO = new ClaimUserDTO();
 
+  causeClaim:ListItemDTO[] = [];
+  affectedSpaces:ListItemDTO[] = [];
   constructor(
     private claimService:ClaimService,
     private http: HttpClient
   ){
 
   }
-  imagenSeleccionada: File | null = null;
-  imagenUrl: string = "";
-  
+  ngOnInit(): void {
+    this.claimService.GetCauseClaim().subscribe((data)=>{
+      this.causeClaim = data;
+    });
+    this.claimService.GetAffectedSpace().subscribe((data)=>{
+      this.affectedSpaces = data;
+    })
+  }
+
+  //ARREGLAR ESTO PORQUE SE DEBE SUBIR TODO EN EL DTO DE RECLAMOS
   seleccionarImagen(event: any) {
-    this.imagenSeleccionada = event.target.files[0] as File;
-  }
-  
-  subirImagen() {
-    // Verificar si se ha seleccionado una imagen
-    if (!this.imagenSeleccionada) {
-      console.error('No se ha seleccionado ninguna imagen');
-      return;
+    const archivosSeleccionados = event.target.files;
+    for (let i = 0; i < archivosSeleccionados.length; i++) {
+      this.imagenesSeleccionadas.push(archivosSeleccionados[i]);
     }
-  
-    const reader = new FileReader();
-    reader.onload = (event: ProgressEvent<FileReader>) => {
-      // Obtener los bytes de la imagen como un ArrayBuffer
-      const bytes = (event.target?.result) as ArrayBuffer;
-      // Convertir los bytes a un Uint8Array
-      const byteArray = new Uint8Array(bytes);
-  
-      // Enviar los bytes en la solicitud POST
-      this.http.post('https://localhost:7083/claims/guardar-imagen', byteArray).subscribe(() => {
-        console.log('Imagen subida correctamente');
-      });
-    };
-  
-    // Leer la imagen como ArrayBuffer
-    reader.readAsArrayBuffer(this.imagenSeleccionada);
+    console.log(this.imagenesSeleccionadas);
+    
+    /*const archivoSeleccionado = event.target.files[0];
+    if (archivoSeleccionado) {
+      this.imagenesSeleccionadas = archivoSeleccionado;  
+      this.claimService.SaveImage(archivoSeleccionado)
+        .subscribe(
+          (response) => {
+            console.log('Imagen subida con éxito:', response);            
+          },
+          (error) => {
+            console.error('Error al subir la imagen:', error);
+          }
+        ); 
+    }*/
   }
-  
-  
-  
-  obtenerImagen(id: number) {
-    this.http.get(`https://localhost:7083/claim/obtener-imagen`, { responseType: 'blob' })
+   
+  /*obtenerImagen(id: number) {
+    this.claimService.GetImages(id)
         .subscribe(
             (imagen: Blob) => {
                 const reader = new FileReader();
@@ -62,5 +67,5 @@ export class UserRegisterClaimComponent {
                 console.error('Error al obtener la imagen:', error);
             }
         );
-      }
+      }*/
 }

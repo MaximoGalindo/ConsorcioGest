@@ -19,9 +19,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
         builder => builder
-            .WithOrigins("http://localhost:4200")
-            .WithOrigins("http://localhost:4201")
-            .WithOrigins("http://localhost:53416")
+            .SetIsOriginAllowed((host) => true)
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials());
@@ -53,6 +51,7 @@ builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ConsortiumService>();
 builder.Services.AddScoped<ConsortiumGenerateLogicService>();
+builder.Services.AddScoped<ClaimsService>();
 
 
 builder.Services.AddSwaggerGen(c =>
@@ -67,7 +66,7 @@ builder.Services.AddSwaggerGen(c =>
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
     });
-
+   
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
