@@ -1,17 +1,28 @@
 
-<div class="container">
+<div class="container" *ngIf="!success">
     <div class="content">
         <h2>Realizar un Reclamo</h2>
-        <select class="custom-select">
+        <select class="custom-select" [(ngModel)]="claim.CauseClaim">
             <option value="" disabled selected>Seleccione la Causa del Reclamo</option>
-            <option *ngFor="let item of causeClaim" [ngValue]="item.id">{{item.name}}</option>
+            <option *ngFor="let item of causeClaim" [value]="item.id">{{item.name}}</option>
         </select>
-        <select class="custom-select">
+        <select class="custom-select"  [(ngModel)]="claim.AffectedSpace">
             <option value="" disabled selected>Seleccione el Espacio Afectado</option>
-            <option *ngFor="let item of affectedSpaces" [ngValue]="item.id">{{item.name}}</option>
+            <option *ngFor="let item of affectedSpaces" [value]="item.id">{{item.name}}</option>
         </select>
-        <textarea name="" id="" rows="18" placeholder="Detalle su problema"></textarea>
+        <textarea name="" id="" rows="18" placeholder="Detalle su problema" [(ngModel)]="claim.ProblemDetail"></textarea>
         <input type="file" (change)="seleccionarImagen($event)" accept="image/png" multiple>       
-        <button>Enviar</button>
+        <button (click)="Save()">Enviar</button>
     </div>    
+</div>
+<div class="container-message" *ngIf="success">
+    <h1>¡Gracias por enviar tu reclamo!</h1>
+    <p>Hemos recibido la información sobre tu reclamo exitosamente. Nuestro equipo de administración se pondrá a trabajar de inmediato para abordar tu solicitud. Te mantendremos informado sobre el progreso a través de la forma de contacto que proporcionaste.</p>
+    <p>Número de Reclamo: <span class="claim-number">{{ claimNumber }}</span></p>
+    <p>Recuerda que puedes seguir el estado de tu reclamo en cualquier momento iniciando sesión en tu cuenta. Si necesitas realizar otro reclamo o tienes preguntas adicionales, no dudes en ponerte en contacto con nosotros.</p>
+    <div class="footer">
+        <p>Gracias por tu colaboración para mejorar la calidad de vida en nuestro edificio</p>
+        <button (click)="Continue()">Continuar</button>
+    </div>
+
 </div>

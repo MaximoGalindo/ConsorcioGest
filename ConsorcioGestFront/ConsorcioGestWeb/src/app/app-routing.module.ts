@@ -9,18 +9,25 @@ import { RegisterConsortiumComponent } from './Components/Consortium/register-co
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
+import { UserRegisterClaimComponent } from './Components/Claims/user-register-claim/user-register-claim.component';
+import { MenuUserComponent } from './Components/menu-user/menu-user.component';
+import { UsersGestComponent } from './Components/Users/users-gest/users-gest.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'main-page-admin',
+  { path: 'main-page-admin',component: MainPageAdminComponent,
     children : [
-      {path: '',component: MainPageAdminComponent},
-      {path: 'claims-gest', component: ClaimsGestComponent}
+      {path: 'claims-gest', component: ClaimsGestComponent},
+      {path: 'user-gest',component:UsersGestComponent}
     ]
   },
-  { path: 'main-page-user', component: MainPageUserComponent},
+  { path: 'main-page-user', component: MainPageUserComponent,
+    children: [
+      {path: '', component: MenuUserComponent}, 
+      {path: 'claim-user', component: UserRegisterClaimComponent}
+    ]},
   { path: 'consortium', component: SelectConsortiumComponent},
   { path: 'register-consortium', 
     children: [

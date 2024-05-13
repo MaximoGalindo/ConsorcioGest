@@ -1,13 +1,17 @@
 table {
     width: 100%;
-    border-collapse: collapse;
     color: white;
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden; 
+    
 }
 th, td {
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 8px;
     text-align: left;
-    background-color: #8A9292;
+    background-color: #005F5B;
 }
 
 th {
@@ -51,12 +55,6 @@ label{
 button{
     background-color: transparent;
 }
-
-.filter-container {
-    display: flex;
-    align-items: center;
-}
-
 .icono:hover:not([disabled]) {
     filter: brightness(120%);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);

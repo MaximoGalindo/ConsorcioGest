@@ -8,8 +8,8 @@
                     placeholder="Buscar">
             <button class="button-search">Buscar</button>
         </div>
-        <div class="consortiums-container" *ngFor="let c of consortiums">
-            <button (click)="selectConsortium(c.Id)" class="consortiums-button">
+        <div class="consortiums-container" >
+            <button *ngFor="let c of consortiums" (click)="selectConsortium(c.Id)" class="consortiums-button">
                 {{c.Name}}
                 <br>
                 {{c.Location}}
@@ -17,9 +17,12 @@
         </div>
         <div style="margin-top: 30px; 
                     margin-right: 25px;
+                    margin-left: 25px;
                         display: flex;
-                        justify-content: right;
+                        justify-content: space-between;
+                        align-items: center;
                         ">
+           <button class="back-login" (click)="BackLogin()">Volver</button>
            <button class="add-consortium" (click)="addConsortium()"><i class="fa-solid fa-plus fa-2x"></i> </button>
         </div>
     </div>

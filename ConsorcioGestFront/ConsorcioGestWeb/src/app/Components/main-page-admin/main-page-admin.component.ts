@@ -10,13 +10,6 @@ import { AuthService } from 'src/app/Services/auth.service';
 })
 export class MainPageAdminComponent implements OnInit, OnDestroy {
 
-  //VARIABLES PARA LAS PANTALLAS
-  ClaimGest: boolean = false;
-  BookingGest: boolean = false;
-  UserGest: boolean = false;
-  StatsGest: boolean = false;
-  SurveyGest: boolean = false;
-
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private router:Router,
@@ -34,13 +27,6 @@ export class MainPageAdminComponent implements OnInit, OnDestroy {
     this.document.body.classList.add('backgroud-login');
   }
 
-  ShowClaimGest(){
-    this.ClaimGest = true;
-    this.BookingGest = false;
-    this.UserGest = false;
-    this.StatsGest = false;
-    this.SurveyGest = false;
-  }
 
   BackToSelectConsortium(){
     this.authService.RemoveCurrentConsortium().subscribe({

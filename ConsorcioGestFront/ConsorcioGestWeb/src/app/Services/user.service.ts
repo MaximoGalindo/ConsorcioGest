@@ -12,7 +12,7 @@ import { environment } from '../Helpers/Envriorment';
 })
 export class UserService {
 
-  baseUrl = `${environment.API_URL}/users`;
+  baseUrl = `${environment.API_URL}/users/`;
   constructor(private http:HttpClient) { }
 
   CreateUser(registerUserDTO: RegisterUserDTO): Observable<any> {

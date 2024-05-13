@@ -1,0 +1,40 @@
+.container{
+    height: 250px;
+    width: 370px;
+    background-color: #36CFA2;
+    border-radius: 10px;   
+    margin-right: 15px; 
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 15px 0 15px;
+    font-weight: 600;
+}
+h2{
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+.content{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h4{
+    margin: 0;
+}
+.content button{
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 12px;
+    width: 90%;
+    font-size: 20px;
+    margin: 10px;
+}

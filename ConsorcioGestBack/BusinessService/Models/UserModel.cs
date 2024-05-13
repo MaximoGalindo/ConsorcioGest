@@ -18,6 +18,7 @@ namespace BusinessService.Models
         public bool IsOwner { get; set; }
         public bool IsOcupant { get; set; }
         public int? IdCondominium { get; set; }
+        public string Condominio { get; set; }
         public ProfileModel Profile { get; set; } = null;
         public StateModel UserState { get; set; } = null;
         public int? IdDocumentType { get; set; }

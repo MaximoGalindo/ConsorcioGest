@@ -7,6 +7,7 @@ export class UserModel {
     isOwner: boolean = false;
     isOcupant: boolean = false;
     idCondominium?: number;
+    condominio:string = '';
     profile: ProfileModel = new ProfileModel();
     userState: StateModel = new StateModel();
     idDocumentType?: number;

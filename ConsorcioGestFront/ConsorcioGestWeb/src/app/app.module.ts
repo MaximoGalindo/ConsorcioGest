@@ -26,6 +26,8 @@ import { UserRegisterClaimComponent } from './Components/Claims/user-register-cl
 import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
 import { NavbarUserComponent } from './Components/navbar-user/navbar-user.component';
 import { FooterUserComponent } from './Components/footer-user/footer-user.component';
+import { MenuUserComponent } from './Components/menu-user/menu-user.component';
+import { ClaimsInfoComponent } from './Components/Claims/claims-info/claims-info.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { FooterUserComponent } from './Components/footer-user/footer-user.compon
     MainPageUserComponent,
     NavbarUserComponent,
     FooterUserComponent,
+    MenuUserComponent,
+    ClaimsInfoComponent
   ],
   imports: [
     BrowserModule,

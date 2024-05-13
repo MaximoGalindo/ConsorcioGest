@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace WebApi.Controllers
+namespace WebApi.Controllers.ClaimController
 {
     [Route("claims")]
     [ApiController]
@@ -21,21 +21,15 @@ namespace WebApi.Controllers
         }
         //PONERLE AUTHORIZE A TODOS
         [HttpPost("save-claim-user")]
-        public async Task<IActionResult> SaveClaim(SaveClaimDTO saveClaimDTO)
+        public async Task<IActionResult> SaveClaim([FromForm] SaveClaimDTO saveClaimDTO)
         {
             return Ok(claimsService.SaveClaim(saveClaimDTO));
-        }
-
-        [HttpPost("save-image/{idClaim}")]
-        public async Task<IActionResult> UploadImage([FromForm] List<IFormFile> files, int idClaim)
-        {
-            return Ok(claimsService.UploadImage(idClaim, files));           
         }
 
         [HttpGet("cause-claims-list")]
         public IActionResult GetCauseClaims()
         {
-            return Ok(claimsService.GetCauseClaims());  
+            return Ok(claimsService.GetCauseClaims());
         }
 
         [HttpGet("affected-space-list")]
@@ -43,6 +37,19 @@ namespace WebApi.Controllers
         {
             return Ok(claimsService.GetAffectedSpace());
         }
+
+        [HttpGet("get-claims-by-state/{idState}")]
+        public IActionResult GetClaimsByState(int idState)
+        {
+            return Ok(claimsService.GetAllClaimsByState(idState));
+        }
+
+        [HttpGet("get-claims-count-by-state")]
+        public IActionResult GetCountClaimsByState()
+        {
+            return Ok(claimsService.GetCountClaimsByState());
+        }
+
 
         /*[HttpGet("{id}")]
         public IActionResult ObtenerImagen(int id)
@@ -56,5 +63,5 @@ namespace WebApi.Controllers
             return File(imagen, "image/jpeg"); // Ajusta el tipo de contenido según el formato de tus imágenes
         }*/
 
-    }   
+    }
 }

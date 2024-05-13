@@ -46,5 +46,7 @@ export class SelectConsortiumComponent {
   addConsortium(){
     this.router.navigate(['/register-consortium'])     
   }
-
+  BackLogin(){
+    this.router.navigate(['/login'])     
+  }
 }

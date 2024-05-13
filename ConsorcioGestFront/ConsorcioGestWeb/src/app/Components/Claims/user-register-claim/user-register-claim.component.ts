@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClaimUserDTO } from 'src/app/Models/DTO/ClaimUserDTO';
 import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { ClaimService } from 'src/app/Services/claim.service';
@@ -12,12 +13,13 @@ import { ClaimService } from 'src/app/Services/claim.service';
 export class UserRegisterClaimComponent implements OnInit {
   imagenesSeleccionadas: File[] = [];
   claim:ClaimUserDTO = new ClaimUserDTO();
-
   causeClaim:ListItemDTO[] = [];
   affectedSpaces:ListItemDTO[] = [];
+  success:boolean = false;
+  claimNumber:string = "";
   constructor(
     private claimService:ClaimService,
-    private http: HttpClient
+    private router:Router
   ){
 
   }
@@ -29,43 +31,23 @@ export class UserRegisterClaimComponent implements OnInit {
       this.affectedSpaces = data;
     })
   }
-
-  //ARREGLAR ESTO PORQUE SE DEBE SUBIR TODO EN EL DTO DE RECLAMOS
   seleccionarImagen(event: any) {
     const archivosSeleccionados = event.target.files;
     for (let i = 0; i < archivosSeleccionados.length; i++) {
       this.imagenesSeleccionadas.push(archivosSeleccionados[i]);
     }
-    console.log(this.imagenesSeleccionadas);
-    
-    /*const archivoSeleccionado = event.target.files[0];
-    if (archivoSeleccionado) {
-      this.imagenesSeleccionadas = archivoSeleccionado;  
-      this.claimService.SaveImage(archivoSeleccionado)
-        .subscribe(
-          (response) => {
-            console.log('Imagen subida con éxito:', response);            
-          },
-          (error) => {
-            console.error('Error al subir la imagen:', error);
-          }
-        ); 
-    }*/
+    this.claim.Images = this.imagenesSeleccionadas;
   }
-   
-  /*obtenerImagen(id: number) {
-    this.claimService.GetImages(id)
-        .subscribe(
-            (imagen: Blob) => {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    this.imagenUrl = reader.result as string;
-                };
-                reader.readAsDataURL(imagen);
-            },
-            error => {
-                console.error('Error al obtener la imagen:', error);
-            }
-        );
-      }*/
+
+  Save(){
+    this.claimService.SaveClaim(this.claim).subscribe((data)=>{
+      this.claimNumber = data.result;
+      this.success = true;  
+    })
+  }
+  Continue(){
+    this.success = false;
+    this.router.navigate(['/main-page-user'])
+  }
+
 }

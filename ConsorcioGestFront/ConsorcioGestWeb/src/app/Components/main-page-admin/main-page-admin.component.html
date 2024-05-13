@@ -6,7 +6,7 @@
     <h4>Sistema de gestion de Consorcios</h4>
     <br>
     <div class="items">
-      <button style="margin-left: 30px;">
+      <button style="margin-left: 30px;" routerLink="/main-page-admin/claims-gest">
         <i class="fa-solid fa-circle-exclamation fa-2x" style="margin-right: 7px; color: black;"></i>
         Reclamos
       </button>    
@@ -18,7 +18,7 @@
       </button>    
     </div>
     <div class="items">
-      <button style="margin-left: 26px;">
+      <button style="margin-left: 26px;" routerLink="/main-page-admin/user-gest">
         <i class="fa-solid fa-users fa-2x" style="margin-right: 4px; color: black;"></i>
         Usuarios
       </button>    
@@ -51,18 +51,6 @@
   </div>
 
   <div class="content">
-    <app-users-gest></app-users-gest>
-  </div>
-  <div class="content" *ngIf="BookingGest">
-    
-  </div>
-  <div class="content" *ngIf="UserGest">
-    
-  </div>
-  <div class="content" *ngIf="StatsGest">
-   
-  </div>
-  <div class="content" *ngIf="SurveyGest">
-    
+    <router-outlet></router-outlet>
   </div>
 </div>

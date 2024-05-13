@@ -13,6 +13,7 @@ namespace BusinessService.DTO
         public int CauseClaimID { get; set; }
         public int AffectedSpaceID { get; set; }
         public string ProblemDetail { get; set; }
+        public List<IFormFile> Files { get; set; }
     }
 
     public class ImageDTO

@@ -21,20 +21,28 @@ namespace BusinessService.Services
             this._context = consorcioGestContext;   
         }
 
-        public int SaveClaim(SaveClaimDTO claim) 
+        public async Task<string> SaveClaim(SaveClaimDTO claim) 
         {
-            Reclamo reclamo = new Reclamo
+            try
             {
-                Fecha = DateTime.Now,
-                Comentario = claim.ProblemDetail,
-                IdUsuario = LoginService.CurrentUser.Id,
-                IdEstadoReclamo = (int)ClaimsStatesEnum.PENDING,
-                IdEspacioAfectado = claim.AffectedSpaceID,
-                IdCausaProblema = claim.CauseClaimID,
-                NroReclamo = GenerateClaimNumber()
-            };
-            var result = DBAdd(reclamo, _context);
-            return reclamo.Id;
+                Reclamo reclamo = new Reclamo
+                {
+                    Fecha = DateTime.Now,
+                    Comentario = claim.ProblemDetail,
+                    IdUsuario = LoginService.CurrentUser.Id,
+                    IdEstadoReclamo = (int)ClaimsStatesEnum.PENDING,
+                    IdEspacioAfectado = claim.AffectedSpaceID,
+                    IdCausaProblema = claim.CauseClaimID,
+                    NroReclamo = GenerateClaimNumber()
+                };
+                var result = DBAdd(reclamo, _context);
+                var result2 = await UploadImages(reclamo.Id, claim.Files);
+                return reclamo.NroReclamo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
@@ -47,7 +55,7 @@ namespace BusinessService.Services
         }
 
 
-        public async Task<bool> UploadImage(int idClaim, List<IFormFile> imageDTO)
+        private async Task<bool> UploadImages(int idClaim, List<IFormFile> imageDTO)
         {
             List<Imagene> images = new List<Imagene>();   
             using (var memoryStream = new MemoryStream())
@@ -86,6 +94,42 @@ namespace BusinessService.Services
                     ID = c.Id,
                     Name = c.Nombre
                 }).ToList();
+        }
+
+        public List<ClaimDTO> GetAllClaimsByState(int idState)
+        {
+            List<ClaimDTO> claimDTOs = _context.Reclamos
+                        .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id)
+                            && (idState != 0 ? c.IdEstadoReclamo == idState : true))
+                        .Select(c => new ClaimDTO
+                        {
+                            ClaimNumber = c.NroReclamo,
+                            StateId = c.IdEstadoReclamo,
+                            State = c.IdEstadoReclamoNavigation.Nombre,
+                            CauseClaimID = c.IdCausaProblema,
+                            CauseClaim = c.IdCausaProblemaNavigation.Nombre,
+                            Date = c.Fecha.ToString(),
+                            Condominium = c.IdUsuarioNavigation.IdCondominioNavigation.Torre + ' ' + c.IdUsuarioNavigation.IdCondominioNavigation.NumeroDepartamento,
+                            AffectedSpaceID = c.IdEspacioAfectado,
+                            AffectedSpace = c.IdEspacioAfectadoNavigation.Nombre,
+                            UserID = c.IdUsuario,
+                            ProblemDetail = c.Comentario
+                        }).ToList();
+            return claimDTOs;
+        }
+
+        public List<StatesClaimCountDTO> GetCountClaimsByState()
+        {
+            return _context.Reclamos
+                .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id))
+                .GroupBy(c => c.IdEstadoReclamo)
+                .Select(g => new StatesClaimCountDTO
+                {
+                    StateID = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+
         }
     }
 }

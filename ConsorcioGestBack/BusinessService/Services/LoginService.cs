@@ -105,6 +105,7 @@ namespace BusinessService.Services
                     var user = context.Usuarios
                         .Include(u => u.IdPerfilNavigation)
                         .Include(u => u.IdEstadoUsuarioNavigation)
+                        .Include(u => u.IdCondominioNavigation)
                         .Where(u => u.Documento == documentUser && u.Email == email)
                         .FirstOrDefault();
 
@@ -121,6 +122,7 @@ namespace BusinessService.Services
                             IsOwner = user.Espropietario != null ? true : false,
                             IsOcupant = user.Esinquilino != null ? true : false,
                             IdCondominium = user.IdCondominio,
+                            Condominio = user.IdCondominioNavigation != null ? user.IdCondominioNavigation.Torre + ' ' + user.IdCondominioNavigation.NumeroDepartamento : string.Empty,
                             IdDocumentType = user.IdTipoDocumento,
                             Profile = new ProfileModel { Id = user.IdPerfil.Value, Name = user.IdPerfilNavigation.Nombre },
                             UserState = new StateModel { Id = user.IdEstadoUsuario.Value, Name = user.IdEstadoUsuarioNavigation.Nombre },

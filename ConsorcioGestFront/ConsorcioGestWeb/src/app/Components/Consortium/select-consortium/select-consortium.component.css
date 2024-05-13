@@ -52,10 +52,15 @@ h1{
 }
 
 .consortiums-container{
-    margin-top: 30px;
-    margin-left: 40px;
-    margin-right: 40px;
+    height: 300px;
+    overflow-y: auto;
 }   
+
+.consortiums-container button{
+    margin-top: 30px;
+    margin: 10px 10px 10px 10px;
+    width: 400px;
+}
 
 .add-consortium{
     background-color: #F9BC60;
@@ -65,4 +70,13 @@ h1{
     border: none;
     cursor: pointer;
     margin-right: 15px;
+}
+
+.back-login{
+    background-color: #F9BC60;
+    border: none;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
 }
