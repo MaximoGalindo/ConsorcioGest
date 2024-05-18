@@ -14,8 +14,8 @@ body {
     background: #001E1D
 }
 
-h1{
-    margin: 0px;
+h1,h2,h3,h4,h5{
+    margin: 0;
 }
 
 .line {
@@ -75,9 +75,40 @@ select:hover {
     cursor: pointer;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+}
+
+
 @media screen and (max-width: 600px) {
     body{
         font-family: 'Doppio One', sans-serif;
     }
-   
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    ::-webkit-scrollbar-track-piece {
+        background-color: transparent;
+    }
 }

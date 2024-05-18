@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
   }
   SaveUser(data: UserModel) {
     var User = new UserModelDTO();
+    User.id = data.id
     User.condominium = data.condominio
     User.name = data.name + ' ' + data.lastName
     this.userSharedService.setUser(User);

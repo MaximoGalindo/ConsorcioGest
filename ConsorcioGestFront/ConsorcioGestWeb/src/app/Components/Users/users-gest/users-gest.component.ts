@@ -25,7 +25,6 @@ export class UsersGestComponent implements OnInit{
   }
 
   LoadUsers(){
-
     this.userService.GetUsers().subscribe({
       next: data => {
         if (data != null)
@@ -33,7 +32,6 @@ export class UsersGestComponent implements OnInit{
           console.log(this.users);        
       }
     }) 
-    
   }
 
   ActivateUser(userDocument:number){
@@ -71,5 +69,6 @@ export class UsersGestComponent implements OnInit{
 
   CloseModal(){
     this._ShowModalEditUser = false;
+    this.LoadUsers();
   }
 }

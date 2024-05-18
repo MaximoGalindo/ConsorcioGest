@@ -1,4 +1,5 @@
 export class UserModelDTO {
+    id:number = 0
     document: number = 0;
     name: string = '';
     condominium: string = '';

@@ -1,6 +1,6 @@
-.container{
+.container-info-claim{
     height: 250px;
-    width: 370px;
+    width: 350px;
     background-color: #36CFA2;
     border-radius: 10px;   
     margin-right: 15px; 
@@ -37,4 +37,19 @@ h4{
     width: 90%;
     font-size: 20px;
     margin: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .container-info-claim{
+        height: 10rem;
+        width: 20rem;
+        background-color: #36CFA2;
+        border-radius: 10px;   
+        margin-right: 0px; 
+    }    
+
+    .line{
+        width: 100%;
+    }
 }

@@ -14,7 +14,6 @@ import { UsersGestComponent } from './Components/Users/users-gest/users-gest.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditUserModalComponent } from './Components/Users/Modals/edit-user-modal/edit-user-modal.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SelectConsortiumComponent } from './Components/Consortium/select-consortium/select-consortium.component';
 import { CommonModule } from '@angular/common';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
@@ -22,12 +21,16 @@ import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 import { ShowConfigTowerComponent } from './Components/Consortium/Modals/show-config-tower/show-config-tower.component';
-import { UserRegisterClaimComponent } from './Components/Claims/user-register-claim/user-register-claim.component';
+import { UserRegisterClaimComponent } from './Components/Users/user-register-claim/user-register-claim.component';
 import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
 import { NavbarUserComponent } from './Components/navbar-user/navbar-user.component';
 import { FooterUserComponent } from './Components/footer-user/footer-user.component';
 import { MenuUserComponent } from './Components/menu-user/menu-user.component';
 import { ClaimsInfoComponent } from './Components/Claims/claims-info/claims-info.component';
+import { SeeMoreClaimComponent } from './Components/Claims/Modals/see-more-claim/see-more-claim.component';
+import { CarruselImagesModalComponent } from './Components/Claims/Modals/carrusel-images-modal/carrusel-images-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-tracking.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { ClaimsInfoComponent } from './Components/Claims/claims-info/claims-info
     NavbarUserComponent,
     FooterUserComponent,
     MenuUserComponent,
-    ClaimsInfoComponent
+    ClaimsInfoComponent,
+    SeeMoreClaimComponent,
+    CarruselImagesModalComponent,
+    ClaimTrackingComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +64,9 @@ import { ClaimsInfoComponent } from './Components/Claims/claims-info/claims-info
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    CommonModule,
     NgbModule,
-    CommonModule
+    NgbModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

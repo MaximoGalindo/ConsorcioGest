@@ -9,9 +9,11 @@ import { RegisterConsortiumComponent } from './Components/Consortium/register-co
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
 import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
-import { UserRegisterClaimComponent } from './Components/Claims/user-register-claim/user-register-claim.component';
+
 import { MenuUserComponent } from './Components/menu-user/menu-user.component';
 import { UsersGestComponent } from './Components/Users/users-gest/users-gest.component';
+import { UserRegisterClaimComponent } from './Components/Users/user-register-claim/user-register-claim.component';
+import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-tracking.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -26,7 +28,8 @@ const routes: Routes = [
   { path: 'main-page-user', component: MainPageUserComponent,
     children: [
       {path: '', component: MenuUserComponent}, 
-      {path: 'claim-user', component: UserRegisterClaimComponent}
+      {path: 'claim-user', component: UserRegisterClaimComponent},
+      {path: 'claim-traking', component: ClaimTrackingComponent}
     ]},
   { path: 'consortium', component: SelectConsortiumComponent},
   { path: 'register-consortium', 

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-claims">
     <div class="filter-container">
         <label for="">Causa de Reclamo</label>
         <select style="width: 120px; height: 30px;" class="custom-input">
@@ -29,39 +29,12 @@
                 <span class="number-inside">{{ totalClaims }}</span>
             </div>
         </button>
-       <!-- <button class="custom-button" (click)="ChangeState(1)">
-            <span class="left-text">Pendiente</span>
-            <div class="circle">
-                <span class="number-inside">{{}}</span>
-            </div>
-        </button>        
-        <button class="custom-button" (click)="ChangeState(2)">
-            <span class="left-text">En Progreso</span>
-            <div class="circle">
-                <span class="number-inside">10</span>
-            </div>
-        </button>     
-        <button class="custom-button" (click)="ChangeState(3)">
-            <span class="left-text">Cancelado</span>
-            <div class="circle">
-                <span class="number-inside">10</span>
-            </div>
-        </button>     
-        <button class="custom-button" (click)="ChangeState(4)">
-            <span class="left-text">Finalizado</span>
-            <div class="circle">
-                <span class="number-inside">10</span>
-            </div>
-        </button>     
-        <button class="custom-button" (click)="ChangeState(0)">
-            <span class="left-text">Todos</span>
-            <div class="circle">
-                <span class="number-inside">10</span>
-            </div>
-        </button>   -->
     </div>
-    <div class="info-container" >        
+    <div class="info-container">        
         <app-claims-info *ngFor="let claim of ClaimsList" [Claim]="claim"></app-claims-info>
     </div>
 </div>
+
+
+
 

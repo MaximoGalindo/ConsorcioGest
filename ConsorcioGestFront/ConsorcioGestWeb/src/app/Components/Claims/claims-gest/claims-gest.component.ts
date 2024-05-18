@@ -10,6 +10,8 @@ import { ClaimService } from 'src/app/Services/claim.service';
 })
 export class ClaimsGestComponent {
 
+  
+
   ClaimsList:ClaimDTO[] = [];
   idState:number = 0;
   statesCount: ClaimsCountByStatesDTO[] = [];

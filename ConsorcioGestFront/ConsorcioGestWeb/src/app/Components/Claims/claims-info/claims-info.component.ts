@@ -9,6 +9,17 @@ import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
 export class ClaimsInfoComponent {
 
   @Input() Claim:ClaimDTO = new ClaimDTO();
+  _ShowModal:boolean = false;
+  IsAdmin:boolean = false;
   ngOnInit(){
+  }
+
+
+  VerMas(){
+    this._ShowModal = true;
+  }
+
+  CloseModal(){
+    this._ShowModal = false;
   }
 }

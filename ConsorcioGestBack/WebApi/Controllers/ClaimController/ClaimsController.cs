@@ -23,7 +23,18 @@ namespace WebApi.Controllers.ClaimController
         [HttpPost("save-claim-user")]
         public async Task<IActionResult> SaveClaim([FromForm] SaveClaimDTO saveClaimDTO)
         {
-            return Ok(claimsService.SaveClaim(saveClaimDTO));
+            return Ok(claimsService.SaveClaimByUser(saveClaimDTO));
+        }
+        [HttpPost("save-claim-gestion")]
+        public async Task<IActionResult> SaveClaimGestion(SaveClaimGestionDTO saveClaimGestion)
+        {
+            return Ok(claimsService.SaveClaimGestion(saveClaimGestion));
+        }
+
+        [HttpGet("histoty-claim-list/{claimID}")]
+        public IActionResult GetHistoryClaim(int claimID)
+        {
+            return Ok(claimsService.GetHistoryClaim(claimID));
         }
 
         [HttpGet("cause-claims-list")]
@@ -36,6 +47,12 @@ namespace WebApi.Controllers.ClaimController
         public IActionResult GetAffectedSpace()
         {
             return Ok(claimsService.GetAffectedSpace());
+        }
+
+        [HttpGet("states-claims-list")]
+        public IActionResult GetStatesClaims()
+        {
+            return Ok(claimsService.GetStatesClaim());
         }
 
         [HttpGet("get-claims-by-state/{idState}")]
@@ -51,17 +68,17 @@ namespace WebApi.Controllers.ClaimController
         }
 
 
-        /*[HttpGet("{id}")]
-        public IActionResult ObtenerImagen(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetImagesByClaimID(int id)
         {
-            var imagen = consorcioGestContext.Imagenes.FirstOrDefault(i => i.Id == id);
-            if (imagen == null)
-            {
-                return NotFound("No se encontró ninguna imagen con el ID especificado.");
-            }
+            return Ok(claimsService.GetImagesByReclamoId(id));
+        }
 
-            return File(imagen, "image/jpeg"); // Ajusta el tipo de contenido según el formato de tus imágenes
-        }*/
+        [HttpGet("get-claims-by-user/{userID}")]
+        public IActionResult GetClaimsByUserID(int userID)
+        {
+            return Ok(claimsService.GetClaimsByUserID(userID));
+        }
 
     }
 }

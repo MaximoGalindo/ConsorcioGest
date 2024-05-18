@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/Services/storage.service';
 export class NavbarUserComponent {
   isMenuOpen: boolean = false;
   User:UserModelDTO = new UserModelDTO();
+  title:string = "Inicio";
   constructor(private router:Router,
    private SharedDataUser:UserDataSharedService
   ) {

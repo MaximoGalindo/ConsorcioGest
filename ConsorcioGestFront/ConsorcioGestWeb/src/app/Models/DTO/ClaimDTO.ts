@@ -1,4 +1,5 @@
 export class ClaimDTO {
+  public id: number = 0;
   public claimNumber: string = '';
   public stateId?: number;
   public state: string = '';

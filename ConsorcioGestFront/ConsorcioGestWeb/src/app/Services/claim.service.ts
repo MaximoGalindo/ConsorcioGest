@@ -7,6 +7,8 @@ import { environment } from '../Helpers/Envriorment';
 import { ClaimUserDTO } from '../Models/DTO/ClaimUserDTO';
 import { ClaimDTO } from '../Models/DTO/ClaimDTO';
 import { ClaimsCountByStatesDTO } from '../Models/DTO/ClaimsCountByStatesDTO';
+import { HistoryClaimDTO } from '../Models/DTO/HistoryClaimDTO';
+import { ClaimGestDTO } from '../Models/DTO/ClaimGestDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +18,8 @@ export class ClaimService {
   baseUrl =`${environment.API_URL}/claims/`;
   constructor(private http:HttpClient) { }
 
-  SaveImage(idClaim:number,images:File[]):Observable<any>{
-    const formData = new FormData();
-    for (let i = 0; i < images.length; i++) {
-      formData.append('archivos', images[i]);
-    }  
-    return this.http.post(`${this.baseUrl}save-image/${idClaim}`, formData);
-  }
-
   GetImages(idReclamo: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}${idReclamo}`, { responseType: 'blob' });
+    return this.http.get(`${this.baseUrl}${idReclamo}`);
   }
 
   GetCauseClaim(){
@@ -35,6 +29,27 @@ export class ClaimService {
   GetAffectedSpace(){
     return this.http.get<ListItemDTO[]>(this.baseUrl + 'affected-space-list')
   }
+
+  GetStatesClaim(){
+    return this.http.get<ListItemDTO[]>(this.baseUrl + 'states-claims-list')
+  }
+
+  GetHistoryClaim(claimID:number):Observable<HistoryClaimDTO[]> {
+    return this.http.get<HistoryClaimDTO[]>(this.baseUrl + `histoty-claim-list/${claimID}`)
+  }
+
+  GetAllClaimsByState(idState:number):Observable<ClaimDTO[]>{
+    return this.http.get<ClaimDTO[]>(this.baseUrl + 'get-claims-by-state/'+ idState)
+  }
+
+  GetClaimsByUserID(userID:number):Observable<ClaimDTO[]>{
+    return this.http.get<ClaimDTO[]>(this.baseUrl + 'get-claims-by-user/'+ userID)
+  }
+
+  GetCountClaimsByState():Observable<ClaimsCountByStatesDTO[]>{
+    return this.http.get<ClaimsCountByStatesDTO[]>(this.baseUrl + 'get-claims-count-by-state')
+  }
+
 
   SaveClaim(Claim:ClaimUserDTO):Observable<any>{
     const formData = new FormData();
@@ -48,11 +63,8 @@ export class ClaimService {
     return this.http.post<any>(this.baseUrl + 'save-claim-user', formData)
   }
 
-  GetAllClaimsByState(idState:number):Observable<ClaimDTO[]>{
-    return this.http.get<ClaimDTO[]>(this.baseUrl + 'get-claims-by-state/'+ idState)
+  SaveClaimGestion(SaveClaimGest:ClaimGestDTO):Observable<any>{
+    return this.http.post<any>(this.baseUrl + 'save-claim-gestion', SaveClaimGest)  
   }
 
-  GetCountClaimsByState():Observable<ClaimsCountByStatesDTO[]>{
-    return this.http.get<ClaimsCountByStatesDTO[]>(this.baseUrl + 'get-claims-count-by-state')
-  }
 }

@@ -1,10 +1,12 @@
-<div class="container">
-    <div class="menu-toggle" (click)="toggleMenu()">
-        <div class="menu-icon"></div>
-        <div class="menu-icon"></div>
-        <div class="menu-icon"></div>
-    </div>
-    <div class="inicio">Inicio</div>
+<div class="container-navbar">
+    <div class="menu-flex">
+        <div class="menu-toggle" (click)="toggleMenu()">
+            <div class="menu-icon"></div>
+            <div class="menu-icon"></div>
+            <div class="menu-icon"></div>
+        </div>
+        <div class="title">{{title}}</div>
+    </div>    
     <div class="menu" [class.active]="isMenuOpen" (click)="closeMenu($event)">
         <div class="menu-content">
             <h1>Consorcio Gest</h1>
@@ -18,15 +20,15 @@
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
                 Cuenta
             </button>
-            <button routerLink="/main-page-user/claim-user">
+            <button (click)="title = 'Realizar Reclamo'" routerLink="/main-page-user/claim-user">
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
                 Realizar Reclamos
             </button>
-            <button>
+            <button (click)="title = 'Seguimiento de Reclamo'" routerLink="/main-page-user/claim-traking">
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
                 Seguimiento de Reclamo
             </button>
-            <button>
+            <button (click)="title = 'Reservas'">
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
                 Reservas
             </button>

@@ -16,8 +16,19 @@ namespace BusinessService.DTO
         public List<IFormFile> Files { get; set; }
     }
 
-    public class ImageDTO
+    public class ImagesDTO
     {
-        public IFormFile File { get; set; }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string DatosImagen { get; set; }
+        public int IdReclamo { get; set; }
     }
+
+    public class SaveClaimGestionDTO 
+    {
+        public int IdClaim { get; set; }
+        public string Observation {  get; set; }
+        public int StateSelectedID { get; set; }
+    }
+
 }

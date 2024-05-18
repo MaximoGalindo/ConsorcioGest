@@ -8,6 +8,7 @@ namespace BusinessService.DTO
 {
     public class ClaimDTO
     {
+        public int Id { get; set; }
         public string ClaimNumber { get; set; }
         public int? StateId { get; set; }
         public string State { get; set;}
@@ -19,5 +20,13 @@ namespace BusinessService.DTO
         public string AffectedSpace { get; set; }
         public int? UserID { get; set; }
         public string ProblemDetail { get; set; }
+    }
+
+    public class HistoryClaimDTO
+    {
+        public int IdClaim { get; set; }
+        public string Observation {  get; set; }
+        public string Date { get; set; }
+        public string State { get; set; }
     }
 }

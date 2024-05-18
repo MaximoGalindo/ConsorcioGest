@@ -3,6 +3,7 @@
     align-items: center;
     width: 100%;
     margin-top: 30px;
+    font-size: 13px;
 }
 
 .filter-container 
@@ -12,7 +13,7 @@ button {
     border-radius: 10px;
     padding: 10px 12px;
     color: black;
-    font-size: 14px;
+    font-size: 1em;
     cursor: pointer;
     font-weight: 400;   
 }
@@ -26,25 +27,25 @@ label{
     margin-right: 10px;
     margin-left: 10px;
 }
-.container{
+.container-claims{
     margin: 10px;
 }
 
 .states-container{
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 15px;
     display: flex;
 }
 
 .custom-button {
-    width: 180px; 
+    width: 160px; 
     height: 40px; 
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px; 
     border: none;
-    font-size: 20px;
+    font-size: 1.3em;
     font-weight: 600;
     background-color: #005F5B; 
     color: white; 
@@ -82,15 +83,14 @@ label{
     flex-wrap: wrap;
     max-width: 1200px;
     width: 100%;
-    height: 520px;
+    height: 460px;
     overflow-y: auto;
-    margin-left: 50px;
-    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .app-claims-info {
     width: calc(33.33% - 20px); 
-    margin-right: 20px;
+    margin-right: 0;
     margin-bottom: 20px; 
 }
 
@@ -110,3 +110,6 @@ label{
 .info-container::-webkit-scrollbar-track-piece {
     background-color: transparent;
 }
+
+
+

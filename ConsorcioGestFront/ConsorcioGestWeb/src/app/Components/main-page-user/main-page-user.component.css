@@ -1,12 +1,14 @@
-.container {
-    display: flex;
-    height: 100vh;
-    position: relative;
-    flex-direction: column;
-  }
+.main-container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+  flex-direction: column;
+}
+
 .navbar {
   width: 100%;
 }
+
 .footer {
   width: 100%;
   position: absolute;

@@ -1,0 +1,12 @@
+<div class="modal-container" *ngIf="_ShowModal">
+    <div class="modal-content">
+        <span class="close" (click)="CloseModal()">&times;</span>
+        <ngb-carousel *ngIf="Images.length">
+            <ng-template ngbSlide *ngFor="let imagen of Images; let i = index">
+                <div class="picsum-img-wrapper">
+                    <img [src]="'data:image/jpeg;base64,' + imagen.datosImagen" [alt]="imagen.nombre" class="d-block w-100">
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
+</div>

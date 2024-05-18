@@ -1,0 +1,47 @@
+<div class="modal-container" *ngIf="_ShowModal" >
+    <div class="modal-content">
+        <span class="close" (click)="CloseModal()">&times;</span>
+        <div>
+            <h1>Nro Relcamo: 000001</h1>
+            <div class="line"></div>
+            <div class="container-see-more">
+                <h3>Causa del Reclamo</h3>
+                <h3>{{Claim.causeClaim}}</h3>
+            </div>        
+            <div class="container-see-more">
+                <h3>Departamento:</h3>
+                <h3>{{Claim.condominium}}</h3>
+                <button class="see-images" (click)="SeeImages()">Ver Imagenes</button>
+            </div>
+            
+            <div class="container-see-more">
+                <h3>Detalle del Problema</h3>
+                <textarea name="" id="" rows="5" cols="50" disabled [value]="Claim.problemDetail"></textarea>    
+            </div>                
+            <!-- <div class="historial">
+                <h3>Historial</h3>
+                <h5>Fecha: 01/01/2020 22:00 Estado: Pendiente</h5>
+                <h5 class="observacion">Observacion: cacascccascascascasckascnkasmcnaskc askc as caskcnaksncncasncjsancasckjnscjkasncjakcnasjcnacjnakcnasjcnsajcnascnkasnc</h5>
+            </div> -->
+            <div class="container-see-more">
+                <h3>Observacion</h3>
+                <textarea name="" id="" rows="5" cols="50" [(ngModel)]="saveClaimGest.Observation"></textarea>    
+            </div>
+            <div class="container-see-more">
+                <h3>Estado</h3>
+                <select class="custom-input" [(ngModel)]="saveClaimGest.StateSelectedID">
+                    <option *ngFor="let state of statesClaim" [value]="state.id">{{state.name}}</option>                
+                </select>
+                <button (click)="SaveClaimGestion()">Guardar</button>
+            </div>
+        </div>      
+        
+    </div>
+</div>
+
+
+<app-carrusel-images-modal
+    *ngIf="ShowCarrusel"
+    (_ShowModal)="CloseCarrusel()"
+    [Images]="images"
+></app-carrusel-images-modal>
