@@ -106,6 +106,7 @@ namespace BusinessService.Services
                         .Include(u => u.IdPerfilNavigation)
                         .Include(u => u.IdEstadoUsuarioNavigation)
                         .Include(u => u.IdCondominioNavigation)
+                        .Include(u => u.ConsorcioUsuarios)
                         .Where(u => u.Documento == documentUser && u.Email == email)
                         .FirstOrDefault();
 
@@ -121,6 +122,7 @@ namespace BusinessService.Services
                             Email = user.Email,
                             IsOwner = user.Espropietario != null ? true : false,
                             IsOcupant = user.Esinquilino != null ? true : false,
+                            ConsortiumID = user.ConsorcioUsuarios.Where(cu => cu.IdUsuario == user.Id).Select(cu => cu.IdConsorcio).FirstOrDefault(),
                             IdCondominium = user.IdCondominio,
                             Condominio = user.IdCondominioNavigation != null ? user.IdCondominioNavigation.Torre + ' ' + user.IdCondominioNavigation.NumeroDepartamento : string.Empty,
                             IdDocumentType = user.IdTipoDocumento,

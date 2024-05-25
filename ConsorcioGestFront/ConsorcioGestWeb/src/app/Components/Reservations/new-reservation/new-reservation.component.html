@@ -1,0 +1,47 @@
+<!-- <ngb-datepicker #dp [(ngModel)]="model" [minDate]="minDate" [dayTemplate]="customDay"
+
+#d="ngbDatepicker" />
+<pre>Model: {{ model | json }}</pre>
+
+<ng-template
+	#customDay
+	let-date
+	let-currentMonth="currentMonth"
+	let-selected="selected"
+	let-disabled="disabled"
+	let-focused="focused"
+>
+	<span
+		class="custom-day"
+		[class.weekend]="isWeekend(date)"
+		[class.focused]="focused"
+		[class.bg-primary]="selected"
+		[class.hidden]="date.month !== currentMonth"
+		[class.text-muted]="disabled"
+	>
+		{{ date.day }}
+	</span>
+</ng-template> -->
+
+<div class="total-container" *ngIf="!ShowSchedules">
+	<div class="datepicker-container">
+		<ngb-datepicker #dp [(ngModel)]="model" [minDate]="minDate" #d="ngbDatepicker" />
+	</div>
+	<div>
+		<button (click)="Next()">Siguente</button>
+	</div>
+</div>
+
+
+<div class="total-container" *ngIf="ShowSchedules">
+	<div class="rectangule" *ngFor="let item of schedules; let i = index" >
+		<div class="time-slot">
+			<input type="checkbox" [id]="'time' + i" [disabled]="item.available"/>
+			<label [for]="'time' + i">{{item.hour}}</label>
+		</div>
+	</div>
+	<div>
+		<button (click)="Back()">Volver</button>
+	</div>
+</div>
+	

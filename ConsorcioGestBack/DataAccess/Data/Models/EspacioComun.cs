@@ -9,13 +9,5 @@ public partial class EspacioComun
 
     public string? Nombre { get; set; }
 
-    public string? HoraDesde { get; set; }
-
-    public string? HoraHasta { get; set; }
-
-    public int? IdConsorcio { get; set; }
-
-    public virtual Consorcio? IdConsorcioNavigation { get; set; }
-
-    public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();
+    public virtual ICollection<EspacioComunConsorcio> EspacioComunConsorcios { get; set; } = new List<EspacioComunConsorcio>();
 }

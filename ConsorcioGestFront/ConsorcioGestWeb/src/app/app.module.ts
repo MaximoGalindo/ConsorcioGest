@@ -31,6 +31,9 @@ import { SeeMoreClaimComponent } from './Components/Claims/Modals/see-more-claim
 import { CarruselImagesModalComponent } from './Components/Claims/Modals/carrusel-images-modal/carrusel-images-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-tracking.component';
+import { NewReservationComponent } from './Components/Reservations/new-reservation/new-reservation.component';
+import { ReservationCommonSpacesComponent } from './Components/Reservations/reservation-common-spaces/reservation-common-spaces.component';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-
     ClaimsInfoComponent,
     SeeMoreClaimComponent,
     CarruselImagesModalComponent,
-    ClaimTrackingComponent
+    ClaimTrackingComponent,
+    NewReservationComponent,
+    ReservationCommonSpacesComponent
   ],
   imports: [
     BrowserModule,

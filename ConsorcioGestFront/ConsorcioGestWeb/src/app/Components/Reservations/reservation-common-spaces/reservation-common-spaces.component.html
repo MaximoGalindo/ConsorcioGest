@@ -1,0 +1,8 @@
+<div class="total-container">
+	<div *ngFor="let space of commonSpaces" class="rectangule">
+		<h2>{{space.commonSpaceName}}</h2>
+		<div class="line"></div>
+		<h3 style="margin-top: 0.5rem;">Horario: {{space.hourFrom}}hs - {{space.hourTo}}hs</h3>
+		<button (click)="ReserveSpace(space)">Reservar</button>
+	</div>
+</div>

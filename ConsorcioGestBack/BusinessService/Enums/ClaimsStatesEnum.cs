@@ -13,4 +13,19 @@ namespace BusinessService.Enums
         CANCELLED = 3,
         FINISHED = 4,
     }
+
+    public enum UserStatesEnum
+    {
+        Habilitado = 1,
+        Deshabilitado = 2,
+        PendienteDeAprobacion = 3,
+        Rechazado = 4
+    }
+    
+    public enum ReservationsStatesEnum
+    {
+        RESERVATED = 1,
+        CANCELLED = 2,
+        FINISHED = 3
+    }
 }

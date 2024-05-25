@@ -1,5 +1,6 @@
 ﻿using BusinessService.DTO;
 using BusinessService.Services;
+using BusinessService.Templates;
 using DataAccess.Data;
 using DataAccess.Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,9 +16,11 @@ namespace WebApi.Controllers.ClaimController
     public class ClaimsController : ControllerBase
     {
         private readonly ClaimsService claimsService;
-        public ClaimsController(ClaimsService claimsService)
+        private readonly EmailService emailService;
+        public ClaimsController(ClaimsService claimsService, EmailService emailService)
         {
             this.claimsService = claimsService;
+            this.emailService = emailService;
         }
         //PONERLE AUTHORIZE A TODOS
         [HttpPost("save-claim-user")]
@@ -78,6 +81,15 @@ namespace WebApi.Controllers.ClaimController
         public IActionResult GetClaimsByUserID(int userID)
         {
             return Ok(claimsService.GetClaimsByUserID(userID));
+        }
+
+        [HttpPost("send")]
+        public async Task<IActionResult> SendEmail(string to)
+        {
+            string claimNumber = "12345";
+            string claimEmailBody = EmailTemplateService.GetTemplate("EmialComplaintReceived", ("claimNumber", claimNumber));
+            await emailService.SendEmailAsync(to, "Reclamo Recibido", claimEmailBody);
+            return Ok("Correo Enviado");
         }
 
     }

@@ -24,5 +24,6 @@ namespace BusinessService.Models
         public int? IdDocumentType { get; set; }
         public int Document { get; set; }
         public string Token { get; set; }
+        public int ConsortiumID { get; set; }
     }
 }

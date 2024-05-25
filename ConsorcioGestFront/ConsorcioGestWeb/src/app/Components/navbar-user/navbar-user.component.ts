@@ -20,9 +20,9 @@ export class NavbarUserComponent {
   }
 
   ngOnInit(){
-    this.SharedDataUser.User$.subscribe((data)=>{
+   /* this.SharedDataUser.User$.subscribe((data)=>{
       this.User = data;
-    })     
+    })     */
   }
 
   toggleMenu() {

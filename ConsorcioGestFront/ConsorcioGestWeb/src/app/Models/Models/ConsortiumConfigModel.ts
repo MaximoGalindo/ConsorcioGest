@@ -41,6 +41,15 @@ export class CommonSpaces {
   }
   
 }
+export class CommonSpacesModel {
+  id: number = 0;
+  userLimit: number = 0;
+  hourFrom: string = '';
+  hourTo: string = '';
+  numberReservationsAvailable: number = 0;
+  commonSpaceID: number = 0;
+  commonSpaceName: string = '';
+}
 
 
 export class FloorDeparmentDTO{

@@ -1,3 +1,4 @@
+using BusinessService.Models;
 using BusinessService.Services;
 using BusinessService.Services.BaseService;
 using BusinessService.Services.Consortium;
@@ -52,6 +53,9 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ConsortiumService>();
 builder.Services.AddScoped<ConsortiumGenerateLogicService>();
 builder.Services.AddScoped<ClaimsService>();
+builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<ReservationsService>();
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 
 builder.Services.AddSwaggerGen(c =>

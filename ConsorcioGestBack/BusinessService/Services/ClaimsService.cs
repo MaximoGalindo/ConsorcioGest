@@ -11,15 +11,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using BusinessService.Resourses;
+using BusinessService.Templates;
 
 namespace BusinessService.Services
 {
     public class ClaimsService : BaseService<Reclamo>
     {
         public readonly ConsorcioGestContext _context;
-        public ClaimsService(ConsorcioGestContext consorcioGestContext)
+        private readonly EmailService emailService;
+        public ClaimsService(
+            ConsorcioGestContext consorcioGestContext,
+            EmailService emailService)
         {
             this._context = consorcioGestContext;
+            this.emailService = emailService;
         }
 
         public async Task<bool> SaveClaimGestion(SaveClaimGestionDTO saveClaimGestionDTO)
@@ -63,6 +69,10 @@ namespace BusinessService.Services
                 };
                 var result = DBAdd(reclamo, _context);
                 var result2 = await UploadImages(reclamo.Id, claim.Files);
+
+                string template = GlobalResourses.TemplateComplaintReceived;
+
+               
                 return reclamo.NroReclamo;
             }
             catch (Exception ex)

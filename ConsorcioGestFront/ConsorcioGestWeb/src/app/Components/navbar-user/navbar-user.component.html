@@ -13,8 +13,8 @@
             <div class="line"></div>
             <h4>Sistema de gestion de Consorcios</h4>
             
-            <h3>{{User.name}}</h3>
-            <h3>Condominio: {{User.condominium}}</h3>
+            <h3><!--{{User.name}}--></h3>
+            <h3>Condominio: <!--{{User.condominium}}--></h3>
             <div class="line" style="margin-top: 30px; width:250px;"></div>
             <button>
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
@@ -28,7 +28,7 @@
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
                 Seguimiento de Reclamo
             </button>
-            <button (click)="title = 'Reservas'">
+            <button (click)="title = 'Reservas'" routerLink="/main-page-user/reservation-common-spaces">
                 <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
                 Reservas
             </button>

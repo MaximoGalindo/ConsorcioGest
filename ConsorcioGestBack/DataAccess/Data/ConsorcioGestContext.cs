@@ -36,6 +36,8 @@ public partial class ConsorcioGestContext : DbContext
 
     public virtual DbSet<EspacioComun> EspacioComuns { get; set; }
 
+    public virtual DbSet<EspacioComunConsorcio> EspacioComunConsorcios { get; set; }
+
     public virtual DbSet<EstadoEncuestum> EstadoEncuesta { get; set; }
 
     public virtual DbSet<EstadoReclamo> EstadoReclamos { get; set; }
@@ -257,6 +259,18 @@ public partial class ConsorcioGestContext : DbContext
             entity.ToTable("ESPACIO_COMUN");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("NOMBRE");
+        });
+
+        modelBuilder.Entity<EspacioComunConsorcio>(entity =>
+        {
+            entity.ToTable("ESPACIO_COMUN_CONSORCIO");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CantidadReservasDisponibles).HasColumnName("CANTIDAD_RESERVAS_DISPONIBLES");
             entity.Property(e => e.HoraDesde)
                 .HasMaxLength(5)
                 .IsUnicode(false)
@@ -266,14 +280,18 @@ public partial class ConsorcioGestContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("HORA_HASTA");
             entity.Property(e => e.IdConsorcio).HasColumnName("ID_CONSORCIO");
-            entity.Property(e => e.Nombre)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("NOMBRE");
+            entity.Property(e => e.IdEspacioComun).HasColumnName("ID_ESPACIO_COMUN");
+            entity.Property(e => e.LimiteUsuarios).HasColumnName("LIMITE_USUARIOS");
 
-            entity.HasOne(d => d.IdConsorcioNavigation).WithMany(p => p.EspacioComuns)
+            entity.HasOne(d => d.IdConsorcioNavigation).WithMany(p => p.EspacioComunConsorcios)
                 .HasForeignKey(d => d.IdConsorcio)
-                .HasConstraintName("FK_ESPACIOCOMUN_CONSORCIO");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ESPACIO_COMUN_CONSORCIO_CONSORCIO");
+
+            entity.HasOne(d => d.IdEspacioComunNavigation).WithMany(p => p.EspacioComunConsorcios)
+                .HasForeignKey(d => d.IdEspacioComun)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ESPACIO_COMUN_CONSORCIO");
         });
 
         modelBuilder.Entity<EstadoEncuestum>(entity =>
@@ -465,24 +483,28 @@ public partial class ConsorcioGestContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("HORA_HASTA");
             entity.Property(e => e.IdConsorcio).HasColumnName("ID_CONSORCIO");
-            entity.Property(e => e.IdEspacioComun).HasColumnName("ID_ESPACIO_COMUN");
+            entity.Property(e => e.IdEspacioComunConsorcio).HasColumnName("ID_ESPACIO_COMUN_CONSORCIO");
             entity.Property(e => e.IdEstadoReserva).HasColumnName("ID_ESTADO_RESERVA");
             entity.Property(e => e.IdUsuario).HasColumnName("ID_USUARIO");
 
             entity.HasOne(d => d.IdConsorcioNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdConsorcio)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RESERVAS_CONSORCIO");
 
-            entity.HasOne(d => d.IdEspacioComunNavigation).WithMany(p => p.Reservas)
-                .HasForeignKey(d => d.IdEspacioComun)
-                .HasConstraintName("FK_RESERVAS_ESPACIOCOMUN");
+            entity.HasOne(d => d.IdEspacioComunConsorcioNavigation).WithMany(p => p.Reservas)
+                .HasForeignKey(d => d.IdEspacioComunConsorcio)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RESERVAS_ESPACIOCOMUNCONSORCIO");
 
             entity.HasOne(d => d.IdEstadoReservaNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdEstadoReserva)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RESERVAS_ESTADORESERVA");
 
             entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.Reservas)
                 .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RESERVAS_USUARIOS");
         });
 

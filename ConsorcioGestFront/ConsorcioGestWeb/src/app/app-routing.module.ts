@@ -14,6 +14,8 @@ import { MenuUserComponent } from './Components/menu-user/menu-user.component';
 import { UsersGestComponent } from './Components/Users/users-gest/users-gest.component';
 import { UserRegisterClaimComponent } from './Components/Users/user-register-claim/user-register-claim.component';
 import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-tracking.component';
+import { NewReservationComponent } from './Components/Reservations/new-reservation/new-reservation.component';
+import { ReservationCommonSpacesComponent } from './Components/Reservations/reservation-common-spaces/reservation-common-spaces.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -29,7 +31,9 @@ const routes: Routes = [
     children: [
       {path: '', component: MenuUserComponent}, 
       {path: 'claim-user', component: UserRegisterClaimComponent},
-      {path: 'claim-traking', component: ClaimTrackingComponent}
+      {path: 'claim-traking', component: ClaimTrackingComponent},
+      {path: 'reservation-common-spaces', component: ReservationCommonSpacesComponent},
+      {path: 'reservation-user/:commonSpaceID',component: NewReservationComponent}
     ]},
   { path: 'consortium', component: SelectConsortiumComponent},
   { path: 'register-consortium', 
