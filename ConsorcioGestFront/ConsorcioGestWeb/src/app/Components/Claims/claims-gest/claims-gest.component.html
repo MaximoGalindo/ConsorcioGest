@@ -31,7 +31,7 @@
         </button>
     </div>
     <div class="info-container">        
-        <app-claims-info *ngFor="let claim of ClaimsList" [Claim]="claim"></app-claims-info>
+        <app-claims-info *ngFor="let claim of ClaimsList" [Claim]="claim" [IsAdmin]="true" (_Reaload)="Reload()"></app-claims-info>
     </div>
 </div>
 

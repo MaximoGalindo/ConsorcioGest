@@ -16,24 +16,30 @@ export class ClaimsGestComponent {
   idState:number = 0;
   statesCount: ClaimsCountByStatesDTO[] = [];
   totalClaims: number = 0;
+  selectedState:number = 0;
   constructor(private claimService:ClaimService){
 
   }
 
   ChangeState(idState:number){
-    this.claimService.GetAllClaimsByState(idState).subscribe((data)=>{
-      console.log(data);
-      
+    this.claimService.GetAllClaimsByState(idState).subscribe((data)=>{     
       this.ClaimsList = data;
+      this.selectedState = idState
     })
   }
   ngOnInit(): void {
-    this.claimService.GetAllClaimsByState(0).subscribe((data)=>{
+    this.GetAllClaimsByState(0);
+    this.GetCountClaimsByState();
+  }
+
+  GetAllClaimsByState(idState:number){
+    this.claimService.GetAllClaimsByState(idState).subscribe((data)=>{      
       this.ClaimsList = data;
     })
+  }
+
+  GetCountClaimsByState(){
     this.claimService.GetCountClaimsByState().subscribe((data)=>{
-      console.log(data);
-      
       this.statesCount = data;
       this.totalClaims = this.statesCount.reduce((total, state) => total + state.count, 0);
     })
@@ -45,6 +51,11 @@ export class ClaimsGestComponent {
     if(stateID == 3) return 'Cancelado';
     if(stateID == 4) return 'Finalizado';
     return '';
+  }
+
+  Reload(){
+    this.GetAllClaimsByState(this.selectedState != null? this.selectedState : 0);
+    this.GetCountClaimsByState();
   }
 
 }

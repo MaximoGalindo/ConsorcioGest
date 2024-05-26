@@ -8,6 +8,7 @@ namespace BusinessService.DTO
 {
     public class ReservationDTO
     {
+        public string Date { get; set; }
         public string HourFrom { get; set; }
         public string HourTo { get; set; }
         public int CommonSpaceConsortiumID { get; set; }

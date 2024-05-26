@@ -44,12 +44,14 @@ namespace BusinessService.Services
 
         public async Task<bool> SaveReservation(ReservationDTO reservationDTO)
         {
+            DateTime dateTime = DateTime.Parse(reservationDTO.Date);
+
             Reserva reserva = new Reserva
             {
                 IdUsuario = LoginService.CurrentUser.Id,
                 HoraDesde = reservationDTO.HourFrom,
                 HoraHasta = reservationDTO.HourTo,
-                Fecha = DateTime.Now,
+                Fecha = dateTime,
                 IdEstadoReserva = (int)ReservationsStatesEnum.RESERVATED,
                 IdEspacioComunConsorcio = reservationDTO.CommonSpaceConsortiumID,
                 IdConsorcio = LoginService.CurrentUser.ConsortiumID                
@@ -66,7 +68,7 @@ namespace BusinessService.Services
             DateTime dateTime = DateTime.Parse(date);
 
             var commonSpace = _context.EspacioComunConsorcios
-                .Where(e => e.Id == commonSpaceID && e.IdConsorcio == 6 /*LoginService.CurrentUser.ConsortiumID*/)
+                .Where(e => e.Id == commonSpaceID && e.IdConsorcio == LoginService.CurrentUser.ConsortiumID)
                 .Select(e => new
                 {
                     e.HoraDesde,
@@ -78,7 +80,7 @@ namespace BusinessService.Services
             List<string> schedulesAvailable = GetHourlyIntervals(commonSpace.HoraDesde, commonSpace.HoraHasta);
 
             var reservations = _context.Reservas
-                .Where(r => r.Fecha == dateTime && r.IdConsorcio == 6)
+                .Where(r => r.Fecha == dateTime && r.IdConsorcio == LoginService.CurrentUser.ConsortiumID)
                 .Select(r => new
                 {
                     r.HoraDesde,

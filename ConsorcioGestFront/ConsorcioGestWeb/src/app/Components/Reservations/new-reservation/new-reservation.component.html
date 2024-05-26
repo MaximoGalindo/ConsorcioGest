@@ -27,21 +27,28 @@
 	<div class="datepicker-container">
 		<ngb-datepicker #dp [(ngModel)]="model" [minDate]="minDate" #d="ngbDatepicker" />
 	</div>
-	<div>
+	<div class="container-buttons">
+		<button class="back-button" (click)="ToCommonSpaces()">Volver</button>
 		<button (click)="Next()">Siguente</button>
 	</div>
 </div>
 
 
 <div class="total-container" *ngIf="ShowSchedules">
-	<div class="rectangule" *ngFor="let item of schedules; let i = index" >
-		<div class="time-slot">
-			<input type="checkbox" [id]="'time' + i" [disabled]="item.available"/>
-			<label [for]="'time' + i">{{item.hour}}</label>
+	<h2 style="margin: 0;">Elegi un horario</h2>
+	<h2>Fecha: {{model}}</h2>
+	<div class="schedules">
+		<div class="rectangule" *ngFor="let item of schedules; let i = index" >
+			<div class="time-slot">
+				<input type="checkbox" [id]="'time' + i" [disabled]="!item.available" 
+				[(ngModel)]="item.selected" (change)="onCheckboxChange(item.hour, item.selected)"/>
+				<label [for]="'time' + i">{{item.hour}}</label>
+			</div>
 		</div>
 	</div>
-	<div>
-		<button (click)="Back()">Volver</button>
+	<div class="container-buttons">
+		<button class="back-button" (click)="Back()">Volver</button>
+		<button (click)="Save()">Reservar</button>
 	</div>
 </div>
 	

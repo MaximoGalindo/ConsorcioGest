@@ -24,6 +24,11 @@
     gap: 10px;
 }
 
+.schedules{
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
 .time-slot {
     display: flex;
     align-items: center;
@@ -31,6 +36,8 @@
     border-radius: 10px;
     padding: 15px 20px;
     width: 15rem;
+    margin: 0.5rem;
+    
 }
 
 .time-slot input[type="checkbox"] {
@@ -42,6 +49,16 @@
     font-size: 2rem;
     color: black;
     margin-left: 3rem;
+}
+
+.container-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.back-button{
+    background-color:#005F5B;
 }
 
 .red-date .ngb-dp-day.red {

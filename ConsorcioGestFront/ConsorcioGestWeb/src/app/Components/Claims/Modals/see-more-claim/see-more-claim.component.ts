@@ -12,6 +12,7 @@ import { ClaimService } from 'src/app/Services/claim.service';
 export class SeeMoreClaimComponent implements OnInit{
 
   @Output() _ShowModal = new EventEmitter<boolean>();
+  @Output() _Reaload = new EventEmitter<boolean>();
 
   @Input() Claim:ClaimDTO = new ClaimDTO();
 
@@ -51,6 +52,7 @@ export class SeeMoreClaimComponent implements OnInit{
     this.saveClaimGest.IdClaim = this.Claim.id
     this.claimService.SaveClaimGestion(this.saveClaimGest).subscribe((data)=>{
       this._ShowModal.emit(false);
+      this._Reaload.emit(true);
     })   
   }
 }

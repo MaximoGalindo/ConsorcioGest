@@ -6,7 +6,7 @@
     <div class="line"></div>
     <div class="content">
         <h4>Causa del Problema:</h4>
-        <h4>{{Claim.causeClaim}}</h4>
+        <h4 class="weight">{{Claim.causeClaim}}</h4>
         <h4>Fecha: {{Claim.date}}</h4>
         <h4 *ngIf="IsAdmin">Condominio: {{Claim.condominium}}</h4>
         <h4>Espacio Afectado: {{Claim.affectedSpace}}</h4>
@@ -17,5 +17,6 @@
 <app-see-more-claim
     *ngIf="_ShowModal"
     (_ShowModal)="CloseModal()"
+    (_Reaload)="Reaload()"
     [Claim]="Claim"
 ></app-see-more-claim>

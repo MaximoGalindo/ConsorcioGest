@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
 
 @Component({
@@ -8,9 +8,11 @@ import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
 })
 export class ClaimsInfoComponent {
 
+  @Output() _Reaload: EventEmitter<boolean> = new EventEmitter<boolean>(); 
+
   @Input() Claim:ClaimDTO = new ClaimDTO();
   _ShowModal:boolean = false;
-  IsAdmin:boolean = false;
+  @Input() IsAdmin:boolean = false;
   ngOnInit(){
   }
 
@@ -21,5 +23,9 @@ export class ClaimsInfoComponent {
 
   CloseModal(){
     this._ShowModal = false;
+  }
+
+  Reaload(){
+    this._Reaload.emit(true);
   }
 }
