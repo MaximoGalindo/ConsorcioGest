@@ -120,6 +120,9 @@
   <data name="ComplaintReceivedSubject" xml:space="preserve">
     <value />
   </data>
+  <data name="FrontURL" xml:space="preserve">
+    <value>http://localhost:4200</value>
+  </data>
   <data name="TemplateComplaintReceived" xml:space="preserve">
     <value>Hola</value>
   </data>

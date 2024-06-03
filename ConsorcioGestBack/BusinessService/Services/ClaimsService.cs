@@ -18,27 +18,35 @@ namespace BusinessService.Services
 {
     public class ClaimsService : BaseService<Reclamo>
     {
-        public readonly ConsorcioGestContext _context;
+        private readonly ConsorcioGestContext _context;
         private readonly EmailService emailService;
+        private readonly SurveyService surveyService;
         public ClaimsService(
             ConsorcioGestContext consorcioGestContext,
-            EmailService emailService)
+            EmailService emailService,
+            SurveyService surveyService)
         {
             this._context = consorcioGestContext;
             this.emailService = emailService;
+            this.surveyService = surveyService;
         }
 
         public async Task<bool> SaveClaimGestion(SaveClaimGestionDTO saveClaimGestionDTO)
         {
             try
             {
-                Reclamo reclamo =    _context.Reclamos
+                Reclamo reclamo = _context.Reclamos
                     .Where(r => r.Id == saveClaimGestionDTO.IdClaim)
                     .FirstOrDefault();
 
                 reclamo.IdEstadoReclamo = saveClaimGestionDTO.StateSelectedID;
                 DBUpdate(reclamo, _context);
 
+                if(reclamo.IdEstadoReclamo == (int)ClaimsStatesEnum.FINISHED)
+                {
+                    await surveyService.CreateSurvey(reclamo.Id);
+                }                   
+                
                 ReclamoDetalle reclamoDetalle = new ReclamoDetalle();
                 reclamoDetalle.Observacion = saveClaimGestionDTO.Observation;
                 reclamoDetalle.Fecha = DateTime.Now.Date;
@@ -71,7 +79,6 @@ namespace BusinessService.Services
                 var result2 = await UploadImages(reclamo.Id, claim.Files);
 
                 string template = GlobalResourses.TemplateComplaintReceived;
-
                
                 return reclamo.NroReclamo;
             }

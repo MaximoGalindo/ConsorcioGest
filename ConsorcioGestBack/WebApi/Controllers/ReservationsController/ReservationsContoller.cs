@@ -15,11 +15,18 @@ namespace WebApi.Controllers.ReservationsController
             this.reservationsService = reservationsService;
         }
 
-        [HttpGet("get-common-spaces")]
-        public IActionResult GetCommonSpaces()
+        [HttpGet("get-common-spaces-by-user")]
+        public IActionResult GetCommonSpacesByUser()
         {
             return Ok(reservationsService.GetCommonSpaces(LoginService.CurrentUser.ConsortiumID));
         }
+
+        [HttpGet("get-common-spaces")]
+        public IActionResult GetCommonSpaces()
+        {
+            return Ok(reservationsService.GetCommonSpaces(LoginService.CurrentConsortium.Id));
+        }
+
 
         [HttpGet("get-common-space/{id}")]
         public IActionResult GetCommonSpace(int id)
@@ -37,6 +44,18 @@ namespace WebApi.Controllers.ReservationsController
         public IActionResult GetSchedulesAvailable(string date,int commonSpaceID)
         {
             return Ok(reservationsService.GetSchedulesAvailable(date,commonSpaceID));
+        }
+
+        [HttpGet("get-reservations/{commonSpaceID}")]
+        public IActionResult GetReservations(int commonSpaceID)
+        {
+            return Ok(reservationsService.GetReservations(commonSpaceID));
+        }
+
+        [HttpGet("get-reservations-by-user-id")]
+        public IActionResult GetReservationsByUserID()
+        {
+            return Ok(reservationsService.GetReservationByUser());
         }
 
     }

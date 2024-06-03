@@ -9,6 +9,7 @@ import { ClaimDTO } from '../Models/DTO/ClaimDTO';
 import { ClaimsCountByStatesDTO } from '../Models/DTO/ClaimsCountByStatesDTO';
 import { HistoryClaimDTO } from '../Models/DTO/HistoryClaimDTO';
 import { ClaimGestDTO } from '../Models/DTO/ClaimGestDTO';
+import { QuestionOptionDTO, ReplySurveyDTO } from '../Models/DTO/ReplySurveyDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,6 @@ export class ClaimService {
   GetCountClaimsByState():Observable<ClaimsCountByStatesDTO[]>{
     return this.http.get<ClaimsCountByStatesDTO[]>(this.baseUrl + 'get-claims-count-by-state')
   }
-
-
   SaveClaim(Claim:ClaimUserDTO):Observable<any>{
     const formData = new FormData();
     formData.append('CauseClaimID', Claim.CauseClaim.toString());
@@ -65,6 +64,18 @@ export class ClaimService {
 
   SaveClaimGestion(SaveClaimGest:ClaimGestDTO):Observable<any>{
     return this.http.post<any>(this.baseUrl + 'save-claim-gestion', SaveClaimGest)  
+  }
+
+  CheckSurveyCompleted(id:number):Observable<Boolean>{
+    return this.http.get<Boolean>(this.baseUrl + 'check-survey-completed/'+ id)
+  }
+
+  GetQuestionSurvey():Observable<QuestionOptionDTO[]>{
+    return this.http.get<QuestionOptionDTO[]>(this.baseUrl + 'get-survey-questions-options')
+  }
+
+  SaveReplySurvey(replySurvey:ReplySurveyDTO):Observable<any>{
+    return this.http.post<any>(this.baseUrl + 'save-reply-survey', replySurvey)
   }
 
 }

@@ -18,7 +18,7 @@ export class ReservationCommonSpacesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.reservationService.GetCommonSpaces().subscribe((data)=>{
+    this.reservationService.GetCommonSpacesByUser().subscribe((data)=>{
       console.log(data);
       this.commonSpaces = data;
     })

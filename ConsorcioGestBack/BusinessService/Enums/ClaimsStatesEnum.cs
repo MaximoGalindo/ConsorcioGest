@@ -28,4 +28,10 @@ namespace BusinessService.Enums
         CANCELLED = 2,
         FINISHED = 3
     }
+
+    public enum SurveyStatesEnum 
+    {
+        COMPLETED = 1,
+        INITIATED = 2,
+    }
 }

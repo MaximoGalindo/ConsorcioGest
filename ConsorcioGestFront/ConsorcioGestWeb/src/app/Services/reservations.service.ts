@@ -13,9 +13,13 @@ export class ReservationsService {
     baseUrl = `${environment.API_URL}/reservations/`;
     constructor(private http: HttpClient) { }
 
+    GetCommonSpacesByUser():Observable<CommonSpacesModel[]> {
+        return this.http.get<CommonSpacesModel[]>(this.baseUrl + 'get-common-spaces-by-user')
+    }
+
     GetCommonSpaces():Observable<CommonSpacesModel[]> {
         return this.http.get<CommonSpacesModel[]>(this.baseUrl + 'get-common-spaces')
-    }
+    }   
 
     GetCommonSpaceById(id:number):Observable<CommonSpacesModel> {
         return this.http.get<CommonSpacesModel>(this.baseUrl + 'get-common-space/'+ id)
@@ -27,5 +31,9 @@ export class ReservationsService {
 
     GetSchedulesAvailable(date:string, commonSpaceID:number):Observable<any> {
         return this.http.get(`${this.baseUrl}get-schedules-available/${commonSpaceID}?date=${date}`)
+    }
+
+    GetReservations(id:Number):Observable<any> {
+        return this.http.get(this.baseUrl + 'get-reservations/'+ id)
     }
 }

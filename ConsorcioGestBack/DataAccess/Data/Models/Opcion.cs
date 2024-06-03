@@ -12,4 +12,6 @@ public partial class Opcion
     public int? ValorNumerico { get; set; }
 
     public virtual ICollection<EncuestasDetalle> EncuestasDetalles { get; set; } = new List<EncuestasDetalle>();
+
+    public virtual ICollection<PreguntaOpcione> PreguntaOpciones { get; set; } = new List<PreguntaOpcione>();
 }

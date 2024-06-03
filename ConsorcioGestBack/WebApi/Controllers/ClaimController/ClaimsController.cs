@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WebApi.Controllers.ClaimController
@@ -17,10 +18,12 @@ namespace WebApi.Controllers.ClaimController
     {
         private readonly ClaimsService claimsService;
         private readonly EmailService emailService;
-        public ClaimsController(ClaimsService claimsService, EmailService emailService)
+        private readonly SurveyService surveyService;
+        public ClaimsController(ClaimsService claimsService, EmailService emailService, SurveyService surveyService)
         {
             this.claimsService = claimsService;
             this.emailService = emailService;
+            this.surveyService = surveyService;
         }
         //PONERLE AUTHORIZE A TODOS
         [HttpPost("save-claim-user")]
@@ -70,7 +73,6 @@ namespace WebApi.Controllers.ClaimController
             return Ok(claimsService.GetCountClaimsByState());
         }
 
-
         [HttpGet("{id}")]
         public IActionResult GetImagesByClaimID(int id)
         {
@@ -83,12 +85,39 @@ namespace WebApi.Controllers.ClaimController
             return Ok(claimsService.GetClaimsByUserID(userID));
         }
 
+        [HttpGet("check-survey-completed/{surveyID}")]
+        public IActionResult CheckSurveyCompleted(int surveyID)
+        {
+            return Ok(surveyService.CheckIfSurveyCompleted(surveyID));
+        }
+
+        [HttpGet("get-survey-questions-options")]
+        public IActionResult GetQuestionSurvey()
+        {
+            return Ok(surveyService.GetQuestionSurvey());
+        }
+
+        [HttpPost("save-reply-survey")]
+        public IActionResult SaveReplySurvey(ReplySurveyDTO replySurvey)
+        {
+            return Ok(surveyService.SaveReplySurvey(replySurvey));
+        }
+
         [HttpPost("send")]
         public async Task<IActionResult> SendEmail(string to)
         {
-            string claimNumber = "12345";
-            string claimEmailBody = EmailTemplateService.GetTemplate("EmialComplaintReceived", ("claimNumber", claimNumber));
-            await emailService.SendEmailAsync(to, "Reclamo Recibido", claimEmailBody);
+            /*var surveyID = context.Encuestas.Where(e => e.IdReclamo == claimID).Select(e => e.Id);
+            var claim = context.Reclamos.Where(r => r.Id == claimID).Select(r => new
+            {
+                ClaimNumber = r.NroReclamo,
+                Email = r.IdUsuarioNavigation.Email
+            }).FirstOrDefault();*/
+
+            var surveyLink = $"http://localhost:4200/claim-survey/1";
+
+            var bodyEmail = EmailTemplateService.GetTemplate("EmailReplySurvey", ("claimNumber", "123453"), ("surveyLink", surveyLink));
+            ;
+            await emailService.SendEmailAsync("galimaximo@gmail.com", "Reclamo Resuelto", bodyEmail);
             return Ok("Correo Enviado");
         }
 

@@ -5,6 +5,7 @@ using BusinessService.Services.BaseService;
 using BusinessService.Services.Consortium;
 using DataAccess.Data;
 using DataAccess.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -34,7 +35,8 @@ namespace BusinessService.Services
                     HourTo = cs.HoraHasta,
                     NumberReservationsAvailable = cs.CantidadReservasDisponibles,
                     CommonSpaceID = cs.IdEspacioComun,
-                    CommonSpaceName = cs.IdEspacioComunNavigation.Nombre
+                    CommonSpaceName = cs.IdEspacioComunNavigation.Nombre,
+                    CountReservations = cs.Reservas.Count
                 })
                 .ToList();
             return commonSpaces;
@@ -134,6 +136,51 @@ namespace BusinessService.Services
             return commonSpaces;
         }
 
+        public List<ReservationModel> GetReservations(int commonSpaceID)
+        {
+            List<ReservationModel> reservations = _context.Reservas
+                .Where(r => r.IdConsorcio == LoginService.CurrentConsortium.Id 
+                         && r.IdEspacioComunConsorcio == commonSpaceID)
+                .Select(r => new ReservationModel
+                {
+                    Id = r.Id,
+                    User = new UserModelDTO
+                    {
+                        Document = r.IdUsuarioNavigation.Documento,
+                        Name = r.IdUsuarioNavigation.Nombre + ' ' + r.IdUsuarioNavigation.Apellido,
+                        Condominium = r.IdUsuarioNavigation.IdCondominioNavigation.Torre + ' ' + r.IdUsuarioNavigation.IdCondominioNavigation.NumeroDepartamento,
+                        Email = r.IdUsuarioNavigation.Email,
+                        Phone = r.IdUsuarioNavigation.Telefono,
+                    },
+                    CommonSpaceConsortiumID = r.IdEspacioComunConsorcio,
+                    HourFrom = r.HoraDesde,
+                    HourTo = r.HoraHasta,
+                    Date = r.Fecha.Date,
+                    StateReservation = r.IdEstadoReservaNavigation.Nombre,
+                })
+                .OrderBy(r => r.Date)
+                .ToList();
+
+            return reservations;    
+        }
+
+        public List<ReservationUser> GetReservationByUser()
+        {
+            List<ReservationUser> reservations = _context.Reservas
+                .Where(r => r.IdUsuario == LoginService.CurrentUser.Id)
+                .Select(r => new ReservationUser
+                {
+                    Id = r.Id,
+                    CommonSpaceConsortiumID = r.IdEspacioComunConsorcio,
+                    HourFrom = r.HoraDesde,
+                    HourTo = r.HoraHasta,
+                    Date = r.Fecha.Date,
+                    StateReservation = r.IdEstadoReservaNavigation.Nombre,
+                    StateReservationID = r.IdEstadoReserva
+                })
+                .ToList();
+            return reservations;
+        }
 
         private List<string> GetHourlyIntervals(string startHour, string endHour)
         {
@@ -153,6 +200,8 @@ namespace BusinessService.Services
 
             return intervals;
         }
+
+
 
     }
 }

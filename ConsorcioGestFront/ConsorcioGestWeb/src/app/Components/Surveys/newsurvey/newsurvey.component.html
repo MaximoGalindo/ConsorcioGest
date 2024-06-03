@@ -1,0 +1,15 @@
+<div class="total-container" *ngIf="!_IsCompleted">
+    <h2>Contesta nuestra encuesta porfavor</h2>
+    <div *ngFor="let q of questionOptions; let i = index">
+        <h3>{{q.question}}</h3>
+        <select [(ngModel)]="q.optionSelectedID">
+            <option *ngFor="let option of q.options" [value]="option.optionID">{{option.option}}</option>
+        </select>
+        <textarea *ngIf="ShowTextArea(q.optionSelectedID,i)" [(ngModel)]="q.comment" placeholder="Comentario" cols="30" rows="10"></textarea>
+    </div>
+    <button class="button-tab" (click)="Confirm()">Confirmar</button>
+</div>
+
+<div class="total-container" *ngIf="_IsCompleted">
+    <h2>Gracias por contestar la encuesta</h2>
+</div>

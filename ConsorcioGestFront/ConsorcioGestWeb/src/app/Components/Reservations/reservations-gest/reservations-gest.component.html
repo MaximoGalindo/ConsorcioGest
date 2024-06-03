@@ -1,0 +1,50 @@
+<div class="total-container">
+    <h1>Reservas</h1>
+    <div class="common-spaces" *ngIf="!_ShowGrid">
+        <app-common-space *ngFor="let commonSpace of commonSpaces" [commonSpace]="commonSpace"
+            (_ShowGrid)="ShowGrid($event)"></app-common-space>
+    </div>
+    <div  *ngIf="_ShowGrid" class="filter-container">
+        <label style="margin-left: 30px;">Documento</label>
+        <input type="text" name="Document" class="custom-input">
+        <label for="">Departamento</label>
+        <input type="text" name="Deparment" class="custom-input" style="width: 50px;">        
+        <label for="">Fecha Desde</label>
+        <input type="date" name="CreationDate" class="custom-input" style="width: 120px;">
+        <label for="">Fecha Hasta</label>
+        <input type="date" name="ExpirationDate" class="custom-input"  style="width: 120px; margin-right: 10px;">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div *ngIf="_ShowGrid" class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Documento</th>
+                    <th>Nombre Completo</th>
+                    <th>Condominio</th>
+                    <th>Fecha</th>
+                    <th>Horario Reservado</th>
+                    <th>Estado</th>
+                    <th>Contacto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of reservations">
+                    <td>{{r.user.document}}</td>
+                    <td>{{r.user.name}}</td>
+                    <td>{{r.user.condominium}}</td>
+                    <td>{{r.date | date}}</td>
+                    <td>{{r.hourFrom}} - {{r.hourTo}}</td>	
+                    <td>{{r.stateReservation}}</td>
+                    <td>{{r.user.phone}}<br>{{r.user.email}}</td>
+                    <td><button>Ver</button></td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="_ShowGrid">
+        <button class="back-button" (click)="Back()">Volver</button>
+    </div>
+
+</div>

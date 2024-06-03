@@ -1,0 +1,18 @@
+<div class="rectangule">
+    <div class="header">
+        <h2>{{commonSpace.commonSpaceName}}</h2>
+        <i class="fa-solid fa-pen" style="color:black"></i>
+    </div>
+    <div class="line"></div>
+    <div class="count">
+        <h3>Cantidad</h3>
+        <div class="circle">
+            <span class="number-inside">{{commonSpace.countReservations}}</span>
+        </div>
+    </div>
+    <div class="footer">
+        <i style="color: green;" class="fa-solid fa-check fa-2x"></i>
+        <i style="color: red;" class="fa-solid fa-ban fa-2x"></i>
+        <i (click)="ShowGrid(commonSpace.id)" class="fa-solid fa-plus fa-2x"></i>
+    </div>
+</div>

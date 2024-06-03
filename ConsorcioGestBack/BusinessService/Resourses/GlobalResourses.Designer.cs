@@ -70,6 +70,15 @@ namespace BusinessService.Resourses {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://localhost:4200.
+        /// </summary>
+        internal static string FrontURL {
+            get {
+                return ResourceManager.GetString("FrontURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hola.
         /// </summary>
         internal static string TemplateComplaintReceived {

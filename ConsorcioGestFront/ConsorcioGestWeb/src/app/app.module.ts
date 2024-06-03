@@ -33,6 +33,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-tracking.component';
 import { NewReservationComponent } from './Components/Reservations/new-reservation/new-reservation.component';
 import { ReservationCommonSpacesComponent } from './Components/Reservations/reservation-common-spaces/reservation-common-spaces.component';
+import { ReservationsGestComponent } from './Components/Reservations/reservations-gest/reservations-gest.component';
+import { CommonSpaceComponent } from './Components/Reservations/common-space/common-space.component';
+import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.component';
 
 
 @NgModule({
@@ -60,7 +63,10 @@ import { ReservationCommonSpacesComponent } from './Components/Reservations/rese
     CarruselImagesModalComponent,
     ClaimTrackingComponent,
     NewReservationComponent,
-    ReservationCommonSpacesComponent
+    ReservationCommonSpacesComponent,
+    ReservationsGestComponent,
+    CommonSpaceComponent,
+    NewsurveyComponent
   ],
   imports: [
     BrowserModule,

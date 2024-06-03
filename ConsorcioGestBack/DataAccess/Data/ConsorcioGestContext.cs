@@ -52,6 +52,8 @@ public partial class ConsorcioGestContext : DbContext
 
     public virtual DbSet<Perfil> Perfils { get; set; }
 
+    public virtual DbSet<PreguntaOpcione> PreguntaOpciones { get; set; }
+
     public virtual DbSet<Preguntum> Pregunta { get; set; }
 
     public virtual DbSet<Reclamo> Reclamos { get; set; }
@@ -260,7 +262,7 @@ public partial class ConsorcioGestContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Nombre)
-                .HasMaxLength(10)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("NOMBRE");
         });
@@ -392,6 +394,27 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("OBSERVACION");
+        });
+
+        modelBuilder.Entity<PreguntaOpcione>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_PREGUNTAS_OPCIONES");
+
+            entity.ToTable("PREGUNTA_OPCIONES");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.IdOpcion).HasColumnName("ID_OPCION");
+            entity.Property(e => e.IdPregunta).HasColumnName("ID_PREGUNTA");
+
+            entity.HasOne(d => d.IdOpcionNavigation).WithMany(p => p.PreguntaOpciones)
+                .HasForeignKey(d => d.IdOpcion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_PREGUNTASOPCIONES_OPCION");
+
+            entity.HasOne(d => d.IdPreguntaNavigation).WithMany(p => p.PreguntaOpciones)
+                .HasForeignKey(d => d.IdPregunta)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_PREGUNTASOPCIONES_PREGUNTA");
         });
 
         modelBuilder.Entity<Preguntum>(entity =>

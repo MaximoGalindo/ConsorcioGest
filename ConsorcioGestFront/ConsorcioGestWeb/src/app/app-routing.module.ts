@@ -16,6 +16,8 @@ import { UserRegisterClaimComponent } from './Components/Users/user-register-cla
 import { ClaimTrackingComponent } from './Components/Users/claim-tracking/claim-tracking.component';
 import { NewReservationComponent } from './Components/Reservations/new-reservation/new-reservation.component';
 import { ReservationCommonSpacesComponent } from './Components/Reservations/reservation-common-spaces/reservation-common-spaces.component';
+import { ReservationsGestComponent } from './Components/Reservations/reservations-gest/reservations-gest.component';
+import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -24,7 +26,8 @@ const routes: Routes = [
   { path: 'main-page-admin',component: MainPageAdminComponent,
     children : [
       {path: 'claims-gest', component: ClaimsGestComponent},
-      {path: 'user-gest',component:UsersGestComponent}
+      {path: 'user-gest',component:UsersGestComponent},
+      {path: 'reservation-gest', component:ReservationsGestComponent}
     ]
   },
   { path: 'main-page-user', component: MainPageUserComponent,
@@ -42,6 +45,7 @@ const routes: Routes = [
       {path: 'confirm', component: SaveConsortiumComponent}
     ]  
   },
+  {path:'claim-survey/:surveyID',component: NewsurveyComponent}
 ];
 
 

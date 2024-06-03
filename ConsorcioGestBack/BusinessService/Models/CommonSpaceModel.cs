@@ -14,6 +14,7 @@ namespace BusinessService.Models
         public string HourTo { get; set;}
         public int NumberReservationsAvailable { get; set; }
         public int CommonSpaceID { get; set; }
-        public string CommonSpaceName { get; set; } 
+        public string CommonSpaceName { get; set; }
+        public int CountReservations {  get; set; }
     }
 }

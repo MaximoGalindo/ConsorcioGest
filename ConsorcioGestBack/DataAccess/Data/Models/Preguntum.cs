@@ -10,4 +10,6 @@ public partial class Preguntum
     public string Pregunta { get; set; } = null!;
 
     public virtual ICollection<EncuestasDetalle> EncuestasDetalles { get; set; } = new List<EncuestasDetalle>();
+
+    public virtual ICollection<PreguntaOpcione> PreguntaOpciones { get; set; } = new List<PreguntaOpcione>();
 }

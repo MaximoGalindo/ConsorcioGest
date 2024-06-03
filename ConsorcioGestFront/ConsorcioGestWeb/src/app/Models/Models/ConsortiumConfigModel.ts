@@ -49,6 +49,7 @@ export class CommonSpacesModel {
   numberReservationsAvailable: number = 0;
   commonSpaceID: number = 0;
   commonSpaceName: string = '';
+  countReservations: number = 0;
 }
 
 
