@@ -11,7 +11,11 @@ public partial class Encuesta
 
     public int IdEstadoEncuesta { get; set; }
 
+    public int IdConsorcio { get; set; }
+
     public virtual ICollection<EncuestasDetalle> EncuestasDetalles { get; set; } = new List<EncuestasDetalle>();
+
+    public virtual Consorcio IdConsorcioNavigation { get; set; } = null!;
 
     public virtual EstadoEncuestum IdEstadoEncuestaNavigation { get; set; } = null!;
 

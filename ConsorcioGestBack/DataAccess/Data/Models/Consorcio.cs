@@ -21,6 +21,8 @@ public partial class Consorcio
 
     public virtual ICollection<Contacto> Contactos { get; set; } = new List<Contacto>();
 
+    public virtual ICollection<Encuesta> Encuesta { get; set; } = new List<Encuesta>();
+
     public virtual ICollection<EspacioComunConsorcio> EspacioComunConsorcios { get; set; } = new List<EspacioComunConsorcio>();
 
     public virtual ICollection<Reserva> Reservas { get; set; } = new List<Reserva>();

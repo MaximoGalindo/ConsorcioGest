@@ -66,8 +66,8 @@ export class ClaimService {
     return this.http.post<any>(this.baseUrl + 'save-claim-gestion', SaveClaimGest)  
   }
 
-  CheckSurveyCompleted(id:number):Observable<Boolean>{
-    return this.http.get<Boolean>(this.baseUrl + 'check-survey-completed/'+ id)
+  CheckSurveyCompleted(id:number):Observable<any>{
+    return this.http.get<any>(this.baseUrl + 'check-survey-completed/'+ id)
   }
 
   GetQuestionSurvey():Observable<QuestionOptionDTO[]>{

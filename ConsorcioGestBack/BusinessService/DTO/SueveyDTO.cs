@@ -35,5 +35,21 @@ namespace BusinessService.DTO
 
     }
 
+    public class SurveyDTO 
+    {
+        public int Id {  get; set; }
+        public UserModelDTO User { get; set; }
+        public int SurveyStateID { get; set; }
+        public string SurveyState {  get; set; }
+        public string ClaimNumber { get; set; }
+        public string CustomerSatisfaccion { get; set; }
+    }
+
+    public class  SurveyDetailDTO
+    {
+        public string Question { get; set;}
+        public string Awnser { get; set; }
+        public string Comment { get; set; }
+    }
 
 }

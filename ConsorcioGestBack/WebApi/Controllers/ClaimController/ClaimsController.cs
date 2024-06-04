@@ -85,24 +85,6 @@ namespace WebApi.Controllers.ClaimController
             return Ok(claimsService.GetClaimsByUserID(userID));
         }
 
-        [HttpGet("check-survey-completed/{surveyID}")]
-        public IActionResult CheckSurveyCompleted(int surveyID)
-        {
-            return Ok(surveyService.CheckIfSurveyCompleted(surveyID));
-        }
-
-        [HttpGet("get-survey-questions-options")]
-        public IActionResult GetQuestionSurvey()
-        {
-            return Ok(surveyService.GetQuestionSurvey());
-        }
-
-        [HttpPost("save-reply-survey")]
-        public IActionResult SaveReplySurvey(ReplySurveyDTO replySurvey)
-        {
-            return Ok(surveyService.SaveReplySurvey(replySurvey));
-        }
-
         [HttpPost("send")]
         public async Task<IActionResult> SendEmail(string to)
         {

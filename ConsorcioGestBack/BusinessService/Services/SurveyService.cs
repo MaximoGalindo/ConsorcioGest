@@ -37,9 +37,10 @@ namespace BusinessService.Services
                     IdEstadoEncuesta = (int)SurveyStatesEnum.INITIATED,
                 };
                 DBAdd(encuesta, context);
+                await SendSurveyByEmail(claimID);
             }
 
-            await SendSurveyByEmail(claimID);
+            
             return true;
         }
 
@@ -105,6 +106,79 @@ namespace BusinessService.Services
                         }).ToList();
 
             return query;
+        }
+
+        public List<SurveyDTO> GetSurveys()
+        {
+            List<SurveyDTO> surveys = context.Encuestas
+                .Where(e => e.IdConsorcio == 6)
+                .Select(e => new SurveyDTO
+                {
+                    Id = e.Id,
+                    User = new UserModelDTO
+                    {
+                        Document = e.IdReclamoNavigation.IdUsuarioNavigation.Documento,
+                        Name = e.IdReclamoNavigation.IdUsuarioNavigation.Nombre + ' ' + e.IdReclamoNavigation.IdUsuarioNavigation.Apellido,
+                        Condominium = e.IdReclamoNavigation.IdUsuarioNavigation.IdCondominioNavigation.Torre + ' ' + e.IdReclamoNavigation.IdUsuarioNavigation.IdCondominioNavigation.NumeroDepartamento,
+                    },
+                    SurveyStateID = e.IdEstadoEncuesta,
+                    SurveyState = e.IdEstadoEncuestaNavigation.Nombre,
+                    ClaimNumber = e.IdReclamoNavigation.NroReclamo
+                })
+                .ToList();
+
+            foreach(var s in surveys)
+            {
+                if(s.SurveyStateID == (int)SurveyStatesEnum.COMPLETED)
+                    s.CustomerSatisfaccion = GetCustomerSatisfaccion(s.Id).ToString();
+            }
+
+            return surveys;
+        }
+
+        public List<SurveyDetailDTO> GetSurveyDetailById(int surveyID)
+        {
+            return context.EncuestasDetalles
+                .Where(ed => ed.IdEncuesta == surveyID)
+                .Select(ed => new SurveyDetailDTO
+                {
+                    Question = ed.IdPreguntaNavigation.Pregunta,
+                    Awnser = ed.IdOpcionNavigation.Opcion1,
+                    Comment = ed.Comentario,
+                })
+                .ToList();
+        }
+
+
+        private CustomerSatisfaccion GetCustomerSatisfaccion(int surveyID)
+        {
+            var customerSatisfaccion = context.EncuestasDetalles
+                .Where(ed => ed.IdEncuesta == surveyID)
+                .Select(ed => new
+                {
+                    CuestionID = ed.IdPregunta,
+                    Option = ed.IdOpcionNavigation
+                })
+                .ToList();
+
+            int totalValues = 0;
+
+            foreach (var cs in customerSatisfaccion)
+            {
+                if (cs.CuestionID == 1 && cs.Option.Opcion1 == "NO")
+                    return CustomerSatisfaccion.Red;
+
+                totalValues += cs.Option.ValorNumerico != null ? cs.Option.ValorNumerico.Value : 0;
+            }
+
+            if (totalValues == 6 || totalValues == 7)
+                return CustomerSatisfaccion.Yellow;
+            else if (totalValues < 6)
+                return CustomerSatisfaccion.Red;
+            else if (totalValues > 7)
+                return CustomerSatisfaccion.Green;
+
+            return CustomerSatisfaccion.Green;
         }
 
     }

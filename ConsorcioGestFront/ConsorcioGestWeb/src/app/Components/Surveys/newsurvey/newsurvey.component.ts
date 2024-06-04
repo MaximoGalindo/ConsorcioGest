@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionDTO, QuestionOptionDTO, ReplySurveyDTO } from 'src/app/Models/DTO/ReplySurveyDTO';
 import { ClaimService } from 'src/app/Services/claim.service';
+import { SurveyService } from 'src/app/Services/survey.service';
 
 @Component({
   selector: 'app-newsurvey',
@@ -15,18 +15,20 @@ export class NewsurveyComponent implements OnInit {
   selectedTab: number = 1;
   questionOptions: QuestionOptionDTO[] = [];
   surveyID: number = 0;
-  constructor( private claimService:ClaimService,private route: ActivatedRoute,) {
+  constructor(private route: ActivatedRoute,private surveyService:SurveyService) {
     this.surveyID = this.route.snapshot.params['surveyID'];
     
   }
 
   ngOnInit(){    
-    this.claimService.GetQuestionSurvey().subscribe((data)=>{
+    this.surveyService.GetQuestionSurvey().subscribe((data)=>{
       this.questionOptions = data 
       console.log(this.questionOptions);      
     })
-    this.claimService.CheckSurveyCompleted(this.surveyID).subscribe((data)=>{
-      this._IsCompleted = data;
+    this.surveyService.CheckSurveyCompleted(this.surveyID).subscribe((data)=>{
+      console.log(data);
+      
+      this._IsCompleted = data.result;
     })
   }
 
@@ -48,8 +50,9 @@ export class NewsurveyComponent implements OnInit {
     }
     replySurvey.Questions = anwsers;
     console.log(replySurvey);
-    this.claimService.SaveReplySurvey(replySurvey).subscribe((data)=>{
-      console.log(data);      
+
+    this.surveyService.SaveReplySurvey(replySurvey).subscribe((data)=>{   
+      this._IsCompleted = true;   
     })
 
   }
