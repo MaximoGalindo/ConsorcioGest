@@ -82,7 +82,7 @@ namespace BusinessService.Services
             List<string> schedulesAvailable = GetHourlyIntervals(commonSpace.HoraDesde, commonSpace.HoraHasta);
 
             var reservations = _context.Reservas
-                .Where(r => r.Fecha == dateTime && r.IdConsorcio == LoginService.CurrentUser.ConsortiumID)
+                .Where(r => r.Fecha == dateTime && r.IdConsorcio == LoginService.CurrentUser.ConsortiumID && r.IdEstadoReserva == (int)ReservationsStatesEnum.RESERVATED)
                 .Select(r => new
                 {
                     r.HoraDesde,
@@ -176,10 +176,22 @@ namespace BusinessService.Services
                     HourTo = r.HoraHasta,
                     Date = r.Fecha.Date,
                     StateReservation = r.IdEstadoReservaNavigation.Nombre,
-                    StateReservationID = r.IdEstadoReserva
+                    StateReservationID = r.IdEstadoReserva,
+                    CommonSpaceConsortium = r.IdEspacioComunConsorcioNavigation.IdEspacioComunNavigation.Nombre
                 })
                 .ToList();
             return reservations;
+        }
+        
+        public bool UpdateStateReservation(int reservationID,int stateReservationID)
+        {
+            var reservation = _context.Reservas.Where(r => r.Id == reservationID).FirstOrDefault();
+            if (reservation != null)
+            {
+                reservation.IdEstadoReserva = stateReservationID;
+                return DBUpdate(reservation, _context);
+            }
+            return false;          
         }
 
         private List<string> GetHourlyIntervals(string startHour, string endHour)
@@ -200,6 +212,7 @@ namespace BusinessService.Services
 
             return intervals;
         }
+
 
 
 

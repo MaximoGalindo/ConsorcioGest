@@ -198,6 +198,7 @@ public partial class ConsorcioGestContext : DbContext
             entity.ToTable("ENCUESTAS");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Fecha).HasColumnType("date");
             entity.Property(e => e.IdConsorcio).HasColumnName("ID_Consorcio");
             entity.Property(e => e.IdEstadoEncuesta).HasColumnName("ID_ESTADO_ENCUESTA");
             entity.Property(e => e.IdReclamo).HasColumnName("ID_RECLAMO");

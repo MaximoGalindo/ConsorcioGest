@@ -1,0 +1,129 @@
+table {
+    width: 100%;
+    color: white;
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+th,
+td {
+    border: 2px solid black;
+    padding: 8px;
+    text-align: left;
+    background-color: #005F5B;
+}
+
+th {
+    background-color: #36CFA2;
+    color: black;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.filter-container button {
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.custom-input {
+    width: 100px;
+    height: 10px;
+}
+
+label {
+    color: white;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.table-container {
+    display: flex;
+    margin: 30px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(120%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.icono:hover:not([disabled]) {
+    filter: brightness(120%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.icono[disabled]:hover {
+    filter: brightness(100%);
+    box-shadow: none;
+}
+
+.rectangule {
+    height: 2rem;
+    width: 8rem;
+    background-color: green;
+    text-align: center;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.satisfaccion {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    border: 0.5px solid black;
+}
+
+.satisfaction-green {
+    background-color: rgb(14, 157, 14);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.satisfaction-yellow {
+    background-color: rgb(236, 236, 41);
+    color: black;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.satisfaction-red {
+    background-color: rgb(210, 22, 22);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.satisfaction-no-data {
+    background-color: transparent;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+

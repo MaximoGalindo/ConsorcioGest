@@ -36,6 +36,9 @@ import { ReservationCommonSpacesComponent } from './Components/Reservations/rese
 import { ReservationsGestComponent } from './Components/Reservations/reservations-gest/reservations-gest.component';
 import { CommonSpaceComponent } from './Components/Reservations/common-space/common-space.component';
 import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.component';
+import { SurveysGestComponent } from './Components/Surveys/surveys-gest/surveys-gest.component';
+import { SeeMoreSurveyComponent } from './Components/Surveys/Modals/see-more-survey/see-more-survey.component';
+import { MyReservationsComponent } from './Components/Reservations/my-reservations/my-reservations.component';
 
 
 @NgModule({
@@ -66,7 +69,10 @@ import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.com
     ReservationCommonSpacesComponent,
     ReservationsGestComponent,
     CommonSpaceComponent,
-    NewsurveyComponent
+    NewsurveyComponent,
+    SurveysGestComponent,
+    SeeMoreSurveyComponent,
+    MyReservationsComponent
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,8 @@ import { NewReservationComponent } from './Components/Reservations/new-reservati
 import { ReservationCommonSpacesComponent } from './Components/Reservations/reservation-common-spaces/reservation-common-spaces.component';
 import { ReservationsGestComponent } from './Components/Reservations/reservations-gest/reservations-gest.component';
 import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.component';
+import { SurveysGestComponent } from './Components/Surveys/surveys-gest/surveys-gest.component';
+import { MyReservationsComponent } from './Components/Reservations/my-reservations/my-reservations.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -27,7 +29,8 @@ const routes: Routes = [
     children : [
       {path: 'claims-gest', component: ClaimsGestComponent},
       {path: 'user-gest',component:UsersGestComponent},
-      {path: 'reservation-gest', component:ReservationsGestComponent}
+      {path: 'reservation-gest', component:ReservationsGestComponent},
+      {path: 'survey-gest',component:SurveysGestComponent}
     ]
   },
   { path: 'main-page-user', component: MainPageUserComponent,
@@ -36,7 +39,8 @@ const routes: Routes = [
       {path: 'claim-user', component: UserRegisterClaimComponent},
       {path: 'claim-traking', component: ClaimTrackingComponent},
       {path: 'reservation-common-spaces', component: ReservationCommonSpacesComponent},
-      {path: 'reservation-user/:commonSpaceID',component: NewReservationComponent}
+      {path: 'reservation-user/:commonSpaceID',component: NewReservationComponent},
+      {path: 'my-reservation',component:MyReservationsComponent}
     ]},
   { path: 'consortium', component: SelectConsortiumComponent},
   { path: 'register-consortium', 

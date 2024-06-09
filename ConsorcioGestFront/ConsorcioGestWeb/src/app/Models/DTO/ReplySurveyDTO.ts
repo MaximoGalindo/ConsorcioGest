@@ -1,3 +1,5 @@
+import { UserModelDTO } from "./UserModelDTO";
+
 export class QuestionDTO {
   QuestionID: number = 0;
   AnswerID: number = 0;
@@ -23,3 +25,20 @@ export class OptionDTO {
   option: string = '';
   valueNumeric: number = 0;
 }
+
+export class SurveyDTO {
+  id: number = 0;
+  user: UserModelDTO = new UserModelDTO();
+  surveyStateID: number = 0;
+  surveyState: string = '';
+  claimNumber: string = '';
+  customerSatisfaccion: string = '';
+}
+
+export class SurveyDetailDTO {
+  question: string = '';
+  awnser: string = '';
+  comment: string = '';
+}
+
+

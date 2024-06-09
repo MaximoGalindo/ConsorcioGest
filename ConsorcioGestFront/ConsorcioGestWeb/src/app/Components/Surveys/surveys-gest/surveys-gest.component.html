@@ -1,0 +1,56 @@
+<div class="filter-container">
+    <label style="margin-left: 30px;">Nro Reclamo</label>
+    <input type="text" name="Document" class="custom-input">
+    <label for="">Estado</label>
+    <select style="width: 120px; height: 20px;" class="custom-input">
+        <option value="" disabled>Estado</option>
+    </select>
+    <label for="">Satisfaccion</label>
+    <select style="width: 120px; height: 20px;" class="custom-input">
+        <option value="" disabled>Estado</option>
+    </select>
+    <label for="">Fecha Desde</label>
+    <input type="date" name="CreationDate" class="custom-input" style="width: 120px;">
+    <label for="">Fecha Hasta</label>
+    <input type="date" name="ExpirationDate" class="custom-input" style="width: 120px; margin-right: 10px;">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Documento</th>
+                <th>Nombre Completo</th>
+                <th>Condominio</th>
+                <th>Numero de Reclamo</th>
+                <th>Estado</th>
+                <th>Satisfaccion del Cliente</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of Surveys">
+                <td>{{e.id}}</td>
+                <td>{{e.user.document}}</td>
+                <td>{{e.user.name}}</td>
+                <td>{{e.user.condominium}}</td>
+                <td>{{e.claimNumber}}</td>
+                <td>{{e.surveyState}}</td>
+                <td class="satisfaccion">
+                    <div class="rectangule" [ngClass]="getSatisfactionClass(e.customerSatisfaccion)">
+                        {{getTextSatisfaction(e.customerSatisfaccion)}}
+                    </div>
+                </td>
+                <td><button (click)="ShowSurvey(e.id)"><i class="fa-solid fa-eye fa-2x"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<app-see-more-survey 
+    *ngIf="_ShowModal"
+    [SurveyID]="SelectedSurvey"
+    (_CloseModal)="CloseModal()"
+></app-see-more-survey>

@@ -27,5 +27,6 @@ namespace BusinessService.Models
         public int StateReservationID { get; set; }
         public string StateReservation { get; set; }
         public int CommonSpaceConsortiumID { get; set; }
+        public string CommonSpaceConsortium { get; set;}
     }
 }

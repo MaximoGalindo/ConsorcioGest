@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../Helpers/Envriorment";
-import { ReservationDTO } from "../Models/DTO/ReservationsDTO";
+import { ReservationDTO, ReservationUser } from "../Models/DTO/ReservationsDTO";
 import { Observable } from "rxjs";
 import { CommonSpacesModel } from "../Models/Models/ConsortiumConfigModel";
 
@@ -35,5 +35,8 @@ export class ReservationsService {
 
     GetReservations(id:Number):Observable<any> {
         return this.http.get(this.baseUrl + 'get-reservations/'+ id)
+    }
+    GetReservationsByUserID():Observable<ReservationUser[]> {
+        return this.http.get<ReservationUser[]>(this.baseUrl + 'get-reservations-by-user-id')
     }
 }

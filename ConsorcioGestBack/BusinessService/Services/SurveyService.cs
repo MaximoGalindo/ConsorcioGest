@@ -35,6 +35,7 @@ namespace BusinessService.Services
                 {
                     IdReclamo = claimID,
                     IdEstadoEncuesta = (int)SurveyStatesEnum.INITIATED,
+                    Fecha = DateTime.Now.Date,
                 };
                 DBAdd(encuesta, context);
                 await SendSurveyByEmail(claimID);
@@ -59,6 +60,7 @@ namespace BusinessService.Services
             };
             Encuesta encuesta = context.Encuestas.Where(e => e.Id == replySurvey.IdSurvey).FirstOrDefault();
             encuesta.IdEstadoEncuesta = (int)SurveyStatesEnum.COMPLETED;
+            encuesta.Fecha = DateTime.Now.Date;
             DBUpdate(encuesta, context);
             return true;
         }

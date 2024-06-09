@@ -13,6 +13,8 @@ public partial class Encuesta
 
     public int IdConsorcio { get; set; }
 
+    public DateTime? Fecha { get; set; }
+
     public virtual ICollection<EncuestasDetalle> EncuestasDetalles { get; set; } = new List<EncuestasDetalle>();
 
     public virtual Consorcio IdConsorcioNavigation { get; set; } = null!;

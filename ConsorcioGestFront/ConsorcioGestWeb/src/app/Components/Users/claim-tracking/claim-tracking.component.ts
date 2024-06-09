@@ -21,7 +21,8 @@ export class ClaimTrackingComponent {
 
   ngOnInit(){
     this.SharedDataUser.User$.subscribe((data)=>{
-      this.User = data;
+      if(data != null)
+        this.User = data;
     }) 
     this.claimService.GetClaimsByUserID(this.User.id).subscribe((data)=>{
       this.claimsDTO = data;

@@ -1,0 +1,30 @@
+<div class="total-container">
+    <div>
+        <div>
+            <select class="custom-select">
+                <option value="" disabled selected>Seleccione el Espacio Comun</option>            
+            </select>           
+        </div>
+        <div class="date-filter">
+            <label for="">Fecha Desde:</label>
+            <input type="date" class="custom-input" name="dateSince">
+        </div>
+        <div class="date-filter">
+            <label for="">Fecha Hasta:</label>
+            <input type="date" class="custom-input" name="dateUntil">
+        </div>
+    </div>
+    <div class="reservations" >
+        <div class="rectangule" *ngFor="let r of reservations">
+            <h2 style="padding-top: 1rem;">{{r.commonSpaceConsortium}}</h2>
+            <div class="line"></div>
+            <h3 style="margin-top: 0.5rem; font-weight: 600;">{{r.stateReservation}}</h3>
+            <h3>Fecha: {{r.date | date}}</h3>
+            <h3>Desde: {{r.hourFrom}}hs - Hasta: {{r.hourTo}}hs</h3>
+            <div class="cancel-button">
+                <button>Cancelar Reserva</button>
+            </div>
+        </div>
+    </div>
+
+</div>

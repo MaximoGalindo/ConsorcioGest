@@ -1,0 +1,67 @@
+.modal-content {
+    background-color: #ABD1C6;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 60%;
+    position: relative;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.cuestions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.cuestions table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.5rem;
+}
+
+.cuestions th,
+.cuestions td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.cuestions th {
+    background-color: transparent;
+    color: black;
+}
+
+.cuestions th,
+.cuestions td {
+    width: 33.33%;
+    /* Ajusta el ancho según sea necesario */
+}
+
+.cuestions th:nth-child(1),
+.cuestions td:nth-child(1) {
+    width: 50%;
+    /* Ajusta el ancho de la columna Pregunta */
+}
+
+.cuestions th:nth-child(2),
+.cuestions td:nth-child(2) {
+    width: 20%;
+    /* Ajusta el ancho de la columna Respuesta */
+}
+
+.cuestions th:nth-child(3),
+.cuestions td:nth-child(3) {
+    width: 30%;
+    /* Ajusta el ancho de la columna Comentario */
+}
