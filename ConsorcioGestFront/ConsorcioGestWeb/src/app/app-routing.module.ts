@@ -20,6 +20,7 @@ import { ReservationsGestComponent } from './Components/Reservations/reservation
 import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.component';
 import { SurveysGestComponent } from './Components/Surveys/surveys-gest/surveys-gest.component';
 import { MyReservationsComponent } from './Components/Reservations/my-reservations/my-reservations.component';
+import { StatsComponent } from './Components/Stats/stats/stats.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -30,7 +31,8 @@ const routes: Routes = [
       {path: 'claims-gest', component: ClaimsGestComponent},
       {path: 'user-gest',component:UsersGestComponent},
       {path: 'reservation-gest', component:ReservationsGestComponent},
-      {path: 'survey-gest',component:SurveysGestComponent}
+      {path: 'survey-gest',component:SurveysGestComponent},
+      {path: 'stats',component:StatsComponent}
     ]
   },
   { path: 'main-page-user', component: MainPageUserComponent,

@@ -39,6 +39,9 @@ import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.com
 import { SurveysGestComponent } from './Components/Surveys/surveys-gest/surveys-gest.component';
 import { SeeMoreSurveyComponent } from './Components/Surveys/Modals/see-more-survey/see-more-survey.component';
 import { MyReservationsComponent } from './Components/Reservations/my-reservations/my-reservations.component';
+import { StatsComponent } from './Components/Stats/stats/stats.component';
+import { PieChartComponent } from './Components/Stats/pie-chart/pie-chart.component';
+import { BarChartComponent } from './Components/Stats/bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -72,7 +75,10 @@ import { MyReservationsComponent } from './Components/Reservations/my-reservatio
     NewsurveyComponent,
     SurveysGestComponent,
     SeeMoreSurveyComponent,
-    MyReservationsComponent
+    MyReservationsComponent,
+    StatsComponent,
+    PieChartComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +89,7 @@ import { MyReservationsComponent } from './Components/Reservations/my-reservatio
     BrowserAnimationsModule,
     CommonModule,
     NgbModule,
-    NgbModule
+
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

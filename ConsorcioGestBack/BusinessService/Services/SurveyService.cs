@@ -27,6 +27,7 @@ namespace BusinessService.Services
             
         public async Task<bool> CreateSurvey(int claimID)
         {
+            var consortiumID = context.Reclamos.Where(r => r.Id == claimID).Select(r => r.IdUsuarioNavigation.ConsorcioUsuarios.Select(c => c.IdConsorcio).FirstOrDefault()).FirstOrDefault();
             var encuestaExist = context.Encuestas.Any(e => e.IdReclamo == claimID);
 
             if(!encuestaExist)
@@ -36,6 +37,7 @@ namespace BusinessService.Services
                     IdReclamo = claimID,
                     IdEstadoEncuesta = (int)SurveyStatesEnum.INITIATED,
                     Fecha = DateTime.Now.Date,
+                    IdConsorcio = consortiumID
                 };
                 DBAdd(encuesta, context);
                 await SendSurveyByEmail(claimID);

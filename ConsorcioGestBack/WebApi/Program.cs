@@ -56,6 +56,7 @@ builder.Services.AddScoped<ClaimsService>();
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<ReservationsService>();
 builder.Services.AddScoped<SurveyService>();
+builder.Services.AddScoped<StatsService>();
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 

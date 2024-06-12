@@ -51,7 +51,7 @@ export class SeeMoreClaimComponent implements OnInit{
   SaveClaimGestion(){
     this.saveClaimGest.IdClaim = this.Claim.id
     this.claimService.SaveClaimGestion(this.saveClaimGest).subscribe((data)=>{
-      this._ShowModal.emit(false);
+      this._ShowModal.emit(true);
       this._Reaload.emit(true);
     })   
   }
