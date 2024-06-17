@@ -3,7 +3,23 @@
   max-width: 100%;
 }
 
-.bar-chart{
-  width: 35rem;
+.bar-chart {
+  width: 30rem;
   max-width: 100%;
+}
+
+.total-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: white;
 }

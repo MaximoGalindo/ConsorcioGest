@@ -1,8 +1,22 @@
+<div class="filter-container">
+    <label for="">Desde</label>
+    <input type="date" class="custom-input" style="width: 120px;" [(ngModel)]="dateFrom">
+    <label for="">Hasta</label>
+    <input type="date" class="custom-input" style="width: 120px; margin-right: 10px;" [(ngModel)]="dateTo">
+    <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+</div>
 <div class="total-container">
-    <div class="pie-chart">
-        <app-pie-chart></app-pie-chart>
+    <div class="row1">
+        <div class="pie-chart">
+            <app-pie-chart></app-pie-chart>
+        </div>
+        <div class="pie-chart">
+            <app-number-claims-chart></app-number-claims-chart>
+        </div>
     </div>
-    <div class="bar-chart">
-       <app-bar-chart></app-bar-chart>
+    <div class="row2">
+        <div class="bar-chart">
+            <app-line-chart></app-line-chart>
+        </div>
     </div>
 </div>

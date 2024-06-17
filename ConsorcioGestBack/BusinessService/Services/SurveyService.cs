@@ -115,7 +115,7 @@ namespace BusinessService.Services
         public List<SurveyDTO> GetSurveys()
         {
             List<SurveyDTO> surveys = context.Encuestas
-                .Where(e => e.IdConsorcio == 6)
+                .Where(e => e.IdConsorcio == LoginService.CurrentConsortium.Id)
                 .Select(e => new SurveyDTO
                 {
                     Id = e.Id,
@@ -154,7 +154,7 @@ namespace BusinessService.Services
         }
 
 
-        private CustomerSatisfaccion GetCustomerSatisfaccion(int surveyID)
+        public CustomerSatisfaccion GetCustomerSatisfaccion(int surveyID)
         {
             var customerSatisfaccion = context.EncuestasDetalles
                 .Where(ed => ed.IdEncuesta == surveyID)

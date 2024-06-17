@@ -1,0 +1,27 @@
+<div class="total-container">
+    <div>
+        <h3>Cantidad de Reclamos Gestionados</h3>
+    </div>
+    <div class="date-filter">
+        <select id="monthSelect" [(ngModel)]="selectedMonth" (change)="onMonthChange()">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+        </select>
+        <select id="yearSelect" [(ngModel)]="selectedYear" (change)="onMonthChange()">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+    </div>
+    <div class="numbers">
+        <div class="number">
+            <h3>Satisfecho</h3>
+            <h1>{{claimsS}}</h1>
+        </div>
+        <div class="number">
+            <h3>Regular</h3>
+            <h1>{{claimsR}}</h1>
+        </div>
+        <div class="number">
+            <h3>Insatisfecho</h3>
+            <h1>{{claimsI}}</h1>
+        </div>
+    </div>
+</div>

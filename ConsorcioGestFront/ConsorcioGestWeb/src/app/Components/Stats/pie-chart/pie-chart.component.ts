@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import Chart, { ChartType } from 'chart.js/auto';
+import { FiltersSharedService } from 'src/app/Services/Shared/filters-shared.service';
 import { StatsService } from 'src/app/Services/stats.service';
+import { Utils } from 'src/app/Helpers/Utils';
 
 @Component({
   selector: 'app-pie-chart',
@@ -10,20 +12,29 @@ import { StatsService } from 'src/app/Services/stats.service';
 export class PieChartComponent {
 
   public chart: Chart | undefined;
-
-  constructor(private statsService: StatsService) {
+  constructor(private statsService: StatsService, private dateFilter: FiltersSharedService) {
 
   }
 
   ngOnInit(): void {
-
-    let dateFrom: Date | null = null;
-    let dateTo: Date | null = null;
-
+    this.dateFilter.DateFilter$.subscribe(date => {
+      this.GetStats(date.dateFrom, date.dateTo);
+    })
+  }
+  GetStats(dateFrom: string | null, dateTo: string | null) {
+    if (dateFrom && !dateTo) { 
+        dateTo = Utils.parseDate(new Date());
+    }
+    if (this.chart) {
+      this.chart.destroy()
+    }
     this.statsService.GetMostFrequentComplaintsByCauseOfComplaint(dateFrom, dateTo).subscribe(stats => {
-
-      const labels: string[] = Object.keys(stats.data); // Obteniendo las claves del objeto como un array
-      const values: number[] = Object.values(stats.data).map(Number);; // Obteniendo los valores del objeto como un array
+      var labels: string[] = ['No hay resultados']
+      var values: number[] = [1]
+      if (Object.keys(stats.data).length !== 0 || stats.data.constructor !== Object) {
+        labels = Object.keys(stats.data);
+        values = Object.values(stats.data).map(Number);
+      }
 
       const data = {
         labels: labels,
@@ -31,11 +42,11 @@ export class PieChartComponent {
           label: 'Causa de Reclamo Mas Frecuente',
           data: values,
           backgroundColor: [
-            'rgb(255, 99, 132)',   // Rojo
-            'rgb(54, 162, 235)',   // Azul
-            'rgb(255, 205, 86)',   // Amarillo
-            'rgb(75, 192, 192)',   // Verde agua
-            'rgb(153, 102, 255)',  // Morado
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(153, 102, 255)',
           ],
           hoverOffset: 4
         }]
@@ -46,7 +57,7 @@ export class PieChartComponent {
             labels: {
               color: 'white',
               font: {
-                size: 14 // Tamaño de fuente para las etiquetas
+                size: 10
               }
             }
           }
@@ -59,13 +70,6 @@ export class PieChartComponent {
         options: options
       });
     })
-
-
-
-
-
-
   }
-
 
 }

@@ -42,6 +42,8 @@ import { MyReservationsComponent } from './Components/Reservations/my-reservatio
 import { StatsComponent } from './Components/Stats/stats/stats.component';
 import { PieChartComponent } from './Components/Stats/pie-chart/pie-chart.component';
 import { BarChartComponent } from './Components/Stats/bar-chart/bar-chart.component';
+import { LineChartComponent } from './Components/Stats/line-chart/line-chart.component';
+import { NumberClaimsChartComponent } from './Components/Stats/number-claims-chart/number-claims-chart.component';
 
 
 @NgModule({
@@ -78,7 +80,9 @@ import { BarChartComponent } from './Components/Stats/bar-chart/bar-chart.compon
     MyReservationsComponent,
     StatsComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    LineChartComponent,
+    NumberClaimsChartComponent
   ],
   imports: [
     BrowserModule,

@@ -11,15 +11,15 @@ export class StatsService {
   baseUrl = `${environment.API_URL}/stats/`;
   constructor(private http: HttpClient) { }
 
-  GetMostFrequentComplaintsByCauseOfComplaint(dateFrom: Date | null, dateTo: Date | null): Observable<any> {
+  GetMostFrequentComplaintsByCauseOfComplaint(dateFrom: string | null, dateTo: string | null): Observable<any> {
     let params: string[] = [];
 
     if (dateFrom) {
-      params.push(`dateFrom=${dateFrom.toISOString()}`);
+      params.push(`dateFrom=${dateFrom}`);
     }
 
     if (dateTo) {
-      params.push(`dateTo=${dateTo.toISOString()}`);
+      params.push(`dateTo=${dateTo}`);
     }
 
     const queryString = params.length > 0 ? `?${params.join('&')}` : '';
@@ -29,6 +29,10 @@ export class StatsService {
 
   GetNumberOfClaimsPerMonths(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}get-number-of-claims-per-months`);
+  }
+
+  GetNumberOfGestionClaimsPerMonth(month:number,year:number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}get-number-of-gestion-claims-per-month/${month},${year}`);
   }
 
 }

@@ -1,9 +1,12 @@
-﻿using BusinessService.Models;
+﻿using BusinessService.Enums;
+using BusinessService.Models;
 using BusinessService.Services.BaseService;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +16,12 @@ namespace BusinessService.Services
     public class StatsService : BaseService<Object>
     {
         private readonly ConsorcioGestContext context;
+        private readonly SurveyService surveyService;
 
-        public StatsService(ConsorcioGestContext context)
+        public StatsService(ConsorcioGestContext context, SurveyService surveyService)
         {
             this.context = context;
+            this.surveyService = surveyService;
         }
 
         public StatsModel GetMostFrequentComplaintsByCauseOfComplaint(DateTime? dateFrom, DateTime? dateTo)
@@ -75,18 +80,54 @@ namespace BusinessService.Services
                 { "November", 0 },
                 { "December", 0 }
             };
-           
+
             foreach (var reclamo in reclamos)
             {
-                var month = reclamo.Fecha.Value.Month; 
+                var month = reclamo.Fecha.Value.Month;
                 var monthName = new DateTime(1, month, 1).ToString("MMMM");
                 claimsPerMonth[monthName]++;
             }
 
-            // Create and return the stats model
             return new StatsModel
             {
                 Data = claimsPerMonth
+            };
+        }
+
+        public StatsModel GetNumberOfGestionClaimsPerMonth(int month, int year)
+        {
+            var encuestas = context.Encuestas
+               .Where(r => r.IdConsorcio == 6 && r.Fecha.Value.Month == month && r.Fecha.Value.Year == year)
+               .ToList();
+
+            var gestionClaims = new Dictionary<string, int>
+            {
+                {"Satisfechos", 0 },
+                {"Regular", 0 },
+                {"Insatisfechos", 0 }
+            };
+
+            foreach (var encuesta in encuestas)
+            {
+                var result = surveyService.GetCustomerSatisfaccion(encuesta.Id);
+
+                switch (result)
+                {
+                    case CustomerSatisfaccion.Green:
+                        gestionClaims["Satisfechos"]++;
+                        break;
+                    case CustomerSatisfaccion.Yellow:
+                        gestionClaims["Regular"]++;
+                        break;
+                    case CustomerSatisfaccion.Red:
+                        gestionClaims["Insatisfechos"]++;
+                        break;
+                }
+            }
+
+            return new StatsModel
+            {
+                Data = gestionClaims
             };
         }
 
