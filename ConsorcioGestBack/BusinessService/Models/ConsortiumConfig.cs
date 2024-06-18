@@ -48,6 +48,7 @@ namespace BusinessService.Models
     public class CommonSpaces
     {
         public int IdSpace { get; set; }
+        public string NameSpace { get; set; }
         public string HourFrom { get; set; }
         public string HourTo { get; set; }
         public int LimitUsers { get; set; }

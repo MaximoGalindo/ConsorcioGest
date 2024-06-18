@@ -37,17 +37,16 @@
                   </div>
                   <button class="add-tower" (click)="AddTower()"><i class="fa-solid fa-plus fa-2x"></i></button>          
         </div>
-        <div *ngIf="selectedTab == 3" style="height: 600px;">
+        <div *ngIf="selectedTab == 3" style="height: 600px;" class="common-space">
             <h2>Espacios Comunes</h2>
-            <div>
-                <div *ngFor="let item of commonSpacesList; let i = index" class="input-wrapper">
-                    <input class="custom-input" placeholder="Nombre" [(ngModel)]="item.name" style="width: 200px;">
-                    <input type="time" class="custom-input" placeholder="Desde" [(ngModel)]="item.hourFrom" style="width: 60px; ">
-                    <input type="time" class="custom-input" placeholder="Hasta" [(ngModel)]="item.hourTo" style="width: 60px;">
-                    <button class="remove-tower" type="button" (click)="RemoveCommonSpace(i)"><i class="fa-solid fa-trash fa-2x"></i></button>
-                  </div>
-              </div>
-              <button class="add-tower" (click)="AddCommonSpace()"><i class="fa-solid fa-plus fa-2x"></i></button>          
+            <div *ngFor="let item of commonSpacesList; let i = index">
+                <input type="checkbox"  [id]="'time' + i" (change)="onCheckboxChange(i)" [checked]="isSelected(i)"> 
+                <label [for]="'time' + i">{{item.name}}</label>
+                <button class="remove-tower" type="button" (click)="ShowCommonSpaceConfigModal(item)" *ngIf="isSelected(i)">
+                    <i class="fa-solid fa-pen fa-2x" style="color: rgb(16, 76, 96);"></i>
+                </button>
+            </div> 
+            
         </div>
         
         <div>
@@ -64,5 +63,11 @@
 <app-config-tower-modal
     *ngIf="_ShowConfigTowerModal"
     [tower]="SelectedTower"
-    (_TowerIsPresent)="CloseModal()"
+    (_TowerIsPresent)="CloseConfigTowerModal()"
 ></app-config-tower-modal>
+
+<app-common-space-config 
+    *ngIf="_ShowCommonSpaceConfigModal" 
+    [commonSpaceConfig]="SelectedCommonSpace"
+    (_ShowModal)="CloseCommonSpaceModal()">    
+</app-common-space-config>

@@ -41,9 +41,9 @@ namespace WebApi.Controllers.ReservationsController
         }
 
         [HttpGet("get-schedules-available/{commonSpaceID}")]
-        public IActionResult GetSchedulesAvailable(string date,int commonSpaceID)
+        public IActionResult GetSchedulesAvailable(string date, int commonSpaceID)
         {
-            return Ok(reservationsService.GetSchedulesAvailable(date,commonSpaceID));
+            return Ok(reservationsService.GetSchedulesAvailable(date, commonSpaceID));
         }
 
         [HttpGet("get-reservations/{commonSpaceID}")]
@@ -56,6 +56,12 @@ namespace WebApi.Controllers.ReservationsController
         public IActionResult GetReservationsByUserID()
         {
             return Ok(reservationsService.GetReservationByUser());
+        }
+
+        [HttpPost("update-state-reservation")]
+        public IActionResult UpdateStateReservation(UpdateStateReservationDTO updateStateReservation)
+        {
+            return Ok(reservationsService.UpdateStateReservation(updateStateReservation));
         }
 
     }

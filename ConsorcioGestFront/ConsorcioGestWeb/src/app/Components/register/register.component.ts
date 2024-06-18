@@ -87,6 +87,7 @@ export class RegisterComponent {
         Phone: this.registerForm.get('Phone')?.value,
         Document: this.registerForm.get('Document')?.value,
         UserType: this.registerForm.get('UserType')?.value,
+        ConsortiumID: this.registerForm.get('Consortium')?.value,
         DocumentType: this.registerForm.get('DocumentType')?.value
       };
 

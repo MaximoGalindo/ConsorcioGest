@@ -5,7 +5,7 @@ export class ConsortiumConfiguration {
   Name: string;
   Location: string;
   Towers: Tower[];
-  CommonSpaces: CommonSpaces[];
+  CommonSpaces: CommonSpaceConfig[];
 
   constructor() {
     this.CUIT = '';
@@ -19,28 +19,23 @@ export class ConsortiumConfiguration {
 export class Tower {
   name: string;
   towerConfig: TowerConfig;
-  floorDepartments: FloorDeparmentDTO[] = [];
+  floorDepartment: FloorDeparmentDTO[] = [];
 
   constructor() {
     this.name = '';
     this.towerConfig = new TowerConfig();
-    this.floorDepartments = [];
+    this.floorDepartment = [];
   }
 }
 
-
-export class CommonSpaces {
-  name: string;
-  hourFrom: string;
-  hourTo: string;
-
-  constructor() {
-    this.name = '';
-    this.hourFrom = '';
-    this.hourTo = '';
-  }
-  
+export class CommonSpaceConfig {
+  idSpace: number = 0;
+  nameSpace: string = '';
+  hourFrom: string = '';
+  hourTo: string = '';
+  limitUsers: number = 0;
 }
+
 export class CommonSpacesModel {
   id: number = 0;
   userLimit: number = 0;

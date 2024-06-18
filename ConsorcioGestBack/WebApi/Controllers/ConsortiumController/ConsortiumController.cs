@@ -54,5 +54,11 @@ namespace WebApi.Controllers.LoginController
             return Ok(consortiumService.GetCondominiums(Tower));
         }
 
+        [HttpGet("get-common-spaces")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetCommonSpaces()
+        {
+            return Ok(consortiumService.GetCommonSpaces());
+        }
     }
 }

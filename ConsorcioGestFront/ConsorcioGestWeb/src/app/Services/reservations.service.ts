@@ -13,30 +13,33 @@ export class ReservationsService {
     baseUrl = `${environment.API_URL}/reservations/`;
     constructor(private http: HttpClient) { }
 
-    GetCommonSpacesByUser():Observable<CommonSpacesModel[]> {
+    GetCommonSpacesByUser(): Observable<CommonSpacesModel[]> {
         return this.http.get<CommonSpacesModel[]>(this.baseUrl + 'get-common-spaces-by-user')
     }
 
-    GetCommonSpaces():Observable<CommonSpacesModel[]> {
+    GetCommonSpaces(): Observable<CommonSpacesModel[]> {
         return this.http.get<CommonSpacesModel[]>(this.baseUrl + 'get-common-spaces')
-    }   
-
-    GetCommonSpaceById(id:number):Observable<CommonSpacesModel> {
-        return this.http.get<CommonSpacesModel>(this.baseUrl + 'get-common-space/'+ id)
     }
 
-    SaveReservation(reservation: ReservationDTO):Observable<any> {
+    GetCommonSpaceById(id: number): Observable<CommonSpacesModel> {
+        return this.http.get<CommonSpacesModel>(this.baseUrl + 'get-common-space/' + id)
+    }
+
+    SaveReservation(reservation: ReservationDTO): Observable<any> {
         return this.http.post(this.baseUrl + 'save-reservation', reservation)
     }
 
-    GetSchedulesAvailable(date:string, commonSpaceID:number):Observable<any> {
+    GetSchedulesAvailable(date: string, commonSpaceID: number): Observable<any> {
         return this.http.get(`${this.baseUrl}get-schedules-available/${commonSpaceID}?date=${date}`)
     }
 
-    GetReservations(id:Number):Observable<any> {
-        return this.http.get(this.baseUrl + 'get-reservations/'+ id)
+    GetReservations(id: Number): Observable<any> {
+        return this.http.get(this.baseUrl + 'get-reservations/' + id)
     }
-    GetReservationsByUserID():Observable<ReservationUser[]> {
+    GetReservationsByUserID(): Observable<ReservationUser[]> {
         return this.http.get<ReservationUser[]>(this.baseUrl + 'get-reservations-by-user-id')
+    }
+    CancelReservation(updateResevation: any): Observable<any> {
+        return this.http.post<any>(this.baseUrl + 'update-state-reservation', updateResevation);
     }
 }

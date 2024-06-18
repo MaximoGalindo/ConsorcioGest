@@ -31,4 +31,9 @@ export class ConsortiumService {
   GetTowers():Observable<ListItemDTO[]>{
     return this.http.get<ListItemDTO[]>(this.baseUrl + 'get-towers')
   }
+
+  GetCommonSpaces():Observable<ListItemDTO[]>{
+    return this.http.get<ListItemDTO[]>(this.baseUrl + 'get-common-spaces')
+  }
+
 }

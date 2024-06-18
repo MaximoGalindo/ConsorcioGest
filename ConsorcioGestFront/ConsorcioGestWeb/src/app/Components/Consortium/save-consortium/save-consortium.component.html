@@ -15,16 +15,18 @@
             <div>
                 <h2>Espacios Comunes</h2>                
             </div>
-        </div>
-        
+        </div>      
+        <div>
             <div *ngFor="let item of consortiumConfig.Towers">
                 <h3>{{item.name}}<i class="fa-solid fa-eye" style="margin-left: 10px;" 
                     (click)="ShowConfigTower(item)"></i></h3>      
             </div>
             <div *ngFor="let item of consortiumConfig.CommonSpaces">
-                <h3>{{item.name + ' - ' + item.hourFrom + ' - ' + item.hourTo }}</h3>
+                <h3>{{item.nameSpace}}<i class="fa-solid fa-eye" style="margin-left: 10px;" 
+                    (click)="ShowCommonSpaceConfig(item)"></i></h3>    
             </div>
-
+        </div>  
+       
         <button (click)="Save()">Confirmar</button>
             
     </div>
@@ -35,3 +37,9 @@
     (_IsEdit)="IsEdit($event)"
     [tower]="selectedTower"
 ></app-show-config-tower>
+
+<app-common-space-config
+    *ngIf="_OpenCommonSpaceConfigModal"
+    [commonSpaceConfig]="selectedCommonSpace"
+    (_ShowModal)="CloseModal()"
+></app-common-space-config>

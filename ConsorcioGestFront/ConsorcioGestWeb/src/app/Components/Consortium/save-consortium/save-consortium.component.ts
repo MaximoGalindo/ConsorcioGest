@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CommonSpaces, ConsortiumConfiguration, Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
+import { CommonSpaceConfig, CommonSpacesModel, ConsortiumConfiguration, Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
 import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortium-config-shared.service';
 import { ShowConfigTowerComponent } from '../Modals/show-config-tower/show-config-tower.component';
 import { CountDepartmentsByFloor, NomencaltureEnum } from 'src/app/Models/Models/TowerConfigModel';
 import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { elementAt, isEmpty } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-save-consortium',
@@ -15,18 +16,21 @@ import { elementAt, isEmpty } from 'rxjs';
 export class SaveConsortiumComponent {
 
   _OpenShowConfigModal: boolean = false
+  _OpenCommonSpaceConfigModal: boolean = false
   _IsEdit: boolean = false
 
   consortiumConfig: ConsortiumConfiguration = new ConsortiumConfiguration()
-  selectedTower:Tower = new Tower();
+  selectedTower: Tower = new Tower();
+  selectedCommonSpace: CommonSpaceConfig = new CommonSpaceConfig();
 
   constructor(
     private towerConfigShared: ConsortiumConfigSharedService,
     private modalService: NgbModal,
-    private consortiumSevice: ConsortiumService
+    private consortiumSevice: ConsortiumService,
+    private router:Router
   ) {
 
-    this.consortiumConfig.CUIT = '1234567890';
+    /*this.consortiumConfig.CUIT = '1234567890';
     this.consortiumConfig.Name = 'Gamma';
     this.consortiumConfig.Location = 'Circunvalacion';
   
@@ -66,77 +70,85 @@ export class SaveConsortiumComponent {
     tower1.towerConfig.countDeparmentsByFloors.push(departmentPerFloor4)
     tower1.towerConfig.countDeparmentsByFloors.push(departmentPerFloor5)
   
-    const commonSpace1 = new CommonSpaces();
-    commonSpace1.name = 'Espacio común 1';
+    const commonSpace1 = new CommonSpaceConfig();
+    commonSpace1.nameSpace = 'Espacio común 1';
     commonSpace1.hourFrom = '09:00';
     commonSpace1.hourTo = '18:00';
+    commonSpace1.idSpace = 1;
+    commonSpace1.limitUsers = 5;
   
     this.consortiumConfig.Towers.push(tower1);
     this.consortiumConfig.Towers.push(tower2);
     this.consortiumConfig.CommonSpaces.push(commonSpace1);
     
     //BORRAR ESTO DESPUES
-    towerConfigShared.setConsortiumConfig(this.consortiumConfig);
+    towerConfigShared.setConsortiumConfig(this.consortiumConfig);*/
 
-   /* towerConfigShared.ConsortiumConfig$.subscribe({
+    towerConfigShared.ConsortiumConfig$.subscribe({
       next: consortiumConfig => {
         this.consortiumConfig = consortiumConfig
       }
-    })*/
+    })
 
-   }
+  }
 
 
-  ShowConfigTower(tower:Tower){
+  ShowConfigTower(tower: Tower) {
     console.log(tower);
-    
-    if(tower.floorDepartments.length > 0){
-      this.selectedTower = tower;      
-      this._OpenShowConfigModal = true;     
+
+    if (tower.floorDepartment.length > 0) {
+      this.selectedTower = tower;
+      this._OpenShowConfigModal = true;
     }
-    else{
+    else {
       this.consortiumSevice.GenerateLogicConfiguration(tower).subscribe({
-        next: config => {   
-          for(var item of config){ 
-            tower.floorDepartments.push(item);    
-          }              
+        next: config => {
+          for (var item of config) {
+            tower.floorDepartment.push(item);
+          }
           this.selectedTower = tower;
           this._OpenShowConfigModal = true;
         }
-      })  
-      tower.floorDepartments = []
+      })
+      tower.floorDepartment = []
     }
-
- 
   }
 
-  CloseModal(){
+  ShowCommonSpaceConfig(commonSpace: CommonSpaceConfig) {
+    this.selectedCommonSpace = commonSpace
+    this._OpenCommonSpaceConfigModal = true
+  }
+
+  CloseModal() {
     this.selectedTower = new Tower();
+    this.selectedCommonSpace = new CommonSpaceConfig();
     this._OpenShowConfigModal = false
+    this._OpenCommonSpaceConfigModal = false
   }
 
 
   Save() {
     this.consortiumConfig.Towers.forEach(tower => {
-      if(tower.floorDepartments.length == 0){
+      if (tower.floorDepartment.length == 0) {
         this.consortiumSevice.GenerateLogicConfiguration(tower).subscribe({
           next: config => {
-            tower.floorDepartments = config;
+            tower.floorDepartment = config;
           }
         })
-      }      
-    }) 
+      }
+    })
     console.log(this.consortiumConfig);
-    
+
     this.consortiumSevice.SaveConsortium(this.consortiumConfig).subscribe({
       next: consortium => {
         console.log(consortium);
+        this.router.navigate(['/consortium']);
       }
     });
   }
-  
 
-  IsEdit(evento: boolean){
+
+  IsEdit(evento: boolean) {
     this._IsEdit = evento
     return this._IsEdit;
   }
@@ -156,5 +168,5 @@ export class SaveConsortiumComponent {
 
 
 
-  
+
 }

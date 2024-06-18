@@ -67,7 +67,7 @@ namespace BusinessService.Services.Consortium
 
             return true;
         }
-        //CAMBIAR A PRIVATE DESPUES
+
         private void SaveCommonSpaces(List<CommonSpaces> commonSpaces, int idConsortium)
         {
             foreach(CommonSpaces commonSpace in commonSpaces) 
@@ -152,6 +152,19 @@ namespace BusinessService.Services.Consortium
             }
         }
 
+       /* public bool DeleteConsortium(int consortiumID)
+        {
+            var consortium = _context.Consorcios.Where(c => c.Id == consortiumID).FirstOrDefault();
+            var contacts = _context.Contactos.Where(c => c.IdConsorcio == consortiumID).ToList();
+            var consortiumConfigurations = _context.ConsortiumConfigurations.Where(c => c.IdConsortium == consortiumID).FirstOrDefault();
+            var commonSpacesConsortium = _context.EspacioComunConsorcios.Where(e => e.IdConsorcio == consortiumID).ToList();
+            var condominiums = _context.Condominios.Where(c => c.IdConsorcio == consortiumID).ToList();
+            
+            DBDelete()
+
+            //var consortiumUsers = _context.ConsorcioUsuarios.
+        }*/
+
         public List<ListItemDTO> GetTowers()
         {
             return _context.Condominios
@@ -176,6 +189,17 @@ namespace BusinessService.Services.Consortium
                             Name = c.NumeroDepartamento,
                         })
                         .ToList();
+        }
+
+        public List<ListItemDTO> GetCommonSpaces()
+        {
+            return _context.EspacioComuns
+                .Select(e => new ListItemDTO
+                {
+                    ID = e.Id,
+                    Name = e.Nombre
+                })
+                .ToList();
         }
     }
 }

@@ -16,8 +16,23 @@ export class MyReservationsComponent {
   }
 
   ngOnInit(){
+    this.LoadReservationsByUser();
+  }
+
+  LoadReservationsByUser(){
     this.reservationService.GetReservationsByUserID().subscribe((data)=>{
       this.reservations = data
+    })
+  }
+
+  CancelReservation(reservationUser:ReservationUser){
+    var dto = {
+      ReservationID: reservationUser.id,
+      StateReservationID: 2
+    }
+    this.reservationService.CancelReservation(dto).subscribe((data)=>{
+      console.log(data);
+      this.LoadReservationsByUser()
     })
   }
 }

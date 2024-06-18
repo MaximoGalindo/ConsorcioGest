@@ -41,8 +41,6 @@ export class ConfigTowerModalComponent {
   }
 
   save(){      
-    console.log(this.uniformDeps);
-    
     if(!this.listTowers.find(tower => tower.name === this.tower.name)){
       if(this.uniformDeps > 0){
         this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:this.uniformDeps});
@@ -63,8 +61,7 @@ export class ConfigTowerModalComponent {
           this.tower.towerConfig.countDeparmentsByFloors.push({departmentsCount:deps}));  
       }
       this.listTowers[index] = this.tower
-    }
-    console.log(this.listTowers);    
+    } 
     this.towerConfigShared.setListTower(this.listTowers);
     this.CloseModal();
   }

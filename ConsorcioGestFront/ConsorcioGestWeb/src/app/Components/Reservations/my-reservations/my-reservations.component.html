@@ -22,7 +22,7 @@
             <h3>Fecha: {{r.date | date}}</h3>
             <h3>Desde: {{r.hourFrom}}hs - Hasta: {{r.hourTo}}hs</h3>
             <div class="cancel-button">
-                <button>Cancelar Reserva</button>
+                <button (click)="CancelReservation(r)">Cancelar Reserva</button>
             </div>
         </div>
     </div>

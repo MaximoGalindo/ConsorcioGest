@@ -44,6 +44,9 @@ import { PieChartComponent } from './Components/Stats/pie-chart/pie-chart.compon
 import { BarChartComponent } from './Components/Stats/bar-chart/bar-chart.component';
 import { LineChartComponent } from './Components/Stats/line-chart/line-chart.component';
 import { NumberClaimsChartComponent } from './Components/Stats/number-claims-chart/number-claims-chart.component';
+import { TermsAndConditionsComponent } from './Components/Info/terms-and-conditions/terms-and-conditions.component';
+import { FAQSComponent } from './Components/Info/faqs/faqs.component';
+import { CommonSpaceConfigComponent } from './Components/Consortium/Modals/common-space-config/common-space-config.component';
 
 
 @NgModule({
@@ -82,7 +85,10 @@ import { NumberClaimsChartComponent } from './Components/Stats/number-claims-cha
     PieChartComponent,
     BarChartComponent,
     LineChartComponent,
-    NumberClaimsChartComponent
+    NumberClaimsChartComponent,
+    TermsAndConditionsComponent,
+    FAQSComponent,
+    CommonSpaceConfigComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,7 @@
+<div class="faqs-container" [ngClass]="isAdmin ? 'color-white' : 'color-black'">
+  <h2>Preguntas Frecuentes</h2>
+  <div class="faq" *ngFor="let faq of filteredFaqs">
+    <h3 (click)="toggleAnswer(faq)">{{ faq.question }}</h3>
+    <p *ngIf="faq.showAnswer">{{ faq.answer }}</p>
+  </div>
+</div>

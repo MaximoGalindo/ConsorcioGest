@@ -9,7 +9,7 @@
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let floor of ObtenerPisosUnicos(tower.floorDepartments); let i = index">
+          <ng-container *ngFor="let floor of ObtenerPisosUnicos(tower.floorDepartment); let i = index">
             <tr>
               <td><i (click)="AddFloor(i)" class="fa-solid fa-plus"></i></td>
               <td>                

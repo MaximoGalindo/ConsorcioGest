@@ -41,7 +41,7 @@ button {
 }
 
 .reservations{
-    max-height: 30rem;
+    max-height: 60vh;
     overflow-y: auto;
 }
 

@@ -32,7 +32,7 @@ export class ShowConfigTowerComponent {
   }
 
   ObtenerDepartamentosPorPiso(floor: string): any[] {
-   const floorDepartments = this.tower.floorDepartments.filter(department => department.floor === floor);  
+   const floorDepartments = this.tower.floorDepartment.filter(department => department.floor === floor);  
    return floorDepartments
   }
 
@@ -75,7 +75,7 @@ export class ShowConfigTowerComponent {
     
     this.consortiumConfig.Towers.forEach(tower => {
       if(tower.name == this.tower.name)
-        tower.floorDepartments = departments;
+        tower.floorDepartment = departments;
     })
 
     this.towerConfigShared.setConsortiumConfig(this.consortiumConfig)

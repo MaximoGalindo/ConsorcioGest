@@ -3,6 +3,7 @@ using BusinessService.Enums;
 using BusinessService.Models;
 using BusinessService.Models.AuxModel;
 using BusinessService.ResponseDTO;
+using BusinessService.Services.BaseService;
 using DataAccess.Data;
 using DataAccess.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BusinessService.Services
 {
-    public class UserService
+    public class UserService : BaseService<Usuario>
     {
         private readonly ConsorcioGestContext _context;
 
@@ -29,7 +30,7 @@ namespace BusinessService.Services
             {
                 if (userDTO != null)
                 {
-                    var userExist = _context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == Convert.ToInt32(userDTO.Document));
+                    var userExist = _context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == Convert.ToInt32(userDTO.Document)).FirstOrDefault();
 
                     if (userExist != null)
                         return new SuccessResponseDTO { Success = false, Message = "Este usuario ya existe" }; 
@@ -50,9 +51,17 @@ namespace BusinessService.Services
                         IdPerfil = null
                     };
 
-                    _context.Add(usuario);
-                    var result = _context.SaveChanges();
-                    if (result > 0)
+                    var result = DBAdd(usuario, _context);
+
+                    ConsorcioUsuario consorcioUsuario = new ConsorcioUsuario
+                    {
+                        IdUsuario = usuario.Id,
+                        IdConsorcio = userDTO.ConsortiumID,
+                    };
+
+                    result = DBAdd(consorcioUsuario, _context);
+
+                    if (result)
                         return new SuccessResponseDTO { Success = true, Message = "Usuario creado correctamente" }; 
                     else
                         return new SuccessResponseDTO { Success = false, Message = "Error al crear el usuario" }; ;

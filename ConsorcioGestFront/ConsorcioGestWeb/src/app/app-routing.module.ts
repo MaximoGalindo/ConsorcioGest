@@ -21,6 +21,8 @@ import { NewsurveyComponent } from './Components/Surveys/newsurvey/newsurvey.com
 import { SurveysGestComponent } from './Components/Surveys/surveys-gest/surveys-gest.component';
 import { MyReservationsComponent } from './Components/Reservations/my-reservations/my-reservations.component';
 import { StatsComponent } from './Components/Stats/stats/stats.component';
+import { TermsAndConditionsComponent } from './Components/Info/terms-and-conditions/terms-and-conditions.component';
+import { FAQSComponent } from './Components/Info/faqs/faqs.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -32,7 +34,9 @@ const routes: Routes = [
       {path: 'user-gest',component:UsersGestComponent},
       {path: 'reservation-gest', component:ReservationsGestComponent},
       {path: 'survey-gest',component:SurveysGestComponent},
-      {path: 'stats',component:StatsComponent}
+      {path: 'stats',component:StatsComponent},
+      {path: 'terms-and-conditions',component:TermsAndConditionsComponent,data: { isAdmin: true }},
+      {path: 'FAQS',component:FAQSComponent,data: { isAdmin: true } }
     ]
   },
   { path: 'main-page-user', component: MainPageUserComponent,
@@ -42,7 +46,9 @@ const routes: Routes = [
       {path: 'claim-traking', component: ClaimTrackingComponent},
       {path: 'reservation-common-spaces', component: ReservationCommonSpacesComponent},
       {path: 'reservation-user/:commonSpaceID',component: NewReservationComponent},
-      {path: 'my-reservation',component:MyReservationsComponent}
+      {path: 'my-reservation',component:MyReservationsComponent},
+      {path: 'terms-and-conditions',component:TermsAndConditionsComponent,data: { isAdmin: false }},
+      {path: 'FAQS',component:FAQSComponent, data: { isAdmin: false } }
     ]},
   { path: 'consortium', component: SelectConsortiumComponent},
   { path: 'register-consortium', 

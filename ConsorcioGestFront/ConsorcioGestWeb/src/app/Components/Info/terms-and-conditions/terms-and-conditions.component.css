@@ -1,0 +1,54 @@
+.terms-container-admin {
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  color: white;
+}
+
+.terms-container-user {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  color: black;
+}
+
+.terms-container-admin h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.terms-container-admin h3 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.terms-container-admin p {
+  color: rgb(162, 162, 162);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+
+.terms-container-user h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.terms-container-user h3 {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.terms-container-user p {
+  color: rgb(56, 56, 56);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}

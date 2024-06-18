@@ -179,16 +179,17 @@ namespace BusinessService.Services
                     StateReservationID = r.IdEstadoReserva,
                     CommonSpaceConsortium = r.IdEspacioComunConsorcioNavigation.IdEspacioComunNavigation.Nombre
                 })
+                .OrderBy(r => r.StateReservationID)
                 .ToList();
             return reservations;
         }
         
-        public bool UpdateStateReservation(int reservationID,int stateReservationID)
+        public bool UpdateStateReservation(UpdateStateReservationDTO updateStateReservation)
         {
-            var reservation = _context.Reservas.Where(r => r.Id == reservationID).FirstOrDefault();
+            var reservation = _context.Reservas.Where(r => r.Id == updateStateReservation.ReservationID).FirstOrDefault();
             if (reservation != null)
             {
-                reservation.IdEstadoReserva = stateReservationID;
+                reservation.IdEstadoReserva = updateStateReservation.StateReservationID;
                 return DBUpdate(reservation, _context);
             }
             return false;          

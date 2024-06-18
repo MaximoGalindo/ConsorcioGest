@@ -7,6 +7,7 @@ export class RegisterUserDTO {
     Phone: string = '';
     Document: string = '';
     DocumentType: number = 0; 
+    ConsortiumID: number = 0;
     UserType: string = '';
   }
   
