@@ -12,7 +12,7 @@ namespace BusinessService.Enums
     }
     public enum CustomerSatisfaccion
     {
-        Green, Yellow, Red
+        Green, Yellow, Red, Unaswerred
     }
     public enum Awnser
     {

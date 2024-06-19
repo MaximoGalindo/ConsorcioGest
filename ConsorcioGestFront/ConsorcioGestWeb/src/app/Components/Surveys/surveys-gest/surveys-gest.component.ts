@@ -51,9 +51,10 @@ export class SurveysGestComponent implements OnInit {
         return 'Regular';
       case 'red':
         return 'Insatisfecho';
-      default:
+      case 'Unaswerred':
         return 'Encuesta no Respondida'; 
     }
+    return '';
   }
 
   ShowSurvey(ID:number){

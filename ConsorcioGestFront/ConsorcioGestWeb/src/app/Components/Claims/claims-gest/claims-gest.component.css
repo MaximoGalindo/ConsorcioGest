@@ -19,9 +19,15 @@ button {
 }
 
 .custom-input {
-    width: 100px;
-    height: 10px;
+    width: 8rem !important;
+    height: 2rem;
 }
+
+.custom-select{
+    width: 10rem;
+    height: 2rem;
+}
+
 label{
     color: white;
     margin-right: 10px;
@@ -92,23 +98,6 @@ label{
     width: calc(33.33% - 20px); 
     margin-right: 0;
     margin-bottom: 20px; 
-}
-
-.info-container::-webkit-scrollbar {
-    width: 10px;
-}
-
-.info-container::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-.info-container::-webkit-scrollbar-track {
-    background-color: transparent;
-}
-
-.info-container::-webkit-scrollbar-track-piece {
-    background-color: transparent;
 }
 
 

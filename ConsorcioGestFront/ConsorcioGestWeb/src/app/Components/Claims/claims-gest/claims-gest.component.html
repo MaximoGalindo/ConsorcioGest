@@ -1,18 +1,17 @@
 <div class="container-claims">
     <div class="filter-container">
         <label for="">Causa de Reclamo</label>
-        <select style="width: 120px; height: 30px;" class="custom-input">
-            <option value="" disabled>Estado</option>                
+        <select class="custom-select" [(ngModel)]="selectedCauseClaim">
+            <option value="" disabled>Causa reclamo</option>        
+            <option *ngFor="let state of causeClaims" [value]="state.id">{{state.name}}</option>        
         </select>
-        <label for="">Departamento</label>
-        <input type="text" name="Deparment" class="custom-input" style="width: 50px;">
         <label for="">NroReclamo</label>
-        <input type="text" name="ClaimNumber" class="custom-input" style="width: 50px;">
+        <input type="text" name="ClaimNumber" class="custom-input" [(ngModel)]="claimNumber" style="width: 50px;">
         <label for="">Fecha Desde</label>
-        <input type="date" name="CreationDate" class="custom-input" style="width: 120px;">
+        <input type="date" name="CreationDate" class="custom-input" [(ngModel)]="dateFrom" style="width: 120px;">
         <label for="">Fecha Hasta</label>
-        <input type="date" name="ExpirationDate" class="custom-input"  style="width: 120px; margin-right: 10px;">
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="date" name="ExpirationDate" class="custom-input" [(ngModel)]="dateTo" style="width: 120px; margin-right: 10px;">
+        <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div class="states-container">
         <ng-container *ngFor="let state of statesCount">

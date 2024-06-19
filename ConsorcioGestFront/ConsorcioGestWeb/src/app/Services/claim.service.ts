@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ConsortiumConfiguration, Tower } from '../Models/Models/ConsortiumConfigModel';
@@ -10,6 +10,7 @@ import { ClaimsCountByStatesDTO } from '../Models/DTO/ClaimsCountByStatesDTO';
 import { HistoryClaimDTO } from '../Models/DTO/HistoryClaimDTO';
 import { ClaimGestDTO } from '../Models/DTO/ClaimGestDTO';
 import { QuestionOptionDTO, ReplySurveyDTO } from '../Models/DTO/ReplySurveyDTO';
+import { FilterClaimDTO, FilterClaimUserDTO } from '../Models/DTO/FilterClaimDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +39,43 @@ export class ClaimService {
   GetHistoryClaim(claimID:number):Observable<HistoryClaimDTO[]> {
     return this.http.get<HistoryClaimDTO[]>(this.baseUrl + `histoty-claim-list/${claimID}`)
   }
-
-  GetAllClaimsByState(idState:number):Observable<ClaimDTO[]>{
-    return this.http.get<ClaimDTO[]>(this.baseUrl + 'get-claims-by-state/'+ idState)
+  GetAllClaims(filter: FilterClaimDTO): Observable<ClaimDTO[]> {
+    let params = new HttpParams();
+    if (filter.stateID) {
+      params = params.append('StateID', filter.stateID.toString());
+    }
+    if (filter.causeClaim) {
+      params = params.append('CauseClaim', filter.causeClaim.toString());
+    }
+    if (filter.nroReclamo) {
+      params = params.append('NroReclamo', filter.nroReclamo);
+    }
+    if (filter.dateFrom) {
+      params = params.append('DateFrom', filter.dateFrom);
+    }
+    if (filter.dateTo) {
+      params = params.append('DateTo', filter.dateTo);
+    }
+    return this.http.get<ClaimDTO[]>(`${this.baseUrl}get-all-claims`, { params });
   }
 
-  GetClaimsByUserID(userID:number):Observable<ClaimDTO[]>{
-    return this.http.get<ClaimDTO[]>(this.baseUrl + 'get-claims-by-user/'+ userID)
+  GetClaimsByUser(filter: FilterClaimUserDTO): Observable<ClaimDTO[]> {
+    let params = new HttpParams();
+    if (filter.causeClaim) {
+      params = params.append('CauseClaim', filter.causeClaim.toString());
+    }
+    if (filter.nroReclamo) {
+      params = params.append('NroReclamo', filter.nroReclamo);
+    }
+    if (filter.dateFrom) {
+      params = params.append('DateFrom', filter.dateFrom);
+    }
+    if (filter.dateTo) {
+      params = params.append('DateTo', filter.dateTo);
+    }
+    return this.http.get<ClaimDTO[]>(`${this.baseUrl}get-claims-by-user`, { params });
   }
-
+  
   GetCountClaimsByState():Observable<ClaimsCountByStatesDTO[]>{
     return this.http.get<ClaimsCountByStatesDTO[]>(this.baseUrl + 'get-claims-count-by-state')
   }

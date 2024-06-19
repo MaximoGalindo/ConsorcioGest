@@ -1,21 +1,22 @@
-
 <div class="container-register">
     <div class="content">
-        <div>
-            <select class="custom-select">
-                <option value="" disabled selected>Seleccione la Causa del Reclamo</option>            
-            </select>           
-        </div>
-        <div class="date-filter">
-            <input type="date"  class="custom-input" name="dateSince">
-            <input type="date"  class="custom-input" name="dateUntil">
-        </div>
-        <div class="search">
-            <input placeholder="Nro de Reclamo" type="text" name="ClaimNumebr" class="custom-input">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-        <div class="claims">
-            <app-claims-info *ngFor="let claim of claimsDTO" [Claim]="claim"></app-claims-info>
-        </div>
+      <div>
+        <select class="custom-select" [(ngModel)]="selectedCauseClaim">
+          <option value="" selected>Seleccione la Causa del Reclamo</option>   
+          <option *ngFor="let item of causeClaims" [ngValue]="item">{{ item.name }}</option>         
+        </select>           
+      </div>
+      <div class="date-filter">
+        <input type="date" [(ngModel)]="dateFrom" class="custom-input" name="dateSince">
+        <input type="date" [(ngModel)]="dateTo" class="custom-input" name="dateUntil">
+      </div>
+      <div class="search">
+        <input placeholder="Nro de Reclamo" [(ngModel)]="claimNumber" type="text" name="ClaimNumber" class="custom-input">
+        <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+      <div class="claims">
+        <app-claims-info *ngFor="let claim of claimsDTO" [Claim]="claim"></app-claims-info>
+      </div>
     </div>    
-</div>
+  </div>
+  

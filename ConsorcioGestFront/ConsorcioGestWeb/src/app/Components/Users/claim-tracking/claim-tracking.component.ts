@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
+import { FilterClaimUserDTO } from 'src/app/Models/DTO/FilterClaimDTO';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
+import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.service';
 import { ClaimService } from 'src/app/Services/claim.service';
 
@@ -13,21 +15,36 @@ export class ClaimTrackingComponent {
   
   claimsDTO:ClaimDTO[] = []
   User:UserModelDTO = new UserModelDTO();
-  constructor(private claimService:ClaimService,
-    private SharedDataUser:UserDataSharedService
-  ){
+  causeClaims:ListItemDTO[] = [];
+
+  //FILTERS
+  selectedCauseClaim:ListItemDTO = new ListItemDTO();
+  dateFrom:string = "";
+  dateTo:string = "";
+  claimNumber:string = "";
+
+  constructor(private claimService:ClaimService){
 
   }
 
   ngOnInit(){
-    this.SharedDataUser.User$.subscribe((data)=>{
-      if(data != null)
-        this.User = data;
-    }) 
-    this.claimService.GetClaimsByUserID(this.User.id).subscribe((data)=>{
+    this.claimService.GetCauseClaim().subscribe((data)=>{
+      this.causeClaims = data;
+    })
+    var filter = new FilterClaimUserDTO();
+    this.claimService.GetClaimsByUser(filter).subscribe((data)=>{
       this.claimsDTO = data;
-      console.log(this.claimsDTO);
-      
+    })
+  }
+
+  Search(){   
+    var filter = new FilterClaimUserDTO ();
+    filter.causeClaim = this.selectedCauseClaim.id;
+    filter.nroReclamo = this.claimNumber != '' ? this.claimNumber : '';
+    filter.dateFrom = this.dateFrom != '' ? this.dateFrom : '';
+    filter.dateTo = this.dateTo != '' ? this.dateTo : '';
+    this.claimService.GetClaimsByUser(filter).subscribe((data)=>{
+      this.claimsDTO = data;
     })
   }
 

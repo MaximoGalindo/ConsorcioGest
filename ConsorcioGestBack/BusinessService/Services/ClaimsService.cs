@@ -164,33 +164,41 @@ namespace BusinessService.Services
 
 
 
-        public List<ClaimDTO> GetAllClaimsByState(int idState)
+        public List<ClaimDTO> GetAllClaims(FilterClaimDTO filterClaim)
         {
             List<ClaimDTO> claimDTOs = _context.Reclamos
-                        .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id)
-                            && (idState != 0 ? c.IdEstadoReclamo == idState : true))
-                        .Select(c => new ClaimDTO
-                        {
-                            Id = c.Id,
-                            ClaimNumber = c.NroReclamo,
-                            StateId = c.IdEstadoReclamo,
-                            State = c.IdEstadoReclamoNavigation.Nombre,
-                            CauseClaimID = c.IdCausaProblema,
-                            CauseClaim = c.IdCausaProblemaNavigation.Nombre,
-                            Date = c.Fecha.ToString(),
-                            Condominium = c.IdUsuarioNavigation.IdCondominioNavigation.Torre + ' ' + c.IdUsuarioNavigation.IdCondominioNavigation.NumeroDepartamento,
-                            AffectedSpaceID = c.IdEspacioAfectado,
-                            AffectedSpace = c.IdEspacioAfectadoNavigation.Nombre,
-                            UserID = c.IdUsuario,
-                            ProblemDetail = c.Comentario
-                        }).ToList();
+                            .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id)
+                                    && (filterClaim.StateID != 0 ? c.IdEstadoReclamo == filterClaim.StateID : true)
+                                    && (filterClaim.CauseClaim != 0 ? c.IdCausaProblema == filterClaim.CauseClaim : true)
+                                    && (!string.IsNullOrEmpty(filterClaim.NroReclamo) ? c.NroReclamo == filterClaim.NroReclamo : true)
+                                    && (filterClaim.DateFrom != null ? c.Fecha >= filterClaim.DateFrom : true)
+                                    && (filterClaim.DateTo != null ? c.Fecha <= filterClaim.DateTo : true))
+                            .Select(c => new ClaimDTO
+                            {
+                                Id = c.Id,
+                                ClaimNumber = c.NroReclamo,
+                                StateId = c.IdEstadoReclamo,
+                                State = c.IdEstadoReclamoNavigation.Nombre,
+                                CauseClaimID = c.IdCausaProblema,
+                                CauseClaim = c.IdCausaProblemaNavigation.Nombre,
+                                Date = c.Fecha.ToString(),
+                                Condominium = c.IdUsuarioNavigation.IdCondominioNavigation.Torre + ' ' + c.IdUsuarioNavigation.IdCondominioNavigation.NumeroDepartamento,
+                                AffectedSpaceID = c.IdEspacioAfectado,
+                                AffectedSpace = c.IdEspacioAfectadoNavigation.Nombre,
+                                UserID = c.IdUsuario,
+                                ProblemDetail = c.Comentario
+                            }).ToList();
             return claimDTOs;
         }
 
-        public List<ClaimDTO> GetClaimsByUserID(int userID)
+        public List<ClaimDTO> GetClaimsByUser(FilterClaimUserDTO filterClaim)
         {
             List<ClaimDTO> claimDTOs = _context.Reclamos
-                        .Where(c => c.IdUsuario == userID)
+                        .Where(c => c.IdUsuario == 19//LoginService.CurrentUser.Id
+                                && (filterClaim.CauseClaim != 0 ? c.IdCausaProblema == filterClaim.CauseClaim : true)
+                                && (!string.IsNullOrEmpty(filterClaim.NroReclamo) ? c.NroReclamo == filterClaim.NroReclamo : true)
+                                && (filterClaim.DateFrom != null ? c.Fecha >= filterClaim.DateFrom : true)
+                                && (filterClaim.DateTo != null ? c.Fecha <= filterClaim.DateTo : true))
                         .Select(c => new ClaimDTO
                         {
                             Id = c.Id,

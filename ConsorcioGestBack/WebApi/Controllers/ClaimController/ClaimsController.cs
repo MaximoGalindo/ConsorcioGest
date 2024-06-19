@@ -34,7 +34,7 @@ namespace WebApi.Controllers.ClaimController
         [HttpPost("save-claim-gestion")]
         public async Task<IActionResult> SaveClaimGestion(SaveClaimGestionDTO saveClaimGestion)
         {
-            return Ok(claimsService.SaveClaimGestion(saveClaimGestion));
+            return Ok(await claimsService.SaveClaimGestion(saveClaimGestion));
         }
 
         [HttpGet("histoty-claim-list/{claimID}")]
@@ -61,10 +61,10 @@ namespace WebApi.Controllers.ClaimController
             return Ok(claimsService.GetStatesClaim());
         }
 
-        [HttpGet("get-claims-by-state/{idState}")]
-        public IActionResult GetClaimsByState(int idState)
+        [HttpGet("get-all-claims")]
+        public IActionResult GetAllClaims([FromQuery] FilterClaimDTO filterClaim)
         {
-            return Ok(claimsService.GetAllClaimsByState(idState));
+            return Ok(claimsService.GetAllClaims(filterClaim));
         }
 
         [HttpGet("get-claims-count-by-state")]
@@ -79,10 +79,10 @@ namespace WebApi.Controllers.ClaimController
             return Ok(claimsService.GetImagesByReclamoId(id));
         }
 
-        [HttpGet("get-claims-by-user/{userID}")]
-        public IActionResult GetClaimsByUserID(int userID)
+        [HttpGet("get-claims-by-user")]
+        public IActionResult GetClaimsByUser([FromQuery] FilterClaimUserDTO filterClaimUser)
         {
-            return Ok(claimsService.GetClaimsByUserID(userID));
+            return Ok(claimsService.GetClaimsByUser(filterClaimUser));
         }
 
         [HttpPost("send")]

@@ -69,12 +69,12 @@ namespace BusinessService.Services
 
         public async Task<bool> SendSurveyByEmail(int claimID)
         {
-            var surveyID = context.Encuestas.Where(e => e.IdReclamo == claimID).Select(e => e.Id);
+            var surveyID = context.Encuestas.Where(e => e.IdReclamo == claimID).Select(e => e.Id).FirstOrDefault();
             var claim = context.Reclamos.Where(r => r.Id == claimID).Select(r => new 
-                { 
-                    ClaimNumber = r.NroReclamo, 
-                    Email = r.IdUsuarioNavigation.Email 
-                }).FirstOrDefault();
+            { 
+                ClaimNumber = r.NroReclamo, 
+                Email = r.IdUsuarioNavigation.Email 
+            }).FirstOrDefault();
 
             var surveyLink = $"{GlobalResourses.FrontURL}/claim-survey/{surveyID}";
 
@@ -175,14 +175,17 @@ namespace BusinessService.Services
                 totalValues += cs.Option.ValorNumerico != null ? cs.Option.ValorNumerico.Value : 0;
             }
 
-            if (totalValues == 6 || totalValues == 7)
-                return CustomerSatisfaccion.Yellow;
-            else if (totalValues < 6)
-                return CustomerSatisfaccion.Red;
-            else if (totalValues > 7)
-                return CustomerSatisfaccion.Green;
+            if(customerSatisfaccion.Count != 0)
+            {
+                if (totalValues == 6 || totalValues == 7)
+                    return CustomerSatisfaccion.Yellow;
+                else if (totalValues < 6)
+                    return CustomerSatisfaccion.Red;
+                else if (totalValues > 7)
+                    return CustomerSatisfaccion.Green;
+            }
 
-            return CustomerSatisfaccion.Green;
+            return CustomerSatisfaccion.Unaswerred;
         }
 
     }
