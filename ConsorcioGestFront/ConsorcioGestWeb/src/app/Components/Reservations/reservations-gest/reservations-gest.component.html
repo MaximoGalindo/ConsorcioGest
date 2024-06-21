@@ -6,14 +6,12 @@
     </div>
     <div  *ngIf="_ShowGrid" class="filter-container">
         <label style="margin-left: 30px;">Documento</label>
-        <input type="text" name="Document" class="custom-input">
-        <label for="">Departamento</label>
-        <input type="text" name="Deparment" class="custom-input" style="width: 50px;">        
+        <input type="text" [(ngModel)]="document" name="Document" class="custom-input">    
         <label for="">Fecha Desde</label>
-        <input type="date" name="CreationDate" class="custom-input" style="width: 120px;">
+        <input type="date" name="CreationDate" [(ngModel)]="dateFrom" class="custom-input" style="width: 120px;">
         <label for="">Fecha Hasta</label>
-        <input type="date" name="ExpirationDate" class="custom-input"  style="width: 120px; margin-right: 10px;">
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="date" name="ExpirationDate" [(ngModel)]="dateTo" class="custom-input"  style="width: 120px; margin-right: 10px;">
+        <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div *ngIf="_ShowGrid" class="table-container">
         <table>
@@ -38,7 +36,9 @@
                     <td>{{r.hourFrom}} - {{r.hourTo}}</td>	
                     <td>{{r.stateReservation}}</td>
                     <td>{{r.user.phone}}<br>{{r.user.email}}</td>
-                    <td><button>Ver</button></td>
+                    <td class="actions">
+                        <button [disabled]="r.stateReservation == 'Cancelado'" (click)="CancelReservation(r)"><i [ngStyle]="{'color': r.stateReservation == 'Cancelado' ? 'gray' : 'red'}" class="fa-solid fa-ban fa-2x"></i></button>
+                    </td>
                 </tr>                
             </tbody>
         </table>
@@ -46,5 +46,11 @@
     <div *ngIf="_ShowGrid">
         <button class="back-button" (click)="Back()">Volver</button>
     </div>
-
 </div>
+
+<app-cancel-reservation
+    *ngIf="_ShowCancelReservation"
+    (_ShowModal)="CloseModal()"
+    [Reservation]="selectedReservation"
+>
+</app-cancel-reservation>

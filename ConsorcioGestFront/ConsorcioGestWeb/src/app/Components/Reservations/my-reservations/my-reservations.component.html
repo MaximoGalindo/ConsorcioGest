@@ -1,17 +1,19 @@
 <div class="total-container">
     <div>
-        <div>
-            <select class="custom-select">
-                <option value="" disabled selected>Seleccione el Espacio Comun</option>            
-            </select>           
-        </div>
         <div class="date-filter">
             <label for="">Fecha Desde:</label>
-            <input type="date" class="custom-input" name="dateSince">
+            <input type="date" class="custom-input" [(ngModel)]="dateFrom" name="dateSince">
         </div>
         <div class="date-filter">
             <label for="">Fecha Hasta:</label>
-            <input type="date" class="custom-input" name="dateUntil">
+            <input type="date" [(ngModel)]="dateTo" class="custom-input" name="dateUntil">           
+        </div>
+        <div class="filter-container">
+            <select class="custom-select" [(ngModel)]="selectedCommomSpace">
+                <option value="" disabled selected>Seleccione el Espacio Comun</option>         
+                <option *ngFor="let commonSpace of commonSpaces" [value]="commonSpace.id">{{commonSpace.commonSpaceName}}</option>   
+            </select>    
+            <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>       
         </div>
     </div>
     <div class="reservations" >

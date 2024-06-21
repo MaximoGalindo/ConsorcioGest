@@ -33,5 +33,12 @@ namespace WebApi.Controllers.StatsController
         {
             return Ok(statsService.GetNumberOfGestionClaimsPerMonth(month,year));
         }
+
+        [HttpGet("get-years")]
+        public IActionResult GetYearsWithClaims()
+        {
+            return Ok(statsService.GetYearsWithClaims());
+        }
+
     }
 }

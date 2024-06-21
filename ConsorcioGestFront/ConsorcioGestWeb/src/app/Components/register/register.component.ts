@@ -118,8 +118,7 @@ export class RegisterComponent {
     this.consortiumService.GetConsortiums().subscribe({
       next: data => {
         for (var item of data) {
-          this.consortiums.push({ Id: item.id, Name: item.name, Location: item.location });
-          console.log(this.consortiums);            
+          this.consortiums.push({ Id: item.id, Name: item.name, Location: item.location });        
         }
       }
     })

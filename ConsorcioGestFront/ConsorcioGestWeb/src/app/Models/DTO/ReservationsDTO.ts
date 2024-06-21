@@ -15,3 +15,9 @@ export class ReservationUser {
   commonSpaceConsortiumID: number = 0;
   commonSpaceConsortium: string = '';
 }
+
+export class UpdateStateReservationDTO {
+  reservationID: number = 0;
+  stateReservationID: number = 0;
+  message: string = '';
+}

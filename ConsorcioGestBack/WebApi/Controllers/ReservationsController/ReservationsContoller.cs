@@ -46,22 +46,28 @@ namespace WebApi.Controllers.ReservationsController
             return Ok(reservationsService.GetSchedulesAvailable(date, commonSpaceID));
         }
 
-        [HttpGet("get-reservations/{commonSpaceID}")]
-        public IActionResult GetReservations(int commonSpaceID)
+        [HttpGet("get-reservations")]
+        public IActionResult GetReservations([FromQuery] FilterReservationDTO filterReservation)
         {
-            return Ok(reservationsService.GetReservations(commonSpaceID));
+            return Ok(reservationsService.GetReservations(filterReservation));
         }
 
         [HttpGet("get-reservations-by-user-id")]
-        public IActionResult GetReservationsByUserID()
+        public IActionResult GetReservationsByUserID([FromQuery] FilterReservationUserDTO filterReservation)
         {
-            return Ok(reservationsService.GetReservationByUser());
+            return Ok(reservationsService.GetReservationByUser(filterReservation));
         }
 
         [HttpPost("update-state-reservation")]
-        public IActionResult UpdateStateReservation(UpdateStateReservationDTO updateStateReservation)
+        public async Task<IActionResult> UpdateStateReservation(UpdateStateReservationDTO updateStateReservation)
         {
-            return Ok(reservationsService.UpdateStateReservation(updateStateReservation));
+            return Ok(await reservationsService.UpdateStateReservation(updateStateReservation));
+        }
+
+        [HttpPost("cancel-reservation-by-user")]
+        public IActionResult CancelReservationByUser(int reservationID)
+        {
+            return Ok(reservationsService.CancelReservationByUser(reservationID));
         }
 
     }

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { FilterReservationUserDTO } from 'src/app/Models/DTO/FiltersDTO';
 import { ReservationUser } from 'src/app/Models/DTO/ReservationsDTO';
+import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
+import { CommonSpacesModel } from 'src/app/Models/Models/ConsortiumConfigModel';
 import { ReservationsService } from 'src/app/Services/reservations.service';
 
 @Component({
@@ -10,6 +13,12 @@ import { ReservationsService } from 'src/app/Services/reservations.service';
 export class MyReservationsComponent {
 
   reservations:ReservationUser[] = []
+  commonSpaces:CommonSpacesModel[] = [] 
+
+  //FILTERS
+  selectedCommomSpace:number = 0;
+  dateFrom:string = "";
+  dateTo:string = "";
 
   constructor(private reservationService:ReservationsService){
     
@@ -17,22 +26,33 @@ export class MyReservationsComponent {
 
   ngOnInit(){
     this.LoadReservationsByUser();
+    this.reservationService.GetCommonSpaces().subscribe((data)=>{
+      this.commonSpaces = data
+    })
   }
 
   LoadReservationsByUser(){
-    this.reservationService.GetReservationsByUserID().subscribe((data)=>{
+    var filter = new FilterReservationUserDTO();
+    this.reservationService.GetReservationsByUserID(filter).subscribe((data)=>{
       this.reservations = data
     })
   }
 
   CancelReservation(reservationUser:ReservationUser){
-    var dto = {
-      ReservationID: reservationUser.id,
-      StateReservationID: 2
-    }
-    this.reservationService.CancelReservation(dto).subscribe((data)=>{
+    this.reservationService.CancelReservation(reservationUser.id).subscribe((data)=>{
       console.log(data);
       this.LoadReservationsByUser()
+    })
+  }
+  Search(){
+    var filter = new FilterReservationUserDTO();
+    console.log(this.selectedCommomSpace);
+    
+    filter.commonSpaceID =  this.selectedCommomSpace;
+    filter.dateFrom = this.dateFrom;
+    filter.dateTo = this.dateTo;
+    this.reservationService.GetReservationsByUserID(filter).subscribe((data)=>{
+      this.reservations = data
     })
   }
 }

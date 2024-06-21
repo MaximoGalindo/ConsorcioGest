@@ -10,7 +10,7 @@ import { ClaimsCountByStatesDTO } from '../Models/DTO/ClaimsCountByStatesDTO';
 import { HistoryClaimDTO } from '../Models/DTO/HistoryClaimDTO';
 import { ClaimGestDTO } from '../Models/DTO/ClaimGestDTO';
 import { QuestionOptionDTO, ReplySurveyDTO } from '../Models/DTO/ReplySurveyDTO';
-import { FilterClaimDTO, FilterClaimUserDTO } from '../Models/DTO/FilterClaimDTO';
+import { FilterClaimDTO, FilterClaimUserDTO } from '../Models/DTO/FiltersDTO';
 
 @Injectable({
   providedIn: 'root'

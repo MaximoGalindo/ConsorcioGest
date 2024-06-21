@@ -10,5 +10,6 @@ namespace BusinessService.DTO
     {
         public int ReservationID { get; set; }
         public int StateReservationID { get; set; }
+        public string Message { get; set; }
     }
 }

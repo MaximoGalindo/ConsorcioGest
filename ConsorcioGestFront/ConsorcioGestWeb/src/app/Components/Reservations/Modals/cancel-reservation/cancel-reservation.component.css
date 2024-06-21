@@ -1,0 +1,48 @@
+.modal-content {
+    background-color: #ABD1C6;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 80%;
+    height: 50%;
+    width: 50%;
+    position: relative;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+h1, h3{
+    margin: 0;
+}
+
+.content{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content textarea{
+    width: 80%;
+    height: 25vh;
+}
+
+button{
+    background-color: #005F5B;
+    border: none;
+    border-radius: 0.6rem;
+    padding: 0.5rem 0.5rem;
+    width: 10rem;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    margin-top: 1rem;
+}
+

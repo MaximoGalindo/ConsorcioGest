@@ -33,10 +33,9 @@ export class NumberClaimsChartComponent {
   years: number[] = [];
 
   constructor(private statsService: StatsService) {
-    const currentYear = new Date().getFullYear();
-    for (let i = currentYear - 10; i <= currentYear; i++) {
-      this.years.push(i);
-    }
+    statsService.GetYearsWithClaims().subscribe(stats => {
+      this.years = stats;
+    })
 
     this.selectedMonth = new Date().getMonth() + 1;
     this.selectedYear = new Date().getFullYear();

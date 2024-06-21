@@ -35,4 +35,8 @@ export class StatsService {
     return this.http.get<any>(`${this.baseUrl}get-number-of-gestion-claims-per-month/${month},${year}`);
   }
 
+  GetYearsWithClaims():Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}get-years`);
+  }
+
 }

@@ -3,6 +3,7 @@ using BusinessService.Enums;
 using BusinessService.Models;
 using BusinessService.Services.BaseService;
 using BusinessService.Services.Consortium;
+using BusinessService.Templates;
 using DataAccess.Data;
 using DataAccess.Data.Models;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,9 +20,11 @@ namespace BusinessService.Services
     public class ReservationsService : BaseService<Reserva>
     {
         private readonly ConsorcioGestContext _context;
-        public ReservationsService(ConsorcioGestContext consorcioGestContext) 
+        private readonly EmailService emailService;
+        public ReservationsService(ConsorcioGestContext consorcioGestContext,EmailService emailService) 
         {
             this._context = consorcioGestContext;
+            this.emailService = emailService;
         }
 
         public List<CommonSpaceModel> GetCommonSpaces(int consortiumID)
@@ -136,11 +140,24 @@ namespace BusinessService.Services
             return commonSpaces;
         }
 
-        public List<ReservationModel> GetReservations(int commonSpaceID)
+        public List<ReservationModel> GetReservations(FilterReservationDTO filterReservation)
         {
+            List<Reserva> reservas = _context.Reservas.Where(r => r.IdConsorcio == LoginService.CurrentConsortium.Id).ToList();
+            foreach (var r in reservas)
+            {
+                if(r.Fecha >= DateTime.Now.Date)
+                {
+                    r.IdEstadoReserva = (int)ReservationsStatesEnum.FINISHED;
+                    DBUpdate(r, _context);
+                }
+            }
+
             List<ReservationModel> reservations = _context.Reservas
-                .Where(r => r.IdConsorcio == LoginService.CurrentConsortium.Id 
-                         && r.IdEspacioComunConsorcio == commonSpaceID)
+                .Where(r => r.IdConsorcio == LoginService.CurrentConsortium.Id
+                         && r.IdEspacioComunConsorcio == filterReservation.CommonSpaceID        
+                         && (filterReservation.Document != 0 ? r.IdUsuarioNavigation.Documento == filterReservation.Document : true)
+                         && (filterReservation.DateFrom != null ? r.Fecha >= filterReservation.DateFrom : true)
+                         && (filterReservation.DateTo != null ? r.Fecha <= filterReservation.DateTo : true))
                 .Select(r => new ReservationModel
                 {
                     Id = r.Id,
@@ -164,10 +181,23 @@ namespace BusinessService.Services
             return reservations;    
         }
 
-        public List<ReservationUser> GetReservationByUser()
+        public List<ReservationUser> GetReservationByUser(FilterReservationUserDTO filterReservation)
         {
+            List<Reserva> reservas = _context.Reservas.Where(r => r.IdConsorcio == LoginService.CurrentUser.Id).ToList();
+            foreach (var r in reservas)
+            {
+                if (r.Fecha >= DateTime.Now.Date)
+                {
+                    r.IdEstadoReserva = (int)ReservationsStatesEnum.FINISHED;
+                    DBUpdate(r, _context);
+                }
+            }
+
             List<ReservationUser> reservations = _context.Reservas
-                .Where(r => r.IdUsuario == LoginService.CurrentUser.Id)
+                .Where(r => r.IdUsuario == LoginService.CurrentUser.Id
+                            && (filterReservation.CommonSpaceID != 0 ? r.IdEspacioComunConsorcio == filterReservation.CommonSpaceID : true)
+                            && (filterReservation.DateFrom != null ? r.Fecha >= filterReservation.DateFrom : true)
+                            && (filterReservation.DateTo != null ? r.Fecha <= filterReservation.DateTo : true))
                 .Select(r => new ReservationUser
                 {
                     Id = r.Id,
@@ -184,15 +214,47 @@ namespace BusinessService.Services
             return reservations;
         }
         
-        public bool UpdateStateReservation(UpdateStateReservationDTO updateStateReservation)
+        public async Task<bool> UpdateStateReservation(UpdateStateReservationDTO updateStateReservation)
         {
             var reservation = _context.Reservas.Where(r => r.Id == updateStateReservation.ReservationID).FirstOrDefault();
             if (reservation != null)
             {
+                if (updateStateReservation.StateReservationID == (int)ReservationsStatesEnum.CANCELLED)
+                    await SendCancelEmailAsync(reservation.Id,updateStateReservation.Message);
+
                 reservation.IdEstadoReserva = updateStateReservation.StateReservationID;
                 return DBUpdate(reservation, _context);
-            }
+            }            
             return false;          
+        }
+
+        private async Task<bool> SendCancelEmailAsync(int reservationID,string message)
+        {
+            var reservation = _context.Reservas.Where(r => r.Id == reservationID)
+                                               .Select(r => new
+                                               {
+                                                   r.HoraDesde,
+                                                   r.HoraHasta,
+                                                   CommonSpaceName = r.IdEspacioComunConsorcioNavigation.IdEspacioComunNavigation.Nombre,
+                                                   EmailUser = r.IdUsuarioNavigation.Email,
+                                               })
+                                               .FirstOrDefault();
+
+            var bodyEmail = EmailTemplateService.GetTemplate("EmailCancelReservation",("commonSpace",reservation.CommonSpaceName), ("hourFrom", reservation.HoraDesde), ("hourTo", reservation.HoraHasta),("message",message));
+            
+            await emailService.SendEmailAsync(reservation.EmailUser, "Cancelacion de Reserva", bodyEmail);
+            return true;
+        }
+
+        public bool CancelReservationByUser(int reservationID)
+        {
+            var reservation = _context.Reservas.Where(r => r.Id == reservationID).FirstOrDefault();
+            if (reservation != null)
+            {
+                reservation.IdEstadoReserva = (int)ReservationsStatesEnum.CANCELLED;
+                return DBUpdate(reservation, _context);
+            }
+            return false;
         }
 
         private List<string> GetHourlyIntervals(string startHour, string endHour)

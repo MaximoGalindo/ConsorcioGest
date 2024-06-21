@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
 import { ClaimsCountByStatesDTO } from 'src/app/Models/DTO/ClaimsCountByStatesDTO';
-import { FilterClaimDTO } from 'src/app/Models/DTO/FilterClaimDTO';
+import { FilterClaimDTO } from 'src/app/Models/DTO/FiltersDTO';
 import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { ClaimService } from 'src/app/Services/claim.service';
 

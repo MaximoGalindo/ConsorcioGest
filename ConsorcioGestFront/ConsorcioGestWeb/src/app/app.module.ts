@@ -47,6 +47,7 @@ import { NumberClaimsChartComponent } from './Components/Stats/number-claims-cha
 import { TermsAndConditionsComponent } from './Components/Info/terms-and-conditions/terms-and-conditions.component';
 import { FAQSComponent } from './Components/Info/faqs/faqs.component';
 import { CommonSpaceConfigComponent } from './Components/Consortium/Modals/common-space-config/common-space-config.component';
+import { CancelReservationComponent } from './Components/Reservations/Modals/cancel-reservation/cancel-reservation.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { CommonSpaceConfigComponent } from './Components/Consortium/Modals/commo
     NumberClaimsChartComponent,
     TermsAndConditionsComponent,
     FAQSComponent,
-    CommonSpaceConfigComponent
+    CommonSpaceConfigComponent,
+    CancelReservationComponent
   ],
   imports: [
     BrowserModule,

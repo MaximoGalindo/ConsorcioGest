@@ -49,7 +49,7 @@ namespace BusinessService.Services
                      Count = g.Count()
                  })
                  .OrderByDescending(g => g.Count)
-                 .Take(5)
+                 .Take(4)
                  .ToDictionary(g => g.CauseOfComplaint, g => g.Count);
 
             return new StatsModel
@@ -129,6 +129,22 @@ namespace BusinessService.Services
             {
                 Data = gestionClaims
             };
+        }
+
+
+        public List<int> GetYearsWithClaims()
+        {
+            var currentYear = DateTime.Now.Year;
+            var pastTenYears = Enumerable.Range(currentYear - 10, 11);
+
+            var yearsWithClaims = context.Reclamos
+                .Where(r => pastTenYears.Contains(r.Fecha.Value.Year))
+                .Select(r => r.Fecha.Value.Year)
+                .Distinct()
+                .OrderBy(year => year)
+                .ToList();
+
+            return yearsWithClaims;
         }
 
     }

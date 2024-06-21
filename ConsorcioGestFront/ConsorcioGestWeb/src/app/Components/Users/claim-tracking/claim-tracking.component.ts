@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
-import { FilterClaimUserDTO } from 'src/app/Models/DTO/FilterClaimDTO';
+import { FilterClaimUserDTO } from 'src/app/Models/DTO/FiltersDTO';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
 import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.service';
