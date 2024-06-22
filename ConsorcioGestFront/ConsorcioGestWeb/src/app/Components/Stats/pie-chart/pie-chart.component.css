@@ -1,0 +1,41 @@
+.filter-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    color: white;
+    gap: 0.5rem;
+}
+
+.total-container {
+    background-color: #0A3333;
+    text-align: center;
+    color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 85vh;
+}
+
+input{
+    height: 2rem;
+    width: 8rem !important;
+    padding-right: 0.2rem;
+}
+
+label{
+    font-size: 1rem;
+}
+
+button {
+    background-color: #F9BC60;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: black;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: 400;   
+}
+h3{
+    margin: 0;
+}

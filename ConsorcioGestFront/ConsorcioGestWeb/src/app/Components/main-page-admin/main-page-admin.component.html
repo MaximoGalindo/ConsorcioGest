@@ -5,56 +5,58 @@
     <hr class="line">   
     <h4>Sistema de gestion de Consorcios</h4>
     <br>
-    <div class="items">
-      <button style="margin-left: 30px;" routerLink="/main-page-admin/claims-gest">
-        <i class="fa-solid fa-circle-exclamation fa-2x" style="margin-right: 7px; color: black;"></i>
-        Reclamos
-      </button>    
-    </div>
-    <div class="items">
-      <button style="margin-left: 33px;" routerLink="/main-page-admin/reservation-gest"> 
-        <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
-        Reservas
-      </button>    
-    </div>
-    <div class="items">
-      <button style="margin-left: 26px;" routerLink="/main-page-admin/user-gest">
-        <i class="fa-solid fa-users fa-2x" style="margin-right: 4px; color: black;"></i>
-        Usuarios
-      </button>    
-    </div>
-    <div class="items">
-      <button style="margin-left: 30px;" routerLink="/main-page-admin/survey-gest">
-        <i class="fa-solid fa-square-poll-horizontal fa-2x" style="margin-right: 7px; color: black;"></i>
-        Encuestas
-      </button>    
-    </div>  
-    <div class="items">
-      <button style="margin-left: 28px;"  routerLink="/main-page-admin/stats">
-        <i class="fa-solid fa-chart-line fa-2x" style="margin-right: 7px; color: black;"></i>
-        Estadisticas
-      </button>    
-    </div>
-
-
     <div>
-      <button class="items-session" (click)="BackToSelectConsortium()">
-        <i class="fa-solid fa-building " style="margin-right: 7px; color: black;"></i>
-        Seleccionar Consorcio
-      </button>    
-    </div>  
-    <div>
-      <button class="items-session">
-        <i class="fa-solid fa-arrow-right-from-bracket " style="margin-right: 3px; color: black;"></i>
-        Cerrar Sesion
-      </button>    
-    </div>  
-    <div>
-      <a routerLink="/main-page-admin/terms-and-conditions">Terminos y Condiciones</a>
+      <div class="items">
+        <button style="margin-left: 30px;" routerLink="/main-page-admin/claims-gest">
+          <i class="fa-solid fa-circle-exclamation fa-2x" style="margin-right: 7px; color: black;"></i>
+          Reclamos
+        </button>    
+      </div>
+      <div class="items">
+        <button style="margin-left: 33px;" routerLink="/main-page-admin/reservation-gest"> 
+          <i class="fa-solid fa-calendar-days fa-2x" style="margin-right: 7px; color: black;"></i>
+          Reservas
+        </button>    
+      </div>
+      <div class="items">
+        <button style="margin-left: 26px;" routerLink="/main-page-admin/user-gest">
+          <i class="fa-solid fa-users fa-2x" style="margin-right: 4px; color: black;"></i>
+          Usuarios
+        </button>    
+      </div>
+      <div class="items">
+        <button style="margin-left: 30px;" routerLink="/main-page-admin/survey-gest">
+          <i class="fa-solid fa-square-poll-horizontal fa-2x" style="margin-right: 7px; color: black;"></i>
+          Encuestas
+        </button>    
+      </div>  
+      <div class="items">
+        <button style="margin-left: 28px;"  routerLink="/main-page-admin/stats">
+          <i class="fa-solid fa-chart-line fa-2x" style="margin-right: 7px; color: black;"></i>
+          Estadisticas
+        </button>    
+      </div>
     </div>
-    <div>
-      <a routerLink="/main-page-admin/FAQS">Preguntas Frecuentes</a>
-    </div>
+    <div class="session">
+      <div>
+        <a routerLink="/main-page-admin/terms-and-conditions">Terminos y Condiciones</a>
+      </div>
+      <div>
+        <a routerLink="/main-page-admin/FAQS">Preguntas Frecuentes</a>
+      </div>
+      <div style="margin-top: 0.5rem;">
+        <button class="items-session" (click)="BackToSelectConsortium()">
+          <i class="fa-solid fa-building " style="margin-right: 7px; color: black;"></i>
+          Seleccionar Consorcio
+        </button>    
+      </div>  
+      <div  style="margin-top: 0.5rem;">
+        <button class="items-session">
+          <i class="fa-solid fa-arrow-right-from-bracket " style="margin-right: 3px; color: black;"></i>
+          Cerrar Sesion
+        </button>    
+      </div>      
+    </div>    
   </div>
 
   <div class="content">

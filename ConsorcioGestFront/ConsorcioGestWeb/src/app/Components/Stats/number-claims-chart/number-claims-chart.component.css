@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 20rem;
-    height: 8rem;
+    width: 28.5rem;
+    height: 15rem;
     background-color: #0A3333;
     text-align: center;
     color: white;
+    border-radius: 1rem;
 }
 
 h3{
@@ -34,4 +35,17 @@ h1 {
     gap: 1rem;
     color: white;
     text-align: center;
+}
+
+.bar-chart{
+    width: 20rem;
+    max-width: 20rem;
+    margin-left: 4rem;
+}
+
+select{
+    height: 1.5rem;
+    width: 6rem;
+    text-align: center;
+    margin: 0;
 }

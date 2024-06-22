@@ -41,7 +41,6 @@ import { SeeMoreSurveyComponent } from './Components/Surveys/Modals/see-more-sur
 import { MyReservationsComponent } from './Components/Reservations/my-reservations/my-reservations.component';
 import { StatsComponent } from './Components/Stats/stats/stats.component';
 import { PieChartComponent } from './Components/Stats/pie-chart/pie-chart.component';
-import { BarChartComponent } from './Components/Stats/bar-chart/bar-chart.component';
 import { LineChartComponent } from './Components/Stats/line-chart/line-chart.component';
 import { NumberClaimsChartComponent } from './Components/Stats/number-claims-chart/number-claims-chart.component';
 import { TermsAndConditionsComponent } from './Components/Info/terms-and-conditions/terms-and-conditions.component';
@@ -84,7 +83,6 @@ import { CancelReservationComponent } from './Components/Reservations/Modals/can
     MyReservationsComponent,
     StatsComponent,
     PieChartComponent,
-    BarChartComponent,
     LineChartComponent,
     NumberClaimsChartComponent,
     TermsAndConditionsComponent,

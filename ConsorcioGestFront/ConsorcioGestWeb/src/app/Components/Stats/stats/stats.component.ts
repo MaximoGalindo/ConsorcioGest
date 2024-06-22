@@ -8,18 +8,10 @@ import { FiltersSharedService } from 'src/app/Services/Shared/filters-shared.ser
   styleUrls: ['./stats.component.css']
 })
 export class StatsComponent implements OnInit {
-
-  dateFrom:Date = new Date();
-  dateTo:Date | null = null;
-
-
-  constructor(private dateFilter:FiltersSharedService) { }
+  constructor() { }
 
   ngOnInit(): void {
       
-  }
-  Search(){
-    this.dateFilter.SetDateFilter(this.dateFrom,this.dateTo);
   }
 
 }

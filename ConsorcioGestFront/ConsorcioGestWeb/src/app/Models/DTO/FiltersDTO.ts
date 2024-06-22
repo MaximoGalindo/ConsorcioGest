@@ -8,7 +8,7 @@ export class BaseFilter {
 //CLAIMS
 export class BaseFilterClaimDTO extends BaseFilter {
   causeClaim: number = 0;
-  nroReclamo?: string;
+  nroReclamo?: string = '';
 }
 
 export class FilterClaimDTO extends BaseFilterClaimDTO {

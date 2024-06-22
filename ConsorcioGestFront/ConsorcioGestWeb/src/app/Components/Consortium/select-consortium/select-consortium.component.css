@@ -9,7 +9,7 @@
 
 .rectangule{
     padding: 20px;
-    height: 500px;
+    height: 85vh;
     width: 500px;
     background-color: #AAFBB7;
     border-radius: 20px;
@@ -21,8 +21,8 @@ h1{
 }
 
 .custom-input{
-    width: 300px !important;
-    height: 20px !important;
+    width: 300px ;
+    height: 2.5rem;
 }
 
 .button-search {

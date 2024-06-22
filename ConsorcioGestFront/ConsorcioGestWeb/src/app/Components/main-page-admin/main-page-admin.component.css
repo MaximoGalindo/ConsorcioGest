@@ -53,3 +53,8 @@ button{
   padding: 0;
   cursor: pointer;
 }
+
+.session{
+  margin-left: 1.8rem;
+  margin-top: 30vh;
+}

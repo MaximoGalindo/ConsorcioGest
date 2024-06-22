@@ -1,25 +1,45 @@
 .pie-chart {
-  width: 20rem;
+  margin: 1rem 1rem 0 1rem;
   max-width: 100%;
+}
+
+.line-chart {
+  width: 28.5rem;
+  max-width: 100%;
+  text-align: center;
+  color: white;
 }
 
 .bar-chart {
-  width: 30rem;
-  max-width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.total-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+h3{
+  margin: 0;
 }
 
-.filter-container {
+.stats {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+}
+
+.header{
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+h2{
+  margin: 0;
   color: white;
+}
+
+.total-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: 100vh
 }

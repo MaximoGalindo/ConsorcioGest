@@ -1,1 +1,14 @@
-<canvas id="pieChart">{{chart}}</canvas>
+
+
+<div class="total-container">
+    <h3>Causas de Reclamos mas Frecuente</h3>
+    <div class="filter-container">
+        <label for="">Desde</label>
+        <input type="date" class="custom-input" style="width: 120px;" [(ngModel)]="dateFrom">
+        <label for="">Hasta</label>
+        <input type="date" class="custom-input" style="width: 120px; margin-right: 10px;" [(ngModel)]="dateTo">
+        <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <canvas id="pieChart">{{chart}}</canvas>
+</div>
+

@@ -19,7 +19,7 @@ export class ClaimsGestComponent {
   causeClaims:ListItemDTO[] = [];
 
   //FILTERS
-  selectedCauseClaim:ListItemDTO = new ListItemDTO();
+  selectedCauseClaim:number = 0;
   dateFrom:string = "";
   dateTo:string = "";
   claimNumber:string = "";
@@ -80,12 +80,18 @@ export class ClaimsGestComponent {
 
   Search(){   
     var filter = new FilterClaimDTO ();
+    console.log(this.selectedCauseClaim);
+    
     filter.stateID = this.selectedState != null ? this.selectedState : 0
-    filter.causeClaim = this.selectedCauseClaim.id;
+    filter.causeClaim = this.selectedCauseClaim;
     filter.nroReclamo = this.claimNumber != '' ? this.claimNumber : '';
     filter.dateFrom = this.dateFrom != '' ? this.dateFrom : '';
     filter.dateTo = this.dateTo != '' ? this.dateTo : '';
-    this.claimService.GetClaimsByUser(filter).subscribe((data)=>{
+
+    console.log(filter);
+    
+
+    this.claimService.GetAllClaims(filter).subscribe((data)=>{
       this.ClaimsList = data;
     })
   }

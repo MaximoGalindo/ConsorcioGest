@@ -50,6 +50,32 @@ export class LineChartComponent {
       this.chart = new Chart('LineChart', {
         type: 'line' as ChartType,
         data: data2,
+        options: {
+          plugins: {
+            legend: {
+              display: false // Esto elimina la leyenda completa del gráfico
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: 'white' 
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)' 
+              }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                color: 'white'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              }
+            }
+          }
+        }
       })
 
 

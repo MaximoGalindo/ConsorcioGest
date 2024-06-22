@@ -12,15 +12,24 @@ import { Utils } from 'src/app/Helpers/Utils';
 export class PieChartComponent {
 
   public chart: Chart | undefined;
+  dateFrom:string = ''; 
+  dateTo:string = '';
+
   constructor(private statsService: StatsService, private dateFilter: FiltersSharedService) {
 
   }
 
   ngOnInit(): void {
-    this.dateFilter.DateFilter$.subscribe(date => {
-      this.GetStats(date.dateFrom, date.dateTo);
-    })
+    this.GetStats(null,null);
   }
+
+  Search(){
+    if(this.dateTo == null){
+      this.dateTo = Utils.parseDate(new Date());
+    }
+    this.GetStats(this.dateFrom, this.dateTo);
+  }
+
   GetStats(dateFrom: string | null, dateTo: string | null) {
     if (dateFrom && !dateTo) { 
         dateTo = Utils.parseDate(new Date());
@@ -42,17 +51,20 @@ export class PieChartComponent {
           label: 'Causa de Reclamo Mas Frecuente',
           data: values,
           backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
+            'rgb(7, 79, 245)',
+            'rgb(224, 7, 245)',
+            'rgb(7, 245, 220)',
+            'rgb(245, 184, 7)',
           ],
-          hoverOffset: 4
+          hoverOffset: 4,
+          borderWidth: 0
         }]
       };
       const options = {
         plugins: {
+          title: {
+            display: false
+          },
           legend: {
             labels: {
               color: 'white',
