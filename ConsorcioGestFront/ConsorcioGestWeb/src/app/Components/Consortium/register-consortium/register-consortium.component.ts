@@ -18,12 +18,12 @@ import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 })
 export class RegisterConsortiumComponent {
 
-  _ShowConfigTowerModal: boolean = false;
+  _ShowConfigTowerModal: boolean = true;
   _ShowCommonSpaceConfigModal: boolean = false;
   SelectedTower:Tower = new Tower();
   SelectedCommonSpace:CommonSpaceConfig = new CommonSpaceConfig();
 
-  selectedTab: number = 3;
+  selectedTab: number = 2;
   consortiumConfig: ConsortiumConfiguration = new ConsortiumConfiguration();
   towerList:Tower[] = []; 
   commonSpacesList:ListItemDTO[] = []
@@ -77,9 +77,9 @@ export class RegisterConsortiumComponent {
 
   onCheckboxChange(index: number) {
     if (this.selectedIndices.has(index)) {
-      this.selectedIndices.delete(index); // Deseleccionar el checkbox si ya está seleccionado
+      this.selectedIndices.delete(index); 
     } else {
-      this.selectedIndices.add(index); // Seleccionar el checkbox
+      this.selectedIndices.add(index); 
     }
   }
 

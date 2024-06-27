@@ -3,81 +3,79 @@
         <span class="close" (click)="CloseModal()">&times;</span>
         <h1>Configuracion de Bloque</h1>
         <div class="line"></div>
+        <div class="config-container">
             <div>
-                <label for="">Cantidad de Pisos:</label>
-                <input type="number" 
-                class="custom-input" 
-                placeholder="Pisos"             
-                min="1"
-                [(ngModel)]="tower.towerConfig.floors">
+                <div style="display: flex; align-items: center;">
+                    <label for="" style="margin-right: 10px;">Cantidad de Pisos:</label>
+                    <div class="validation" style="display: flex; flex-direction: column;">
+                        <input type="number" class="custom-input" placeholder="Pisos" min="1"
+                               [(ngModel)]="tower.towerConfig.floors" [ngClass]="{'error': minFloorRequired}"
+                               (ngModelChange)="ClearError()">
+                        <span *ngIf="minFloorRequired" class="error-message">Debe ingresar un número mayor a 0</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="margin: 0px 3px">Configuracion de Unidades</h3>
+                    <div style="margin: 0px; width: 230px;" class="line"></div>
+                    <div class="units-container">
+                        <label style="font-size: 15px ;" for="">Departamentos:</label>
+                        <select class="custom-select" [(ngModel)]="tower.towerConfig.departmentConfig.nomencalture">
+                            <option value="0" disabled>Seleccione una Division</option>
+                            <option [ngValue]="1">Numerica</option>
+                            <option [ngValue]="2">Alfanumerica</option>
+                        </select>
+                        <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1">
+                            <input type="checkbox" [(ngModel)]="tower.towerConfig.departmentConfig.sequential">
+                            Secuencial
+                        </label>
+                    </div>
+                    <div>
+                        <label
+                            *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential">Intercalacion</label>
+                        <input
+                            *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential"
+                            type="number" class="custom-input" min="1"
+                            [(ngModel)]="tower.towerConfig.departmentConfig.iteration">
+
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" [(ngModel)]="tower.towerConfig.isUniform"
+                                (change)="onCheckboxChange(1)">
+                            Uniforme
+                        </label>
+                        <label class="custom-radio">
+                            <input class="custom-checkbox" type="checkbox" [(ngModel)]="tower.towerConfig.isUniqual"
+                                (change)="onCheckboxChange(2)">
+                            Desigual
+                        </label>
+                        <button *ngIf="tower.towerConfig.isUniqual" class="edit-grid" type="button"
+                            (click)="ShowGridConfig()"><i class="fa-solid fa-pen"
+                                style="color: rgb(16, 76, 96);"></i></button>
+                    </div>
+                    <div>
+                        <label>
+                            <input class="custom-checkbox" type="checkbox" [(ngModel)]="tower.towerConfig.hasLowLevel">
+                            Tiene Planta Baja
+                        </label>
+                    </div>
+                    <div *ngIf="tower.towerConfig.isUniform">
+                        <label for="">Cantidad de Departamentos por Piso:</label>
+                        <input type="number" class="custom-input" [(ngModel)]="uniformDeps">
+                    </div>
+                    <button (click)="GenerateLogicTower()">Generar</button>
+                </div>
             </div>
-            <div>
-                <h3 style="margin: 0px 3px">Configuracion de Unidades</h3>
-                <div style="margin: 0px; width: 230px;" class="line"></div>
-                <div class="units-container">
-                    <label style="font-size: 15px ;" for="">Departamentos:</label>
-                    <select class="custom-select" [(ngModel)]="tower.towerConfig.departmentConfig.nomencalture">
-                        <option value="0" disabled>Seleccione una Division</option>  
-                        <option [ngValue]="1" >Numerica</option>  
-                        <option [ngValue]="2" >Alfanumerica</option>                
-                    </select>
-                    <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1">
-                        <input type="checkbox" 
-                        [(ngModel)]="tower.towerConfig.departmentConfig.sequential">
-                        Secuencial
-                    </label>                   
-                </div>  
-                <div>
-                    <label *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential">Intercalacion</label>
-                    <input *ngIf="tower.towerConfig.departmentConfig.nomencalture == 1 && !tower.towerConfig.departmentConfig.sequential" 
-                    type="number" 
-                    class="custom-input"                  
-                    min="1"
-                    [(ngModel)]="tower.towerConfig.departmentConfig.iteration">
-                    
-                </div>
-                <div>
-                    <label>
-                        <input 
-                        type="checkbox" 
-                        [(ngModel)]="tower.towerConfig.isUniform"
-                        (change)="onCheckboxChange(1)">
-                        Uniforme
-                    </label>   
-                    <label class="custom-radio">
-                        <input                          
-                        type="checkbox"                         
-                        [(ngModel)]="tower.towerConfig.isUniqual"
-                        (change)="onCheckboxChange(2)">
-                        Desigual
-                    </label>   
-                    <button *ngIf="tower.towerConfig.isUniqual" class="edit-grid" type="button" (click)="showGridConfig()"><i class="fa-solid fa-pen" style="color: rgb(16, 76, 96);"></i></button> 
-                </div>
-                <div>
-                    <label>
-                        <input type="checkbox" 
-                        [(ngModel)]="tower.towerConfig.hasLowLevel">
-                        Tiene Planta Baja
-                    </label> 
-                </div>
-                <div *ngIf="tower.towerConfig.isUniform">
-                    <label for="">Cantidad de Departamentos por Piso:</label>
-                    <input type="number" 
-                    class="custom-input"                  
-                    [(ngModel)]="uniformDeps">
-                
-                </div>                 
-            </div>     
-            <div class="button-container">
-                <button (click)="save()">Guardar</button>
-                <button (click)="CloseModal()">Cerrar</button>
-            </div>  
+            <div class="config-tower">
+                <app-show-config-tower [tower]="tower" (_TableData)="GetTableData($event)"></app-show-config-tower>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button (click)="save()">Guardar</button>
+        </div>
     </div>
 </div>
 
-<app-config-grid 
-    *ngIf="_GridIsPresent"    
-    [Floor]="tower.towerConfig.floors"
-    (_ShowModal)="CloseGridModal()"
-    (_CountDeparmentsByFloors)="GetDepartmentsByFloor($event)"
-></app-config-grid>
+<app-config-grid *ngIf="_GridIsPresent" [Floor]="tower.towerConfig.floors" (_ShowModal)="CloseGridModal()"
+    (_CountDeparmentsByFloors)="GetDepartmentsByFloor($event)"></app-config-grid>

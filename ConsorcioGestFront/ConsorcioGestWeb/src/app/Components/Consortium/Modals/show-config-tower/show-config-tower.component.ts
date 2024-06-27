@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ConsortiumConfiguration, Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
-import { TowerConfig } from 'src/app/Models/Models/TowerConfigModel';
+import { ConsortiumConfiguration, FloorDeparmentDTO, Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
+import { CountDepartmentsByFloor, DepartmentConfig, NomencaltureEnum, TowerConfig } from 'src/app/Models/Models/TowerConfigModel';
 import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortium-config-shared.service';
 @Component({
   selector: 'app-show-config-tower',
@@ -8,91 +8,95 @@ import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortiu
   styleUrls: ['./show-config-tower.component.css']
 })
 export class ShowConfigTowerComponent {
- 
-  @Output() _ShowModal = new EventEmitter<boolean>();
+
   @Output() _IsEdit = new EventEmitter<boolean>();
+  @Output() _TableData =  new EventEmitter<any[]>();
 
   @ViewChild('tableRef') tableRef: ElementRef = new ElementRef(null);
 
   @Input() tower:Tower = new Tower();
 
+  tableDisabled:boolean = false;
   consortiumConfig:ConsortiumConfiguration = new ConsortiumConfiguration();
+
+  ngOnInit(){   
+    if(this.tower.floorDepartment.length == 0){
+      this.tower.floorDepartment = [
+        { floor: "1", department: "1" },
+        { floor: "1", department: "2" },
+        { floor: "1", department: "3" },
+        { floor: "1", department: "4" },
+        { floor: "1", department: "5" },
+        { floor: "2", department: "6" },
+        { floor: "2", department: "7" },
+        { floor: "2", department: "8" },
+        { floor: "2", department: "9" },
+        { floor: "2", department: "10" },
+        { floor: "3", department: "11" },
+        { floor: "3", department: "12" },
+        { floor: "3", department: "13" },
+        { floor: "3", department: "14" },
+        { floor: "3", department: "15" },
+        { floor: "4", department: "16" },
+        { floor: "4", department: "17" },
+        { floor: "4", department: "18" },
+        { floor: "4", department: "19" },
+        { floor: "4", department: "20" },
+        { floor: "5", department: "21" },
+        { floor: "5", department: "22" },
+        { floor: "5", department: "23" },
+        { floor: "5", department: "24" },
+        { floor: "5", department: "25" }
+      ];  
+    }
+    
+  }
 
   constructor(
     private towerConfigShared: ConsortiumConfigSharedService
   ) {    
   }
-  ObtenerPisosUnicos(departamentos: any[]): string[] {
-    const pisosUnicosSet = new Set<string>();
-    departamentos.forEach(departamento => {
-        pisosUnicosSet.add(departamento.floor);
-    });
-    const pisosUnicosArray = Array.from(pisosUnicosSet);     
-    return pisosUnicosArray;  
+  ObtenerPisosUnicos(departments: any[]): string[] {
+    const uniqueFloors = [...new Set(departments.map(d => d.floor))];
+    return uniqueFloors;
   }
 
   ObtenerDepartamentosPorPiso(floor: string): any[] {
-   const floorDepartments = this.tower.floorDepartment.filter(department => department.floor === floor);  
-   return floorDepartments
+    return this.tower.floorDepartment.filter(d => d.floor === floor);
   }
 
-  ReadTableData(table: HTMLTableElement): any[] {
-    const departments: any[] = [];
-    const rows = table.rows;
-    for (let i = 1; i < rows.length; i++) { 
-      const floor = rows[i].cells[0].querySelector('input')?.value.trim() || '';
+  EmitDataTable(): void {
+    if (this.tableRef) {
+      const table: HTMLTableElement = this.tableRef.nativeElement;
+      setTimeout(() => {
+        const departments: FloorDeparmentDTO[] = this.ReadTableData(table);
+        this._TableData.emit(departments);
+      },1000)
 
+    }
+  }
+
+  ReadTableData(table: HTMLTableElement): FloorDeparmentDTO[] {
+    const departments: FloorDeparmentDTO[] = [];
+    const rows = table.rows;
+
+    for (let i = 1; i < rows.length; i++) {
+      const floorCell = rows[i].cells[0].querySelector('input');
+      const floor = floorCell ? floorCell.value.trim() : '';
+  
       for (let j = 1; j < rows[i].cells.length; j++) {
-        const inputField = rows[i].cells[j].querySelector('input');
-        if (inputField) {
-          const department = inputField.value.trim();
-          if (department !== '') {
+        const departmentInput = rows[i].cells[j].querySelector('input');
+        
+        if (departmentInput) {
+          const department = departmentInput.value.trim();
+  
+          if (department !== '') { // Check if department is not empty
             departments.push({ floor, department });
           }
         }
       }
     }
-  return departments;
+    return departments;
   }
 
-  CloseModal(){
-    this.tableRef = new ElementRef(null);
-    this.tower = new Tower();  
-    this._ShowModal.emit(false);
-    this._IsEdit.emit(false);
-  }
-
-  Save(){
-    const table = this.tableRef.nativeElement;
-    const departments: any[] = this.ReadTableData(table);
-    console.log(departments);
-
-    this.towerConfigShared.ConsortiumConfig$.subscribe({
-      next: consortiumConfig => {
-        this.consortiumConfig = consortiumConfig
-      }
-    })
-    
-    this.consortiumConfig.Towers.forEach(tower => {
-      if(tower.name == this.tower.name)
-        tower.floorDepartment = departments;
-    })
-
-    this.towerConfigShared.setConsortiumConfig(this.consortiumConfig)
-    console.log(this.consortiumConfig);
-    this._IsEdit.emit(true);
-    this.CloseModal();
-  }
-
-  AddFloor(i: number){
-    /*console.log(this.pisosUnicosArray);
-    console.log(i);
-    this.pisosUnicosArray.splice(i + 1, 0, " ");
-
-  // Imprimir el array actualizado en la consola
-  console.log(this.pisosUnicosArray);*/
-  }
-  AddDeparment(i: number){
-    
-  }
 }

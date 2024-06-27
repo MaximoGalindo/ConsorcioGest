@@ -139,6 +139,8 @@ export class SaveConsortiumComponent {
     })
     console.log(this.consortiumConfig);
 
+
+    //ESTO DEBERIA MOVERSE AL REGISTER CONSORTIUM COMPONENT
     this.consortiumSevice.SaveConsortium(this.consortiumConfig).subscribe({
       next: consortium => {
         console.log(consortium);

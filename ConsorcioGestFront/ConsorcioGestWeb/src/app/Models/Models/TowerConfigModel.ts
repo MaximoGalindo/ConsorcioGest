@@ -26,6 +26,8 @@ export class TowerConfig {
       this.nomencalture = NomencaltureEnum.Numeric; 
       this.sequential = false;
     }   
+
+    
   }
   
   export class CountDepartmentsByFloor {

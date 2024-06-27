@@ -3,10 +3,11 @@
     padding: 20px;
     border: 1px solid #888;
     max-width: 80%;
-    height: 420px;
-    width: 600px;
+    height: 68%;
+    width: 70%;
     position: relative;
     border-radius: 10px;
+    display: flex;
 }
 
 .close {
@@ -22,8 +23,11 @@ h1{
 }
 
 .custom-input{
-    width: 50px !important;
-    height: 22px !important;
+    width: 4rem !important;
+    height: 1.7rem !important;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 0;
 }
 label{
     font-size: 18px;
@@ -59,6 +63,11 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    top: 80%;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .edit-grid{
@@ -75,3 +84,62 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+.config-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.config-tower{
+    margin: 2rem;
+}
+
+
+
+.custom-checkbox + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+  }
+  
+  .custom-checkbox + label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  
+  .custom-checkbox:checked + label::before {
+    background-color: #4caf50;
+    border-color: #4caf50;
+  }
+  
+  .custom-checkbox:checked + label::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 4px;
+    width: 8px;
+    height: 16px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
+  }
+
+  .validation{
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .validation .custom-input{
+    margin: 0;
+  }

@@ -110,6 +110,14 @@ textarea:focus {
     box-shadow: 0 0 5px rgba(102, 175, 233, 0.5);
 }
 
+.error {
+    background-color: rgb(239, 147, 147);
+    border: 1px solid red; 
+}
+.error-message{
+    font-size: 0.7rem;
+    color: red;
+}
 
 @media screen and (max-width: 600px) {
     body{
