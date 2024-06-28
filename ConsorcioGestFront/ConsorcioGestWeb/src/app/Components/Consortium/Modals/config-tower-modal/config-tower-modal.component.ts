@@ -5,6 +5,7 @@ import { ConsortiumConfigSharedService } from 'src/app/Services/Shared/consortiu
 import { CountDepartmentsByFloor, DepartmentConfig, NomencaltureEnum, TowerConfig } from 'src/app/Models/Models/TowerConfigModel';
 import { Tower } from 'src/app/Models/Models/ConsortiumConfigModel';
 import { ConsortiumService } from 'src/app/Services/consortium.service';
+import { Utils } from 'src/app/Helpers/Utils';
 
 @Component({
   selector: 'app-config-tower-modal',
@@ -72,6 +73,7 @@ export class ConfigTowerModalComponent {
 
     this.consortiumService.GenerateLogicConfiguration(this.tower).subscribe({
       next: config => { 
+        Utils.success("Se genero correctamente")
         this.tower.floorDepartment = config;
         this._ShowConfigTower = true
       }

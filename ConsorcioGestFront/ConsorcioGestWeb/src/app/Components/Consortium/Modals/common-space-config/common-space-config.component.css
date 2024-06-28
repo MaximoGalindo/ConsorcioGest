@@ -3,8 +3,8 @@
     padding: 20px;
     border: 1px solid #888;
     max-width: 80%;
-    height: 420px;
-    width: 600px;
+    height: 20rem;
+    width: 30rem;
     position: relative;
     border-radius: 10px;
 }
@@ -16,7 +16,12 @@
     padding: 10px;
     cursor: pointer;
 }
-
+.button-container{
+    display: flex;
+    position: absolute;
+    top: 16rem;
+    left: 9rem;
+}
 button {
     background-color: #F9BC60;
     border: none;
@@ -30,6 +35,23 @@ button {
     margin-right: 10px;
 }
 
+
+label{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.custom-input{
+    height: 2rem;
+    width: 6rem;
+    text-align: center;
+    padding: 0;
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+
+.time-input{
+    padding: 0 0.5rem;
+}
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

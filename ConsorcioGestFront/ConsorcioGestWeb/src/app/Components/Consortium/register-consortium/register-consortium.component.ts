@@ -10,6 +10,8 @@ import { CommonSpaceConfig, CommonSpacesModel, ConsortiumConfiguration, Tower } 
 import { Router } from '@angular/router';
 import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
+import { Utils } from 'src/app/Helpers/Utils';
+import { ConfirmationService } from 'src/app/Helpers/ConfirmationModal';
 
 @Component({
   selector: 'app-register-consortium',
@@ -18,26 +20,29 @@ import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 })
 export class RegisterConsortiumComponent {
 
-  _ShowConfigTowerModal: boolean = true;
-  _ShowCommonSpaceConfigModal: boolean = false;
-  SelectedTower:Tower = new Tower();
-  SelectedCommonSpace:CommonSpaceConfig = new CommonSpaceConfig();
+  loading: boolean = false;
 
-  selectedTab: number = 2;
+  _ShowConfigTowerModal: boolean = false;
+  _ShowCommonSpaceConfigModal: boolean = false;
+  SelectedTower: Tower = new Tower();
+  SelectedCommonSpace: CommonSpaceConfig = new CommonSpaceConfig();
+
+  selectedTab: number = 1;
   consortiumConfig: ConsortiumConfiguration = new ConsortiumConfiguration();
-  towerList:Tower[] = []; 
-  commonSpacesList:ListItemDTO[] = []
-  commonSpacesConfigs:CommonSpaceConfig[] = [];
+  towerList: Tower[] = [];
+  commonSpacesList: ListItemDTO[] = []
+  commonSpacesConfigs: CommonSpaceConfig[] = [];
 
   constructor(
-    private towerConfigShared:ConsortiumConfigSharedService,
-    private router:Router,
-    private consortiumService:ConsortiumService
-  ){
+    private towerConfigShared: ConsortiumConfigSharedService,
+    private router: Router,
+    private consortiumService: ConsortiumService,
+    private confirmationService: ConfirmationService
+  ) {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.consortiumService.GetCommonSpaces().subscribe({
       next: data => {
         this.commonSpacesList = data
@@ -46,30 +51,30 @@ export class RegisterConsortiumComponent {
   }
 
   //MODAL
-  ConfigureTower(item:Tower){
+  ConfigureTower(item: Tower) {
     this._ShowConfigTowerModal = true;
     this.SelectedTower = item;
   }
 
-  CloseConfigTowerModal(){
+  CloseConfigTowerModal() {
     this._ShowConfigTowerModal = false;
   }
-  CloseCommonSpaceModal(){
+  CloseCommonSpaceModal() {
     this._ShowCommonSpaceConfigModal = false;
   }
 
-  ShowCommonSpaceConfigModal(commonSpace:any){
+  ShowCommonSpaceConfigModal(commonSpace: any) {
     this.SelectedCommonSpace = new CommonSpaceConfig();
     this.SelectedCommonSpace.idSpace = commonSpace.id;
     this.SelectedCommonSpace.nameSpace = commonSpace.name;
     this._ShowCommonSpaceConfigModal = true;
   }
-   //FORMULARIO
+  //FORMULARIO
 
-  AddTower(){
+  AddTower() {
     this.towerList.push(new Tower());
   }
-  RemoveTower(index:number){
+  RemoveTower(index: number) {
     this.towerList.splice(index, 1);
   }
 
@@ -77,9 +82,9 @@ export class RegisterConsortiumComponent {
 
   onCheckboxChange(index: number) {
     if (this.selectedIndices.has(index)) {
-      this.selectedIndices.delete(index); 
+      this.selectedIndices.delete(index);
     } else {
-      this.selectedIndices.add(index); 
+      this.selectedIndices.add(index);
     }
   }
 
@@ -90,13 +95,23 @@ export class RegisterConsortiumComponent {
 
 
   //BOTONES 
-  Back(){
-    this.selectedTab = this.selectedTab > 1   ? this.selectedTab - 1 : this.selectedTab
+  Back() {
+    this.selectedTab = this.selectedTab > 1 ? this.selectedTab - 1 : this.selectedTab
   }
-  Next(){
+  Next() {
     this.selectedTab = this.selectedTab < 5 ? this.selectedTab + 1 : this.selectedTab
   }
-  Confirm(){
+
+  BackToSelectConsortium(){
+    this.router.navigate(['/consortium']);
+  }
+  Confirm() {
+    /*this.confirmationService.confirm('¿Estás seguro que quieres borrar esto?').then(confirm => {
+      if (confirm) {
+        
+      }
+    });*/
+    this.loading = true;
     this.towerConfigShared.TowerList$.subscribe({
       next: towerList => {
         this.towerList = towerList
@@ -108,9 +123,21 @@ export class RegisterConsortiumComponent {
       }
     })
     this.consortiumConfig.Towers = this.towerList;
-    this.consortiumConfig.CommonSpaces = this.commonSpacesConfigs    
-    this.towerConfigShared.setConsortiumConfig(this.consortiumConfig)
-    this.router.navigate(['/register-consortium/confirm']);
-    console.log(this.consortiumConfig);  
+    this.consortiumConfig.CommonSpaces = this.commonSpacesConfigs
+
+    console.log(this.consortiumConfig);
+    this.consortiumService.SaveConsortium(this.consortiumConfig).subscribe({
+      next: consortium => {
+        console.log(consortium);
+        this.router.navigate(['/consortium']);
+        Utils.success("El consorcio se guardo correctamente")
+        this.loading = false
+      },
+      error: error => {
+        Utils.error(error.message)
+        this.loading = false
+      }
+    });
+
   }
 }

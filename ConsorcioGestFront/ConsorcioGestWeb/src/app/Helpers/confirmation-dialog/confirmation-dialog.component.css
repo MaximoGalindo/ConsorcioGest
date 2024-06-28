@@ -1,0 +1,19 @@
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+.modal-header{
+    padding: 1rem 1rem 0 1rem !important;
+}
+
+.modal-title{
+    font-size: 1.5rem;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}

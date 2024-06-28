@@ -7,7 +7,6 @@ import { ClaimsGestComponent } from './Components/Claims/claims-gest/claims-gest
 import { SelectConsortiumComponent } from './Components/Consortium/select-consortium/select-consortium.component';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
-import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
 
 import { MenuUserComponent } from './Components/menu-user/menu-user.component';
@@ -54,7 +53,6 @@ const routes: Routes = [
   { path: 'register-consortium', 
     children: [
       {path:'' , component: RegisterConsortiumComponent},
-      {path: 'confirm', component: SaveConsortiumComponent}
     ]  
   },
   {path:'claim-survey/:surveyID',component: NewsurveyComponent}

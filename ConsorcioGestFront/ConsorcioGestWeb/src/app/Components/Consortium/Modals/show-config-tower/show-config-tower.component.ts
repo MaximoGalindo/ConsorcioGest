@@ -49,7 +49,6 @@ export class ShowConfigTowerComponent {
         { floor: "5", department: "25" }
       ];  
     }
-    
   }
 
   constructor(
@@ -99,4 +98,5 @@ export class ShowConfigTowerComponent {
     return departments;
   }
 
+  
 }

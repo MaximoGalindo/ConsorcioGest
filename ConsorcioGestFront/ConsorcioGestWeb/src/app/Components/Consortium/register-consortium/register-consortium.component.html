@@ -1,73 +1,75 @@
 <div class="total-container">
-    <div class="rectangule">
+    <div class="rectangule" *ngIf="loading">
+        <div class="spinner-border loading" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
         <div style="margin-bottom: 20px;">
             <h1>Nuevo Consorcio</h1>
-            <div class="line"></div>    
+            <div class="line"></div>
         </div>
-        <div *ngIf="selectedTab == 1" style="height: 600px;">    
-            <h2>Datos</h2>    
-                <div style="margin-top: 15px;">
-                    <input type="text" 
-                            class="custom-input" 
-                            placeholder="Nombre"
-                            [(ngModel)]="consortiumConfig.Name">
-                </div> 
-                <div >
-                    <input type="text" 
-                            class="custom-input" 
-                            placeholder="Ubicacion"
-                            [(ngModel)]="consortiumConfig.Location">
-                </div>   
-                <div>
-                    <input type="text" 
-                            class="custom-input" 
-                            placeholder="CUIT"
-                            [(ngModel)]="consortiumConfig.CUIT">
-                </div> 
-        </div> 
+    </div>
+    <div class="rectangule" *ngIf="!loading">
+        <button class="button-tab back-button" (click)="BackToSelectConsortium()">Volver</button>
+
+        <div style="margin-bottom: 20px;">
+            <h1>Nuevo Consorcio</h1>
+            <div class="line"></div>
+        </div>
+        <div *ngIf="selectedTab == 1" style="height: 600px;">
+            <h2>Datos</h2>
+            <div style="margin-top: 15px;">
+                <input type="text" class="custom-input" placeholder="Nombre" [(ngModel)]="consortiumConfig.Name">
+            </div>
+            <div>
+                <input type="text" class="custom-input" placeholder="Ubicacion" [(ngModel)]="consortiumConfig.Location">
+            </div>
+            <div>
+                <input type="text" class="custom-input" placeholder="CUIT" [(ngModel)]="consortiumConfig.CUIT">
+            </div>
+        </div>
 
         <div *ngIf="selectedTab == 2" style="height: 600px;">
             <h2>Bloques</h2>
-                <div>
-                    <div *ngFor="let item of towerList; let i = index" class="input-wrapper">
-                        <input class="custom-input" placeholder="Nombre del Bloque" [(ngModel)]="item.name">
-                        <button class="remove-tower" type="button" (click)="ConfigureTower(item)"><i class="fa-solid fa-pen fa-2x" style="color: rgb(16, 76, 96);"></i></button>
-                        <button class="remove-tower" type="button" (click)="RemoveTower(i)"><i class="fa-solid fa-trash fa-2x"></i></button>
-                      </div>
-                  </div>
-                  <button class="add-tower" (click)="AddTower()"><i class="fa-solid fa-plus fa-2x"></i></button>          
+            <div>
+                <div *ngFor="let item of towerList; let i = index" class="input-wrapper">
+                    <input class="custom-input" placeholder="Nombre del Bloque" [(ngModel)]="item.name">
+                    <button class="remove-tower" type="button" (click)="ConfigureTower(item)"><i
+                            class="fa-solid fa-pen fa-2x" style="color: rgb(16, 76, 96);"></i></button>
+                    <button class="remove-tower" type="button" (click)="RemoveTower(i)"><i
+                            class="fa-solid fa-trash fa-2x"></i></button>
+                </div>
+            </div>
+            <button class="add-tower" (click)="AddTower()"><i class="fa-solid fa-plus fa-2x"></i></button>
         </div>
-        <div *ngIf="selectedTab == 3" style="height: 600px;" class="common-space">
+        <div *ngIf="selectedTab == 3" style="height: 600px;">
             <h2>Espacios Comunes</h2>
-            <div *ngFor="let item of commonSpacesList; let i = index">
-                <input type="checkbox"  [id]="'time' + i" (change)="onCheckboxChange(i)" [checked]="isSelected(i)"> 
-                <label [for]="'time' + i">{{item.name}}</label>
-                <button class="remove-tower" type="button" (click)="ShowCommonSpaceConfigModal(item)" *ngIf="isSelected(i)">
-                    <i class="fa-solid fa-pen fa-2x" style="color: rgb(16, 76, 96);"></i>
-                </button>
-            </div> 
-            
+            <div>
+                <div *ngFor="let item of commonSpacesList; let i = index" class="aling-center">
+                    <input class="form-check-input custom-checkbox" type="checkbox" [id]="'time' + i"
+                        (change)="onCheckboxChange(i)" [checked]="isSelected(i)">
+                    <label class="custom-checkbox-label" [for]="'time' + i">{{item.name}}</label>
+                    <button class="remove-tower" type="button" (click)="ShowCommonSpaceConfigModal(item)"
+                        *ngIf="isSelected(i)">
+                        <i class="fa-solid fa-pen fa-2x" style="color: rgb(16, 76, 96);"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        
+
         <div>
             <button class="button-tab" (click)="Back()">Anterior</button>
             <i class="fa-{{selectedTab == 1 ? 'solid' : 'regular'}} fa-circle fa-2x" style="margin: 0 8px 0 10px;"></i>
             <i class="fa-{{selectedTab == 2 ? 'solid' : 'regular'}} fa-circle fa-2x" style="margin: 0 8px 0 10px;"></i>
-            <i class="fa-{{selectedTab == 3 ? 'solid' : 'regular'}} fa-circle fa-2x" style="margin: 0 8px 0 10px;"></i>            
+            <i class="fa-{{selectedTab == 3 ? 'solid' : 'regular'}} fa-circle fa-2x" style="margin: 0 8px 0 10px;"></i>
             <button *ngIf="selectedTab != 3" class="button-tab" (click)="Next()">Siguiente</button>
             <button *ngIf="selectedTab == 3" class="button-tab" (click)="Confirm()">Confirmar</button>
         </div>
     </div>
 </div>
 
-<app-config-tower-modal
-    *ngIf="_ShowConfigTowerModal"
-    [tower]="SelectedTower"
-    (_TowerIsPresent)="CloseConfigTowerModal()"
-></app-config-tower-modal>
+<app-config-tower-modal *ngIf="_ShowConfigTowerModal" [tower]="SelectedTower"
+    (_TowerIsPresent)="CloseConfigTowerModal()"></app-config-tower-modal>
 
-<app-common-space-config 
-    *ngIf="_ShowCommonSpaceConfigModal" 
-    [commonSpaceConfig]="SelectedCommonSpace"
-    (_ShowModal)="CloseCommonSpaceModal()">    
+<app-common-space-config *ngIf="_ShowCommonSpaceConfigModal" [commonSpaceConfig]="SelectedCommonSpace"
+    (_ShowModal)="CloseCommonSpaceModal()">
 </app-common-space-config>

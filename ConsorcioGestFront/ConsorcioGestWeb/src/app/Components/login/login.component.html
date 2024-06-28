@@ -3,33 +3,38 @@
     <hr class="line">   
     <h4>Sistema de gestion de Consorcios</h4>
     <br>
-    <h3>Ingresar al Sistema</h3>
-    <div>
-        <input type="text" 
-                name="Email" 
-                #Email="ngModel" 
-                [(ngModel)]="form.Email"
-                class="custom-input" 
-                placeholder="Correo Electrónico">
+    <div *ngIf="loading">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
     </div>
-    <div>
-        <input type="password" 
-                class="custom-input" 
-                placeholder="Contraseña"
-                [(ngModel)]="form.Password"
-                #Password="ngModel"
-                name="Password">    
+    <div *ngIf="!loading" class="login">
+        <h3>Ingresar al Sistema</h3>
+        <div>
+            <input type="text" 
+                    name="Email" 
+                    #Email="ngModel" 
+                    [(ngModel)]="form.Email"
+                    class="custom-input" 
+                    placeholder="Correo Electrónico">
+        </div>
+        <div>
+            <input type="password" 
+                    class="custom-input" 
+                    placeholder="Contraseña"
+                    [(ngModel)]="form.Password"
+                    #Password="ngModel"
+                    name="Password">    
+        </div>
+        <div>
+            <button (click)="onSubmit()">Iniciar Sesion</button>
+        </div>
+        <div>
+            <button (click)="register('Residente')">Registrarse</button>
+        </div>
+        <div>
+            <a (click)="register('Admin')" class="admin-register">Registrarse como Administrador</a>
+        </div>  
     </div>
-    <div >
-        <a href="" class="forgot-password">Olvide mi contraseña</a>
-    </div>
-    <div>
-        <button (click)="onSubmit()">Iniciar Sesion</button>
-    </div>
-    <div>
-        <button (click)="register('Residente')">Registrarse</button>
-    </div>
-    <div>
-        <a (click)="register('Admin')" class="admin-register">Registrarse como Administrador</a>
-    </div>  
+   
 </div>

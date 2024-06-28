@@ -19,7 +19,6 @@ import { CommonModule } from '@angular/common';
 import { RegisterConsortiumComponent } from './Components/Consortium/register-consortium/register-consortium.component';
 import { ConfigTowerModalComponent } from './Components/Consortium/Modals/config-tower-modal/config-tower-modal.component';
 import { ConfigGridComponent } from './Components/Consortium/Modals/config-grid/config-grid.component';
-import { SaveConsortiumComponent } from './Components/Consortium/save-consortium/save-consortium.component';
 import { ShowConfigTowerComponent } from './Components/Consortium/Modals/show-config-tower/show-config-tower.component';
 import { UserRegisterClaimComponent } from './Components/Users/user-register-claim/user-register-claim.component';
 import { MainPageUserComponent } from './Components/main-page-user/main-page-user.component';
@@ -47,6 +46,10 @@ import { TermsAndConditionsComponent } from './Components/Info/terms-and-conditi
 import { FAQSComponent } from './Components/Info/faqs/faqs.component';
 import { CommonSpaceConfigComponent } from './Components/Consortium/Modals/common-space-config/common-space-config.component';
 import { CancelReservationComponent } from './Components/Reservations/Modals/cancel-reservation/cancel-reservation.component';
+import { Utils } from './Helpers/Utils';
+import { ToastComponent } from './Helpers/toast/toast.component';
+import { ToastService } from './Helpers/ToastService';
+import { ConfirmationDialogComponent } from './Helpers/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -62,7 +65,6 @@ import { CancelReservationComponent } from './Components/Reservations/Modals/can
     RegisterConsortiumComponent,
     ConfigTowerModalComponent,
     ConfigGridComponent,
-    SaveConsortiumComponent,
     ShowConfigTowerComponent,
     UserRegisterClaimComponent,
     MainPageUserComponent,
@@ -88,7 +90,9 @@ import { CancelReservationComponent } from './Components/Reservations/Modals/can
     TermsAndConditionsComponent,
     FAQSComponent,
     CommonSpaceConfigComponent,
-    CancelReservationComponent
+    CancelReservationComponent,
+    ToastComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -104,4 +108,9 @@ import { CancelReservationComponent } from './Components/Reservations/Modals/can
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private toastService: ToastService) {
+    // Inicializar Utils con el ToastService
+    Utils.initialize(toastService);
+  }
+}

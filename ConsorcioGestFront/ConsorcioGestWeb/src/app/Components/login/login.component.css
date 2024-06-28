@@ -50,7 +50,7 @@ a {
 }
 
 .forgot-password {
-    margin-right: 280px;
+    margin-left: 1rem;
 }
 
 .admin-register {
@@ -58,8 +58,7 @@ a {
     color: grey;
     text-align: left;
     font-size: 14px; 
-    margin-left: 10px;
-    margin-top: 60px;
+    margin-top: 3rem;
 }
 
 button {
@@ -73,6 +72,13 @@ button {
     font-weight: 300;
     margin-top: 10px;
 }
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 
 
 @media screen and (max-width: 500px) {
