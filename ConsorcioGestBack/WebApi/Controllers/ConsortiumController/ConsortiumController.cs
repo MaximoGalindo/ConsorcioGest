@@ -26,7 +26,7 @@ namespace WebApi.Controllers.LoginController
         }
 
         [HttpGet("get-consortiums")]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public IActionResult GetAllConsortiums() {
 
             return Ok(consortiumService.GetAllConsortiums());

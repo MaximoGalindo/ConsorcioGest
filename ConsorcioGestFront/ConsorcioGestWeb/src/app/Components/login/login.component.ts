@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Utils } from 'src/app/Helpers/Utils';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
 import { UserModel } from 'src/app/Models/Models/UserModel';
 import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.service';
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.storageService.saveToken(data.token); 
         
         this.SaveUser(data);       
-
+        Utils.success('Login exitoso');
         if(data.profile.name == 'Admin'){
           this.isLoginFailed = false;
           this.isLoggedIn = true;  
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
         this.isLoggedIn = false;
         this.loading = false
+        Utils.error("Login fallido")
       }
       
     });   

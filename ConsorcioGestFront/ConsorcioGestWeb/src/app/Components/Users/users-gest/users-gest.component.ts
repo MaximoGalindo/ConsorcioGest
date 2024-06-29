@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { filter } from 'rxjs';
+import { FilterUserDTO } from 'src/app/Models/DTO/FiltersDTO';
 import { UpdateUserDTO } from 'src/app/Models/DTO/UpdateUserDTO';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
+import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
+import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -13,25 +17,64 @@ export class UsersGestComponent implements OnInit{
 
   _ShowModalEditUser:boolean = false;
   users:UserModelDTO[] = [];
-  selectedUser:UserModelDTO = new UserModelDTO();
+  userDocument:number = 0;
+  towers:ListItemDTO[] = [];
+  statuses:ListItemDTO[] = [];
+  condominiums:ListItemDTO[] = [];
+
+  //Filter
+  selectedTower:string = '';
+  document:string = "";
+  seletedStatus:number = 0;
+  selectedCondominium:string = '';
 
   constructor(
     private userService:UserService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private ConsortiumService:ConsortiumService
   ){}
 
   ngOnInit(){
-    this.LoadUsers();
+    var filter = new FilterUserDTO();
+    this.LoadUsers(filter);
+
+    this.ConsortiumService.GetTowers().subscribe((towers)=>{
+      this.towers = towers;
+    })
+
+    this.userService.GetStatus().subscribe((statuses)=>{     
+      this.statuses = statuses;
+    })   
+
   }
 
-  LoadUsers(){
-    this.userService.GetUsers().subscribe({
+  LoadConsortiums(tower:any){  
+    this.selectedTower = tower.value;
+    this.ConsortiumService.GetCondominiums(tower.value).subscribe((condominiums)=>{
+      console.log(condominiums);
+      this.condominiums = condominiums
+    })
+  }
+
+  LoadUsers(filter:FilterUserDTO){
+    this.userService.GetUsers(filter).subscribe({
       next: data => {
         if (data != null)
           this.users = data;
           console.log(this.users);        
       }
     }) 
+  }
+
+  Search(){
+    var filter = new FilterUserDTO();
+
+    
+    filter.document = parseInt(this.document);
+    filter.userStateID = this.seletedStatus;
+    filter.codominium = this.selectedCondominium;
+    filter.tower = this.selectedTower;
+    this.LoadUsers(filter);
   }
 
   ActivateUser(userDocument:number){
@@ -41,7 +84,8 @@ export class UsersGestComponent implements OnInit{
     this.userService.UpdateUser(userDocument,user).subscribe({
       next: data => {
         console.log(data);
-        this.LoadUsers();
+        var filter = new FilterUserDTO();
+        this.LoadUsers(filter);
       }      
     })
   }
@@ -53,22 +97,20 @@ export class UsersGestComponent implements OnInit{
     this.userService.UpdateUser(userDocument,user).subscribe({
       next: data => {
         console.log(data);
-        this.LoadUsers();
+        var filter = new FilterUserDTO();
+        this.LoadUsers(filter);
       }      
     })
   }
 
   EditUser(userDocument:number){
     this._ShowModalEditUser = true;
-    this.userService.GetUserByDocument(userDocument).subscribe({
-      next: data => {
-        this.selectedUser = data;
-      }
-    })    
+    this.userDocument = userDocument;
   }
 
   CloseModal(){
     this._ShowModalEditUser = false;
-    this.LoadUsers();
+    var filter = new FilterUserDTO();
+    this.LoadUsers(filter);
   }
 }

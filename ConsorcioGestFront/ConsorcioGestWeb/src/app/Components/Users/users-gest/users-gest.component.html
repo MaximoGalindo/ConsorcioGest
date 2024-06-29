@@ -1,17 +1,22 @@
 <div class="filter-container">
     <label style="margin-left: 30px;">Documento</label>
-    <input type="text" name="Document" class="custom-input">
-    <label for="">Departamento</label>
-    <input type="text" name="Deparment" class="custom-input" style="width: 50px;">
-    <label for="">Estado</label>
-    <select style="width: 120px; height: 30px;" class="custom-input">
-        <option value="" disabled>Estado</option>                
+    <input [(ngModel)]="document" type="text" name="Document" class="custom-input">
+    <label style="margin-left: 30px;">Torre</label>
+    <select (change)="LoadConsortiums($event.target)" style="width: 120px; height: 30px;" class="custom-input" [(ngModel)]="selectedTower">
+        <option value="" disabled selected>Torre</option>
+        <option *ngFor="let t of towers" [value]="t.name">{{t.name}}</option>     
     </select>
-    <label for="">Fecha Alta</label>
-    <input type="date" name="CreationDate" class="custom-input" style="width: 120px;">
-    <label for="">Fecha Baja</label>
-    <input type="date" name="ExpirationDate" class="custom-input"  style="width: 120px; margin-right: 10px;">
-    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    <label for="">Departamento</label>
+    <select style="width: 120px; height: 30px;" class="custom-input" [(ngModel)]="selectedCondominium">
+        <option value="" disabled selected>Departamento</option>    
+        <option *ngFor="let c of condominiums" [value]="c.name">{{c.name}}</option>            
+    </select>
+    <label for="">Estado</label>
+    <select style="width: 120px; height: 30px;" class="custom-input" [(ngModel)]="seletedStatus">
+        <option value="" disabled selected>Estado</option>
+        <option *ngFor="let s of statuses" [value]="s.id">{{s.name}}</option>                
+    </select>
+    <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
 </div>
 <div class="table-container">
     <table>
@@ -36,23 +41,23 @@
                 <td>{{user.phone}} <br> {{user.email}}</td>
                 <td>{{user.profile?.name}}</td>
                 <td>{{user.state.name}}</td>
-                <td>
-                    <button *ngIf="user.state.name != 'Pendiente de Aprobacion'" [disabled]="user.state.name === 'Habilitado'"
+                <td style="width: 10rem;">
+                    <button *ngIf="user.state.id != 3" [disabled]="user.state.id === 1"
                         (click)="ActivateUser(user.document)" class="icono"
                         style="color: green; margin-right: 8px; background-color: transparent; border: none;">
-                        <i class="fa-solid fa-check fa-2x" style="color: green;"></i>
+                        <i class="fa-solid fa-check fa-2x" style="color: green;" [ngClass]="{'disabled': user.state.id === 1}"></i>
                     </button>
-                    <button *ngIf="user.state.name != 'Pendiente de Aprobacion'" [disabled]="user.state.name === 'Deshabilitado'"
+                    <button *ngIf="user.state.id != 3" [disabled]="user.state.id === 2"
                         (click)="DeactivateUser(user.document)" class="icono"
                         style="color: red; margin-right: 8px; background-color: transparent; border: none;">
-                        <i class="fa-solid fa-ban fa-2x" style="color: red;"></i>
+                        <i class="fa-solid fa-ban fa-2x" style="color: red;" [ngClass]="{'disabled': user.state.id === 2}"></i>
                     </button>
-                    <button *ngIf="user.state.name != 'Pendiente de Aprobacion'" (click)="EditUser(user.document)"
+                    <button *ngIf="user.state.id != 3" (click)="EditUser(user.document)"
                         class="icono"
                         style="color: lightblue; margin-right: 8px; background-color: transparent; border: none;">
                         <i class="fa-solid fa-pen fa-2x" style="color: lightblue;"></i>
                     </button>
-                    <button *ngIf="user.state.name == 'Pendiente de Aprobacion'" (click)="EditUser(user.document)"
+                    <button *ngIf="user.state.id == 3" (click)="EditUser(user.document)"
                         class="icono"
                         style="color: lightblue; margin-right: 8px; background-color: transparent; border: none;">
                         <i class="fa-solid fa-pen fa-2x" style="color: lightblue;"></i>
@@ -65,6 +70,6 @@
 
 <app-edit-user-modal
     *ngIf="_ShowModalEditUser"
-    [User]="selectedUser"
+    [userDocument]="userDocument"
     (_CloseModal)="CloseModal()"
 ></app-edit-user-modal>

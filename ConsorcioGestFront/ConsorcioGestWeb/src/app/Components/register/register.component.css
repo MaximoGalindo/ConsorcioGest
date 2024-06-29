@@ -1,7 +1,7 @@
 .custom-input,
 .custom-select {
     width: 100%;
-    height: 30px;
+    height: 3rem;
     padding: 10px;
     margin: 10px 0;
     border: none;
@@ -36,6 +36,15 @@
     text-align: center;
     height: 100vh;
 }
+
+.info-cuenta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 20%;
+    max-width: 70%;
+}
+
 
 h2,
 h3 {
@@ -83,35 +92,73 @@ button {
     flex-direction: column;
     text-align: center;
 }
+
 .consortium-name {
     font-weight: bold;
-    /* Opcional: haz que el nombre del consorcio sea negrita */
 }
 
 .consortium-location {
     margin-left: auto;
-    /* Mueve la ubicación hacia la derecha */
 }
 
+.radio {
+    transform: scale(1.5);
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+}
 
+label {
+    margin-bottom: 0.2rem;
+}
 
-@media screen and (max-width: 500px) {
+.radio-container {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px; 
+    margin: 0;
+}
+
+.button-container{
+    display: flex;
+    gap: 1rem;
+    margin: 0 auto;
+}
+
+.cancel{    
+    background-color: #005F5B;
+    color: white;
+}
+
+@media screen and (max-width: 700px) {
     .input-container {
         flex-direction: column;
     }
 
-    .input-container input {
-        margin-right: 0;
-        margin-bottom: 10px;
+    .custom-input,
+    .custom-select {
+        margin: 0.5rem 0;
     }
 
-    .input-container select {
-        margin-right: 0;
-        margin-bottom: 10px;
+    .info-cuenta{
+        max-width: 100%;
+        margin: 0;
+    }
+    .input-container input,
+    .input-container select{
+        margin: 0.7rem 0;
+    }
+    .button-container{
+        flex-direction: column;
+        gap: 0;
     }
 
-    .register-container {
-        margin-left: 50px;
-        margin-right: 50px;
-    }
+
 }

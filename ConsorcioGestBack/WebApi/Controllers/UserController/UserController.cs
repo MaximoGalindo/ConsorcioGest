@@ -31,9 +31,9 @@ namespace WebApi.Controllers.UserController
 
         [HttpGet("get-users")]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetAllUsers()
+        public IActionResult GetAllUsers([FromQuery] FilterUserDTO filterUser)
         {
-            return Ok(userService.GetAllUsers());
+            return Ok(userService.GetAllUsers(filterUser));
         }
 
         [HttpGet("get-user-by-document/{documentUser}")]

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Utils } from 'src/app/Helpers/Utils';
 import { RegisterUserDTO } from 'src/app/Models/DTO/RegisterUserDTO';
 import { ConsortiumModel } from 'src/app/Models/HelperModel/ConsortiumModel';
 import { DocumentTypeModel } from 'src/app/Models/HelperModel/DocumentTypeModel';
@@ -13,6 +14,9 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+  loading: boolean = false;
+
   registerForm: FormGroup = new FormGroup({});
   confirmPassword: string = '';
   documentTypes: DocumentTypeModel[] = [];
@@ -74,9 +78,14 @@ export class RegisterComponent {
   }
 
   SubmitForm() {
+    if (this.registerForm.invalid) {
+      this.markFormGroupTouched(this.registerForm);
+      return;
+    }
+
+
     if (this.registerForm.valid
       && this.registerForm.get('Password')?.value === this.registerForm.get('ConfirmPassword')?.value) {
-      console.log(this.registerForm.value);
 
       const user: RegisterUserDTO = {
         Name: this.registerForm.get('Name')?.value,
@@ -89,19 +98,41 @@ export class RegisterComponent {
         UserType: this.registerForm.get('UserType')?.value,
         ConsortiumID: this.registerForm.get('Consortium')?.value,
         DocumentType: this.registerForm.get('DocumentType')?.value
-      };
-
+      };  
+      this.loading = true;
       this.userService.CreateUser(user).subscribe({
         next: data => {
-          if (data != null)
-            //ACA CON LO QUE SE RESPONDE LA API PODEMOS CREAR LOS MENSAJES DE CONFIRMACIONES
+          if (data != null && data.success){
+            Utils.success("El usuario se ha creado correctamente");
+            this.loading = false;
             this.router.navigate(['/login'])
+          }
+          else{
+            Utils.error(data.message);
+            this.loading = false;
+          }
         }
       })
 
     } else {
-      console.log("Formulario inválido o contraseñas no coinciden.");
+      Utils.error("Faltan campos por rellenar");
     }
+  }
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.registerForm.get(field);
+    return control ? !control.valid && control.touched : false;
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.get(key);
+      control?.markAsTouched();
+    });
+  }
+
+  Cancel(){
+    this.router.navigate(['/login'])
   }
 
   LoadDocumentTypes() {

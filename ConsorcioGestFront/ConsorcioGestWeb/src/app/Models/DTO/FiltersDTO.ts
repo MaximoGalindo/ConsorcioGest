@@ -31,6 +31,13 @@ export class FilterReservationDTO extends BaseFilterReservationsDTO {
 export class FilterReservationUserDTO extends BaseFilterReservationsDTO {
 }
 
+export class FilterUserDTO{
+
+  document: number = 0;
+  tower:string = '';
+  codominium:string = '';
+  userStateID: number = 0;
+}
 
 
 

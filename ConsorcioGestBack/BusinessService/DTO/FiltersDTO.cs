@@ -40,8 +40,17 @@ namespace BusinessService.DTO
 
     public class FilterReservationUserDTO : BaseFilterReservationsDTO
     {
-       
+
     }
+
+    public class FilterUserDTO
+    {
+        public int Document { get; set; }
+        public string? Tower { get; set; }
+        public string? Condominium { get; set; }
+        public int UserStateID { get; set; }
+    }
+
 
 
 }

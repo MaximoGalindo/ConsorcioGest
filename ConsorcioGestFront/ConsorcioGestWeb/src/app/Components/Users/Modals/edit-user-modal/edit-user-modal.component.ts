@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UpdateUserDTO } from 'src/app/Models/DTO/UpdateUserDTO';
-import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
+import { UserModelByDocumentDTO, UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
 import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { ConsortiumService } from 'src/app/Services/consortium.service';
 import { UserService } from 'src/app/Services/user.service';
@@ -14,7 +14,8 @@ export class EditUserModalComponent implements OnInit {
 
   @Output() _CloseModal =  new EventEmitter<Boolean>();
 
-  @Input() User = new UserModelDTO();
+  User = new UserModelByDocumentDTO();
+  @Input() userDocument:number = 0;
 
   condominiums:ListItemDTO[] = [];
   towers:ListItemDTO[] = [];
@@ -22,7 +23,10 @@ export class EditUserModalComponent implements OnInit {
   statuses:ListItemDTO[] = [];
 
   selectedTower:string = "";
-  selectedCondominium:number = 0;
+  selectedCondominium:number | undefined = 0;
+  condominium:string | undefined = "";
+  selectedProfile:number | undefined = 0;
+  selectedState:number | undefined = 0;
   property:number = 0;
   userUpdated:UpdateUserDTO = new UpdateUserDTO()
   constructor(
@@ -32,6 +36,18 @@ export class EditUserModalComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.UserSevice.GetUserByDocument(this.userDocument).subscribe({
+      next: data => {
+        this.User = data;
+        if(this.User.state.id === 1 || this.User.state.id === 2){
+          this.selectedProfile = this.User.profile?.id;
+          this.selectedTower = this.User.tower;     
+          this.selectedState = this.User.state?.id;  
+          this.LoadConsortiums(this.selectedTower);
+          console.log(this.User);
+        }
+      }
+    })    
     this.ConsortiumService.GetTowers().subscribe((towers)=>{
       this.towers = towers;
     })
@@ -41,35 +57,36 @@ export class EditUserModalComponent implements OnInit {
     this.UserSevice.GetStatus().subscribe((statuses)=>{     
       this.statuses = statuses;
     })   
-    console.log(this.User);
-    
   }
   CloseModal(){
     this._CloseModal.emit(false);
     this.selectedTower = "";
-    this.selectedCondominium = 0;
-    console.log(this.User);
-    
+    this.selectedCondominium = 0;    
   }
   LoadConsortiums(tower:any){  
-    this.selectedTower = tower.value;
-    this.ConsortiumService.GetCondominiums(tower.value).subscribe((condominiums)=>{
-      console.log(condominiums);
+    if(this.User.tower === null){
+      this.selectedTower = tower.value;
+    }    
+    this.ConsortiumService.GetCondominiums(this.selectedTower).subscribe((condominiums)=>{
       this.condominiums = condominiums
+      this.selectedCondominium = this.condominiums.find(x => x.name === this.User.condominium)?.id;
     })
   }
 
   SelectConsortium($event:any) {
-    this.selectedCondominium = $event.target.value;
-    console.log(this.selectedCondominium);  
+    this.selectedCondominium = parseInt($event.target.value);
+    this.condominium = this.condominiums.find(x => x.id === this.selectedCondominium)?.name;
   }
 
   EditUser(){
     this.userUpdated.Email = this.User.email;
     this.userUpdated.Phone = this.User.phone;
     this.userUpdated.IdCondominium = this.selectedCondominium   
-    this.userUpdated.IdProfile = this.User.profile?.id
+    this.userUpdated.IdProfile = this.selectedProfile
     this.userUpdated.IdUserState = this.User.state?.id
+
+
+
     this.UserSevice.UpdateUser(this.User.document,this.userUpdated).subscribe((data)=>{
       console.log(data);
       this.CloseModal();

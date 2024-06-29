@@ -1,53 +1,71 @@
 <div class="total-container">
     <form [formGroup]="registerForm" (ngSubmit)="SubmitForm()">
-        <div class="register-container">
-            <h1>Registrarse</h1> 
-        <h3>Información de cuenta</h3>   
-        <div  class="input-container">
-            <input type="text" class="custom-input" placeholder="Email" name="Email" formControlName="Email">
-        </div>
-        <div class="input-container">
-            <input type="password" class="custom-input" placeholder="Contraseña" name="Password" formControlName="Password">
-            <input type="password" class="custom-input" placeholder="Confirmar Contraseña" name="ConfirmPassword" formControlName="ConfirmPassword">
-        </div>
-        <hr>
-        <h3>Información personal</h3>
-        <div class="input-container">
-            <input type="text" class="custom-input" placeholder="Nombre" name="Name" formControlName="Name">
-            <input type="text" class="custom-input" placeholder="Apellido" name="LastName"
-            formControlName="LastName">
-            <input type="text" class="custom-input" placeholder="Teléfono" name="Phone"
-            formControlName="Phone">
-        </div>
-        <div class="input-container">
-            <select class="custom-select" formControlName="Consortium">
-                <option value="" disabled>Seleccione su Consorcio</option>
-                <option *ngFor="let consortium of consortiums" [value]="consortium.Id">{{ consortium.Name + ' - ' + consortium.Location }}</option>
-            </select>
-            <select class="custom-select" formControlName="DocumentType">
-                <option value="" disabled>Seleccione el tipo de documento</option>
-                <option *ngFor="let documentType of documentTypes" [value]="documentType.Id">{{ documentType.Name }}</option>
-            </select>
-            <input type="text" class="custom-input" placeholder="Documento" name="Document"
-            formControlName="Document">
-        </div>
-        <div *ngIf="residentRegister">
-            <label>
-                <input type="radio" formControlName="UserType" value="IsOcupant" name="UserType">
-                Soy Inquilino
-            </label>            
-        </div>
-        <div *ngIf="residentRegister">
-            <label>
-                <input type="radio" formControlName="UserType" value="IsOwner" name="UserType">
-                Soy Propietario
-            </label>           
-        </div>
-        <div >
-            <button>Registrarse</button>
-        </div>
-    </div>
-    </form>
+        <div>
+            <h1 class="title">Registrarse</h1>
+            <div *ngIf="loading" class="loading"> 
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div *ngIf="!loading" class="register-container">
+                <h3>Información de cuenta</h3>
+                <div class="info-cuenta">
+                    <div class="input-container">
+                        <input type="text" class="custom-input" placeholder="Email" name="Email" formControlName="Email"
+                            [ngClass]="{'error': isFieldInvalid('Email')}">
+                    </div>
+                    <div class="input-container">
+                        <input type="password" class="custom-input" placeholder="Contraseña" name="Password"
+                            formControlName="Password" [ngClass]="{'error': isFieldInvalid('Password')}">
+                        <input type="password" class="custom-input" placeholder="Confirmar Contraseña"
+                            name="ConfirmPassword" formControlName="ConfirmPassword"
+                            [ngClass]="{'error': isFieldInvalid('ConfirmPassword')}">
+                    </div>
+                </div>
 
+                <hr>
+                <h3>Información personal</h3>
+                <div class="input-container">
+                    <input type="text" class="custom-input" placeholder="Nombre" name="Name" formControlName="Name"
+                        [ngClass]="{'error': isFieldInvalid('Name')}">
+                    <input type="text" class="custom-input" placeholder="Apellido" name="LastName"
+                        formControlName="LastName" [ngClass]="{'error': isFieldInvalid('LastName')}">
+                    <input type="text" class="custom-input" placeholder="Teléfono" name="Phone" formControlName="Phone"
+                        [ngClass]="{'error': isFieldInvalid('Phone')}">
+                </div>
+                <div class="input-container">
+                    <select class="custom-select" formControlName="Consortium"
+                        [ngClass]="{'error': isFieldInvalid('Consortium')}">
+                        <option value="" disabled>Seleccione su Consorcio</option>
+                        <option *ngFor="let consortium of consortiums" [value]="consortium.Id">{{ consortium.Name + ' -
+                            ' +
+                            consortium.Location }}</option>
+                    </select>
+                    <select class="custom-select" formControlName="DocumentType"
+                        [ngClass]="{'error': isFieldInvalid('DocumentType')}">
+                        <option value="" disabled>Seleccione el tipo de documento</option>
+                        <option *ngFor="let documentType of documentTypes" [value]="documentType.Id">{{
+                            documentType.Name }}
+                        </option>
+                    </select>
+                    <input type="text" class="custom-input" placeholder="Documento" name="Document"
+                        formControlName="Document" [ngClass]="{'error': isFieldInvalid('Document')}">
+                </div>
+                <div *ngIf="residentRegister" class="radio-container">
+                    <input class="form-check-input radio" type="radio" formControlName="UserType" value="IsOcupant"
+                        name="UserType" [ngClass]="{'error': isFieldInvalid('UserType')}">
+                    <label for="IsOcupant">Soy Inquilino</label>
+                </div>
+                <div *ngIf="residentRegister" class="radio-container">
+                    <input class="form-check-input radio" type="radio" formControlName="UserType" value="IsOwner"
+                        name="UserType" [ngClass]="{'error': isFieldInvalid('UserType')}">
+                    <label for="IsOwner">Soy Propietario</label>
+                </div>
+                <div class="button-container">
+                    <button class="cancel" (click)="Cancel()">Cancelar</button>
+                    <button>Registrarse</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-    

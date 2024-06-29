@@ -87,12 +87,15 @@ namespace BusinessService.Services
             return documentTypeList;
         }
 
-        public List<UserModelDTO> GetAllUsers()
+        public List<UserModelDTO> GetAllUsers(FilterUserDTO filterUser)
         {
             List<UserModelDTO> userModelDTOs = _context.Usuarios
-                .Where(u => 
-                u.ConsorcioUsuarios.Any(cu => cu.IdConsorcio == LoginService.CurrentConsortium.Id)
+                .Where(u => (u.ConsorcioUsuarios.Any(cu => cu.IdConsorcio == LoginService.CurrentConsortium.Id)
                 && u.IdPerfil != 1)
+                && (filterUser.Document != 0 ? u.Documento == filterUser.Document: true)
+                && (!string.IsNullOrEmpty(filterUser.Tower) ? u.IdCondominioNavigation.Torre == filterUser.Tower : true)
+                && (!string.IsNullOrEmpty(filterUser.Condominium) ? u.IdCondominioNavigation.NumeroDepartamento == filterUser.Condominium : true)
+                && (filterUser.UserStateID != 0 ? u.IdEstadoUsuario == filterUser.UserStateID : true))
                .Select(u => new UserModelDTO 
                {
                    Name = u.Nombre + ' ' + u.Apellido,
@@ -122,11 +125,11 @@ namespace BusinessService.Services
             return userModelDTOs;
         }
 
-        public UserModelDTO GetUserByDocument(int documentUser)
+        public UserModelByDocumentDTO GetUserByDocument(int documentUser)
         {
-            UserModelDTO userModelDTO = _context.Usuarios
+            UserModelByDocumentDTO userModelDTO = _context.Usuarios
                 .Where(u => u.Documento == documentUser)
-                .Select(u => new UserModelDTO
+                .Select(u => new UserModelByDocumentDTO
                 {
                     Name = u.Nombre + ' ' + u.Apellido,
                     Phone = u.Telefono,
@@ -145,10 +148,9 @@ namespace BusinessService.Services
                                  Id = u.IdEstadoUsuarioNavigation.Id,
                                  Name = u.IdEstadoUsuarioNavigation.Nombre
                              } : new StateModel(),
+                    Tower = u.IdCondominioNavigation != null ? u.IdCondominioNavigation.Torre : "",
                     Condominium =
-                    u.IdCondominioNavigation != null ?
-                            u.IdCondominioNavigation.Torre
-                    + ' ' + u.IdCondominioNavigation.NumeroDepartamento
+                    u.IdCondominioNavigation != null ? u.IdCondominioNavigation.NumeroDepartamento
                     : "",
 
                 }).First();

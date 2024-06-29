@@ -19,3 +19,16 @@ class StateModel {
     id: number = 0;
     name: string = '';
 }
+
+export class UserModelByDocumentDTO {
+    id:number = 0
+    document: number = 0;
+    name: string = '';
+    tower: string = '';
+    condominium: string = '';
+    email: string = '';
+    phone: string = '';
+    profile: ProfileModel | null = null;
+    property: string = '';
+    state: StateModel = new StateModel();
+}
