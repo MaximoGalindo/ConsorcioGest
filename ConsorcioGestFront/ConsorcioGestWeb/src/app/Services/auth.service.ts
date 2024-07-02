@@ -22,4 +22,8 @@ export class AuthService {
   RemoveCurrentConsortium() :Observable<any>{
     return this.http.post<any>(this.baseUrl + "remove-current-consortium", null);
   }
+
+  Logout():Observable<any>{
+    return this.http.post<any>(this.baseUrl + "logout", null);
+  }
 }

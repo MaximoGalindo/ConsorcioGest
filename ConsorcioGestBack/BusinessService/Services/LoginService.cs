@@ -154,5 +154,11 @@ namespace BusinessService.Services
             CurrentConsortium = null;
             return true;
         }
+
+        public bool Logout()
+        {
+            CurrentUser = null;
+            return true;
+        }
     }
 }

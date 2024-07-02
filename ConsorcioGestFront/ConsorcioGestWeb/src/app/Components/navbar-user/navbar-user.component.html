@@ -37,13 +37,15 @@
                 Mis Reservas
             </button>
             <div class="line" style="width:250px;"></div>
-            <button>
+            <button (click)="Logout()">
                 <i class="fa-solid fa-power-off fa-2x" style="margin-right: 7px; color: black;"></i>
                 Cerrar Sesion
             </button>
-            <div class="line" style="width:250px; margin-top: 25vh;"></div>
-            <a (click)="title = 'Terminos y Condiciones'" style="margin-top: 5px;" routerLink="/main-page-user/terms-and-conditions">Terminos y Condiciones</a>
-            <a routerLink="/main-page-user/FAQS">Preguntas Frecuentes</a>
+            <div class="terms-and-conditions">
+                <div class="line" style="width:250px;"></div>
+                <a (click)="title = 'Terminos y Condiciones'" style="margin-top: 5px;" routerLink="/main-page-user/terms-and-conditions">Terminos y Condiciones</a>
+                <a routerLink="/main-page-user/FAQS">Preguntas Frecuentes</a>
+            </div>            
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 .container-register{
     display: flex;
+    flex-direction: row;
     justify-content: center;
 }
 
@@ -11,7 +12,7 @@
 
 .content{
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
 }
 

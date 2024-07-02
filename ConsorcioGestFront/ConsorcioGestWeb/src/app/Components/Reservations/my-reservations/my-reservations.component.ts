@@ -26,7 +26,7 @@ export class MyReservationsComponent {
 
   ngOnInit(){
     this.LoadReservationsByUser();
-    this.reservationService.GetCommonSpaces().subscribe((data)=>{
+    this.reservationService.GetCommonSpacesByUser().subscribe((data)=>{
       this.commonSpaces = data
     })
   }

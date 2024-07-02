@@ -97,7 +97,7 @@ namespace BusinessService.Services
         public StatsModel GetNumberOfGestionClaimsPerMonth(int month, int year)
         {
             var encuestas = context.Encuestas
-               .Where(r => r.IdConsorcio == 6 && r.Fecha.Value.Month == month && r.Fecha.Value.Year == year)
+               .Where(r => r.IdConsorcio == LoginService.CurrentConsortium.Id && r.Fecha.Value.Month == month && r.Fecha.Value.Year == year)
                .ToList();
 
             var gestionClaims = new Dictionary<string, int>

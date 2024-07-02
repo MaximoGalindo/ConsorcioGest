@@ -4,50 +4,96 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between; 
 }
 
-.menu-toggle {
-    display: none;
-    height: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    cursor: pointer;
-}
 
 .menu {
     display: flex;
     position: absolute; 
-    top: 50px; 
+    top: 0px; 
     left: 0; 
     z-index: 1; 
     transition: all 0.3s ease; 
-    transform: translateX(-100%); 
+    transform: translateX(-100%)
 }
 
-.title{
-    font-size: 18px;
-    font-weight: 500;
-    color: white;
-    margin-left: 3.5rem;
-}
-.menu.active {
+.menu-toggle {
     display: flex;
-    width: 230px;
-    height: 500px;
-    background-color: #36CFA2;
-    transform: translateY(0);
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    left: 1%;
 }
+
 
 .menu-icon {
-    width: 60px;
-    height: 20px;
-    background-color: white;        
-    margin: 3px;
+    width: 3.2rem;
+    height: 0.5rem;
+    background-color: white;       
+    margin: 2px;
     margin-left: 8px;
     border-radius: 8px;
 }
+
+.menu-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.title{
+    font-size: 2rem;
+    font-weight: 500;
+    color: white;
+}
+
+.menu.active {
+    display: flex;
+    width: 270px;
+    height: 100vh;
+    background-color: #36CFA2;
+    transform: translateY(0);
+} 
+
+.menu-content{
+    margin: 0 auto  ;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+h1{
+    margin: 20px 0 0 0;
+    font-size: 30px;
+}
+h3{
+    margin: 0;
+}
+h4{
+    font-size: 10px;
+}
+button{
+    display: flex;
+    align-items: center;  
+    border: none;
+    background-color:transparent;
+    font-size: 15px;
+    color: black;
+    font-weight: 600;
+    padding: 0;
+    margin: 10px 0 5px 5px;
+}
+
+.terms-and-conditions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 90%;
+}
+
 
 @media screen and (max-width: 600px) {
     .menu {
@@ -65,23 +111,21 @@
         flex-direction: column;
         align-items: center;
         cursor: pointer;
-        margin-top: 1.3rem;
+        position: absolute;
+        left: 2%;
     }
-    .menu-flex{
-        display: flex;
-        align-items: center;
-    }
+
     .menu.active {
         display: flex;
         width: 270px;
-        height: 700px;
+        height: 85vh;
         background-color: #36CFA2;
         transform: translateY(0);
     }   
 
     .menu-icon {
-        width: 30px;
-        height: 5px;
+        width: 3rem;
+        height: 0.5rem;
         background-color: white;       
         margin: 2px;
         margin-left: 8px;
@@ -113,5 +157,8 @@
         font-weight: 600;
         padding: 0;
         margin: 10px 0 5px 5px;
+    }
+    .title{
+        font-size: 1.5rem;
     }
 }

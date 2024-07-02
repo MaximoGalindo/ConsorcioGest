@@ -1,7 +1,9 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { UserModelDTO } from 'src/app/Models/DTO/UserModelDTO';
 import { UserDataSharedService } from 'src/app/Services/Shared/user-data-shared.service';
+import { AuthService } from 'src/app/Services/auth.service';
 import { StorageService } from 'src/app/Services/storage.service';
 
 @Component({
@@ -14,7 +16,9 @@ export class NavbarUserComponent {
   User:UserModelDTO = new UserModelDTO();
   title:string = "Inicio";
   constructor(private router:Router,
-   private SharedDataUser:UserDataSharedService
+   private SharedDataUser:UserDataSharedService,
+   private authService:AuthService,
+   private storageService:StorageService
   ) {
     
   }
@@ -43,5 +47,17 @@ export class NavbarUserComponent {
 
   GoToClaims(){
     this.router.navigate(['/main-page-user/claim-user']);
+  }
+
+  Logout(){
+    this.authService.Logout().pipe(
+      finalize(() => {
+        this.storageService.clean();
+        this.router.navigate(['/login']);
+      })
+    ).subscribe({
+      next: () => {
+      }
+    });
   }
 }

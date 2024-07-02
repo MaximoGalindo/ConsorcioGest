@@ -152,7 +152,7 @@ namespace BusinessService.Services.Consortium
             }
         }
 
-       /* public bool DeleteConsortium(int consortiumID)
+        /*public bool DeleteConsortium(int consortiumID)
         {
             var consortium = _context.Consorcios.Where(c => c.Id == consortiumID).FirstOrDefault();
             var contacts = _context.Contactos.Where(c => c.IdConsorcio == consortiumID).ToList();
