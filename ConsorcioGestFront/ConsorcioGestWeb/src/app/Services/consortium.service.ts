@@ -36,4 +36,7 @@ export class ConsortiumService {
     return this.http.get<ListItemDTO[]>(this.baseUrl + 'get-common-spaces')
   }
 
+  DeleteConsortium(id:number):Observable<any>{
+    return this.http.post(this.baseUrl + 'delete-consortium?consortiumID=' + id,null)
+  }
 }

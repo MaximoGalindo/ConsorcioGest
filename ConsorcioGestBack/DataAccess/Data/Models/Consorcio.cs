@@ -13,6 +13,8 @@ public partial class Consorcio
 
     public string? Cuit { get; set; }
 
+    public DateTime? ExpirationDate { get; set; }
+
     public virtual ICollection<Condominio> Condominios { get; set; } = new List<Condominio>();
 
     public virtual ICollection<ConsorcioUsuario> ConsorcioUsuarios { get; set; } = new List<ConsorcioUsuario>();

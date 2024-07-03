@@ -11,8 +11,8 @@ export class AuthService {
   baseUrl = `${environment.API_URL}/login/`;
   constructor(private http:HttpClient) { }
 
-  login(credentials:any) :Observable<UserModel>{
-    return this.http.post<UserModel>(this.baseUrl, credentials);
+  login(credentials:any) :Observable<any>{
+    return this.http.post<any>(this.baseUrl, credentials);
   }
 
   SetCurrentConsortium(consortiumID:number) :Observable<any>{

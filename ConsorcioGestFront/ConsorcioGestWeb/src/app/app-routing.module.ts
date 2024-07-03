@@ -38,6 +38,7 @@ const routes: Routes = [
       {path: 'FAQS',component:FAQSComponent,data: { isAdmin: true } }
     ]
   },
+  {path: 'user-admin-gest',component:UsersGestComponent},
   { path: 'main-page-user', component: MainPageUserComponent,
     children: [
       {path: '', component: MenuUserComponent}, 

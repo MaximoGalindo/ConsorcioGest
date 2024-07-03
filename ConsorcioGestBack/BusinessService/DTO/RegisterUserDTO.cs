@@ -13,7 +13,8 @@ namespace BusinessService.DTO
         public string Email { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
-        public string Document { get; set; }
+        public int Document { get; set; }
+        public bool AdminRegister { get; set; }
         public int DocumentType { get; set; }
         public int ConsortiumID { get; set; }
         public string? UserType { get; set; }

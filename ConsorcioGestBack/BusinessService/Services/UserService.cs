@@ -30,7 +30,7 @@ namespace BusinessService.Services
             {
                 if (userDTO != null)
                 {
-                    var userExist = _context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == Convert.ToInt32(userDTO.Document)).FirstOrDefault();
+                    var userExist = _context.Usuarios.Where(u => u.Email == userDTO.Email && u.Documento == userDTO.Document).FirstOrDefault();
 
                     if (userExist != null)
                         return new SuccessResponseDTO { Success = false, Message = "Este usuario ya existe" }; 
@@ -48,18 +48,23 @@ namespace BusinessService.Services
                         Documento = Convert.ToInt32(userDTO.Document),
                         IdTipoDocumento = userDTO.DocumentType,
                         IdCondominio = null,
-                        IdPerfil = null
+                        IdPerfil = null,
+                        ActivationDate = null,
+                        ExpirationDate = null,
                     };
 
                     var result = DBAdd(usuario, _context);
 
-                    ConsorcioUsuario consorcioUsuario = new ConsorcioUsuario
+                    if (!userDTO.AdminRegister)
                     {
-                        IdUsuario = usuario.Id,
-                        IdConsorcio = userDTO.ConsortiumID,
-                    };
+                        ConsorcioUsuario consorcioUsuario = new ConsorcioUsuario
+                        {
+                            IdUsuario = usuario.Id,
+                            IdConsorcio = userDTO.ConsortiumID,
+                        };
 
-                    result = DBAdd(consorcioUsuario, _context);
+                        result = DBAdd(consorcioUsuario, _context);
+                    }
 
                     if (result)
                         return new SuccessResponseDTO { Success = true, Message = "Usuario creado correctamente" }; 
@@ -124,6 +129,40 @@ namespace BusinessService.Services
                }).ToList();
             return userModelDTOs;
         }
+
+        public List<UserModelDTO> GetAllAdminUsers()
+        {
+            List<UserModelDTO> userModelDTOs = _context.Usuarios
+               .Where(u => !u.ConsorcioUsuarios.Any() && u.IdPerfil == 1)
+               .Select(u => new UserModelDTO
+               {
+                   Name = u.Nombre + ' ' + u.Apellido,
+                   Phone = u.Telefono,
+                   Email = u.Email,
+                   Document = u.Documento,
+                   Profile = u.IdPerfilNavigation != null ?
+                            new ProfileModel
+                            {
+                                Id = u.IdPerfilNavigation.Id,
+                                Name = u.IdPerfilNavigation.Nombre
+                            } : new ProfileModel(),
+                   Property = u.Esinquilino == true ? "Inquilino" : "Propietario",
+                   State = u.IdEstadoUsuarioNavigation != null ?
+                             new StateModel
+                             {
+                                 Id = u.IdEstadoUsuarioNavigation.Id,
+                                 Name = u.IdEstadoUsuarioNavigation.Nombre
+                             } : new StateModel(),
+                   Condominium =
+                    u.IdCondominioNavigation != null ?
+                            u.IdCondominioNavigation.Torre
+                    + ' ' + u.IdCondominioNavigation.NumeroDepartamento
+                    : "",
+
+               }).ToList();
+            return userModelDTOs;
+        }
+
 
         public UserModelByDocumentDTO GetUserByDocument(int documentUser)
         {

@@ -117,6 +117,7 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("CUIT");
+            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -558,6 +559,7 @@ public partial class ConsorcioGestContext : DbContext
             entity.ToTable("USUARIOS");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ActivationDate).HasColumnType("datetime");
             entity.Property(e => e.Apellido)
                 .HasMaxLength(150)
                 .IsUnicode(false)
@@ -577,6 +579,7 @@ public partial class ConsorcioGestContext : DbContext
             entity.Property(e => e.Espropietario)
                 .HasDefaultValueSql("((0))")
                 .HasColumnName("ESPROPIETARIO");
+            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
             entity.Property(e => e.IdCondominio).HasColumnName("ID_CONDOMINIO");
             entity.Property(e => e.IdEstadoUsuario).HasColumnName("ID_ESTADO_USUARIO");
             entity.Property(e => e.IdPerfil).HasColumnName("ID_PERFIL");

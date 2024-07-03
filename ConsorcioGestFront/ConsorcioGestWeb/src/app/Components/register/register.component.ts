@@ -88,17 +88,19 @@ export class RegisterComponent {
       && this.registerForm.get('Password')?.value === this.registerForm.get('ConfirmPassword')?.value) {
 
       const user: RegisterUserDTO = {
+        AdminRegister: this.adminRegister,
         Name: this.registerForm.get('Name')?.value,
         LastName: this.registerForm.get('LastName')?.value,
         Email: this.registerForm.get('Email')?.value,
         Password: this.registerForm.get('Password')?.value,
         ConfirmPassword: this.registerForm.get('ConfirmPassword')?.value,
         Phone: this.registerForm.get('Phone')?.value,
-        Document: this.registerForm.get('Document')?.value,
+        Document: parseInt(this.registerForm.get('Document')?.value),
         UserType: this.registerForm.get('UserType')?.value,
-        ConsortiumID: this.registerForm.get('Consortium')?.value,
+        ConsortiumID: this.registerForm.get('Consortium')?.value ? parseInt(this.registerForm.get('Consortium')?.value) : 0,
         DocumentType: this.registerForm.get('DocumentType')?.value
       };  
+     
       this.loading = true;
       this.userService.CreateUser(user).subscribe({
         next: data => {

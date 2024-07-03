@@ -21,12 +21,7 @@ namespace WebApi.Controllers.LoginController
         [HttpPost]
         public IActionResult Login(LoginUser loginUser)
         {
-            var user = loginService.Login(loginUser);
-
-            if (user != null)
-                return Ok(user);
-            else
-                return BadRequest("Credenciales inválidas");
+            return Ok(loginService.Login(loginUser));
         }
 
         /*[HttpGet("/getUser")]

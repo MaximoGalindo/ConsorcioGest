@@ -7,17 +7,17 @@ export class Utils {
     Utils.toastService = toastService;
   }
 
-  static success(message: string) {
+  static success(message: string, delay: number = 1500) {
     if (Utils.toastService) {
-      Utils.toastService.success(message);
+      Utils.toastService.success(message, delay);
     } else {
       console.error('ToastService is not initialized.');
     }
   }
 
-  static error(message: string) {
+  static error(message: string, delay: number = 1500) {
     if (Utils.toastService) {
-      Utils.toastService.error(message);
+      Utils.toastService.error(message, delay);
     } else {
       console.error('ToastService is not initialized.');
     }

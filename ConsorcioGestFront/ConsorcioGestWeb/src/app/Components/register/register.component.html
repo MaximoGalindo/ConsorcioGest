@@ -34,7 +34,7 @@
                         [ngClass]="{'error': isFieldInvalid('Phone')}">
                 </div>
                 <div class="input-container">
-                    <select class="custom-select" formControlName="Consortium"
+                    <select *ngIf="residentRegister" class="custom-select" formControlName="Consortium"
                         [ngClass]="{'error': isFieldInvalid('Consortium')}">
                         <option value="" disabled>Seleccione su Consorcio</option>
                         <option *ngFor="let consortium of consortiums" [value]="consortium.Id">{{ consortium.Name + ' -

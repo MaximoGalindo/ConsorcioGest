@@ -24,7 +24,7 @@
     transform: translate(-50%, -50%);
     border-radius: 1rem;
     padding: 1rem 0;
-    z-index: 1; /* Asegúrate de que el texto esté por encima del pseudo-elemento */
+    /* Asegúrate de que el texto esté por encima del pseudo-elemento */
   }
   
   .title::before {

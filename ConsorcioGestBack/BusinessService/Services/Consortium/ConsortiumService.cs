@@ -36,9 +36,20 @@ namespace BusinessService.Services.Consortium
             return floorDepartmentDTOs;
         }
 
+        public bool DeleteConsortium(int consortiumID)
+        {
+            var consortium = _context.Consorcios
+                            .Where(c => c.Id == consortiumID)
+                            .FirstOrDefault();
+            consortium.ExpirationDate = DateTime.Now;
+            return DBUpdate(consortium, _context);
+        }
+
+
         public List<ConsortiumModel> GetAllConsortiums()
         {
             List<ConsortiumModel> consortiumList = _context.Consorcios
+                    .Where(c => c.ExpirationDate == null)
                     .Select(t => new ConsortiumModel
                     {
                         Id = t.Id,

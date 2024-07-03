@@ -60,5 +60,13 @@ namespace WebApi.Controllers.LoginController
         {
             return Ok(consortiumService.GetCommonSpaces());
         }
+
+        [HttpPost("delete-consortium")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult DeleteConsortium(int consortiumID)
+        {
+            return Ok(consortiumService.DeleteConsortium(consortiumID));
+        }
     }
+
 }

@@ -1,19 +1,25 @@
 <div class="total-container">
     <div class="rectangule">
-        <h1>Seleccione un Consorcio</h1>
-        <div class="line"></div>
+        <div>
+            <h1>Seleccione un Consorcio</h1>
+            <div class="line"></div>
+            <button class="button-user" (click)="GoToUsers()"><i class="fa-solid fa-user fa-2x"></i></button>
+        </div>
         <div style="margin-top: 30px">
             <input type="text" 
                     class="custom-input" 
                     placeholder="Buscar">
             <button class="button-search">Buscar</button>
         </div>
-        <div class="consortiums-container" >
-            <button *ngFor="let c of consortiums" (click)="selectConsortium(c.Id)" class="consortiums-button">
-                {{c.Name}}
-                <br>
-                {{c.Location}}
-            </button>
+        <div class="consortiums-container">
+            <div class="consortium" *ngFor="let c of consortiums">
+                <button (click)="selectConsortium(c.Id)" class="consortiums-button">
+                    {{c.Name}}
+                    <br>
+                    {{c.Location}}
+                </button>      
+                <button class="trash" (click)="RemoveConsortium(c.Id)"><i class="fa-solid fa-trash fa-2x"></i></button>    
+            </div>        
         </div>
         <div style="margin-top: 1.5rem; 
                     margin-right: 25px;

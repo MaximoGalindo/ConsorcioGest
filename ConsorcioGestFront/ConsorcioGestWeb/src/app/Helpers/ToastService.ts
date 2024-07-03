@@ -12,11 +12,11 @@ export class ToastService {
     this.toasts = this.toasts.filter(t => t !== toast);
   }
 
-  success(message: string) {
-    this.show(message, { classname: 'bg-success text-light', delay: 1500 });
+  success(message: string, delay: number = 1500) {
+    this.show(message, { classname: 'bg-success text-light', delay: delay });
   }
 
-  error(message: string) {
-    this.show(message, { classname: 'bg-danger text-light', delay: 1500 });
+  error(message: string, delay: number = 1500) {
+    this.show(message, { classname: 'bg-danger text-light', delay: delay });
   }
 }

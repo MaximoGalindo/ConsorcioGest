@@ -36,6 +36,14 @@ namespace WebApi.Controllers.UserController
             return Ok(userService.GetAllUsers(filterUser));
         }
 
+        [HttpGet("get-admin-users")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetAllAdminUsers()
+        {
+            return Ok(userService.GetAllAdminUsers());
+        }
+
+
         [HttpGet("get-user-by-document/{documentUser}")]
         [Authorize(Roles = "Admin")]
         public IActionResult GetUserByDocument(int documentUser)

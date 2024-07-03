@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using BusinessService.Models.AuxModel;
+using BusinessService.Enums;
+using BusinessService.ResponseDTO;
 
 namespace BusinessService.Services
 {
@@ -31,29 +33,42 @@ namespace BusinessService.Services
             this._config = configuration;
         }
 
-        public UserModel Login(LoginUser loginUser)
+        public ResponseModel<UserModel> Login(LoginUser loginUser)
         {
-            if(loginUser != null)
-            {
-                var user = Authenticate(loginUser);
+            var response = new ResponseModel<UserModel>();
 
-                if (user != null)
+            if (loginUser != null)
+            {
+                var authResponse = Authenticate(loginUser);
+
+                if (authResponse.Success)
                 {
-                    var token = GenerateToken(user);
+                    var token = GenerateToken(authResponse.Data);
                     GetCurrentUser(token);
-                    return CurrentUser;
+                    response.Success = true;
+                    response.Data = CurrentUser;
+                    return response;
+                }
+                else
+                {
+                    return authResponse;
                 }
             }
-            return null;
+
+            response.Success = false;
+            response.Message = "LoginUser no puede ser nulo";
+            return response;
         }
 
-        private UserModel Authenticate(LoginUser loginUser)
+        private ResponseModel<UserModel> Authenticate(LoginUser loginUser)
         {
+            var response = new ResponseModel<UserModel>();
+
             var currentUser = context.Usuarios
-                .Include(u => u.IdPerfilNavigation)
                 .Where(u => u.Email == loginUser.Email && u.Contrasenia == loginUser.Password)
                 .Select(u => new UserModel
                 {
+                    Id = u.Id,
                     Document = u.Documento,
                     Email = u.Email,
                     Profile = new ProfileModel { Id = u.Id, Name = u.IdPerfilNavigation.Nombre}
@@ -62,9 +77,42 @@ namespace BusinessService.Services
 
             if (currentUser != null)
             {
-                return currentUser;
+                var user = context.Usuarios
+                    .Where(u => u.Id == currentUser.Id)
+                    .Select(u => new
+                    {
+                        ConsorcioUsuarios = u.ConsorcioUsuarios
+                            .Select(cu => new
+                            {
+                                cu.IdConsorcioNavigation.ExpirationDate
+                            }).ToList(),
+                        Estado = u.IdEstadoUsuario
+                    })
+                    .FirstOrDefault();
+
+                if (user.ConsorcioUsuarios.Any(c => c.ExpirationDate != null))
+                {
+                    response.Success = false;
+                    response.Message = "Hay un error con su consorcio. Contecte con el Administrador";
+                    return response;
+                }
+                if (user.Estado != 1)
+                {
+                    response.Success = false;
+                    response.Message = "El usuario no se encuentra habilitado para ingresar";
+                    return response;
+                }
+
+                response.Success = true;
+                response.Data = currentUser;
+                return response;
             }
-            return null;
+            else
+            {
+                response.Success = false;
+                response.Message = "Las credenciales son invalidas";
+            }
+            return response;
         }
 
         private string GenerateToken(UserModel userModel)
@@ -158,6 +206,7 @@ namespace BusinessService.Services
         public bool Logout()
         {
             CurrentUser = null;
+            CurrentConsortium = null;
             return true;
         }
     }

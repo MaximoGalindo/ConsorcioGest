@@ -31,6 +31,10 @@ public partial class Usuario
 
     public int Documento { get; set; }
 
+    public DateTime? ActivationDate { get; set; }
+
+    public DateTime? ExpirationDate { get; set; }
+
     public virtual ICollection<ConsorcioUsuario> ConsorcioUsuarios { get; set; } = new List<ConsorcioUsuario>();
 
     public virtual Condominio? IdCondominioNavigation { get; set; }

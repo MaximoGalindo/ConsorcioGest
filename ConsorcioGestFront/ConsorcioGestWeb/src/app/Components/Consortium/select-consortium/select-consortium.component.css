@@ -36,17 +36,22 @@ h1{
     font-weight: 300;
 }
 
-.consortiums-button{
-    background-color: white;
+.button-user{
+    position: absolute;
     border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
+    background-color: transparent;
+    right: 33%;
+    top: 11.5%;
+}
+
+.consortiums-button{
+    background-color: transparent;
+    border: none;
     color: black;
+    padding: 0rem 1rem;
     font-size: 16px;
     cursor: pointer;
-    font-weight: 300;
     height: 65px;
-    width: 100%;
     font-weight: 500;
     text-align: left;
 }
@@ -55,6 +60,23 @@ h1{
     height: 300px;
     overflow-y: auto;
 }   
+.consortium{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    background-color: white;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+.trash{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 15px;
+    width: 3rem !important;
+    color: rgb(187, 16, 16);
+}
 
 .consortiums-container button{
     margin-top: 30px;
