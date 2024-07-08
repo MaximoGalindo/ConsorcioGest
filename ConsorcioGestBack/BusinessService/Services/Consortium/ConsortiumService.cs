@@ -62,7 +62,6 @@ namespace BusinessService.Services.Consortium
 
         public bool SaveConsortium(ConsortiumConfig consortiumConfig)
         {
-
             Consorcio consorcio = new Consorcio {
                 Nombre = consortiumConfig.Name,
                 Ubicacion = consortiumConfig.Location,
@@ -162,19 +161,6 @@ namespace BusinessService.Services.Consortium
                 }
             }
         }
-
-        /*public bool DeleteConsortium(int consortiumID)
-        {
-            var consortium = _context.Consorcios.Where(c => c.Id == consortiumID).FirstOrDefault();
-            var contacts = _context.Contactos.Where(c => c.IdConsorcio == consortiumID).ToList();
-            var consortiumConfigurations = _context.ConsortiumConfigurations.Where(c => c.IdConsortium == consortiumID).FirstOrDefault();
-            var commonSpacesConsortium = _context.EspacioComunConsorcios.Where(e => e.IdConsorcio == consortiumID).ToList();
-            var condominiums = _context.Condominios.Where(c => c.IdConsorcio == consortiumID).ToList();
-            
-            DBDelete()
-
-            //var consortiumUsers = _context.ConsorcioUsuarios.
-        }*/
 
         public List<ListItemDTO> GetTowers()
         {

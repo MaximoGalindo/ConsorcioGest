@@ -19,6 +19,10 @@ public partial class EspacioComunConsorcio
 
     public int IdEspacioComun { get; set; }
 
+    public bool? Activo { get; set; }
+
+    public DateTime? ExpirationDate { get; set; }
+
     public virtual Consorcio IdConsorcioNavigation { get; set; } = null!;
 
     public virtual EspacioComun IdEspacioComunNavigation { get; set; } = null!;

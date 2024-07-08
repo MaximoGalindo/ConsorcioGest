@@ -280,7 +280,11 @@ public partial class ConsorcioGestContext : DbContext
             entity.ToTable("ESPACIO_COMUN_CONSORCIO");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Activo)
+                .IsRequired()
+                .HasDefaultValueSql("((1))");
             entity.Property(e => e.CantidadReservasDisponibles).HasColumnName("CANTIDAD_RESERVAS_DISPONIBLES");
+            entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
             entity.Property(e => e.HoraDesde)
                 .HasMaxLength(5)
                 .IsUnicode(false)

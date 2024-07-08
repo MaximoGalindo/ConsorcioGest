@@ -45,6 +45,7 @@ export class CommonSpacesModel {
   commonSpaceID: number = 0;
   commonSpaceName: string = '';
   countReservations: number = 0;
+  active:boolean = false;
 }
 
 

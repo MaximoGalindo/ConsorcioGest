@@ -63,3 +63,12 @@ i{
     font-weight: 500;
     border: none;
 }
+
+.disabled{
+    color: grey !important;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+}

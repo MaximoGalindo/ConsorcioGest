@@ -69,4 +69,9 @@ export class ReservationsService {
     UpdateStateReservation(updateReservation:UpdateStateReservationDTO): Observable<any> {
         return this.http.post<any>(this.baseUrl + 'update-state-reservation', updateReservation);
     }
+
+    UpdateStateCommonSpace(commonSpaceID: number, state: boolean): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}update-state-common-space`, { commonSpaceID, state });
+    }
+    
 }

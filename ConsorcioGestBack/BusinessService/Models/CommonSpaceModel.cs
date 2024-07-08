@@ -16,5 +16,6 @@ namespace BusinessService.Models
         public int CommonSpaceID { get; set; }
         public string CommonSpaceName { get; set; }
         public int CountReservations {  get; set; }
+        public bool Active {  get; set; }     
     }
 }

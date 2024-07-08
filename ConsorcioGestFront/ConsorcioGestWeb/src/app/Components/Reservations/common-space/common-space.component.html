@@ -11,8 +11,15 @@
         </div>
     </div>
     <div class="footer">
-        <i style="color: green;" class="fa-solid fa-check fa-2x"></i>
-        <i style="color: red;" class="fa-solid fa-ban fa-2x"></i>
-        <i (click)="ShowGrid(commonSpace.id)" class="fa-solid fa-plus fa-2x"></i>
+        <button [disabled]="commonSpace.active === true" (click)="UpdateCommonSpace(commonSpace.id,true)">
+            <i style="color: green;" class="fa-solid fa-check fa-2x" [ngClass]="{'disabled': commonSpace.active === true}"></i>
+        </button>
+        <button [disabled]="commonSpace.active === false" (click)="UpdateCommonSpace(commonSpace.id,false)">
+            <i style="color: red;" class="fa-solid fa-ban fa-2x" [ngClass]="{'disabled': commonSpace.active === false}"></i>
+        </button>
+        <button [disabled]="!commonSpace.active " (click)="ShowGrid(commonSpace.id)">
+            <i class="fa-solid fa-plus fa-2x"></i>
+        </button>
+
     </div>
 </div>

@@ -70,5 +70,10 @@ namespace WebApi.Controllers.ReservationsController
             return Ok(reservationsService.CancelReservationByUser(reservationID));
         }
 
+        [HttpPost("update-state-common-space")]
+        public IActionResult UpdateStateCommonSpace(UpdateStateCommonSpaceDTO updateStateCommonSpaceDTO)
+        {
+            return Ok(reservationsService.UpdateStateCommonSpace(updateStateCommonSpaceDTO.CommonSpaceID,updateStateCommonSpaceDTO.State));
+        }
     }
 }

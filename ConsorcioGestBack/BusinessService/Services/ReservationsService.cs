@@ -30,7 +30,7 @@ namespace BusinessService.Services
         public List<CommonSpaceModel> GetCommonSpaces(int consortiumID)
         {
             List<CommonSpaceModel> commonSpaces = _context.EspacioComunConsorcios
-                .Where(cs => cs.IdConsorcio == consortiumID)
+                .Where(cs => cs.IdConsorcio == consortiumID && cs.ExpirationDate == null)
                 .Select(cs => new CommonSpaceModel
                 {
                     Id = cs.Id,
@@ -40,13 +40,34 @@ namespace BusinessService.Services
                     NumberReservationsAvailable = cs.CantidadReservasDisponibles,
                     CommonSpaceID = cs.IdEspacioComun,
                     CommonSpaceName = cs.IdEspacioComunNavigation.Nombre,
-                    CountReservations = cs.Reservas.Count
+                    CountReservations = cs.Reservas.Count,
+                    Active = cs.Activo.Value
                 })
                 .ToList();
             return commonSpaces;
         }
 
+        public bool UpdateStateCommonSpace(int commonSpaceID,bool state)
+        {
+            var commonSpace = _context.EspacioComunConsorcios
+                .Where(cs => cs.Id == commonSpaceID)
+                .FirstOrDefault();
+            commonSpace.Activo = state;
 
+            var result = DBUpdate(commonSpace,_context);
+
+            var reservations = _context.Reservas
+                .Where(r => r.IdEspacioComunConsorcio == commonSpace.Id)
+                .ToList();
+            foreach (var reservation in reservations) 
+            {
+                reservation.IdEstadoReserva = state ? (int)ReservationsStatesEnum.RESERVATED : (int)ReservationsStatesEnum.CANCELLED;
+                if (reservation.Fecha > DateTime.Now)
+                    reservation.IdEstadoReserva = (int)ReservationsStatesEnum.CANCELLED;
+                result = DBUpdate(reservation, _context);
+            }
+            return result;
+        }
 
         public async Task<bool> SaveReservation(ReservationDTO reservationDTO)
         {
@@ -139,6 +160,7 @@ namespace BusinessService.Services
 
             return commonSpaces;
         }
+
 
         public List<ReservationModel> GetReservations(FilterReservationDTO filterReservation)
         {

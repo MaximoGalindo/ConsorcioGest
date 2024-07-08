@@ -12,4 +12,10 @@ namespace BusinessService.DTO
         public int StateReservationID { get; set; }
         public string Message { get; set; }
     }
+
+    public class UpdateStateCommonSpaceDTO 
+    {
+        public int CommonSpaceID { get; set; }
+        public bool State { get; set; }
+    }
 }
