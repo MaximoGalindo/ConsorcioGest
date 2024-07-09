@@ -51,7 +51,7 @@ const routes: Routes = [
       {path: 'FAQS',component:FAQSComponent, data: { isAdmin: false } }
     ]},
   { path: 'consortium', component: SelectConsortiumComponent},
-  { path: 'register-consortium', 
+  { path: 'register-consortium/:consortiumID', 
     children: [
       {path:'' , component: RegisterConsortiumComponent},
     ]  

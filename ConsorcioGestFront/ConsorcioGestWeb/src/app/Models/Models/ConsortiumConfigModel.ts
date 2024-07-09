@@ -53,3 +53,9 @@ export class FloorDeparmentDTO{
   floor:string = '';
   department:string = '';    
 }
+
+export class EditConsortiumDTO{
+  consortiumID:number = 0
+  name:string = ''
+  commonSpaces:CommonSpaceConfig[] = []
+}

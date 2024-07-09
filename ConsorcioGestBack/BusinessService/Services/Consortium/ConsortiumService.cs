@@ -198,5 +198,89 @@ namespace BusinessService.Services.Consortium
                 })
                 .ToList();
         }
+
+        public ConsortiumDTO GetConfigurationsByID(int consortiumID) 
+        {
+            ConsortiumDTO consortium = new ConsortiumDTO();
+
+            var cons = _context.Consorcios
+                .Where(c => c.Id == consortiumID)
+                .Select(c => new 
+                {
+                    Name = c.Nombre,
+                    CUIT = c.Cuit,
+                    Location = c.Ubicacion,                    
+                })
+                .FirstOrDefault();
+
+            consortium.Name = cons.Name;
+            consortium.CUIT = cons.CUIT;
+            consortium.Location = cons.Location;
+
+            var towers = _context.ConsortiumConfigurations
+                .Where(c => c.IdConsortium == consortiumID)
+                .Select(c => c.TowerName)
+                .ToList();
+            consortium.Towers = towers;
+
+            var commonSpaces = _context.EspacioComunConsorcios
+                .Where(e => e.IdConsorcio == consortiumID)
+                .Select(e => new CommonSpaces
+                {
+                    IdSpace = e.IdEspacioComun,
+                    NameSpace = e.IdEspacioComunNavigation.Nombre,
+                    HourFrom = e.HoraDesde,
+                    HourTo = e.HoraHasta,
+                    LimitUsers = e.LimiteUsuarios
+                })
+                .ToList();
+
+            consortium.CommonSpaces = commonSpaces;
+
+            return consortium;          
+        
+        }
+
+        public bool EditConsortium(EditConsortiumDTO consortiumDTO)
+        {
+            var consortium = _context.Consorcios
+                .Where(c => c.Id == consortiumDTO.ConsortiumID)
+                .FirstOrDefault();
+
+            consortium.Nombre = consortiumDTO.Name;
+            var result = DBUpdate(consortium, _context);
+
+            var commonSpaces = _context.EspacioComunConsorcios
+                .Where(cs => cs.IdConsorcio == consortiumDTO.ConsortiumID)
+                .ToList();
+
+            foreach(var cs in consortiumDTO.CommonSpaces)
+            {
+                if (commonSpaces.Any(c => c.IdEspacioComun == cs.IdSpace))
+                {
+                    var commonSpace = _context.EspacioComunConsorcios.Where(coms => coms.IdEspacioComun == cs.IdSpace).FirstOrDefault();
+                    commonSpace.HoraDesde = cs.HourFrom;
+                    commonSpace.HoraHasta = cs.HourTo;
+                    commonSpace.LimiteUsuarios = cs.LimitUsers;
+                    result = DBUpdate(commonSpace, _context);
+                }
+                else
+                {
+                    EspacioComunConsorcio espacioComunConsorcio = new EspacioComunConsorcio
+                    {
+                        LimiteUsuarios = cs.LimitUsers,
+                        HoraDesde = cs.HourFrom,
+                        HoraHasta = cs.HourTo,
+                        IdConsorcio = consortiumDTO.ConsortiumID,
+                        IdEspacioComun = cs.IdSpace
+                    };
+                    espacioComunConsorcio.CantidadReservasDisponibles = GetNumberHoursAvaible(cs.HourFrom, cs.HourTo, "HH:mm");
+                    result = DBAdd(espacioComunConsorcio, _context);
+                }
+            }
+
+            return result;
+        }
+
     }
 }

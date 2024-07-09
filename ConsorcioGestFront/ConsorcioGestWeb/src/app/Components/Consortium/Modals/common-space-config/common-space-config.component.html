@@ -2,30 +2,39 @@
     <div class="modal-content">
         <span class="close" (click)="CloseModal()">&times;</span>
         <div class="text-center">
-            <h1>{{commonSpaceConfig.nameSpace}}</h1> 
+            <h1>{{commonSpaceConfig.nameSpace}}</h1>
         </div>
-   
+
         <div>
             <div>
                 <label for="">Hora Desde</label>
-                <input class="custom-input" [ngClass]="{'error': !commonSpaceConfig.hourFrom}" type="time" [(ngModel)]="commonSpaceConfig.hourFrom"
-                (ngModelChange)="resetErrors()">
+
+                <select class="custom-input" [(ngModel)]="commonSpaceConfig.hourFrom"
+                    [ngClass]="{'error': !commonSpaceConfig.hourFrom}">
+                    <option *ngFor="let hora of intervaloHoras" [value]="hora">{{ hora }}</option>
+                </select>
+
                 <div *ngIf="errorMessage.hourFrom" class="error-message">
                     {{errorMessage.hourFrom}}
                 </div>
             </div>
             <div>
                 <label for="">Hora Hasta</label>
-                <input class="custom-input" [ngClass]="{'error':!commonSpaceConfig.hourTo}" type="time" [(ngModel)]="commonSpaceConfig.hourTo"
-                (ngModelChange)="resetErrors()">
+                <select class="custom-input" [(ngModel)]="commonSpaceConfig.hourTo"
+                    [ngClass]="{'error': !commonSpaceConfig.hourTo}">
+                    <option *ngFor="let hora of intervaloHoras" [value]="hora">{{ hora }}</option>
+                </select>
+
                 <div *ngIf="errorMessage.hourTo" class="error-message">
                     {{errorMessage.hourTo}}
                 </div>
             </div>
             <div>
                 <label for="">Limite de horas reservadas por usuario</label>
-                <input class="custom-input" [ngClass]="{'error': commonSpaceConfig.limitUsers == null || commonSpaceConfig.limitUsers < 1}" style="width: 3rem;" type="number" [(ngModel)]="commonSpaceConfig.limitUsers"
-                (ngModelChange)="resetErrors()">
+                <input class="custom-input"
+                    [ngClass]="{'error': commonSpaceConfig.limitUsers == null || commonSpaceConfig.limitUsers < 1}"
+                    style="width: 3rem;" type="number" [(ngModel)]="commonSpaceConfig.limitUsers"
+                    (ngModelChange)="resetErrors()">
                 <div *ngIf="errorMessage.limitUsers" class="error-message">
                     {{errorMessage.limitUsers}}
                 </div>
@@ -34,7 +43,7 @@
             <div class="button-container">
                 <button (click)="Save()">Guardar</button>
                 <button (click)="CloseModal()">Cerrar</button>
-            </div>  
+            </div>
         </div>
     </div>
 </div>

@@ -108,3 +108,7 @@ input[type=time]::-webkit-calendar-picker-indicator {
     position: absolute;
     top: 40%;
 }
+
+.disabled{
+    color: gray !important;
+}

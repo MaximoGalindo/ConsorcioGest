@@ -65,7 +65,7 @@ export class SelectConsortiumComponent {
   }
 
   addConsortium() {
-    this.router.navigate(['/register-consortium'])
+    this.router.navigate(['/register-consortium',0])
   }
   BackLogin() {
     this.router.navigate(['/login'])
@@ -74,5 +74,9 @@ export class SelectConsortiumComponent {
     this.document.body.classList.remove('backgroud-login');
     this.document.body.classList.add('background-admin');
     this.router.navigate(['/user-admin-gest'])
+  }
+
+  EditConsortium(consortiumID: number) {
+    this.router.navigate(['/register-consortium', consortiumID])
   }
 }

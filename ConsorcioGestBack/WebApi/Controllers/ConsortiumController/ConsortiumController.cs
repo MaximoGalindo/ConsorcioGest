@@ -67,6 +67,18 @@ namespace WebApi.Controllers.LoginController
         {
             return Ok(consortiumService.DeleteConsortium(consortiumID));
         }
+
+        [HttpGet("get-consortium-configurations-by-id/{consortiumID}")]
+        public IActionResult GetConfigurationsByID(int consortiumID)
+        {
+            return Ok(consortiumService.GetConfigurationsByID(consortiumID));
+        }
+
+        [HttpPut("edit-consortium")]
+        public IActionResult EditConsortium(EditConsortiumDTO consortiumDTO)
+        {
+            return Ok(consortiumService.EditConsortium(consortiumDTO));
+        }
     }
 
 }

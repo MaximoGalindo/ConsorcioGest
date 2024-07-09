@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ConsortiumConfiguration, Tower } from '../Models/Models/ConsortiumConfigModel';
+import { ConsortiumConfiguration, EditConsortiumDTO, Tower } from '../Models/Models/ConsortiumConfigModel';
 import { ListItemDTO } from '../Models/HelperModel/ListItemDTO';
 import { environment } from '../Helpers/Envriorment';
 
@@ -38,5 +38,13 @@ export class ConsortiumService {
 
   DeleteConsortium(id:number):Observable<any>{
     return this.http.post(this.baseUrl + 'delete-consortium?consortiumID=' + id,null)
+  }
+
+  GetConfigurationsByID(id:number):Observable<any>{ 
+    return this.http.get(this.baseUrl + 'get-consortium-configurations-by-id/' + id)
+  }
+
+  EditConsortium(dto:EditConsortiumDTO):Observable<any>{
+    return this.http.put(this.baseUrl + 'edit-consortium',dto)
   }
 }

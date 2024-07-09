@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace BusinessService.Models
 {
-
     public class ConsortiumConfig
     {
         public string CUIT {  get; set; }
@@ -54,11 +53,25 @@ namespace BusinessService.Models
         public int LimitUsers { get; set; }
     }
 
-
     public class FloorDepartmentDTO {
         public string Floor {  get; set; }
         public string Department { get; set; }
     }
 
+    public class ConsortiumDTO 
+    {
+        public string CUIT { get; set; }
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public List<string> Towers { get; set; }
+        public List<CommonSpaces> CommonSpaces { get; set; }
+    }
+
+    public class EditConsortiumDTO 
+    {   
+        public int ConsortiumID { get; set; }
+        public string Name { get; set; }
+        public List<CommonSpaces> CommonSpaces { get; set; }
+    }
 
 }
