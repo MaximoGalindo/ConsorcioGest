@@ -6,11 +6,11 @@
     </div>
     <div  *ngIf="_ShowGrid" class="filter-container">
         <label style="margin-left: 30px;">Documento</label>
-        <input type="text" [(ngModel)]="document" name="Document" class="custom-input">    
+        <input type="text" [(ngModel)]="document" name="Document" class="custom-input" style="width: 8rem;">    
         <label for="">Fecha Desde</label>
-        <input type="date" name="CreationDate" [(ngModel)]="dateFrom" class="custom-input" style="width: 120px;">
+        <input type="date" name="CreationDate" [(ngModel)]="dateFrom" class="custom-input" >
         <label for="">Fecha Hasta</label>
-        <input type="date" name="ExpirationDate" [(ngModel)]="dateTo" class="custom-input"  style="width: 120px; margin-right: 10px;">
+        <input type="date" name="ExpirationDate" [(ngModel)]="dateTo" class="custom-input"  style=" margin-right: 10px;">
         <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div *ngIf="_ShowGrid" class="table-container">

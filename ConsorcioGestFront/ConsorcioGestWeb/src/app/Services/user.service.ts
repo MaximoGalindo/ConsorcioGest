@@ -46,6 +46,11 @@ export class UserService {
     return this.http.get<UserModelByDocumentDTO>(this.baseUrl + 'get-user-by-document/'+ userDocument)
   }
 
+  GetUserByID(userId:number): Observable<UserModelByDocumentDTO>{
+    return this.http.get<UserModelByDocumentDTO>(this.baseUrl + 'get-user-by-id/'+ userId)
+  }
+
+
   UpdateUser(userDocument:number, user:UpdateUserDTO):Observable<any>{
     return this.http.put(this.baseUrl + 'update-user/'+ userDocument, user)
   }

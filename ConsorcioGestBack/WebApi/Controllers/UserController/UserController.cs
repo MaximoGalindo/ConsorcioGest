@@ -51,6 +51,13 @@ namespace WebApi.Controllers.UserController
             return Ok(userService.GetUserByDocument(documentUser));
         }
 
+        [HttpGet("get-user-by-id/{userID}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult GetUserByID(int userID)
+        {
+            return Ok(userService.GetUserBydID(userID));
+        }
+
         [HttpPut("update-user/{documentUser}")]
         [Authorize]
         public IActionResult UpdateUser(int documentUser, [FromBody] UpdateUserDTO userDTO)

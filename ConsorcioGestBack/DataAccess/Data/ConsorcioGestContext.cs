@@ -449,6 +449,7 @@ public partial class ConsorcioGestContext : DbContext
                 .HasMaxLength(2000)
                 .IsUnicode(false)
                 .HasColumnName("COMENTARIO");
+            entity.Property(e => e.ExpirationDate).HasColumnType("date");
             entity.Property(e => e.Fecha)
                 .HasColumnType("date")
                 .HasColumnName("FECHA");

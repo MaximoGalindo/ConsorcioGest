@@ -40,6 +40,25 @@ h4{
     cursor: pointer;
 }
 
+.buttons{
+    display: flex;
+    align-items: center;
+}
+
+.trash {
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent !important;
+    border: none;
+    border-radius: 0;
+}
+
+.see-more{
+    display: flex;
+    align-items: center;
+}
+
 .weight{
     font-weight: bold;
 }

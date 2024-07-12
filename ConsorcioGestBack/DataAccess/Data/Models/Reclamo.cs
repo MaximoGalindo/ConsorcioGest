@@ -21,6 +21,8 @@ public partial class Reclamo
 
     public int? IdCausaProblema { get; set; }
 
+    public DateTime? ExpirationDate { get; set; }
+
     public virtual ICollection<Encuesta> Encuesta { get; set; } = new List<Encuesta>();
 
     public virtual CausaProblema? IdCausaProblemaNavigation { get; set; }

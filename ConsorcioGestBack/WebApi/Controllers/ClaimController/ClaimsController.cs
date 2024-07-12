@@ -88,13 +88,6 @@ namespace WebApi.Controllers.ClaimController
         [HttpPost("send")]
         public async Task<IActionResult> SendEmail(string to)
         {
-            /*var surveyID = context.Encuestas.Where(e => e.IdReclamo == claimID).Select(e => e.Id);
-            var claim = context.Reclamos.Where(r => r.Id == claimID).Select(r => new
-            {
-                ClaimNumber = r.NroReclamo,
-                Email = r.IdUsuarioNavigation.Email
-            }).FirstOrDefault();*/
-
             var surveyLink = $"http://localhost:4200/claim-survey/1";
 
             var bodyEmail = EmailTemplateService.GetTemplate("EmailReplySurvey", ("claimNumber", "123453"), ("surveyLink", surveyLink));
@@ -103,5 +96,10 @@ namespace WebApi.Controllers.ClaimController
             return Ok("Correo Enviado");
         }
 
+        [HttpPut("delete-claim")]
+        public IActionResult DeleteClaim(int claimID)
+        {
+            return Ok(claimsService.DeleteClaim(claimID));
+        }
     }
 }

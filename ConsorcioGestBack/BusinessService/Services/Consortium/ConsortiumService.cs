@@ -118,7 +118,7 @@ namespace BusinessService.Services.Consortium
         {        
             foreach(Tower tower in consortiumConfig.Towers)
             {
-                TowerConfig towerConfig = tower.TowerConfig;
+                    TowerConfig towerConfig = tower.TowerConfig;
                 DepartmentConfig department = towerConfig.DepartmentConfig;
 
                 ConsortiumConfiguration consortiumConfiguration = new ConsortiumConfiguration();

@@ -9,7 +9,7 @@ export class ClaimDTO {
   public condominium: string = '';
   public affectedSpaceId?: number;
   public affectedSpace: string = '';
-  public userId?: number;
+  public userID: number = 0
   public problemDetail: string = '';
 }
 

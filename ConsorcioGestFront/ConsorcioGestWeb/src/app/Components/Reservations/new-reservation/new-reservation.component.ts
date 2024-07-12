@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCalendar, NgbDate, NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Utils } from 'src/app/Helpers/Utils';
 import { ReservationDTO } from 'src/app/Models/DTO/ReservationsDTO';
 import { CommonSpacesModel } from 'src/app/Models/Models/ConsortiumConfigModel';
 import { ReservationsService } from 'src/app/Services/reservations.service';
@@ -44,6 +45,7 @@ export class NewReservationComponent implements OnInit {
 	id: number = 0;
 	schedules: Array<{ hour: string, available: boolean, selected: boolean }> = [];
 	selectedHours: string[] = [];
+	hoursAviable:number = 0;
 
 	//private calendar = inject(NgbCalendar);
 	constructor(
@@ -58,7 +60,9 @@ export class NewReservationComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.id = this.route.snapshot.params['commonSpaceID'];
-
+		this.reservationService.GetCommonSpaceById(this.id).subscribe((data) => {
+			this.hoursAviable = data.userLimit
+		})
 
 	}
 
@@ -70,6 +74,15 @@ export class NewReservationComponent implements OnInit {
 
 	onCheckboxChange(hour: string, isChecked: boolean) {
 		if (isChecked) {
+			if (this.selectedHours.length >= this.hoursAviable) {
+				Utils.error("Has alcanzado el límite de horas que se pueden reservar por usuario");
+				const scheduleIndex = this.schedules.findIndex(s => s.hour === hour);
+				if (scheduleIndex > -1) {
+					this.schedules[scheduleIndex].selected = false;
+					(document.getElementById('time' + scheduleIndex) as HTMLInputElement).checked = false;
+				}
+				return;
+			}
 			this.selectedHours.push(hour);
 		} else {
 			const index = this.selectedHours.indexOf(hour);
@@ -79,12 +92,13 @@ export class NewReservationComponent implements OnInit {
 		}
 
 		if (!this.areSelectedHoursConsecutive()) {
-			alert('Los horarios deben ser consecutivos.');
-			const index = this.selectedHours.indexOf(hour);
-			if (index > -1) {
-				this.selectedHours.splice(index, 1);
+			Utils.error("Las horas seleccionadas no son consecutivas");
+			const scheduleIndex = this.schedules.findIndex(s => s.hour === hour);
+			if (scheduleIndex > -1) {
+				this.schedules[scheduleIndex].selected = false;
+				(document.getElementById('time' + scheduleIndex) as HTMLInputElement).checked = false;
 			}
-			(document.getElementById('time' + this.schedules.findIndex(s => s.hour === hour)) as HTMLInputElement).checked = false;
+			this.selectedHours = this.selectedHours.filter(h => h !== hour);
 		}
 	}
 
@@ -98,14 +112,12 @@ export class NewReservationComponent implements OnInit {
 			.sort((a, b) => a - b);
 
 		for (let i = 1; i < sortedHours.length; i++) {
-			if (sortedHours[i] !== sortedHours[i - 1] + 60) { // Asumiendo que los horarios están en intervalos de 1 hora
+			if (sortedHours[i] !== sortedHours[i - 1] + 60) { 
 				return false;
 			}
 		}
 		return true;
 	}
-
-
 
 	Save() {
 		if (this.selectedHours.length > 0) {
@@ -126,6 +138,7 @@ export class NewReservationComponent implements OnInit {
 			this.reservationService.SaveReservation(reservationDTO).subscribe((data) => {
 				console.log(data);
 				this.router.navigate(['/main-page-user/reservation-common-spaces']);
+				Utils.success("Se genero correctamente la reserva")
 			})
 		}
 	}

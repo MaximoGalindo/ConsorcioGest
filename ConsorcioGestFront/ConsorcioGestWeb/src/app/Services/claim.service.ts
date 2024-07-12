@@ -107,4 +107,8 @@ export class ClaimService {
     return this.http.post<any>(this.baseUrl + 'save-reply-survey', replySurvey)
   }
 
+  DeleteClaim(claimID:number) : Observable<any>{
+    return this.http.put(this.baseUrl + 'delete-claim',claimID)
+  }
+
 }

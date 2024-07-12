@@ -76,7 +76,9 @@ namespace BusinessService.Services
                     NroReclamo = GenerateClaimNumber()
                 };
                 var result = DBAdd(reclamo, _context);
-                var result2 = await UploadImages(reclamo.Id, claim.Files);
+
+                if(claim.Files != null)
+                    await UploadImages(reclamo.Id, claim.Files);
 
                 string template = GlobalResourses.TemplateComplaintReceived;
                
@@ -168,6 +170,7 @@ namespace BusinessService.Services
         {
             List<ClaimDTO> claimDTOs = _context.Reclamos
                             .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id)
+                                    && c.ExpirationDate == null
                                     && (filterClaim.StateID != 0 ? c.IdEstadoReclamo == filterClaim.StateID : true)
                                     && (filterClaim.CauseClaim != 0 ? c.IdCausaProblema == filterClaim.CauseClaim : true)
                                     && (!string.IsNullOrEmpty(filterClaim.NroReclamo) ? c.NroReclamo == filterClaim.NroReclamo : true)
@@ -194,7 +197,8 @@ namespace BusinessService.Services
         public List<ClaimDTO> GetClaimsByUser(FilterClaimUserDTO filterClaim)
         {
             List<ClaimDTO> claimDTOs = _context.Reclamos
-                        .Where(c => c.IdUsuario == 19//LoginService.CurrentUser.Id
+                        .Where(c => c.IdUsuario == LoginService.CurrentUser.Id
+                                && c.ExpirationDate == null
                                 && (filterClaim.CauseClaim != 0 ? c.IdCausaProblema == filterClaim.CauseClaim : true)
                                 && (!string.IsNullOrEmpty(filterClaim.NroReclamo) ? c.NroReclamo == filterClaim.NroReclamo : true)
                                 && (filterClaim.DateFrom != null ? c.Fecha >= filterClaim.DateFrom : true)
@@ -225,7 +229,7 @@ namespace BusinessService.Services
                 .ToList();
 
             var claimCounts = _context.Reclamos
-                .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id))
+                .Where(c => c.IdUsuarioNavigation.ConsorcioUsuarios.Any(x => x.IdConsorcio == LoginService.CurrentConsortium.Id) && c.ExpirationDate == null)
                 .GroupBy(c => c.IdEstadoReclamo)
                 .Select(g => new
                 {
@@ -261,6 +265,17 @@ namespace BusinessService.Services
                        IdReclamo = img.IdReclamo
                    })
                    .ToList();
+        }
+
+        public bool DeleteClaim(int claimID)
+        {
+            var claim = _context.Reclamos
+                .Where(r => r.Id == claimID)
+                .FirstOrDefault();
+            
+            claim.ExpirationDate = DateTime.Now;
+
+            return DBUpdate(claim, _context);
         }
     }
 }

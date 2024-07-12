@@ -10,8 +10,8 @@
             <option value="" disabled selected>Seleccione el Espacio Afectado</option>
             <option *ngFor="let item of affectedSpaces" [value]="item.id">{{item.name}}</option>
         </select>
-        <textarea name="" id="" rows="18" placeholder="Detalle su problema" [(ngModel)]="claim.ProblemDetail"></textarea>
-        <input type="file" (change)="seleccionarImagen($event)" accept="image/png" multiple>       
+        <textarea name="" id="" rows="38" placeholder="Detalle su problema" [(ngModel)]="claim.ProblemDetail"></textarea>
+        <input type="file" class="files" (change)="seleccionarImagen($event)" accept="image/png" multiple>       
         <button (click)="Save()">Enviar</button>
     </div>    
 </div>

@@ -12,7 +12,7 @@
       </div>
       <div class="search">
         <input placeholder="Nro de Reclamo" [(ngModel)]="claimNumber" type="text" name="ClaimNumber" class="custom-input">
-        <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button style="margin-top: 0.5rem;" (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
       <div class="claims">
         <app-claims-info *ngFor="let claim of claimsDTO" [Claim]="claim"></app-claims-info>

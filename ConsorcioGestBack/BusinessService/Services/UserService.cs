@@ -163,6 +163,31 @@ namespace BusinessService.Services
             return userModelDTOs;
         }
 
+        public UserModelByDocumentDTO GetUserBydID(int userID)
+        {
+            UserModelByDocumentDTO userModelDTO = _context.Usuarios
+                .Where(u => u.Id == userID)
+                .Select(u => new UserModelByDocumentDTO
+                {
+                    Name = u.Nombre + ' ' + u.Apellido,
+                    Phone = u.Telefono,
+                    Email = u.Email,
+                    Document = u.Documento,
+                    Property = u.Esinquilino == true ? "Inquilino" : "Propietario",
+                    State = u.IdEstadoUsuarioNavigation != null ?
+                             new StateModel
+                             {
+                                 Id = u.IdEstadoUsuarioNavigation.Id,
+                                 Name = u.IdEstadoUsuarioNavigation.Nombre
+                             } : new StateModel(),
+                    Tower = u.IdCondominioNavigation != null ? u.IdCondominioNavigation.Torre : "",
+                    Condominium =
+                    u.IdCondominioNavigation != null ? u.IdCondominioNavigation.NumeroDepartamento
+                    : "",
+
+                }).First();
+            return userModelDTO != null ? userModelDTO : null;
+        }
 
         public UserModelByDocumentDTO GetUserByDocument(int documentUser)
         {

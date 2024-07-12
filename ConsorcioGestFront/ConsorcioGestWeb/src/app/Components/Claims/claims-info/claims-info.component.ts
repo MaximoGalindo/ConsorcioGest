@@ -11,7 +11,7 @@ export class ClaimsInfoComponent {
   @Output() _Reaload: EventEmitter<boolean> = new EventEmitter<boolean>(); 
 
   @Input() Claim:ClaimDTO = new ClaimDTO();
-  _ShowModal:boolean = false;
+  _ShowModal:boolean = true;
   @Input() IsAdmin:boolean = false;
   ngOnInit(){
   }
