@@ -53,6 +53,11 @@ namespace BusinessService.Services
                         ExpirationDate = null,
                     };
 
+                    if (userDTO.AdminRegister)
+                    {
+                        usuario.IdPerfil = 1;
+                    }
+
                     var result = DBAdd(usuario, _context);
 
                     if (!userDTO.AdminRegister)
@@ -236,7 +241,7 @@ namespace BusinessService.Services
                 user.Telefono = userDTO.Phone != null ? userDTO.Phone : user.Telefono;
                 user.Email = userDTO.Email != null ? userDTO.Email : user.Email;
                 user.IdPerfil = userDTO.IdProfile != null ? userDTO.IdProfile : user.IdPerfil;
-                user.IdCondominio = userDTO.IdCondominium != null ? userDTO.IdCondominium : user.IdCondominio;
+                user.IdCondominio = userDTO.IdCondominium != 0 ? userDTO.IdCondominium : user.IdCondominio != null ? user.IdCondominio : null;
                 user.IdEstadoUsuario = userDTO.IdUserState != null ? userDTO.IdUserState : userDTO.IdUserState;
             }
 

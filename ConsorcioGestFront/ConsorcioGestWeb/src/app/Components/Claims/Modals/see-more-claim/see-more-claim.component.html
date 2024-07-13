@@ -1,5 +1,12 @@
 <div class="modal-container" *ngIf="_ShowModal" >
-    <div class="modal-content">
+    <div class="modal-content" *ngIf="loading" >
+        <div class="spinner-container">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+        </div>
+    </div>
+    <div class="modal-content" *ngIf="!loading">
         <span class="close" (click)="CloseModal()">&times;</span>
         <div class="claim-info">
             <h1>Nro Relcamo: 000001</h1>
@@ -40,6 +47,16 @@
                 <p>DNI: {{user.document}}</p>
                 <p>Telefono: {{user.phone}}</p>
                 <p>Email: {{user.email}}</p>
+            </div>
+        </div>
+        <div class="history">
+            <button (click)="toggleHistory()" class="history-button">Mostrar Historial</button>
+            <div *ngIf="showHistory" class="history-dropdown">
+                <div *ngFor="let item of historyClaim">
+                    <p>Estado: <b>{{item.state}}</b> | Fecha: <b>{{item.date}}</b> </p>
+                    <p>Observación: <b>{{item.observation}}</b></p>
+                    <div class="line"></div>
+                </div>
             </div>
         </div>
     </div>

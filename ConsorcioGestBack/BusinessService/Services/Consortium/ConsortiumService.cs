@@ -282,5 +282,18 @@ namespace BusinessService.Services.Consortium
             return result;
         }
 
+        public List<ConsortiumModel> SearchConsortium(string name)
+        {
+            List<ConsortiumModel> consortiumList = _context.Consorcios
+                .Where(c => c.ExpirationDate == null && c.Nombre.Contains(name))
+                .Select(t => new ConsortiumModel
+                {
+                    Id = t.Id,
+                    Name = t.Nombre,
+                    Location = t.Ubicacion
+                }).ToList();
+
+            return consortiumList;
+        }
     }
 }

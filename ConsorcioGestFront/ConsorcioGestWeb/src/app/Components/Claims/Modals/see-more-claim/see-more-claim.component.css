@@ -109,8 +109,35 @@ button{
     background-color: rgb(202, 202, 202);
 }
 
-.historial{
+.history {
     position: absolute;
     top: 15%;
-    left: 50%;
+    left: 42%;
+}
+.history button{
+    font-size: 0.7rem;
+    width: 7rem !important;
+}
+
+.history-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 19rem;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    color: white;
+    padding: 1rem 0.5rem;
+    z-index: 1000;
+    border-radius: 1rem 0 0 1rem; 
+    max-height: 22rem;
+    overflow-y: auto;
+}
+.history-dropdown p {
+    margin: 0.3rem 0;
+}
+
+.spinner-container{
+    position: absolute;
+    left: 48%;
+    top: 45%;
 }

@@ -1,4 +1,5 @@
 ﻿using BusinessService.Models;
+using BusinessService.Services;
 using BusinessService.Services.Consortium;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -78,6 +79,12 @@ namespace WebApi.Controllers.LoginController
         public IActionResult EditConsortium(EditConsortiumDTO consortiumDTO)
         {
             return Ok(consortiumService.EditConsortium(consortiumDTO));
+        }
+
+        [HttpGet("search-consortium")]
+        public IActionResult SearchConsortium(string name)
+        {
+            return Ok(consortiumService.SearchConsortium(name));
         }
     }
 

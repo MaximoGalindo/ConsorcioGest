@@ -16,6 +16,7 @@ export class EditUserModalComponent implements OnInit {
 
   User = new UserModelByDocumentDTO();
   @Input() userDocument:number = 0;
+  @Input() isAdmin:boolean = false;
 
   condominiums:ListItemDTO[] = [];
   towers:ListItemDTO[] = [];
@@ -44,13 +45,15 @@ export class EditUserModalComponent implements OnInit {
           this.selectedTower = this.User.tower;     
           this.selectedState = this.User.state?.id;  
           this.LoadConsortiums(this.selectedTower);
-          console.log(this.User);
         }
       }
     })    
-    this.ConsortiumService.GetTowers().subscribe((towers)=>{
-      this.towers = towers;
-    })
+    if(!this.isAdmin){
+      this.ConsortiumService.GetTowers().subscribe((towers)=>{
+        this.towers = towers;
+      })
+    }
+
     this.UserSevice.GetProfiles().subscribe((profiles)=>{
       this.profiles = profiles;
     })
@@ -83,9 +86,9 @@ export class EditUserModalComponent implements OnInit {
     this.userUpdated.Phone = this.User.phone;
     this.userUpdated.IdCondominium = this.selectedCondominium   
     this.userUpdated.IdProfile = this.selectedProfile
-    this.userUpdated.IdUserState = this.User.state?.id
+    this.userUpdated.IdUserState = this.selectedState
 
-
+    
 
     this.UserSevice.UpdateUser(this.User.document,this.userUpdated).subscribe((data)=>{
       console.log(data);

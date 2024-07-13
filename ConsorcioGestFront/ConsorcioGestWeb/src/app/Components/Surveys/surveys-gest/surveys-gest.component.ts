@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { filter } from 'rxjs';
+import { FilterSurveyDTO } from 'src/app/Models/DTO/FiltersDTO';
 import { SurveyDTO } from 'src/app/Models/DTO/ReplySurveyDTO';
+import { ListItemDTO } from 'src/app/Models/HelperModel/ListItemDTO';
 import { SurveyService } from 'src/app/Services/survey.service';
 
 @Component({
@@ -13,15 +16,30 @@ export class SurveysGestComponent implements OnInit {
 
   Surveys: SurveyDTO[] = []
   SelectedSurvey:number = 0;
+  surveyStates:ListItemDTO[] = []
+
+  selectedState:number = 0;
+  dateFrom:string = "";
+  dateTo:string = "";
+  claimNumber:string = "";
+
   constructor(private surveyService: SurveyService) {
 
   }
   ngOnInit(): void {
-    this.surveyService.GetSurveys().subscribe((data) => {
+
+    var filter = new FilterSurveyDTO();
+
+    this.surveyService.GetSurveys(filter).subscribe((data) => {
       console.log(data);
 
       this.Surveys = data
     })
+
+    this.surveyService.GetSurveyState().subscribe((data)=>{
+      this.surveyStates = data
+    })
+
   }
 
   getSatisfactionClass(satisfaction: string | null | undefined): string {
@@ -64,5 +82,18 @@ export class SurveysGestComponent implements OnInit {
 
   CloseModal(){
     this._ShowModal = false;
+  }
+
+  Search(){
+    var filter = new FilterSurveyDTO ();
+    
+    filter.stateID = this.selectedState != null ? this.selectedState : 0
+    filter.claimNumber = this.claimNumber != '' ? this.claimNumber : '';
+    filter.dateFrom = this.dateFrom != '' ? this.dateFrom : '';
+    filter.dateTo = this.dateTo != '' ? this.dateTo : '';
+
+    this.surveyService.GetSurveys(filter).subscribe((data)=>{
+      this.Surveys = data
+    })
   }
 } 

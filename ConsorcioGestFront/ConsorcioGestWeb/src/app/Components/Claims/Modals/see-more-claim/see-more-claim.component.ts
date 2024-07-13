@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Utils } from 'src/app/Helpers/Utils';
 import { ClaimDTO } from 'src/app/Models/DTO/ClaimDTO';
 import { ClaimGestDTO } from 'src/app/Models/DTO/ClaimGestDTO';
 import { UserModelByDocumentDTO } from 'src/app/Models/DTO/UserModelDTO';
@@ -23,6 +24,10 @@ export class SeeMoreClaimComponent implements OnInit{
   saveClaimGest:ClaimGestDTO = new ClaimGestDTO();
   statesClaim:ListItemDTO[] = [];
   images:any[] = [];
+  historyClaim:any[] = [];
+
+  loading:boolean = false;
+
   constructor(private claimService:ClaimService,
     private userService:UserService
   ){
@@ -64,9 +69,53 @@ export class SeeMoreClaimComponent implements OnInit{
 
   SaveClaimGestion(){
     this.saveClaimGest.IdClaim = this.Claim.id
-    this.claimService.SaveClaimGestion(this.saveClaimGest).subscribe((data)=>{
-      this._ShowModal.emit(true);
-      this._Reaload.emit(true);
+    this.loading = true;
+    this.claimService.SaveClaimGestion(this.saveClaimGest).subscribe({
+      next: () => {
+        this._ShowModal.emit(true);
+        this._Reaload.emit(true);
+        this.loading = false;
+        Utils.success("Guardado con exito");
+      },
+      error: () => {
+        this.loading = false;
+        Utils.error("Error al guardar");
+      }
     })   
+  }
+
+  showHistory = false;
+
+  toggleHistory() {
+    this.showHistory = !this.showHistory;
+    if(this.showHistory)
+      this.LoadHistorial()
+  }
+
+  LoadHistorial(){  
+    console.log(this.Claim.id);
+      
+    this.claimService.GetHistoryClaim(this.Claim.id).subscribe((data)=>{
+      this.historyClaim = data;
+      this.historyClaim.forEach(element => {
+        switch (element.state) {
+          case "IN_PROGRESS":
+            element.state = "En Progreso";
+            break;
+          case "CANCELLED":
+            element.state = "Cancelado";
+            break;
+          case "FINISHED":
+            element.state = "Finalizado";
+            break;
+          case "PENDING":
+            element.state = "Pendiente";
+            break;
+          default:
+            break;
+        }
+      })
+      
+    })
   }
 }

@@ -39,6 +39,11 @@ export class FilterUserDTO{
   userStateID: number = 0;
 }
 
+export class FilterSurveyDTO extends BaseFilter {
+  stateID: number = 0;
+  claimNumber: string = '';
+}
+
 
 
 

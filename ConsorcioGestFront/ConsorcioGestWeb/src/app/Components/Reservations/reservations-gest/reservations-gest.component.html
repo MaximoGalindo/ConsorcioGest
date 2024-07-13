@@ -34,7 +34,16 @@
                     <td>{{r.user.condominium}}</td>
                     <td>{{r.date | date}}</td>
                     <td>{{r.hourFrom}} - {{r.hourTo}}</td>	
-                    <td>{{r.stateReservation}}</td>
+                    <td class="satisfaccion">
+                        <div class="rectangule" [ngClass]="{
+                            'cancelado': r.stateReservation === 'Cancelado',
+                            'reservado': r.stateReservation === 'Reservado',
+                            'finalizado': r.stateReservation === 'Finalizado'
+                          }">
+                            {{r.stateReservation}}
+                          </div>
+                                                  
+                    </td>
                     <td>{{r.user.phone}}<br>{{r.user.email}}</td>
                     <td class="actions">
                         <button [disabled]="r.stateReservation == 'Cancelado'" (click)="CancelReservation(r)"><i [ngStyle]="{'color': r.stateReservation == 'Cancelado' ? 'gray' : 'red'}" class="fa-solid fa-ban fa-2x"></i></button>

@@ -47,4 +47,8 @@ export class ConsortiumService {
   EditConsortium(dto:EditConsortiumDTO):Observable<any>{
     return this.http.put(this.baseUrl + 'edit-consortium',dto)
   }
+
+  SearchConsortium(search:string):Observable<any>{
+    return this.http.get(this.baseUrl + 'search-consortium?name=' + search)
+  }
 }

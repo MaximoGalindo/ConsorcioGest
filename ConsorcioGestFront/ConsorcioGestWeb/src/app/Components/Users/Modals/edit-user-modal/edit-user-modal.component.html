@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="column">
-                <div class="aling-items">
+                <div class="aling-items" *ngIf="!isAdmin">
                     <label for="">Condominio</label>
                     <select (change)="LoadConsortiums($event.target)" style="width: 110px;" class="custom-select" [(ngModel)]="selectedTower">
                         <option value="" disabled>Torre</option>     

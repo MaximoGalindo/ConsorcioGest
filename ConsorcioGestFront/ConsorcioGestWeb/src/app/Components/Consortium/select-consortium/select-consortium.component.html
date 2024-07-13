@@ -8,8 +8,9 @@
         <div style="margin-top: 30px">
             <input type="text" 
                     class="custom-input" 
-                    placeholder="Buscar">
-            <button class="button-search">Buscar</button>
+                    placeholder="Buscar"
+                    [(ngModel)]="searchText">
+            <button (click)="Search()" class="button-search">Buscar</button>
         </div>
         <div class="consortiums-container">
             <div class="consortium" *ngFor="let c of consortiums">

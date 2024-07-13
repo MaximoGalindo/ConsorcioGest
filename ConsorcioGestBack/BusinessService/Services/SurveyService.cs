@@ -112,10 +112,14 @@ namespace BusinessService.Services
             return query;
         }
 
-        public List<SurveyDTO> GetSurveys()
+        public List<SurveyDTO> GetSurveys(FilterSurveyDTO filterSurvey)
         {
             List<SurveyDTO> surveys = context.Encuestas
-                .Where(e => e.IdConsorcio == LoginService.CurrentConsortium.Id)
+                .Where(e => e.IdConsorcio == LoginService.CurrentConsortium.Id
+                            && (filterSurvey.StateID != 0 ? e.IdEstadoEncuesta == filterSurvey.StateID : true)
+                            && (!string.IsNullOrEmpty(filterSurvey.ClaimNumber) ? e.IdReclamoNavigation.NroReclamo == filterSurvey.ClaimNumber: true)
+                            && (filterSurvey.DateFrom != null ? e.Fecha >= filterSurvey.DateFrom : true)
+                            && (filterSurvey.DateTo != null ? e.Fecha <= filterSurvey.DateTo : true))
                 .Select(e => new SurveyDTO
                 {
                     Id = e.Id,
@@ -188,5 +192,14 @@ namespace BusinessService.Services
             return CustomerSatisfaccion.Unaswerred;
         }
 
+        public List<ListItemDTO> GetSurveyStates()
+        {
+            return context.EstadoEncuesta
+                    .Select(c => new ListItemDTO
+                    {
+                        ID = c.Id,
+                        Name = c.Nombre
+                    }).ToList();
+        }   
     }
 }

@@ -18,9 +18,9 @@ namespace WebApi.Controllers.UserController
         }
 
         [HttpPost("register")]
-        public IActionResult createUser(RegisterUserDTO user)
+        public IActionResult createUser([FromBody] RegisterUserDTO userDTO)
         {
-            return Ok(userService.CreateUser(user));
+            return Ok(userService.CreateUser(userDTO));
         }
 
         [HttpGet("get-document-types")]

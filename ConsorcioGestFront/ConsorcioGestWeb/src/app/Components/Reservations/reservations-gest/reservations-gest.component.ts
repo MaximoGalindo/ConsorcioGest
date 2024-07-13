@@ -24,6 +24,7 @@ export class ReservationsGestComponent {
   dateTo: string = "";
   document: number = 0;
 
+  loading: boolean = false;
   constructor(private reservationService: ReservationsService) { }
 
   ngOnInit() {
@@ -60,11 +61,26 @@ export class ReservationsGestComponent {
 
   CloseModal() {
     this._ShowCancelReservation = false
+    this.ShowGrid(this.selectedCommonSpace)
   }
 
   CancelReservation(reservation: any) {
     this._ShowCancelReservation = true
     this.selectedReservation = reservation
   }
+
+  getBackgroundColor(state: string): string {
+    switch (state) {
+      case 'Cancelado':
+        return 'red';
+      case 'Reservado':
+        return 'yellow';
+      case 'Finalizado':
+        return 'green';
+      default:
+        return 'transparent';
+    }
+  }
+  
 
 }

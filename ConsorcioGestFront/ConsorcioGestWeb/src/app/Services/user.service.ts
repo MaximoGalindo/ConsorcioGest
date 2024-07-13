@@ -42,6 +42,10 @@ export class UserService {
     return this.http.get<UserModelDTO[]>(`${this.baseUrl}get-users`, { params });
   }
 
+  GetAdminUsers():Observable<UserModelDTO[]>{
+    return this.http.get<UserModelDTO[]>(this.baseUrl + 'get-admin-users')
+  }
+
   GetUserByDocument(userDocument:number): Observable<UserModelByDocumentDTO>{
     return this.http.get<UserModelByDocumentDTO>(this.baseUrl + 'get-user-by-document/'+ userDocument)
   }

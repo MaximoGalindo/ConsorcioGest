@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'main-page-admin',component: MainPageAdminComponent,
     children : [
       {path: 'claims-gest', component: ClaimsGestComponent},
-      {path: 'user-gest',component:UsersGestComponent},
+      {path: 'user-gest',component:UsersGestComponent, data: { isAdmin: false }},
       {path: 'reservation-gest', component:ReservationsGestComponent},
       {path: 'survey-gest',component:SurveysGestComponent},
       {path: 'stats',component:StatsComponent},
@@ -38,7 +38,7 @@ const routes: Routes = [
       {path: 'FAQS',component:FAQSComponent,data: { isAdmin: true } }
     ]
   },
-  {path: 'user-admin-gest',component:UsersGestComponent},
+  {path: 'user-admin-gest',component:UsersGestComponent, data: { isAdmin: true }},
   { path: 'main-page-user', component: MainPageUserComponent,
     children: [
       {path: '', component: MenuUserComponent}, 

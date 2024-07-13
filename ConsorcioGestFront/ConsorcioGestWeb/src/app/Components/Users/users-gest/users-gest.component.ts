@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { filter } from 'rxjs';
 import { FilterUserDTO } from 'src/app/Models/DTO/FiltersDTO';
@@ -14,6 +15,8 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./users-gest.component.css']
 })
 export class UsersGestComponent implements OnInit{
+
+  isAdmin:boolean = false;
 
   _ShowModalEditUser:boolean = false;
   users:UserModelDTO[] = [];
@@ -31,20 +34,29 @@ export class UsersGestComponent implements OnInit{
   constructor(
     private userService:UserService,
     private modalService: NgbModal,
-    private ConsortiumService:ConsortiumService
+    private ConsortiumService:ConsortiumService,
+    private route:ActivatedRoute
   ){}
 
   ngOnInit(){
-    var filter = new FilterUserDTO();
-    this.LoadUsers(filter);
+    this.route.data.subscribe(data => {     
+      this.isAdmin = data['isAdmin'];
 
-    this.ConsortiumService.GetTowers().subscribe((towers)=>{
-      this.towers = towers;
-    })
+      var filter = new FilterUserDTO();
+      this.LoadUsers(filter);
 
-    this.userService.GetStatus().subscribe((statuses)=>{     
-      this.statuses = statuses;
-    })   
+      if(!this.isAdmin){
+        this.ConsortiumService.GetTowers().subscribe((towers)=>{
+          this.towers = towers;
+        })
+    
+        this.userService.GetStatus().subscribe((statuses)=>{     
+          this.statuses = statuses;
+        })     
+      } 
+    });
+
+
 
   }
 
@@ -57,13 +69,23 @@ export class UsersGestComponent implements OnInit{
   }
 
   LoadUsers(filter:FilterUserDTO){
-    this.userService.GetUsers(filter).subscribe({
-      next: data => {
-        if (data != null)
-          this.users = data;
-          console.log(this.users);        
-      }
-    }) 
+    if(this.isAdmin){
+      this.userService.GetAdminUsers().subscribe({
+        next: data => {
+          if (data != null)
+            this.users = data;    
+        }
+      })
+    }
+    else{
+      this.userService.GetUsers(filter).subscribe({
+        next: data => {
+          if (data != null)
+            this.users = data;      
+        }
+      }) 
+    }
+
   }
 
   Search(){

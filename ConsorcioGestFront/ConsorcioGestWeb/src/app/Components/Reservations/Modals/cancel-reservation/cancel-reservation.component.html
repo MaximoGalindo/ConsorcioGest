@@ -1,4 +1,9 @@
-<div class="modal-container" *ngIf="_ShowModal">
+<div *ngIf="loading" class="modal-container">
+    <div class="spinner-border loading" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<div class="modal-container" *ngIf="_ShowModal && !loading">
     <div class="modal-content">
         <span class="close" (click)="CloseModal()">&times;</span>
         <div class="content">

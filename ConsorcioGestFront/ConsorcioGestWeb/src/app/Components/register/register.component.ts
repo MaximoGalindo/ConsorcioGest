@@ -83,26 +83,28 @@ export class RegisterComponent {
       return;
     }
 
-
+    console.log();
+    
     if (this.registerForm.valid
       && this.registerForm.get('Password')?.value === this.registerForm.get('ConfirmPassword')?.value) {
 
-      const user: RegisterUserDTO = {
-        AdminRegister: this.adminRegister,
-        Name: this.registerForm.get('Name')?.value,
-        LastName: this.registerForm.get('LastName')?.value,
-        Email: this.registerForm.get('Email')?.value,
-        Password: this.registerForm.get('Password')?.value,
-        ConfirmPassword: this.registerForm.get('ConfirmPassword')?.value,
-        Phone: this.registerForm.get('Phone')?.value,
-        Document: parseInt(this.registerForm.get('Document')?.value),
-        UserType: this.registerForm.get('UserType')?.value,
-        ConsortiumID: this.registerForm.get('Consortium')?.value ? parseInt(this.registerForm.get('Consortium')?.value) : 0,
-        DocumentType: this.registerForm.get('DocumentType')?.value
+      let userDTO: RegisterUserDTO = {
+        adminRegister: this.adminRegister,
+        name: this.registerForm.get('Name')?.value,
+        lastName: this.registerForm.get('LastName')?.value,
+        email: this.registerForm.get('Email')?.value,
+        password: this.registerForm.get('Password')?.value,
+        phone: this.registerForm.get('Phone')?.value,
+        document: parseInt(this.registerForm.get('Document')?.value),
+        userType: this.registerForm.get('UserType')?.value ? this.registerForm.get('UserType')?.value : 'IsAdmin',
+        consortiumID: this.registerForm.get('Consortium')?.value ? parseInt(this.registerForm.get('Consortium')?.value) : 0,
+        documentType: this.registerForm.get('DocumentType')?.value ? parseInt(this.registerForm.get('DocumentType')?.value) : 0
       };  
-     
+      
+      console.log(userDTO);
+      
       this.loading = true;
-      this.userService.CreateUser(user).subscribe({
+      this.userService.CreateUser(userDTO).subscribe({
         next: data => {
           if (data != null && data.success){
             Utils.success("El usuario se ha creado correctamente");
@@ -113,6 +115,10 @@ export class RegisterComponent {
             Utils.error(data.message);
             this.loading = false;
           }
+        },
+        error: error => {
+          Utils.error("Ah ocurrido un error");
+          this.loading = false;
         }
       })
 

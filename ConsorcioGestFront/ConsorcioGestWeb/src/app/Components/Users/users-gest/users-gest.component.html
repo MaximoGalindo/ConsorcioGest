@@ -1,4 +1,7 @@
-<div class="filter-container">
+<div class="back-container">
+    <button *ngIf="isAdmin" routerLink="/consortium" class="back-button">Volver</button>
+</div>
+<div class="filter-container" *ngIf="!isAdmin">
     <label style="margin-left: 30px;">Documento</label>
     <input [(ngModel)]="document" type="text" name="Document" class="custom-input">
     <label style="margin-left: 30px;">Torre</label>
@@ -24,8 +27,8 @@
             <tr>
                 <th>Documento</th>
                 <th>Nombre Completo</th>
-                <th>Condominio</th>
-                <th>Ocupacion</th>
+                <th *ngIf="!isAdmin">Condominio</th>
+                <th *ngIf="!isAdmin">Ocupacion</th>
                 <th>Contacto</th>
                 <th>Perfil</th>
                 <th>Estado</th>
@@ -36,8 +39,8 @@
             <tr *ngFor="let user of users">
                 <td>{{user.document}}</td>
                 <td>{{user.name}}</td>
-                <td>{{user.condominium}}</td>
-                <td>{{user.property}}</td>
+                <td *ngIf="!isAdmin">{{user.condominium}}</td>
+                <td *ngIf="!isAdmin">{{user.property}}</td>
                 <td>{{user.phone}} <br> {{user.email}}</td>
                 <td>{{user.profile?.name}}</td>
                 <td>{{user.state.name}}</td>
@@ -71,5 +74,6 @@
 <app-edit-user-modal
     *ngIf="_ShowModalEditUser"
     [userDocument]="userDocument"
+    [isAdmin]="isAdmin"
     (_CloseModal)="CloseModal()"
 ></app-edit-user-modal>

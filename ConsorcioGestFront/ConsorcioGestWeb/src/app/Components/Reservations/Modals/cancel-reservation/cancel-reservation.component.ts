@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Utils } from 'src/app/Helpers/Utils';
 import { UpdateStateReservationDTO } from 'src/app/Models/DTO/ReservationsDTO';
 import { ReservationsService } from 'src/app/Services/reservations.service';
 
@@ -12,6 +13,7 @@ export class CancelReservationComponent {
   @Input() Reservation:any;
 
   message:string = "";
+  loading:boolean = false;
 
   constructor(private reservationService:ReservationsService){}
 
@@ -26,9 +28,18 @@ export class CancelReservationComponent {
     dto.reservationID = this.Reservation.id;
     dto.stateReservationID = 2;
     dto.message = this.message
-
-    this.reservationService.UpdateStateReservation(dto).subscribe((data) => {
-      this._ShowModal.emit(false);
+    this.loading = true;
+    this.reservationService.UpdateStateReservation(dto).subscribe({
+      next: () => {
+        this._ShowModal.emit(false);
+        this.loading = false;
+        Utils.success("Se cancelo con exito la reserva")
+      },
+      error: () => {
+        this.loading = false;
+        Utils.error("Error al cancelar la reserva")
+      }
+    
     })
   }
 }

@@ -1,19 +1,16 @@
 <div class="filter-container">
     <label style="margin-left: 30px;">Nro Reclamo</label>
-    <input type="text" name="Document" class="custom-input">
+    <input type="text" name="Document" class="custom-input" [(ngModel)]="claimNumber">
     <label for="">Estado</label>
-    <select style="width: 120px; height: 20px;" class="custom-input">
+    <select style="width: 120px; height: 20px;" class="custom-input" [(ngModel)]="selectedState">
         <option value="" disabled>Estado</option>
-    </select>
-    <label for="">Satisfaccion</label>
-    <select style="width: 120px; height: 20px;" class="custom-input">
-        <option value="" disabled>Estado</option>
+        <option *ngFor="let state of surveyStates" [value]="state.id">{{state.name}}</option>">
     </select>
     <label for="">Fecha Desde</label>
-    <input type="date" name="CreationDate" class="custom-input" style="width: 120px;">
+    <input type="date" name="CreationDate" class="custom-input" style="width: 120px;" [(ngModel)]="dateFrom">
     <label for="">Fecha Hasta</label>
-    <input type="date" name="ExpirationDate" class="custom-input" style="width: 120px; margin-right: 10px;">
-    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    <input type="date" name="ExpirationDate" class="custom-input" style="width: 120px; margin-right: 10px;" [(ngModel)]="dateTo">
+    <button (click)="Search()"><i class="fa-solid fa-magnifying-glass"></i></button>
 </div>
 <div class="table-container">
     <table>

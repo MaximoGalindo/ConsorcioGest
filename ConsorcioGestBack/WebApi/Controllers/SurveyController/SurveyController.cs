@@ -34,9 +34,9 @@ namespace WebApi.Controllers.ReservationsController
         }
 
         [HttpGet("get-surveys")]
-        public IActionResult GetSurveys()
+        public IActionResult GetSurveys([FromQuery] FilterSurveyDTO filterSurvey)
         {
-            return Ok(surveyService.GetSurveys());
+            return Ok(surveyService.GetSurveys(filterSurvey));
         }
 
         [HttpGet("get-survey-detail/{surveyID}")]
@@ -45,5 +45,10 @@ namespace WebApi.Controllers.ReservationsController
             return Ok(surveyService.GetSurveyDetailById(surveyID));
         }
 
+        [HttpGet("get-survey-states")]
+        public IActionResult GetSurveyStates()
+        {
+            return Ok(surveyService.GetSurveyStates());
+        }
     }
 }

@@ -51,6 +51,12 @@ namespace BusinessService.DTO
         public int UserStateID { get; set; }
     }
 
+    public class FilterSurveyDTO : BaseFilter 
+    {
+        public int StateID { get; set; }
+        public string? ClaimNumber { get; set; }
+    }
+
 
 
 }

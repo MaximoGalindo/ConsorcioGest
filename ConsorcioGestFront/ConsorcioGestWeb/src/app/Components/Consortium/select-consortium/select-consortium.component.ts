@@ -14,6 +14,7 @@ import { ConsortiumService } from 'src/app/Services/consortium.service';
 export class SelectConsortiumComponent {
 
   consortiums: ConsortiumModel[] = []
+  searchText: string = ''
 
   constructor(
     private consortiumService: ConsortiumService,
@@ -78,5 +79,19 @@ export class SelectConsortiumComponent {
 
   EditConsortium(consortiumID: number) {
     this.router.navigate(['/register-consortium', consortiumID])
+  }
+
+  Search(){
+    this.consortiums = []
+    if(this.searchText.trim() != ''){
+      this.consortiumService.SearchConsortium(this.searchText).subscribe((data) =>{
+        for (var item of data) {
+          this.consortiums.push({ Id: item.id, Name: item.name, Location: item.location });
+        }
+      })
+    }
+    else{
+      this.LoadConsortiums();
+    }
   }
 }
