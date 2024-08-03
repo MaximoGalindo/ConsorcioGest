@@ -27,11 +27,9 @@ namespace WebApi.Controllers.LoginController
         }
 
         [HttpGet("get-consortiums")]
-        [Authorize]
         public IActionResult GetAllConsortiums() {
 
             return Ok(consortiumService.GetAllConsortiums());
-
         }
 
         [HttpPost("save-consortium")]

@@ -10,6 +10,7 @@ namespace BusinessService.DTO
 {
     public class UserModelDTO
     {
+        public int Id { get; set; }
         public int Document { get; set; }
         public string Name { get; set; }
         public string Condominium { get; set; }
@@ -22,6 +23,7 @@ namespace BusinessService.DTO
 
     public class UserModelByDocumentDTO 
     {
+        public int Id { get; set; }
         public int Document { get; set; }
         public string Name { get; set; }
         public string Tower { get; set; }

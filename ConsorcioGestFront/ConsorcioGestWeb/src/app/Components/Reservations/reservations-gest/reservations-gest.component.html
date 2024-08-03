@@ -46,7 +46,7 @@
                     </td>
                     <td>{{r.user.phone}}<br>{{r.user.email}}</td>
                     <td class="actions">
-                        <button [disabled]="r.stateReservation == 'Cancelado'" (click)="CancelReservation(r)"><i [ngStyle]="{'color': r.stateReservation == 'Cancelado' ? 'gray' : 'red'}" class="fa-solid fa-ban fa-2x"></i></button>
+                        <button [disabled]="r.stateReservation == 'Cancelado' || r.stateReservation == 'Finalizado'" (click)="CancelReservation(r)"><i [ngStyle]="{'color': r.stateReservation == 'Cancelado' || r.stateReservation == 'Finalizado' ? 'gray' : 'red'}" class="fa-solid fa-ban fa-2x"></i></button>
                     </td>
                 </tr>                
             </tbody>

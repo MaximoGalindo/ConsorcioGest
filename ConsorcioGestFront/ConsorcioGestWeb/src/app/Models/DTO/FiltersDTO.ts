@@ -24,11 +24,17 @@ export class BaseFilterReservationsDTO extends BaseFilter {
   commonSpaceID: number = 0;
 }
 
-export class FilterReservationDTO extends BaseFilterReservationsDTO {
+export class FilterReservationDTO {
+  dateFrom?: string;
+  dateTo?: string;
   document: number = 0;
+  commonSpaceID: number = 0;
 }
 
-export class FilterReservationUserDTO extends BaseFilterReservationsDTO {
+export class FilterReservationUserDTO {
+  dateFrom?: string;
+  dateTo?: string;
+  commonSpaceID: number = 0;
 }
 
 export class FilterUserDTO{

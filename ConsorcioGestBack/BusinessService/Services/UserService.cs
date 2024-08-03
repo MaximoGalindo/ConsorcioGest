@@ -108,6 +108,7 @@ namespace BusinessService.Services
                 && (filterUser.UserStateID != 0 ? u.IdEstadoUsuario == filterUser.UserStateID : true))
                .Select(u => new UserModelDTO 
                {
+                   Id = u.Id,
                    Name = u.Nombre + ' ' + u.Apellido,
                    Phone = u.Telefono,
                    Email = u.Email,
@@ -141,6 +142,7 @@ namespace BusinessService.Services
                .Where(u => !u.ConsorcioUsuarios.Any() && u.IdPerfil == 1)
                .Select(u => new UserModelDTO
                {
+                   Id = u.Id,
                    Name = u.Nombre + ' ' + u.Apellido,
                    Phone = u.Telefono,
                    Email = u.Email,
@@ -197,9 +199,10 @@ namespace BusinessService.Services
         public UserModelByDocumentDTO GetUserByDocument(int documentUser)
         {
             UserModelByDocumentDTO userModelDTO = _context.Usuarios
-                .Where(u => u.Documento == documentUser)
+                .Where(u => u.Id == documentUser)
                 .Select(u => new UserModelByDocumentDTO
                 {
+                    Id = u.Id,
                     Name = u.Nombre + ' ' + u.Apellido,
                     Phone = u.Telefono,
                     Email = u.Email,
@@ -229,7 +232,7 @@ namespace BusinessService.Services
         public int UpdateUser(int userDocument,UpdateUserDTO userDTO)
         {
             Usuario user = _context.Usuarios
-                .Where(u => u.Documento == userDocument).First();
+                .Where(u => u.Id == userDocument).First();
 
             if(LoginService.CurrentUser.Profile.Id == 2)
             {

@@ -167,7 +167,7 @@ namespace BusinessService.Services
             List<Reserva> reservas = _context.Reservas.Where(r => r.IdConsorcio == LoginService.CurrentConsortium.Id).ToList();
             foreach (var r in reservas)
             {
-                if(r.Fecha >= DateTime.Now.Date)
+                if(DateTime.Now.Date >= r.Fecha)
                 {
                     r.IdEstadoReserva = (int)ReservationsStatesEnum.FINISHED;
                     DBUpdate(r, _context);
@@ -205,10 +205,11 @@ namespace BusinessService.Services
 
         public List<ReservationUser> GetReservationByUser(FilterReservationUserDTO filterReservation)
         {
-            List<Reserva> reservas = _context.Reservas.Where(r => r.IdConsorcio == LoginService.CurrentUser.Id).ToList();
+            List<Reserva> reservas = _context.Reservas.Where(r => r.IdUsuario == LoginService.CurrentUser.Id).ToList();
+
             foreach (var r in reservas)
             {
-                if (r.Fecha >= DateTime.Now.Date)
+                if (DateTime.Now.Date > r.Fecha)
                 {
                     r.IdEstadoReserva = (int)ReservationsStatesEnum.FINISHED;
                     DBUpdate(r, _context);

@@ -21,7 +21,6 @@ export class RegisterComponent {
   confirmPassword: string = '';
   documentTypes: DocumentTypeModel[] = [];
   consortiums: ConsortiumModel[] = [];
-
   adminRegister: boolean = false;
   residentRegister: boolean = false;
 
@@ -54,8 +53,8 @@ export class RegisterComponent {
         Password: ['', Validators.required],
         ConfirmPassword: ['', Validators.required],
         Phone: ['', Validators.required],
-        Document: ['', Validators.required],
         UserType: ['', Validators.required],
+        Documento: [0, Validators.required],
         DocumentType: ['', Validators.required],
         Consortium: ['', Validators.required],
       });
@@ -68,7 +67,7 @@ export class RegisterComponent {
         Password: ['', Validators.required],
         ConfirmPassword: ['', Validators.required],
         Phone: ['', Validators.required],
-        Document: ['', Validators.required],
+        Documento: [0, Validators.required],
         DocumentType: ['', Validators.required],
       });
     }
@@ -82,8 +81,6 @@ export class RegisterComponent {
       this.markFormGroupTouched(this.registerForm);
       return;
     }
-
-    console.log();
     
     if (this.registerForm.valid
       && this.registerForm.get('Password')?.value === this.registerForm.get('ConfirmPassword')?.value) {
@@ -95,7 +92,7 @@ export class RegisterComponent {
         email: this.registerForm.get('Email')?.value,
         password: this.registerForm.get('Password')?.value,
         phone: this.registerForm.get('Phone')?.value,
-        document: parseInt(this.registerForm.get('Document')?.value),
+        document: this.registerForm.get('Documento')?.value,
         userType: this.registerForm.get('UserType')?.value ? this.registerForm.get('UserType')?.value : 'IsAdmin',
         consortiumID: this.registerForm.get('Consortium')?.value ? parseInt(this.registerForm.get('Consortium')?.value) : 0,
         documentType: this.registerForm.get('DocumentType')?.value ? parseInt(this.registerForm.get('DocumentType')?.value) : 0

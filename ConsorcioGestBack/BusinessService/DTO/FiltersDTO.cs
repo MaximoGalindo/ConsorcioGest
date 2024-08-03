@@ -33,14 +33,19 @@ namespace BusinessService.DTO
         public int CommonSpaceID { get; set; }
     }
 
-    public class FilterReservationDTO : BaseFilterReservationsDTO 
+    public class FilterReservationDTO
     {
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
         public int Document {  get; set; }
+        public int CommonSpaceID { get; set; }
     }
 
-    public class FilterReservationUserDTO : BaseFilterReservationsDTO
+    public class FilterReservationUserDTO
     {
-
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
+        public int CommonSpaceID { get; set; }
     }
 
     public class FilterUserDTO

@@ -54,10 +54,7 @@ export class UsersGestComponent implements OnInit{
           this.statuses = statuses;
         })     
       } 
-    });
-
-
-
+    });  
   }
 
   LoadConsortiums(tower:any){  
@@ -74,6 +71,7 @@ export class UsersGestComponent implements OnInit{
         next: data => {
           if (data != null)
             this.users = data;    
+          console.log(this.users);  
         }
       })
     }

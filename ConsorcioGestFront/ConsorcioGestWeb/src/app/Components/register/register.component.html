@@ -1,13 +1,14 @@
 <div class="total-container">
     <form [formGroup]="registerForm" (ngSubmit)="SubmitForm()">
-        <div>
-            <h1 class="title">Registrarse</h1>
+        <div> 
+            <h1 *ngIf="loading" class="title">Registrarse</h1>           
             <div *ngIf="loading" class="loading"> 
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
             <div *ngIf="!loading" class="register-container">
+                <h1 class="title">Registrarse</h1>
                 <h3>Información de cuenta</h3>
                 <div class="info-cuenta">
                     <div class="input-container">
@@ -48,8 +49,7 @@
                             documentType.Name }}
                         </option>
                     </select>
-                    <input type="text" class="custom-input" placeholder="Documento" name="Document"
-                        formControlName="Document" [ngClass]="{'error': isFieldInvalid('Document')}">
+                    <input type="number" class="custom-input" placeholder="Documento" formControlName="Documento"  [ngClass]="{'error': isFieldInvalid('DocumentType')}">
                 </div>
                 <div *ngIf="residentRegister" class="radio-container">
                     <input class="form-check-input radio" type="radio" formControlName="UserType" value="IsOcupant"

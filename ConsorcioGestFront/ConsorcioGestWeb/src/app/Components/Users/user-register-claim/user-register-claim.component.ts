@@ -17,6 +17,7 @@ export class UserRegisterClaimComponent implements OnInit {
   affectedSpaces:ListItemDTO[] = [];
   success:boolean = false;
   claimNumber:string = "";
+  loading:boolean = false;
   constructor(
     private claimService:ClaimService,
     private router:Router
@@ -24,11 +25,15 @@ export class UserRegisterClaimComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.loading = true;
     this.claimService.GetCauseClaim().subscribe((data)=>{
       this.causeClaim = data;
+      this.loading = false;
     });
+    this.loading = true;
     this.claimService.GetAffectedSpace().subscribe((data)=>{
       this.affectedSpaces = data;
+      this.loading = false;
     })
   }
   seleccionarImagen(event: any) {

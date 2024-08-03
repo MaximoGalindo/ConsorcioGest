@@ -90,7 +90,7 @@ export class EditUserModalComponent implements OnInit {
 
     
 
-    this.UserSevice.UpdateUser(this.User.document,this.userUpdated).subscribe((data)=>{
+    this.UserSevice.UpdateUser(this.User.id,this.userUpdated).subscribe((data)=>{
       console.log(data);
       this.CloseModal();
     })

@@ -46,21 +46,21 @@
                 <td>{{user.state.name}}</td>
                 <td style="width: 10rem;">
                     <button *ngIf="user.state.id != 3" [disabled]="user.state.id === 1"
-                        (click)="ActivateUser(user.document)" class="icono"
+                        (click)="ActivateUser(user.id)" class="icono"
                         style="color: green; margin-right: 8px; background-color: transparent; border: none;">
                         <i class="fa-solid fa-check fa-2x" style="color: green;" [ngClass]="{'disabled': user.state.id === 1}"></i>
                     </button>
                     <button *ngIf="user.state.id != 3" [disabled]="user.state.id === 2"
-                        (click)="DeactivateUser(user.document)" class="icono"
+                        (click)="DeactivateUser(user.id)" class="icono"
                         style="color: red; margin-right: 8px; background-color: transparent; border: none;">
                         <i class="fa-solid fa-ban fa-2x" style="color: red;" [ngClass]="{'disabled': user.state.id === 2}"></i>
                     </button>
-                    <button *ngIf="user.state.id != 3" (click)="EditUser(user.document)"
+                    <button *ngIf="user.state.id != 3" (click)="EditUser(user.id)"
                         class="icono"
                         style="color: lightblue; margin-right: 8px; background-color: transparent; border: none;">
                         <i class="fa-solid fa-pen fa-2x" style="color: lightblue;"></i>
                     </button>
-                    <button *ngIf="user.state.id == 3" (click)="EditUser(user.document)"
+                    <button *ngIf="user.state.id == 3" (click)="EditUser(user.id)"
                         class="icono"
                         style="color: lightblue; margin-right: 8px; background-color: transparent; border: none;">
                         <i class="fa-solid fa-pen fa-2x" style="color: lightblue;"></i>
